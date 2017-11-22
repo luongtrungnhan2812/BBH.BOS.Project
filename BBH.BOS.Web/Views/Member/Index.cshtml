@@ -261,4 +261,69 @@
     </div>
 </main>
 
+<div class="modal fade" id="standardModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <!--Content-->
 
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header white-text" style="background-color: #154771">
+                <p class="heading" contenteditable="true">Change Password</p>
+            </div>
+            <!--Body-->
+            <div class="modal-body">
+                <form>
+                    <!--First row-->
+                    <div class="row" style="padding:0px; margin:0px">
+
+                        <div class="col-md-12">
+                            <label id="lbEwallet">New Password</label>
+                            <div class="md-form" style="padding:0px; margin:0px">
+                                <input type="password" style="padding:0px; margin:0px" onfocus="ResetField(1)" id="txtNewPass" name="txtNewPass" class="form-control validate">
+
+                            </div>
+                            <label style="color:red" id="lbPassword"></label>
+                        </div>
+
+                    </div>
+
+                    <div class="row" style="padding:0px; margin:0px">
+
+                        <div class="col-md-12">
+                            <label id="lbEwallet">Confirm New Password</label>
+                            <div class="md-form" style="padding:0px; margin:0px">
+                                <input type="password" style="padding:0px; margin:0px" onfocus="ResetField(2)" id="txtRePass" name="txtRePass" class="form-control validate">
+
+                            </div>
+                            <label style="color:red" id="lbRePass"></label>
+                        </div>
+
+                    </div>
+
+
+                    <div class="row">
+                        <img src="/Images/loading.gif" id="imgLoading" style="position: absolute; display:none">
+                        <div class="col-md-12 text-center">
+                            <input type="button" style="padding:5px 30px; cursor:pointer; height:35px" onclick="ChangePassWord()" value="Confirm" class="btn-primary">
+                        </div>
+                    </div>
+
+                </form>
+
+                <br>
+
+            </div>
+            <!--Footer-->
+            <div class="modal-footer">
+                <img id="imgLoadingBooking" src="/Images/loading.gif" style="display:none">
+                <a id="2lvlModal-cancel" class="btn btn-default waves-effect waves-light" onclick="CloseModal()" data-dismiss="modal" contenteditable="true">Close</a>
+                @*<a id="2lvlModal-learnMore" class="btn btn-danger" onclick="ConfirmBooking()" contenteditable="true">Confirm</a>*@
+
+            </div>
+        </div>
+
+        <!--/.Content-->
+    </div>
+
+
+</div>

@@ -42,23 +42,29 @@
                         <!--Body-->
                         <div class="md-form">
                             <i class="fa fa-envelope prefix"></i>
-                            <input type="text" id="form2" class="form-control">
-                            <label for="form2">Your email</label>
+                            <input type="text" id="txtEmail" name="txtEmail" onfocus="ResetForm(1)" class="form-control">
+                            <label id="lbEmail" for="form2">Email</label>
                         </div>
 
                         <div class="md-form">
                             <i class="fa fa-lock prefix"></i>
-                            <input type="password" id="form4" class="form-control">
-                            <label for="form4">Your password</label>
+                            <input type="password" id="txtPassword" name="txtPassword" onkeydown="return EnterLogin(event, this.value)" onfocus="ResetForm(3)" class="form-control">
+                            <label id="lbPass" for="form4">Password</label>
                         </div>
                             <div class="g-recaptcha" data-sitekey="6LfhJyUUAAAAANmMFHQ7ARUoDEwgs3Zy-W6bwCo1" style="margin-left: 49px;"></div><br />
                             
                             <div class="text-center">
-                                <button class="btn btn-primary">Login</button>
+                                @*<img src="/Images/loading.gif" id="imgLoading" style="position: absolute; display:none">*@
+                                <button class="btn btn-primary" onclick="return LoginMember()">Login</button>
                             </div>
 
                         </div>
+                    <div class="">
+                        <div class="modal-footer text-center">
+                            <a href="/registermember">Sign up</a>
+                        </div>
 
+                    </div>
                     <!--Footer-->
                     @*<div class="modal-footer text-center">
                         Or login with <button type="button" class="btn btn-gplus"><i class="fa fa-google left"></i> Google</button>

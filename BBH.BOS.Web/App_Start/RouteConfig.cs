@@ -14,12 +14,17 @@ namespace BBH.BOS.Web
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute("MemberIndex", "member", new { controller = "Member", action = "Index" });
+            routes.MapRoute("RegisterMember", "registermember", new { controller = "Register", action = "Index" });
+            routes.MapRoute("LoginMember", "login", new { controller = "Login", action = "Index" });
+            routes.MapRoute("EditAccount", "editaccount", new { controller = "Login", action = "EditAccount" });
+            routes.MapRoute("ChangePassword", "changepassword", new { controller = "Login", action = "ChangePassword" });
+            routes.MapRoute("Admin", "admin", new { controller = "Admin", action = "Index" });
 
 
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Register", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

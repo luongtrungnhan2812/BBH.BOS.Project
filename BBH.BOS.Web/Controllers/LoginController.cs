@@ -13,6 +13,13 @@ namespace BBH.BOS.Web.Controllers
         {
             return View();
         }
-        
+        public ActionResult EditAccount()
+        {
+            return View();
+        }
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
     }
 }
