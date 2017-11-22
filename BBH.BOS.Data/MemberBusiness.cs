@@ -10,7 +10,7 @@ namespace BBH.BOS.Data
 {
     public class MemberBusiness : IIMemberService
     {
-        public MemberBO LoginManagerAccount(string username, string password)
+        public MemberBO LoginAccount(string username, string password)
         {
             MemberBO objMemberBO = new MemberBO();
             return objMemberBO;
