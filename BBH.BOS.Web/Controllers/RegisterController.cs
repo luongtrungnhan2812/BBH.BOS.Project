@@ -6,13 +6,12 @@ using System.Web.Mvc;
 
 namespace BBH.BOS.Web.Controllers
 {
-    public class LoginController : Controller
+    public class RegisterController : Controller
     {
-        // GET: Login
+        // GET: Register
         public ActionResult Index()
         {
             return View();
         }
-        
     }
 }

@@ -13,10 +13,13 @@ namespace BBH.BOS.Web
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapRoute("MemberIndex", "member", new { controller = "Member", action = "Index" });
+
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Register", action = "Index", id = UrlParameter.Optional }
             );
         }
     }
