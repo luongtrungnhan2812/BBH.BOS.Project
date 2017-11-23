@@ -708,7 +708,8 @@
     <Content Include="Views\Login\EditAccount.cshtml" />
     <Content Include="Views\Login\ChangePassword.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Common\Deposit.cshtml" />
+    <Content Include="Views\Common\DepositBTC.cshtml" />
+    <Content Include="Views\Common\BuyPackage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -734,10 +735,6 @@
     <ProjectReference Include="..\BBH.BOS.Respository\BBH.BOS.Respository.csproj">
       <Project>{104215f4-867b-443c-8cee-154cd74b850a}</Project>
       <Name>BBH.BOS.Respository</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BBH.BOS.WCF\BBH.BOS.WCF.csproj">
-      <Project>{75d98374-27e7-43dc-a19c-480bf6c5791c}</Project>
-      <Name>BBH.BOS.WCF</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
