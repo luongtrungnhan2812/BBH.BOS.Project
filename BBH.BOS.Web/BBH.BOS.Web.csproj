@@ -736,6 +736,10 @@
       <Project>{104215f4-867b-443c-8cee-154cd74b850a}</Project>
       <Name>BBH.BOS.Respository</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BBH.BOS.Shared\BBH.BOS.Shared.csproj">
+      <Project>{97613068-f7d0-44bd-8605-feac25181f19}</Project>
+      <Name>BBH.BOS.Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
