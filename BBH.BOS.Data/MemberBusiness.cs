@@ -68,9 +68,9 @@ namespace BBH.BOS.Data
                 pa[10] = new SqlParameter("@deleteDate", member.DeleteDate);
                 pa[11] = new SqlParameter("@linkActive", member.LinkActive);
                 pa[12] = new SqlParameter("@deleteUser", member.DeleteUser);
-                pa[13] = new SqlParameter("@deleteDate", member.ExpireTimeLink);
-                pa[14] = new SqlParameter("@updateDate", member.Birdthday);
-                pa[15] = new SqlParameter("@address", member.Address);
+                pa[13] = new SqlParameter("@expireTimeLink", member.ExpireTimeLink);
+                pa[14] = new SqlParameter("@birdthday", member.Birdthday);
+                pa[15] = new SqlParameter("@updateUser", member.UpdateUser);
                 pa[16] = new SqlParameter("@isDelete", member.IsDelete);
 
                 SqlCommand command = helper.GetCommand(sql, pa, true);
@@ -154,7 +154,7 @@ namespace BBH.BOS.Data
             Sqlhelper helper = new Sqlhelper("", "ConnectionString");
             try
             {
-                SqlParameter[] pa = new SqlParameter[17];
+                SqlParameter[] pa = new SqlParameter[18];
                 string sql = "SP_UpdateMember";
                 pa[0] = new SqlParameter("@email", member.Email);
                 pa[1] = new SqlParameter("@pass", member.Password);
@@ -169,9 +169,9 @@ namespace BBH.BOS.Data
                 pa[10] = new SqlParameter("@deleteDate", member.DeleteDate);
                 pa[11] = new SqlParameter("@linkActive", member.LinkActive);
                 pa[12] = new SqlParameter("@deleteUser", member.DeleteUser);
-                pa[13] = new SqlParameter("@deleteDate", member.ExpireTimeLink);
-                pa[14] = new SqlParameter("@updateDate", member.Birdthday);
-                pa[15] = new SqlParameter("@address", member.Address);
+                pa[13] = new SqlParameter("@expireTimeLink", member.ExpireTimeLink);
+                pa[14] = new SqlParameter("@birdthday", member.Birdthday);
+                pa[15] = new SqlParameter("@updateUser", member.UpdateUser);
                 pa[16] = new SqlParameter("@isDelete", member.IsDelete);
                 pa[17] = new SqlParameter("@memberID", member.MemberID);
 
