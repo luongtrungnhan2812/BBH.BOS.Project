@@ -1,5 +1,7 @@
-﻿using System;
+﻿using QRCoder;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
@@ -76,6 +78,14 @@ namespace BBH.BOS.Shared
                 captchaCode.Append(combination[objRandom.Next(combination.Length)]);
             }
             return captchaCode.ToString();
+        }
+        public static string GenQRCode(string strCode)
+        {
+            QRCodeGenerator qrGenerator = new QRCodeGenerator();
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(strCode, QRCodeGenerator.ECCLevel.Q);
+            QRCode qrCode = new QRCode(qrCodeData);
+            Bitmap qrCodeImage = qrCode.GetGraphic(20);
+            return qrCodeImage.ToString();
         }
     }
 }
