@@ -14,5 +14,20 @@ namespace BBH.BOS.Domain.Interfaces
     {
         [OperationContract]
         MemberBO LoginAccount(string username, string password);
+        [OperationContract]
+        IEnumerable<MemberBO> GetListMember(int start, int end);
+        [OperationContract]
+        bool UpdateMember(MemberBO member, int memberID);
+        [OperationContract]
+        bool InsertMember(MemberBO member);
+        [OperationContract]
+        bool CheckEmailExists(string email);
+        [OperationContract]
+        MemberBO GetMemberDetailByEmail(string email);
+        [OperationContract]
+        bool InsertMemberWallet(Member_WalletBO member);
+
+
+
     }
 }

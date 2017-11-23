@@ -285,66 +285,88 @@
 <div class="modal fade" id="standardModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <!--Content-->
-
         <div class="modal-content">
             <!--Header-->
             <div class="modal-header white-text" style="background-color: #154771">
-                <p class="heading" contenteditable="true">Change Password</p>
+                <p class="heading" contenteditable="true" style="color:#fff">Admin Infomation </p>
             </div>
             <!--Body-->
-            <div class="modal-body">
+            <div class="modal-body" style="padding-bottom:0px">
                 <form>
-                    <!--First row-->
-                    <div class="row" style="padding:0px; margin:0px">
-
+                    <div class="row" style="margin-bottom:15px">
+                        <!--First column-->
                         <div class="col-md-12">
-                            <label id="lbEwallet">New Password</label>
-                            <div class="md-form" style="padding:0px; margin:0px">
-                                <input type="password" style="padding:0px; margin:0px" onfocus="ResetField(1)" id="txtNewPass" name="txtNewPass" class="form-control validate">
+                            <div class="md-form">
+                                <input type="text" onfocus="ResetForm('lbErrorUserName', this.value)" id="txtUserName" name="txtUserName" placeholder="UserName" class="form-control validate">
 
                             </div>
-                            <label style="color:red" id="lbPassword"></label>
+                            <label id="lbErrorUserName" style="color:red; display:none" class=""></label>
                         </div>
-
                     </div>
 
-                    <div class="row" style="padding:0px; margin:0px">
-
+                    <div class="row" style="margin-bottom:15px">
+                        <!--First column-->
                         <div class="col-md-12">
-                            <label id="lbEwallet">Confirm New Password</label>
-                            <div class="md-form" style="padding:0px; margin:0px">
-                                <input type="password" style="padding:0px; margin:0px" onfocus="ResetField(2)" id="txtRePass" name="txtRePass" class="form-control validate">
+                            <div class="md-form">
+                                <input type="password" onfocus="ResetForm('lbErrorPassword', this.value)" id="txtPassword" name="txtPassword" placeholder="Password" class="form-control validate">
 
                             </div>
-                            <label style="color:red" id="lbRePass"></label>
+                            <label id="lbErrorPassword" style="color:red; display:none" class=""></label>
                         </div>
-
                     </div>
 
+                    <div class="row" style="margin-bottom:15px">
+                        <!--First column-->
+                        <div class="col-md-12">
+                            <div class="md-form">
+                                <input type="text" onfocus="ResetForm('lbErrorEmail', this.value)" id="txtEmail" name="txtEmail" placeholder="Email" class="form-control validate">
 
-                    <div class="row">
-                        <img src="/Images/loading.gif" id="imgLoading" style="position: absolute; display:none">
-                        <div class="col-md-12 text-center">
-                            <input type="button" style="padding:5px 30px; cursor:pointer; height:35px" onclick="ChangePassWord()" value="Confirm" class="btn-primary">
+                            </div>
+                            <label id="lbErrorEmail" style="color:red; display:none" class=""></label>
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-bottom:15px">
+                        <!--First column-->
+                        <div class="col-md-12">
+                            <div class="md-form">
+                                <input type="text" onfocus="ResetForm('lbErrorFullName', this.value)" id="txtFullName" name="txtFullName" placeholder="FullName" class="form-control validate">
+
+                            </div>
+                            <label id="lbErrorFullName" style="color:red; display:none" class=""></label>
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-bottom:15px">
+                        <!--First column-->
+                        <div class="col-md-12">
+                            <div class="md-form">
+                                <input type="text" id="txtMobile" style="text-align:left" onfocus="ResetForm('lbErrorMobie', this.value)" name="txtMobile" placeholder="Mobile" onkeypress="return functionx(event)" class="form-control">
+                            </div>
+                            <label id="lbErrorMobie" style="color:red; display:none" class=""></label>
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-bottom:15px">
+                        <!--First column-->
+                        <div class="col-md-12">
+                            <div class="md-form">
+                                <input type="text" id="txtAddress" name="txtAddress" placeholder="Address" class="form-control">
+                            </div>
                         </div>
                     </div>
 
                 </form>
-
                 <br>
 
             </div>
             <!--Footer-->
             <div class="modal-footer">
-                <img id="imgLoadingBooking" src="/Images/loading.gif" style="display:none">
-                <a id="2lvlModal-cancel" class="btn btn-default waves-effect waves-light" onclick="CloseModal()" data-dismiss="modal" contenteditable="true">Close</a>
-                @*<a id="2lvlModal-learnMore" class="btn btn-danger" onclick="ConfirmBooking()" contenteditable="true">Confirm</a>*@
+                <img id="imgLoading" src="/Images/loading.gif" style="display:none">
+                <a id="2lvlModal-learnMore" class="btn btn-danger" onclick="SaveAdmin()" contenteditable="true">Save</a>
 
             </div>
         </div>
-
         <!--/.Content-->
     </div>
-
-
 </div>

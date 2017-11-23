@@ -29,5 +29,92 @@ namespace BBH.BOS.Respository
             }
             return objMemberBO;
         }
+
+        public IEnumerable<MemberBO> GetListMember(int start, int end)
+        {
+            string fileLog = Path.GetDirectoryName(Path.Combine(pathLog));
+            try
+            {
+                IEnumerable<MemberBO> objMemberBO = Proxy.GetListMember(start, end);
+                return objMemberBO;
+            }
+            catch (Exception ex)
+            {
+                Utility.WriteLog(fileLog, ex.Message);
+                return null;
+            }
+        }
+
+        public bool InsertMember(MemberBO member)
+        {
+            bool row = false;
+            string fileLog = Path.GetDirectoryName(Path.Combine(pathLog));
+            try
+            {
+                row = Proxy.InsertMember(member);
+            }
+            catch (Exception ex)
+            {
+                Utility.WriteLog(fileLog, ex.Message);
+            }
+            return row;
+        }
+
+        public bool UpdateMember(MemberBO member, int memberID)
+        {
+            bool row = false;
+            string fileLog = Path.GetDirectoryName(Path.Combine(pathLog));
+            try
+            {
+                row = Proxy.UpdateMember(member,memberID);
+            }
+            catch (Exception ex)
+            {
+                Utility.WriteLog(fileLog, ex.Message);
+            }
+            return row;
+        }
+        public bool CheckEmailExists(string email)
+        {
+            bool row = false;
+            string fileLog = Path.GetDirectoryName(Path.Combine(pathLog));
+            try
+            {
+                row = Proxy.CheckEmailExists(email);
+            }
+            catch (Exception ex)
+            {
+                Utility.WriteLog(fileLog, ex.Message);
+            }
+            return row;
+        }
+        public MemberBO GetMemberDetailByEmail(string email)
+        {
+            MemberBO objMemberBO = null;
+            string fileLog = Path.GetDirectoryName(Path.Combine(pathLog));
+            try
+            {
+                objMemberBO = Proxy.GetMemberDetailByEmail(email);
+            }
+            catch (Exception ex)
+            {
+                Utility.WriteLog(fileLog, ex.Message);
+            }
+            return objMemberBO;
+        }
+        public bool InsertMemberWallet(Member_WalletBO member)
+        {
+            bool row = false;
+            string fileLog = Path.GetDirectoryName(Path.Combine(pathLog));
+            try
+            {
+                row = Proxy.InsertMemberWallet(member);
+            }
+            catch (Exception ex)
+            {
+                Utility.WriteLog(fileLog, ex.Message);
+            }
+            return row;
+        }
     }
 }
