@@ -221,6 +221,43 @@ $('#txtE_Wallet').on("keypress", function (e) {
     }
 });
 
+$(document).ready(function () {
+    var result = $('#hdResult').val();
+    if (result == 'registerSuccess')
+    {    
+                    setTimeout(function () { window.location.href = ('/login'); }, 1000);
+                    $('#txtEmail').text('');
+                    $('#txtPassword').text('');
+                    $('#txtRePassword').text('');
+
+                    $('#txtFullName').text('');
+                    $('#txtMobile').text('');
+    }
+    else if (result == 'RegisterFaile')
+    {
+        alertify.error('Error Register. Please contact with administrator');
+    }
+    else if (result == 'EmailExist')
+    {
+        $('#lbEmail').text('This email has used by another');
+        $('#lbEmail').css('display', '');
+    }
+   else if (result == 'errorCaptcha')
+    {
+        alertify.error('Please confirm captcha !');
+    }
+
+    setTimeout(function () {
+        $.ajax({
+            type: "post",
+            async: true,
+            url: "/Register/SetTimeoutSession",
+            success: function () {
+            }
+        })
+    }, 10);
+});
+
 function RegisterMember() {
 
     var email = $('#txtEmail').val();
@@ -286,50 +323,52 @@ function RegisterMember() {
         return false;
     }
     else {
-        $('#imgLoading').css("display", "");
-        $.ajax({
-            type: "post",
-            url: "/Register/RegisterMember",
-            async: false,
-            data: { email: email, password: password, mobile: mobile, fullName: fullName },
-            beforeSend: function () {
-                $('#imgLoading').css("display", "");
-            },
-            success: function (d) {
-                //$('#imgLoading').css("display", "none");
+        return true;
+        //$('#imgLoading').css("display", "");
+        //$.ajax({
+        //    type: "post",
+        //    url: "/Register/RegisterMember",
+        //    async: false,
+        //    data: { email: email, password: password, mobile: mobile, fullName: fullName },
+        //    beforeSend: function () {
+        //        $('#imgLoading').css("display", "");
+        //    },
+        //    success: function (d) {
+        //        //$('#imgLoading').css("display", "none");
 
-                if (d == 'registerSuccess') {
-                    //alertify.alert('Register Success, vui long vao email de kick hoat tai khoan');
-                    //$('#pointID').text(0);
-                    setTimeout(function () { window.location.href = ('/login'); }, 1000);
-                    $('#txtEmail').text('');
-                    $('#txtPassword').text('');
-                    $('#txtRePassword').text('');
+        //        if (d == 'registerSuccess') {
+        //            //alert(d);
+        //            //alertify.alert('Register Success, vui long vao email de kick hoat tai khoan');
+        //            //$('#pointID').text(0);
+        //            setTimeout(function () { window.location.href = ('/'); }, 1000);
+        //            $('#txtEmail').text('');
+        //            $('#txtPassword').text('');
+        //            $('#txtRePassword').text('');
 
-                    $('#txtFullName').text('');
-                    $('#txtMobile').text('');
+        //            $('#txtFullName').text('');
+        //            $('#txtMobile').text('');
 
-                }
-                else if (d == 'EmailExist') {
+        //        }
+        //        else if (d == 'EmailExist') {
 
-                    //alertify.alert('This email has used by another');
-                    $('#lbEmail').text('This email has used by another');
-                    $('#lbEmail').css('display', '');
-                }
+        //            //alertify.alert('This email has used by another');
+        //            $('#lbEmail').text('This email has used by another');
+        //            $('#lbEmail').css('display', '');
+        //        }
 
-                else if (d == 'RegisterFaile') {
+        //        else if (d == 'RegisterFaile') {
 
-                    alertify.error('Error Register. Please contact with administrator');
+        //            alertify.error('Error Register. Please contact with administrator');
 
-                }
-                //else if (d == 'RegisterFaile1') {
-                //    alertify.error('email chua dc kich hoat');
+        //        }
+        //        //else if (d == 'RegisterFaile1') {
+        //        //    alertify.error('email chua dc kich hoat');
 
-                //}
-            },
-            error: function () {
+        //        //}
+        //    },
+        //    error: function () {
 
-            }
-        });
+        //    }
+        //});
     }
 }

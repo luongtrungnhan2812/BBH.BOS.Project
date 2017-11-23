@@ -19,6 +19,7 @@
     <!-- Your custom styles (optional) -->
     <link href="/Content/css/style.css" rel="stylesheet">
     @*<link href="/Content/alertify.css" rel="stylesheet">*@
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 
 <body class="fixed-sn white-skin">
@@ -29,6 +30,8 @@
                 <!--Form with header-->
                 @*@if ((string)Session["Language"] == "EN")
                     {*@
+            @using (Html.BeginForm("RegisterMember", "Register", FormMethod.Post))
+            {
                 <div class="card" style="top:-75px">
                     <div class="card-block">
                         <!--Header-->
@@ -69,12 +72,14 @@
 
                         <div class="text-center">
                             @*<img src="/Images/loading.gif" id="imgLoading" style="position: absolute; display:none">*@
-                            <button class="btn btn-primary" onclick="return RegisterMember()">Sign Up</button>
+                            <input type="submit" class="btn btn-primary" onclick="return RegisterMember()" value="Sign Up">
+                            @*<button class="btn btn-primary" onclick="return RegisterMember()">Sign Up</button>*@
                             <button class="btn btn-primary" onclick="window.location.href='/login'">Sign In</button>
                         </div>
                     </div>
 
                 </div>
+            }
                 @*}
                     else
                     {*@
@@ -104,6 +109,8 @@
             </div>
         </div>
     </div>
+    <input type="hidden" id="hdResult" value="@Session["Result"]" />
+
     @*<input type="hidden" id="hdRedirect" value="@ViewData["UrlRedirect"]" />
         <input type="hidden" id="hdLanguage" value="@Session["Language"]" />*@
     <!-- SCRIPTS -->
@@ -116,7 +123,7 @@
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="/Content/js/mdb.min.js"></script>
 
-    <script src='https://www.google.com/recaptcha/api.js' type="text/javascript"></script>
+    
     <script src="/Scripts/member/member.js"></script>
     @*<script type="text/javascript" src="/Scripts/alertify.js"></script>
     <script type="text/javascript" src="/Scripts/register/register.js"></script>*@

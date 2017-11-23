@@ -9,6 +9,9 @@ using BBH.BOS.Respository;
 using BBH.BOS.Domain.Interfaces;
 using BBH.BOS.Domain.Entities;
 using Microsoft.Practices.Unity;
+using System.Configuration;
+using System.Net;
+using Newtonsoft.Json.Linq;
 
 namespace BBH.BOS.Web.Controllers
 {
@@ -60,7 +63,7 @@ namespace BBH.BOS.Web.Controllers
         }
 
         [HttpPost]
-        public string RegisterMember(string email,string password, string mobile, string fullName)
+        public string RegisterMember()
  //string address, string password, string avatar, int isDelete,DateTime birthday, int isActive, int gender, DateTime updateDate, DateTime deleteDate, string updateUser, string linkActive, DateTime expireTimeLink, DateTime createDate,string deleteUser)
         {
             string result = "";
@@ -71,76 +74,99 @@ namespace BBH.BOS.Web.Controllers
             //}
             //else
             //{
-                //if ((int)Session["GroupID"] != 1)
-                //{
-                //    Response.Redirect("/");
-                //}
-                //if (memberID > 0)
-                //{
-                //    member.FullName = fullName;
-                //    member.Email = email;
-                //    member.Mobile = mobile;
-                   
+            //if ((int)Session["GroupID"] != 1)
+            //{
+            //    Response.Redirect("/");
+            //}
+            //if (memberID > 0)
+            //{
+            //    member.FullName = fullName;
+            //    member.Email = email;
+            //    member.Mobile = mobile;
 
-                //    bool rs = repository.UpdateMember( member,memberID);
-                   
 
-                //}
-                //else if (memberID == 0)
-                //{
-                    member.FullName = fullName;
+            //    bool rs = repository.UpdateMember( member,memberID);
+
+
+            //}
+            //else if (memberID == 0)
+            //{
+            string response = Request.Form["g-recaptcha-response"];
+            string secretKey = "6LfhJyUUAAAAAPKM6Hl87lD0mVKa-0zPKNR53W_j";/* ConfigurationManager.AppSettings["SecrecKey"];*/// "6LfhJyUUAAAAAPKM6Hl87lD0mVKa-0zPKNR53W_j";
+            var client = new WebClient();
+            var result1 = client.DownloadString(string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", secretKey, response));
+            var obj = JObject.Parse(result1);
+            var status = (bool)obj.SelectToken("success");
+            if (status == false)
+            {
+                result = "errorCaptcha";
+            }
+            else
+            {
+                string email = Request.Form["txtEmail"];
+                string password = Request.Form["txtPassword"];
+                string mobile = Request.Form["txtMobile"];
+                string fullName = Request.Form["txtFullName"];
+
+                     member.FullName = fullName;
                     member.Email = email;
                     member.Mobile = mobile;
                     member.Password = password;
-                
-                    //member.Birdthday = DateTime.Parse("1/1/1990");
-                  
-                   // member.ExpireTimeLink = DateTime.Parse("1/1/1990");
                     member.IsActive = 1;
                     member.IsDelete = 0;
                     //member.Hashkey = "1234";
                     member.CreateDate = DateTime.Now;
                     member.Gender = 1;
 
-                    bool checkEmail = repository.CheckEmailExists(email);
-                    if (checkEmail)
+                  
+                bool checkEmail = repository.CheckEmailExists(email);
+                if (checkEmail)
+                {
+                    Response.Write("EmailExist");
+                }
+                else
+                {
+                    int returnAdminID = repository.InsertMember(member);
+                    if (returnAdminID > 0)
                     {
-                        Response.Write("EmailExist");
+                        member = repository.GetMemberDetailByEmail(email);
+                        Member_WalletBO memberWallet = new Member_WalletBO();
+
+                        bool rs_ = repository.InsertMemberWallet(memberWallet);
+                        if (rs_)
+                        {
+                            Session["Email"] = email;
+                            //Session["Points"] = member.Points;
+
+                            //if (Session["username"] == null)
+                            //{
+                            //    Session["username"] = member.Email;
+
+                            //}
+                            Session["memberid"] = member.MemberID;
+                            //Session["ewallet"] = member.E_Wallet;
+                            Session["MemberInfomation"] = member;
+                        }
+                        result = "registerSuccess";
                     }
                     else
-                    {                   
-                        int returnAdminID = repository.InsertMember(member);
-                        if(returnAdminID>0)
-                        {
-                            member = repository.GetMemberDetailByEmail(email);
-                            Member_WalletBO memberWallet = new Member_WalletBO();
-
-                            bool rs_ = repository.InsertMemberWallet(memberWallet);
-                            if (rs_)
-                            {
-                                Session["Email"] = email;
-                                //Session["Points"] = member.Points;
-                               
-                                //if (Session["username"] == null)
-                                //{
-                                //    Session["username"] = member.Email;
-
-                                //}
-                                Session["memberid"] = member.MemberID;
-                                //Session["ewallet"] = member.E_Wallet;
-                                Session["MemberInfomation"] = member;
-                            }
-                            result = "registerSuccess";
-                        }
-                        else
-                        {
-                            result = "RegisterFaile";
-                        }
-                        //result = "insertsuccess";
+                    {
+                        result = "RegisterFaile";
                     }
-                //}
-            //}
+                    //result = "insertsuccess";
+                }
+                
+                
+            }
+            Session["Result"] = result;
+            Response.Redirect("/registermember");
+
             return result;
+        }
+        [HttpPost]
+        public void SetTimeoutSession()
+        {
+            Session["Result"] = null;
         }
     }
 }
