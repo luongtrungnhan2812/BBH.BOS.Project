@@ -17,6 +17,11 @@
     <link href="/Content/css/mdb.css" rel="stylesheet" />
     <!-- Your custom styles (optional) -->
     <link href="/Content/css/style.css" rel="stylesheet" />
+    <style type="text/css">
+        input:invalid {
+            border-bottom: 1px solid red;
+        }
+    </style>
 </head>
 <body class="fixed-sn white-skin">
     <div class="container">
@@ -24,7 +29,7 @@
             <div class="col-md-6 col-lg-5 login-form mx-auto float-none">
                 <!--Form with header-->
                 <div class="card">
-                    <form action="~/Login/LoginMember" method="post" onsubmit="return validateForm()" id="myForm">
+                    <form action="~/Login/LoginMember" method="post" id="myForm">
                         <div class="card-block">
                             <!--Header-->
                             <div class="form-header">
@@ -33,12 +38,12 @@
                             <!--Body-->
                             <div class="md-form">
                                 <i class="fa fa-envelope prefix"></i>
-                                <input type="text" id="txtEmail" name="txtEmail" onfocus="ResetForm(1)" class="form-control">
+                                <input type="text" id="txtEmail" name="txtEmail" onfocus="ResetForm(1)" class="form-control" required>
                                 <label id="lbEmail" for="form2">Email</label>
                             </div>
                             <div class="md-form">
                                 <i class="fa fa-lock prefix"></i>
-                                <input type="password" id="txtPassword" name="txtPassword" onkeydown="return EnterLogin(event, this.value)" onfocus="ResetForm(3)" class="form-control">
+                                <input type="password" id="txtPassword" name="txtPassword" onkeydown="return EnterLogin(event, this.value)" onfocus="ResetForm(3)" class="form-control" required>
                                 <label id="lbPass" for="form4">Password</label>
                             </div>
                             <div class="g-recaptcha" id="captcha" data-sitekey="6LfhJyUUAAAAANmMFHQ7ARUoDEwgs3Zy-W6bwCo1" style="margin-left: 49px;"></div><br />
@@ -73,17 +78,3 @@
 </body>
 
 </html>
-<script>
-    function validateForm() {
-        var x = document.forms["myForm"]["txtEmail"].value;
-        if (x == "") {
-            alert("Email must be filled out");
-            return false;
-        }
-        var x = document.forms["myForm"]["txtPassword"].value;
-        if (x == "") {
-            alert("Password must be filled out");
-            return false;
-        }
-    }
-</script>
