@@ -1,22 +1,16 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
-
 <!DOCTYPE html>
-
 <html>
 <head>
     <meta charset="utf-8">
     <title>Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-
     <title>Material Design Bootstrap</title>
-
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
-
     <!-- Bootstrap core CSS -->
     <link href="/Content/css/bootstrap.min.css" rel="stylesheet" />
     <!-- Material Design Bootstrap -->
@@ -25,40 +19,32 @@
     <link href="/Content/css/style.css" rel="stylesheet" />
 </head>
 <body class="fixed-sn white-skin">
-
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-lg-5 login-form mx-auto float-none">
-
                 <!--Form with header-->
                 <div class="card">
-                    <form action="~/Login/LoginMember" method="post">
+                    <form action="~/Login/LoginMember" method="post" onsubmit="return validateForm()" id="myForm">
                         <div class="card-block">
-
                             <!--Header-->
                             <div class="form-header">
                                 <h3><i class="fa fa-lock"></i> Login:</h3>
                             </div>
-
                             <!--Body-->
                             <div class="md-form">
                                 <i class="fa fa-envelope prefix"></i>
                                 <input type="text" id="txtEmail" name="txtEmail" onfocus="ResetForm(1)" class="form-control">
                                 <label id="lbEmail" for="form2">Email</label>
                             </div>
-
                             <div class="md-form">
                                 <i class="fa fa-lock prefix"></i>
                                 <input type="password" id="txtPassword" name="txtPassword" onkeydown="return EnterLogin(event, this.value)" onfocus="ResetForm(3)" class="form-control">
                                 <label id="lbPass" for="form4">Password</label>
                             </div>
                             <div class="g-recaptcha" id="captcha" data-sitekey="6LfhJyUUAAAAANmMFHQ7ARUoDEwgs3Zy-W6bwCo1" style="margin-left: 49px;"></div><br />
-
                             <div class="text-center">
-                                @*<img src="/Images/loading.gif" id="imgLoading" style="position: absolute; display:none">*@
                                 <button type="submit" class="btn btn-primary">Login</button>
                             </div>
-
                         </div>
                     </form>
                     
@@ -68,20 +54,11 @@
                         </div>
 
                     </div>
-                    <!--Footer-->
-                    @*<div class="modal-footer text-center">
-                        Or login with <button type="button" class="btn btn-gplus"><i class="fa fa-google left"></i> Google</button>
-                    </div>*@
-
                 </div>
-                <!--/Form with header-->
-
             </div>
         </div>
     </div>
-
     <script src='https://www.google.com/recaptcha/api.js' type="text/javascript"></script>
-
     <!-- SCRIPTS -->
     <!-- JQuery -->
     <script src="/Content/js/jquery-3.1.1.min.js"></script>
@@ -96,3 +73,17 @@
 </body>
 
 </html>
+<script>
+    function validateForm() {
+        var x = document.forms["myForm"]["txtEmail"].value;
+        if (x == "") {
+            alert("Email must be filled out");
+            return false;
+        }
+        var x = document.forms["myForm"]["txtPassword"].value;
+        if (x == "") {
+            alert("Password must be filled out");
+            return false;
+        }
+    }
+</script>
