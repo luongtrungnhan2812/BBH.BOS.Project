@@ -707,6 +707,7 @@
     <Content Include="Views\Login\ChangePassword.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Common\DepositBTC.cshtml" />
+    <Content Include="Views\Common\BuyPackage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

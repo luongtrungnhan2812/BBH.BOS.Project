@@ -37,5 +37,9 @@ namespace BBH.BOS.Web.Controllers
             }
             return PartialView();
         }
+        public ActionResult BuyPackage()
+        {
+            return PartialView();
+        }
     }
 }
