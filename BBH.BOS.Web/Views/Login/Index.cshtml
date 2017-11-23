@@ -32,33 +32,36 @@
 
                 <!--Form with header-->
                 <div class="card">
-                    <div class="card-block">
+                    <form action="~/Login/LoginMember" method="post">
+                        <div class="card-block">
 
-                        <!--Header-->
-                        <div class="form-header">
-                            <h3><i class="fa fa-lock"></i> Login:</h3>
-                        </div>
+                            <!--Header-->
+                            <div class="form-header">
+                                <h3><i class="fa fa-lock"></i> Login:</h3>
+                            </div>
 
-                        <!--Body-->
-                        <div class="md-form">
-                            <i class="fa fa-envelope prefix"></i>
-                            <input type="text" id="txtEmail" name="txtEmail" onfocus="ResetForm(1)" class="form-control">
-                            <label id="lbEmail" for="form2">Email</label>
-                        </div>
+                            <!--Body-->
+                            <div class="md-form">
+                                <i class="fa fa-envelope prefix"></i>
+                                <input type="text" id="txtEmail" name="txtEmail" onfocus="ResetForm(1)" class="form-control">
+                                <label id="lbEmail" for="form2">Email</label>
+                            </div>
 
-                        <div class="md-form">
-                            <i class="fa fa-lock prefix"></i>
-                            <input type="password" id="txtPassword" name="txtPassword" onkeydown="return EnterLogin(event, this.value)" onfocus="ResetForm(3)" class="form-control">
-                            <label id="lbPass" for="form4">Password</label>
-                        </div>
-                            <div class="g-recaptcha" data-sitekey="6LfhJyUUAAAAANmMFHQ7ARUoDEwgs3Zy-W6bwCo1" style="margin-left: 49px;"></div><br />
-                            
+                            <div class="md-form">
+                                <i class="fa fa-lock prefix"></i>
+                                <input type="password" id="txtPassword" name="txtPassword" onkeydown="return EnterLogin(event, this.value)" onfocus="ResetForm(3)" class="form-control">
+                                <label id="lbPass" for="form4">Password</label>
+                            </div>
+                            <div class="g-recaptcha" id="captcha" data-sitekey="6LfhJyUUAAAAANmMFHQ7ARUoDEwgs3Zy-W6bwCo1" style="margin-left: 49px;"></div><br />
+
                             <div class="text-center">
                                 @*<img src="/Images/loading.gif" id="imgLoading" style="position: absolute; display:none">*@
-                                <button class="btn btn-primary" onclick="return LoginMember()">Login</button>
+                                <button type="submit" class="btn btn-primary">Login</button>
                             </div>
 
                         </div>
+                    </form>
+                    
                     <div class="">
                         <div class="modal-footer text-center">
                             <a href="/registermember">Sign up</a>
