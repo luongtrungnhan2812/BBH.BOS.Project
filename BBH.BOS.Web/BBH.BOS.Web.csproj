@@ -676,6 +676,7 @@
     <Content Include="Content\sass\mdb\pro\_stepper.scss" />
     <Content Include="Content\sass\mdb\pro\_tabs.scss" />
     <Content Include="Content\sass\mdb\pro\_toasts.scss" />
+    <Content Include="App_Data\IoC.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -684,6 +685,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\member\member.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -709,7 +711,6 @@
     <Content Include="Views\Common\Deposit.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -733,6 +734,10 @@
     <ProjectReference Include="..\BBH.BOS.Respository\BBH.BOS.Respository.csproj">
       <Project>{104215f4-867b-443c-8cee-154cd74b850a}</Project>
       <Name>BBH.BOS.Respository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BBH.BOS.WCF\BBH.BOS.WCF.csproj">
+      <Project>{75d98374-27e7-43dc-a19c-480bf6c5791c}</Project>
+      <Name>BBH.BOS.WCF</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

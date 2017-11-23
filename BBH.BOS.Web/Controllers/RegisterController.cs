@@ -19,38 +19,38 @@ namespace BBH.BOS.Web.Controllers
         
         public ActionResult Index(string p)
         {
-            if (Session["Email"] == null)
-            {
-                Response.Redirect("/login");
-            }
-            int totalRecord = 0;
-            int intPageSize = 10;
-            int start = 0, end = 10;
-            //Int32.TryParse(ConfigurationManager.AppSettings["NumberRecordPage"], out intPageSize);
+            //if (Session["Email"] == null)
+            //{
+            //    Response.Redirect("/login");
+            //}
+            //int totalRecord = 0;
+            //int intPageSize = 10;
+            //int start = 0, end = 10;
+            ////Int32.TryParse(ConfigurationManager.AppSettings["NumberRecordPage"], out intPageSize);
 
-            int page = 1;
-            try
-            {
-                if (p != null && p != "")
-                {
-                    page = int.Parse(p);
-                }
-            }
-            catch
-            {
+            //int page = 1;
+            //try
+            //{
+            //    if (p != null && p != "")
+            //    {
+            //        page = int.Parse(p);
+            //    }
+            //}
+            //catch
+            //{
 
-            }
-            if (page > 1)
-            {
-                start = (page - 1) * intPageSize + 1;
-                end = (page * intPageSize);
-            }
-            IEnumerable<MemberBO> lstMember = repository.GetListMember(start,end);
-                if (lstMember != null && lstMember.Count() > 0)
-                {
-                    string Emaail = lstMember.ElementAt(0).Email;
-                }
-                ViewData["ListAdmin"] = lstMember;
+            //}
+            //if (page > 1)
+            //{
+            //    start = (page - 1) * intPageSize + 1;
+            //    end = (page * intPageSize);
+            //}
+            //IEnumerable<MemberBO> lstMember = repository.GetListMember(start,end);
+            //    if (lstMember != null && lstMember.Count() > 0)
+            //    {
+            //        string Emaail = lstMember.ElementAt(0).Email;
+            //    }
+            //    ViewData["ListAdmin"] = lstMember;
                 //IEnumerable<GroupAdminBO> lstGroupAdmin = repository.ListGroupAdmin();
                 //ViewData["ListGroupAdmin"] = lstGroupAdmin;
             
@@ -59,38 +59,34 @@ namespace BBH.BOS.Web.Controllers
         }
 
         [HttpPost]
-        public string SaveMember(int memberID, string fullName, string email, string mobile, string password)
+        public string RegisterMember(string email,string password, string mobile, string fullName)
  //string address, string password, string avatar, int isDelete,DateTime birthday, int isActive, int gender, DateTime updateDate, DateTime deleteDate, string updateUser, string linkActive, DateTime expireTimeLink, DateTime createDate,string deleteUser)
         {
             string result = "";
             MemberBO member = new MemberBO();
-            if (Session["Email"] == null)
-            {
-                Response.Redirect("/login");
-            }
-            else
-            {
+            //if (Session["Email"] == null)
+            //{
+            //    Response.Redirect("/login");
+            //}
+            //else
+            //{
                 //if ((int)Session["GroupID"] != 1)
                 //{
                 //    Response.Redirect("/");
                 //}
-                if (memberID > 0)
-                {
-                    member.FullName = fullName;
-                    member.Email = email;
-                    member.Mobile = mobile;
-                    //member.CreateDate = createDate;
-                    //member.DeleteDate = deleteDate;
-                    //member.DeleteUser = deleteUser;
-                    //member.LinkActive = linkActive;
-                    //member.ExpireTimeLink = expireTimeLink;
-
-                    bool rs = repository.UpdateMember( member,memberID);
+                //if (memberID > 0)
+                //{
+                //    member.FullName = fullName;
+                //    member.Email = email;
+                //    member.Mobile = mobile;
                    
 
-                }
-                else if (memberID == 0)
-                {
+                //    bool rs = repository.UpdateMember( member,memberID);
+                   
+
+                //}
+                //else if (memberID == 0)
+                //{
                     member.FullName = fullName;
                     member.Email = email;
                     member.Mobile = mobile;
@@ -99,10 +95,10 @@ namespace BBH.BOS.Web.Controllers
                     //string passMd5 = Utility.MaHoaMD5(password + "1234");
                     //member.Password = passMd5;
                     member.Birdthday = DateTime.Parse("1/1/1990");
-                    member.DeleteDate = DateTime.Parse("");
+                    member.DeleteDate = DateTime.Parse("1/1/1990");
                     member.DeleteUser = "";
                     member.LinkActive = "";
-                    member.ExpireTimeLink = DateTime.Parse("");
+                    member.ExpireTimeLink = DateTime.Parse("1/1/1990");
                     member.IsActive = 1;
                     member.IsDelete = 0;
                     //member.Hashkey = "1234";
@@ -148,8 +144,8 @@ namespace BBH.BOS.Web.Controllers
                         }
                         //result = "insertsuccess";
                     }
-                }
-            }
+                //}
+            //}
             return result;
         }
     }
