@@ -296,12 +296,12 @@ function RegisterMember() {
                 $('#imgLoading').css("display", "");
             },
             success: function (d) {
-                $('#imgLoading').css("display", "none");
+                //$('#imgLoading').css("display", "none");
 
                 if (d == 'registerSuccess') {
                     //alertify.alert('Register Success, vui long vao email de kick hoat tai khoan');
                     //$('#pointID').text(0);
-                    setTimeout(function () { window.location.href = ('/'); }, 1000);
+                    setTimeout(function () { window.location.href = ('/login'); }, 1000);
                     $('#txtEmail').text('');
                     $('#txtPassword').text('');
                     $('#txtRePassword').text('');

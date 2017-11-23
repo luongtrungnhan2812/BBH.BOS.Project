@@ -18,7 +18,7 @@ namespace BBH.BOS.Web.Controllers
         [Dependency]
         protected IIMemberService repository { get; set; }
         
-        public ActionResult Index(string p)
+        public ActionResult Index()
         {
             //if (Session["Email"] == null)
             //{
@@ -91,19 +91,16 @@ namespace BBH.BOS.Web.Controllers
                     member.FullName = fullName;
                     member.Email = email;
                     member.Mobile = mobile;
-                    member.Address = "";
                     member.Password = password;
                 
-                    member.Birdthday = DateTime.Parse("1/1/1990");
+                    //member.Birdthday = DateTime.Parse("1/1/1990");
                   
-                    member.LinkActive = "";
-                    member.ExpireTimeLink = DateTime.Parse("1/1/1990");
+                   // member.ExpireTimeLink = DateTime.Parse("1/1/1990");
                     member.IsActive = 1;
                     member.IsDelete = 0;
                     //member.Hashkey = "1234";
                     member.CreateDate = DateTime.Now;
                     member.Gender = 1;
-                    member.Avatar = "";
 
                     bool checkEmail = repository.CheckEmailExists(email);
                     if (checkEmail)
@@ -113,7 +110,7 @@ namespace BBH.BOS.Web.Controllers
                     else
                     {                   
                         int returnAdminID = repository.InsertMember(member);
-                        if(returnAdminID==0)
+                        if(returnAdminID>0)
                         {
                             member = repository.GetMemberDetailByEmail(email);
                             Member_WalletBO memberWallet = new Member_WalletBO();
@@ -123,7 +120,7 @@ namespace BBH.BOS.Web.Controllers
                             {
                                 Session["Email"] = email;
                                 //Session["Points"] = member.Points;
-                                result = "registerSuccess";
+                               
                                 //if (Session["username"] == null)
                                 //{
                                 //    Session["username"] = member.Email;
@@ -133,7 +130,7 @@ namespace BBH.BOS.Web.Controllers
                                 //Session["ewallet"] = member.E_Wallet;
                                 Session["MemberInfomation"] = member;
                             }
-
+                            result = "registerSuccess";
                         }
                         else
                         {

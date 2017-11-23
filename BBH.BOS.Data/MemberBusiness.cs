@@ -53,25 +53,25 @@ namespace BBH.BOS.Data
             try
             {
                 
-                SqlParameter[] pa = new SqlParameter[13];
+                SqlParameter[] pa = new SqlParameter[8];
                 string sql = "SP_InsertMember";
                 pa[0] = new SqlParameter("@email", member.Email);
-                pa[1] = new SqlParameter("@pass", member.Password);
-                pa[2] = new SqlParameter("@avatar", member.Avatar);
-                pa[3] = new SqlParameter("@isActive", member.IsActive);
-                pa[4] = new SqlParameter("@createDate", member.CreateDate);
-                pa[5] = new SqlParameter("@fullName", member.FullName);
-                pa[6] = new SqlParameter("@gender", member.Gender);
-                pa[7] = new SqlParameter("@mobile", member.Mobile);
-                pa[8] = new SqlParameter("@address", member.Address);
+                pa[1] = new SqlParameter("@password", member.Password);
+                //pa[2] = new SqlParameter("@avatar", member.Avatar);
+                pa[2] = new SqlParameter("@isActive", member.IsActive);
+                pa[3] = new SqlParameter("@createDate", member.CreateDate);
+                pa[4] = new SqlParameter("@fullName", member.FullName);
+                pa[5] = new SqlParameter("@gender", member.Gender);
+                pa[6] = new SqlParameter("@mobile", member.Mobile);
+                //pa[8] = new SqlParameter("@addRess", member.Address);
               //  pa[9] = new SqlParameter("@updateDate", member.UpdateDate);
                 //pa[10] = new SqlParameter("@deleteDate", member.DeleteDate);
-                pa[9] = new SqlParameter("@linkActive", member.LinkActive);
+                //pa[9] = new SqlParameter("@linkActive", member.LinkActive);
                 //pa[12] = new SqlParameter("@deleteUser", member.DeleteUser);
-                pa[10] = new SqlParameter("@expireTimeLink", member.ExpireTimeLink);
-                pa[11] = new SqlParameter("@birdthday", member.Birdthday);
+              //  pa[10] = new SqlParameter("@expireTimeLink", member.ExpireTimeLink);
+               // pa[11] = new SqlParameter("@birdthday", member.Birdthday);
                 //pa[15] = new SqlParameter("@updateUser", member.UpdateUser);
-                pa[12] = new SqlParameter("@isDelete", member.IsDelete);
+                pa[7] = new SqlParameter("@isDelete", member.IsDelete);
 
                 SqlCommand command = helper.GetCommand(sql, pa, true);
                 int memberID = Convert.ToInt32(command.ExecuteScalar());
@@ -233,7 +233,7 @@ namespace BBH.BOS.Data
             try
             {
                 MemberBO member = null;
-                string sql = "SP_GetMemberDetailByEmailFE";
+                string sql = "SP_GetMemberByEmail";
                 SqlParameter[] pa = new SqlParameter[1];
                 pa[0] = new SqlParameter("@email", email);
                 SqlCommand command = helper.GetCommand(sql, pa, true);
@@ -265,7 +265,7 @@ namespace BBH.BOS.Data
             try
             {
                 bool rs = false;
-                string sql = "SP_InsertMemberWalletFE";
+                string sql = "SP_InsertMemberWallet";
                 SqlParameter[] pa = new SqlParameter[5];
              
                 pa[0] = new SqlParameter("@IndexWallet", member.IndexWallet);
