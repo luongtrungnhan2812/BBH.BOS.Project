@@ -41,5 +41,9 @@ namespace BBH.BOS.Web.Controllers
         {
             return PartialView();
         }
+        public ActionResult PartialDashboard()
+        {
+            return PartialView();
+        }
     }
 }

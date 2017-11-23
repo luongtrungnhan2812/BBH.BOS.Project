@@ -1,0 +1,191 @@
+﻿
+@{
+    ViewBag.Title = "WalletBTC";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style type="text/css">
+    .box {
+        position: relative;
+        border-radius: 3px;
+        background: #ffffff;
+        border-top: 3px solid #d2d6de;
+        margin-bottom: 20px;
+        width: 100%;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    }
+    .box-body {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 3px;
+        border-bottom-left-radius: 3px;
+        padding: 10px;
+    }
+
+     .table-responsive {
+        overflow-x: auto;
+        min-height: 0.01%;
+    }
+    .box .icon-wallet {
+        width: 2%;
+        padding-top: 18px;
+        padding-bottom: 10px;
+        padding-right: 0px;
+        vertical-align:middle !important;
+    }
+    .box .wallet-amount {
+        width: 20%;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        font-size: 20px;
+        color: #85bb65;
+        vertical-align: middle !important;
+    }
+    .table
+    {
+        margin-bottom: unset !important;
+    }
+    .btn_
+    {
+        width: 140px;
+    }
+</style>
+<main class="" style="padding-top: 5.5rem; margin-left: 5%;margin-right: 5%;">
+
+    <div class="container-fluid">
+
+        <!-- First row -->
+        @{Html.RenderAction("PartialDashboard", "Common", null);}
+        <!-- /.First row -->
+        <!--Second row-->
+        <div class="row mb-0">
+            <div class="col-lg-12">
+                <!-- Widget: user widget style 1 -->
+                <div class="box">
+                    <!-- Add the bg color to the header using any of the bg-* classes -->
+                    <div class="box-body table-responsive">
+                        <table class="table table-hover table-striped wallet-table">
+                            <tbody>
+                                <tr>
+                                    <th class="icon-wallet">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                            <path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"></path>
+                                        </svg>
+                                    </th>
+                                    <th class="wallet-amount">
+                                        <i class="fa fa-btc"></i><span class="btcAmount">0.00000</span>
+                                    </th>
+                                    <th>
+                                        <button class="btn btn_ bg-olive blue darken-3" data-toggle="modal" data-target="#deposit" onclick="ShowDialogDeposit()">Deposit</button>
+                                        <button class="btn btn_ bg-olive deep-purple darken-4" data-toggle="modal" data-target="#withdraw">Withdraw</button>
+                                        <button class="btn btn_ bg-olive purple" data-toggle="modal" data-target="#buy">Buy CLP</button>
+                                    </th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.widget-user -->
+                </div>
+                <!-- /.col -->
+            </div>
+        </div>
+        <!--/.Second row-->
+        <!-- Third row -->
+
+        <div class="row mb-0">
+            <!--First column-->
+            <div class="col-md-12">
+
+                <!--Panel content-->
+                <div class="card-block pt-0" style="    background-color: #fff;">
+
+                    <div class="table-responsive">
+
+                        <!--Table-->
+                        <table class="table table-hover">
+                            <!--Table head-->
+                            <thead>
+                                <tr class="primary-color">
+                                    <th>Campaign name</th>
+                                    <th>Source</th>
+                                    <th>Conversion rate</th>
+                                    <th>Invested</th>
+                                </tr>
+                            </thead>
+                            <!--/Table head-->
+                            <!--Table body-->
+                            <tbody>
+                                <tr class="none-top-border">
+                                    <td>Newsletter</td>
+                                    <td>Newsletter</td>
+                                    <td>5%</td>
+                                    <td>100$</td>
+                                </tr>
+                                <tr>
+                                    <td>Facebook</td>
+                                    <td>Facebook</td>
+                                    <td>5%</td>
+                                    <td>100$</td>
+                                </tr>
+                                <tr>
+                                    <td>Adwords</td>
+                                    <td>Adwords</td>
+                                    <td>5%</td>
+                                    <td>100$</td>
+                                </tr>
+                                <tr>
+                                    <td>Sponsored post</td>
+                                    <td>Sponsored post</td>
+                                    <td>5%</td>
+                                    <td>100$</td>
+                                </tr>
+                                <tr>
+                                    <td>Newsletter 2</td>
+                                    <td>Newsletter 2</td>
+                                    <td>5%</td>
+                                    <td>100$</td>
+                                </tr>
+                            </tbody>
+                            <!--/Table body-->
+                        </table>
+                        <!--/Table-->
+
+                    </div>
+
+                </div>
+                <!--/.Panel content-->
+
+            </div>
+            <!--/First column-->
+        </div>
+
+        <!-- /.Third row -->
+
+    </div>
+
+</main>
+<div class="modal fade in" id="deposit" style="display: none; padding-left: 17px;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">Deposit to your wallet</h4>
+            </div>
+            @{Html.RenderAction("DepositBTC", "Common", null);}
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<script>
+    function ShowDialogDeposit()
+    {
+
+    }
+</script>
+
+
