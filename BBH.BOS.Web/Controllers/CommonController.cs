@@ -17,7 +17,7 @@ namespace BBH.BOS.Web.Controllers
         {
             return View();
         }
-        public ActionResult Deposit(string strIndexWallet = "3")
+        public ActionResult DepositBTC(string strIndexWallet = "3")
         {
             try
             {
