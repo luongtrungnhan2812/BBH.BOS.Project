@@ -712,6 +712,7 @@
     <Content Include="Views\Common\DepositBTC.cshtml" />
     <Content Include="Views\Common\BuyPackage.cshtml" />
     <Content Include="Views\Wallet\WalletBTC.cshtml" />
+    <Content Include="Views\Common\PartialDashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
