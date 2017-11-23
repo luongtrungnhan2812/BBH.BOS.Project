@@ -41,13 +41,32 @@
                                 <li>
                                     <a href="/" class="waves-effect">Home</a>
                                 </li>
-                                
+
                             </ul>
                         </div>
                     </li>
-                    <li><a href="analytics.html" class="collapsible-header waves-effect arrow-r"><i class="fa fa-pie-chart"></i> Analytics</a>
                     <li>
-                        <a class="collapsible-header waves-effect arrow-r"><i class="fa fa-code"></i> Creators<i class="fa fa-angle-down rotate-icon"></i></a>
+                        <a class="collapsible-header waves-effect arrow-r"><i class="fa fa-pie-chart"></i> Wallet<i class="fa fa-angle-down rotate-icon"></i></a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li>
+                                    <a href="/member" class="waves-effect">BTC Wallet</a>
+                                </li>
+                                <li>
+                                    <a href="/member" class="waves-effect">EU Wallet</a>
+                                </li>
+                                <li>
+                                    <a href="/member" class="waves-effect">USD Wallet</a>
+                                </li>
+                                <li>
+                                    <a href="/member" class="waves-effect">Holding Wallet</a>
+                                </li>
+                            </ul>
+                        </div>
+                    <li>
+                        <a class="collapsible-header waves-effect arrow-r">
+                            <i class="fa fa-code"></i> Creators<i class="fa fa-angle-down rotate-icon"></i>
+                        </a>
                         <div class="collapsible-body">
                             <ul>
                                 <li>
@@ -56,13 +75,10 @@
                                 <li>
                                     <a href="/admin" class="waves-effect">Admin</a>
                                 </li>
-                                @*<li>
-                                    <a href="#" class="waves-effect">Create Page</a>
-                                </li>*@
                             </ul>
                         </div>
                     </li>
-                  
+
                     <li>
                         <a class="collapsible-header waves-effect arrow-r"><i class="fa fa-bar-chart"></i> SEO<i class="fa fa-angle-down rotate-icon"></i></a>
                         <div class="collapsible-body">
@@ -108,11 +124,33 @@
                     </a>
                     <div class="dropdown-menu header-notifications animated dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                         <ul>
-                            <li class="active-notification"><i class="fa fa-user" aria-hidden="true"></i> New order received <span class="float-right grey-text"><i class="fa fa-clock-o" aria-hidden="true"></i> 13 min</span></li>
-                            <li class="active-notification"><i class="fa fa-user" aria-hidden="true"></i> New order received <span class="float-right grey-text"><i class="fa fa-clock-o" aria-hidden="true"></i> 51 min</span></li>
-                            <li class="active-notification"><i class="fa fa-bullhorn" aria-hidden="true"></i> Your campaign is about to end <span class="float-right grey-text"><i class="fa fa-clock-o" aria-hidden="true"></i> 3 hours</span></li>
-                            <li class="active-notification"><i class="fa fa-line-chart" aria-hidden="true"></i> Raport is ready to be downloaded <span class="float-right grey-text"><i class="fa fa-clock-o" aria-hidden="true"></i> 1 day</span></li>
-                            <li class="active-notification"><i class="fa fa-life-saver" aria-hidden="true"></i> Something else <span class="float-right grey-text"><i class="fa fa-clock-o" aria-hidden="true"></i> 1 day</span></li>
+                            <li class="active-notification">
+                                <i class="fa fa-user" aria-hidden="true">
+                                </i> New order received
+                                <span class="float-right grey-text"><i class="fa fa-clock-o" aria-hidden="true"></i> 13 min</span>
+                            </li>
+                            <li class="active-notification">
+                                <i class="fa fa-user" aria-hidden="true">
+                                </i> New order received
+                                <span class="float-right grey-text">
+                                    <i class="fa fa-clock-o" aria-hidden="true"></i> 51 min
+                                </span>
+                            </li>
+                            <li class="active-notification">
+                                <i class="fa fa-bullhorn" aria-hidden="true">
+                                </i> Your campaign is about to end
+                                <span class="float-right grey-text"><i class="fa fa-clock-o" aria-hidden="true"></i> 3 hours</span>
+                            </li>
+                            <li class="active-notification">
+                                <i class="fa fa-line-chart" aria-hidden="true">
+                                </i> Raport is ready to be downloaded
+                                <span class="float-right grey-text"><i class="fa fa-clock-o" aria-hidden="true"></i> 1 day</span>
+                            </li>
+                            <li class="active-notification">
+                                <i class="fa fa-life-saver" aria-hidden="true">
+                                </i> Something else
+                                <span class="float-right grey-text"><i class="fa fa-clock-o" aria-hidden="true"></i> 1 day</span>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -143,7 +181,7 @@
     </header>
 
     <!--Main layout-->
-        @RenderBody()
+    @RenderBody()
     <!--/Main layout-->
 
     <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
@@ -242,10 +280,10 @@
     <script src="/Content/js/mdb.min.js"></script>
 
     <script>
-        $(function() {
+        $(function () {
             $('.min-chart#chart-sales').easyPieChart({
                 barColor: "#4caf50",
-                onStep: function(from, to, percent) {
+                onStep: function (from, to, percent) {
                     $(this.el).find('.percent').text(Math.round(percent));
                 }
             });
@@ -260,13 +298,13 @@
 
 
         // Material Select Initialization
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('.mdb-select').material_select();
         });
 
 
         // Tooltips Initialization
-        $(function() {
+        $(function () {
             $('[data-toggle="tooltip"]').tooltip()
         })
     </script>
