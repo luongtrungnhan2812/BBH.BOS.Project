@@ -29,6 +29,7 @@ namespace BBH.BOS.Data
                 if (reader.Read())
                 {
                     objMemberBO = new MemberBO();
+                    objMemberBO.
                     objMemberBO.Email = reader["UserName"].ToString();
                 }
                 return objMemberBO;
