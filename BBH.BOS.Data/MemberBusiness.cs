@@ -21,9 +21,9 @@ namespace BBH.BOS.Data
             {
                 MemberBO objMemberBO = null;
                 //string sql = "select UserName,Password,ac.GroupID from admin a left join AccessRight ac on a.AdminID=ac.AdminID where UserName=@userName and Password=@pass and IsActive=1 and IsDelete=0";
-                string sql = "SP_LoginManagerAccount";
+                string sql = "SP_LoginAccount";
                 SqlParameter[] pa = new SqlParameter[2];
-                pa[0] = new SqlParameter("@userName", username);
+                pa[0] = new SqlParameter("@email", username);
                 pa[1] = new SqlParameter("@pass", password);
 
                 SqlCommand command = helper.GetCommand(sql, pa, true);
@@ -31,13 +31,13 @@ namespace BBH.BOS.Data
                 if (reader.Read())
                 {
                     objMemberBO = new MemberBO();
-                    objMemberBO.Email = reader["UserName"].ToString();
+                    objMemberBO.Email = reader["Email"].ToString();
                 }
                 return objMemberBO;
             }
             catch (Exception ex)
             {
-                Utilitys.WriteLog(fileLog, "Exception login admin : " + ex.Message);
+                Utilitys.WriteLog(fileLog, "Exception login Member : " + ex.Message);
                 return null;
             }
             finally
