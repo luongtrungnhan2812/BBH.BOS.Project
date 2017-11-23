@@ -176,6 +176,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers\WalletController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -710,6 +711,7 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Common\DepositBTC.cshtml" />
     <Content Include="Views\Common\BuyPackage.cshtml" />
+    <Content Include="Views\Wallet\WalletBTC.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

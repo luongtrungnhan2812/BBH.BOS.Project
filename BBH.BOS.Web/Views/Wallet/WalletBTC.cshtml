@@ -1,0 +1,269 @@
+﻿
+@{
+    ViewBag.Title = "WalletBTC";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style type="text/css">
+    .box {
+        position: relative;
+        border-radius: 3px;
+        background: #ffffff;
+        border-top: 3px solid #d2d6de;
+        margin-bottom: 20px;
+        width: 100%;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    }
+    .box-body {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 3px;
+        border-bottom-left-radius: 3px;
+        padding: 10px;
+    }
+
+     .table-responsive {
+        overflow-x: auto;
+        min-height: 0.01%;
+    }
+    .box .icon-wallet {
+        width: 2%;
+        padding-top: 12px;
+        padding-bottom: 10px;
+        padding-right: 0px;
+    }
+    .box .wallet-amount {
+        width: 20%;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        font-size: 20px;
+        color: #85bb65;
+    }
+</style>
+<main class="" style="padding-top: 5.5rem; margin-left: 5%;margin-right: 5%;">
+
+    <div class="container-fluid">
+
+        <!-- First row -->
+        <div class="row mb-0">
+            <!-- First column -->
+            <div class="col-md-3 mb-1">
+                <!--Card-->
+                <div class="card card-cascade cascading-admin-card">
+
+                    <!--Card Data-->
+                    <div class="admin-up">
+                        <i class="fa fa-money  blue darken-3"></i>
+                        <div class="data">
+                            <p>SALES</p>
+                            <h3>2000$</h3>
+                        </div>
+                    </div>
+                    <!--/.Card Data-->
+                    <!--Card content-->
+                    <div class="card-block">
+                        <div class="progress">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <!--Text-->
+                        <p class="card-text">Better than last week (25%)</p>
+                    </div>
+                    <!--/.Card content-->
+
+                </div>
+                <!--/.Card-->
+            </div>
+
+            <!-- Second column -->
+            <div class="col-md-3 mb-1">
+                <!--Card-->
+                <div class="card card-cascade cascading-admin-card">
+
+                    <!--Card Data-->
+                    <div class="admin-up">
+                        <i class="fa fa-line-chart deep-purple darken-4"></i>
+                        <div class="data">
+                            <p>SUBSCRIPTIONS</p>
+                            <h3>200</h3>
+                        </div>
+                    </div>
+                    <!--/.Card Data-->
+                    <!--Card content-->
+                    <div class="card-block">
+                        <div class="progress">
+                            <div class="progress-bar bg-danger" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <!--Text-->
+                        <p class="card-text">Worse than last week (25%)</p>
+                    </div>
+                    <!--/.Card content-->
+
+                </div>
+                <!--/.Card-->
+            </div>
+
+            <!-- Third column -->
+            <div class="col-md-3 mb-1">
+                <!--Card-->
+                <div class="card card-cascade cascading-admin-card">
+
+                    <!--Card Data-->
+                    <div class="admin-up">
+                        <i class="fa fa-pie-chart indigo"></i>
+                        <div class="data">
+                            <p>TRAFFIC</p>
+                            <h3>20000</h3>
+                        </div>
+                    </div>
+                    <!--/.Card Data-->
+                    <!--Card content-->
+                    <div class="card-block">
+                        <div class="progress">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <!--Text-->
+                        <p class="card-text">Better than last week (75%)</p>
+                    </div>
+                    <!--/.Card content-->
+
+                </div>
+                <!--/.Card-->
+            </div>
+
+            <!-- Fourth column -->
+            <div class="col-md-3 mb-1">
+                <!--Card-->
+                <div class="card card-cascade cascading-admin-card">
+
+                    <!--Card Data-->
+                    <div class="admin-up">
+                        <i class="fa fa-bar-chart purple"></i>
+                        <div class="data">
+                            <p>ORGANIC TRAFFIC</p>
+                            <h3>2000</h3>
+                        </div>
+                    </div>
+                    <!--/.Card Data-->
+                    <!--Card content-->
+                    <div class="card-block">
+                        <div class="progress">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <!--Text-->
+                        <p class="card-text">Better than last week (25%)</p>
+                    </div>
+                    <!--/.Card content-->
+
+                </div>
+                <!--/.Card-->
+            </div>
+        </div>
+        <!-- /.First row -->
+        <!--Second row-->
+        <div class="row mb-0">
+            <div class="col-lg-12">
+                <!-- Widget: user widget style 1 -->
+                <div class="box">
+                    <!-- Add the bg color to the header using any of the bg-* classes -->
+                    <div class="box-body table-responsive">
+                        <table class="table table-hover table-striped wallet-table">
+                            <tbody>
+                                <tr>
+                                    <th class="icon-wallet">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                            <path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"></path>
+                                        </svg>
+                                    </th>
+                                    <th class="wallet-amount">
+                                        <i class="fa fa-btc"></i><span class="btcAmount">0.00000</span>
+                                    </th>
+                                    <th>
+                                        <button class="btn bg-olive" data-toggle="modal" data-target="#deposit">Deposit</button>
+                                        <button class="btn bg-olive" data-toggle="modal" data-target="#withdraw">Withdraw</button>
+                                        <button class="btn bg-olive" data-toggle="modal" data-target="#buy">Buy CLP</button>
+                                    </th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.widget-user -->
+                </div>
+                <!-- /.col -->
+            </div>
+        </div>
+        <!--/.Second row-->
+        <!-- Third row -->
+
+        <div class="row mb-0">
+            <!--First column-->
+            <div class="col-md-12">
+
+                <!--Panel content-->
+                <div class="card-block pt-0" style="    background-color: #fff;">
+
+                    <div class="table-responsive">
+
+                        <!--Table-->
+                        <table class="table table-hover">
+                            <!--Table head-->
+                            <thead>
+                                <tr class="primary-color">
+                                    <th>Campaign name</th>
+                                    <th>Source</th>
+                                    <th>Conversion rate</th>
+                                    <th>Invested</th>
+                                </tr>
+                            </thead>
+                            <!--/Table head-->
+                            <!--Table body-->
+                            <tbody>
+                                <tr class="none-top-border">
+                                    <td>Newsletter</td>
+                                    <td>Newsletter</td>
+                                    <td>5%</td>
+                                    <td>100$</td>
+                                </tr>
+                                <tr>
+                                    <td>Facebook</td>
+                                    <td>Facebook</td>
+                                    <td>5%</td>
+                                    <td>100$</td>
+                                </tr>
+                                <tr>
+                                    <td>Adwords</td>
+                                    <td>Adwords</td>
+                                    <td>5%</td>
+                                    <td>100$</td>
+                                </tr>
+                                <tr>
+                                    <td>Sponsored post</td>
+                                    <td>Sponsored post</td>
+                                    <td>5%</td>
+                                    <td>100$</td>
+                                </tr>
+                                <tr>
+                                    <td>Newsletter 2</td>
+                                    <td>Newsletter 2</td>
+                                    <td>5%</td>
+                                    <td>100$</td>
+                                </tr>
+                            </tbody>
+                            <!--/Table body-->
+                        </table>
+                        <!--/Table-->
+
+                    </div>
+
+                </div>
+                <!--/.Panel content-->
+
+            </div>
+            <!--/First column-->
+        </div>
+
+        <!-- /.Third row -->
+
+    </div>
+
+</main>
+
+
