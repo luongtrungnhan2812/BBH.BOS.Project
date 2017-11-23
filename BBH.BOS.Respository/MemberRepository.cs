@@ -45,9 +45,9 @@ namespace BBH.BOS.Respository
             }
         }
 
-        public bool InsertMember(MemberBO member)
+        public int InsertMember(MemberBO member)
         {
-            bool row = false;
+            int row = 0;
             string fileLog = Path.GetDirectoryName(Path.Combine(pathLog));
             try
             {

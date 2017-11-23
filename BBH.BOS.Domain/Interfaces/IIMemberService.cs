@@ -19,7 +19,7 @@ namespace BBH.BOS.Domain.Interfaces
         [OperationContract]
         bool UpdateMember(MemberBO member, int memberID);
         [OperationContract]
-        bool InsertMember(MemberBO member);
+        int InsertMember(MemberBO member);
         [OperationContract]
         bool CheckEmailExists(string email);
         [OperationContract]

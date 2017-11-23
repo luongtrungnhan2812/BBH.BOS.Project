@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
+
 using System.Web;
 using System.Web.Mvc;
 using BBH.BOS.Domain;
 using BBH.BOS.Respository;
 using BBH.BOS.Domain.Interfaces;
 using BBH.BOS.Domain.Entities;
+using Microsoft.Practices.Unity;
 
 namespace BBH.BOS.Web.Controllers
 {
     public class RegisterController : Controller
     {
         // GET: Register
-        //[Dependency]
+        [Dependency]
         protected IIMemberService repository { get; set; }
         
         public ActionResult Index(string p)
@@ -92,11 +93,9 @@ namespace BBH.BOS.Web.Controllers
                     member.Mobile = mobile;
                     member.Address = "";
                     member.Password = password;
-                    //string passMd5 = Utility.MaHoaMD5(password + "1234");
-                    //member.Password = passMd5;
+                
                     member.Birdthday = DateTime.Parse("1/1/1990");
-                    member.DeleteDate = DateTime.Parse("1/1/1990");
-                    member.DeleteUser = "";
+                  
                     member.LinkActive = "";
                     member.ExpireTimeLink = DateTime.Parse("1/1/1990");
                     member.IsActive = 1;
@@ -104,19 +103,17 @@ namespace BBH.BOS.Web.Controllers
                     //member.Hashkey = "1234";
                     member.CreateDate = DateTime.Now;
                     member.Gender = 1;
-                    member.DeleteUser = "";
-                    member.UpdateUser = "";
                     member.Avatar = "";
 
-                    bool checkUserName = repository.CheckEmailExists(email);
-                    if (checkUserName)
+                    bool checkEmail = repository.CheckEmailExists(email);
+                    if (checkEmail)
                     {
                         Response.Write("EmailExist");
                     }
                     else
                     {                   
-                        bool returnAdminID = repository.InsertMember(member);
-                        if(returnAdminID==true)
+                        int returnAdminID = repository.InsertMember(member);
+                        if(returnAdminID==0)
                         {
                             member = repository.GetMemberDetailByEmail(email);
                             Member_WalletBO memberWallet = new Member_WalletBO();

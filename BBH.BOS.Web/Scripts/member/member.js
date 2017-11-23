@@ -299,9 +299,9 @@ function RegisterMember() {
                 $('#imgLoading').css("display", "none");
 
                 if (d == 'registerSuccess') {
-                    alertify.alert('Register Success, vui long vao email de kick hoat tai khoan');
-                    $('#pointID').text(0);
-                    //setTimeout(function () { window.location.href = ('/play-game'); }, 1000);
+                    //alertify.alert('Register Success, vui long vao email de kick hoat tai khoan');
+                    //$('#pointID').text(0);
+                    setTimeout(function () { window.location.href = ('/'); }, 1000);
                     $('#txtEmail').text('');
                     $('#txtPassword').text('');
                     $('#txtRePassword').text('');

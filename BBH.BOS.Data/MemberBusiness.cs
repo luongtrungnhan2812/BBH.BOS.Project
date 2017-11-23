@@ -46,14 +46,14 @@ namespace BBH.BOS.Data
             }
         }
 
-        public bool InsertMember(MemberBO member)
+        public int InsertMember(MemberBO member)
         {
             string fileLog = Path.GetDirectoryName(Path.Combine(pathLog, "Logs"));
             Sqlhelper helper = new Sqlhelper("", "ConnectionString");
             try
             {
                 
-                SqlParameter[] pa = new SqlParameter[17];
+                SqlParameter[] pa = new SqlParameter[13];
                 string sql = "SP_InsertMember";
                 pa[0] = new SqlParameter("@email", member.Email);
                 pa[1] = new SqlParameter("@pass", member.Password);
@@ -64,30 +64,30 @@ namespace BBH.BOS.Data
                 pa[6] = new SqlParameter("@gender", member.Gender);
                 pa[7] = new SqlParameter("@mobile", member.Mobile);
                 pa[8] = new SqlParameter("@address", member.Address);
-                pa[9] = new SqlParameter("@updateDate", member.UpdateDate);
-                pa[10] = new SqlParameter("@deleteDate", member.DeleteDate);
-                pa[11] = new SqlParameter("@linkActive", member.LinkActive);
-                pa[12] = new SqlParameter("@deleteUser", member.DeleteUser);
-                pa[13] = new SqlParameter("@expireTimeLink", member.ExpireTimeLink);
-                pa[14] = new SqlParameter("@birdthday", member.Birdthday);
-                pa[15] = new SqlParameter("@updateUser", member.UpdateUser);
-                pa[16] = new SqlParameter("@isDelete", member.IsDelete);
+              //  pa[9] = new SqlParameter("@updateDate", member.UpdateDate);
+                //pa[10] = new SqlParameter("@deleteDate", member.DeleteDate);
+                pa[9] = new SqlParameter("@linkActive", member.LinkActive);
+                //pa[12] = new SqlParameter("@deleteUser", member.DeleteUser);
+                pa[10] = new SqlParameter("@expireTimeLink", member.ExpireTimeLink);
+                pa[11] = new SqlParameter("@birdthday", member.Birdthday);
+                //pa[15] = new SqlParameter("@updateUser", member.UpdateUser);
+                pa[12] = new SqlParameter("@isDelete", member.IsDelete);
 
                 SqlCommand command = helper.GetCommand(sql, pa, true);
-                //adminID = Convert.ToInt32(command.ExecuteScalar());
-                //return adminID;
-                int row = command.ExecuteNonQuery();
-                bool rs = false;
-                if (row > 0)
-                {
-                    rs = true;
-                }
-                return rs;
+                int memberID = Convert.ToInt32(command.ExecuteScalar());
+                return memberID;
+                //int row = command.ExecuteNonQuery();
+                //bool rs = false;
+                //if (row > 0)
+                //{
+                //    rs = true;
+                //}
+                //return rs;
             }
             catch (Exception ex)
             {
                 Utilitys.WriteLog(fileLog, "Exception insert admin : " + ex.Message);
-                return false;
+                return 0;
             }
             finally
             {
