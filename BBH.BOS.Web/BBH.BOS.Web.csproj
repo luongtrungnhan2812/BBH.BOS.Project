@@ -725,20 +725,6 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BBH.BOS.Domain\BBH.BOS.Domain.csproj">
-      <Project>{e3a1618a-f464-4de8-953c-8e6ad5224d48}</Project>
-      <Name>BBH.BOS.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BBH.BOS.Respository\BBH.BOS.Respository.csproj">
-      <Project>{104215f4-867b-443c-8cee-154cd74b850a}</Project>
-      <Name>BBH.BOS.Respository</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BBH.BOS.Shared\BBH.BOS.Shared.csproj">
-      <Project>{97613068-f7d0-44bd-8605-feac25181f19}</Project>
-      <Name>BBH.BOS.Shared</Name>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
