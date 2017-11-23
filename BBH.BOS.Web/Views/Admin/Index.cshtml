@@ -6,22 +6,35 @@
 
 <main class="" style="padding-top: 5.5rem; margin-left: 5%; margin-right: 5%;">
     <div class="container-fluid">
+        <div class="row" @*style="height:58px"*@>
+            <div class="row white z-depth-1 mb-r col-lg-12" style="margin-bottom: 0rem !important;left:23px">
+
+                <!-- Navigation -->
+                <div class="col-4">
+                    <h4 class="h4-responsive mt-1"><a href="/admin">Admin</a></h4>
+                </div>
+                <div class="col-md-4">
+                    <div class="md-form">
+                        <input placeholder="Search..." type="text" id="form5" class="form-control">
+                        
+
+                    </div>
+                </div>
+                <div class="col-md-4 text-md-right">
+                    <a href="#" class="btn btn-secondary waves-effect waves-light">Search</a>
+                    <a href="#" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#standardModal"><i class="fa fa-print left"></i> Create New</a>
+                </div>
+                <!-- /.Navigation -->
+
+            </div>
+        </div>
+
         <!-- First row -->
         <div class="row">
             <!-- First column -->
             <div class="col-md-8">
-                <div class="row mb-1">
-                    <div class="col-md-9">
-                        <h4 class="h4-responsive mt-1">Your Clients</h4>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="md-form">
-                            <input placeholder="Search..." type="text" id="form5" class="form-control">
-                        </div>
-                    </div>
-                </div>
                 <div class="row">
-                    <div class="col-md-12 mb-1">
+                    <div class="col-md-12 mb-1" style="top:20px">
                         <!-- Tabs -->
                         <!-- Nav tabs -->
                         <div class="tabs-wrapper">
@@ -185,7 +198,7 @@
             </div>
             <!-- /.First column -->
             <!-- Second column -->
-            <div class="col-md-4 mb-1">
+            <div class="col-md-4 mb-1" style="top:20px">
                 <div class="card contact-card with-padding">
                     <div class="card-body">
                         <div class="mt-1 mb-1">
@@ -209,3 +222,69 @@
     </div>
 </main>
 
+<div class="modal fade" id="standardModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <!--Content-->
+
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header white-text" style="background-color: #154771">
+                <p class="heading" contenteditable="true">Change Password</p>
+            </div>
+            <!--Body-->
+            <div class="modal-body">
+                <form>
+                    <!--First row-->
+                    <div class="row" style="padding:0px; margin:0px">
+
+                        <div class="col-md-12">
+                            <label id="lbEwallet">New Password</label>
+                            <div class="md-form" style="padding:0px; margin:0px">
+                                <input type="password" style="padding:0px; margin:0px" onfocus="ResetField(1)" id="txtNewPass" name="txtNewPass" class="form-control validate">
+
+                            </div>
+                            <label style="color:red" id="lbPassword"></label>
+                        </div>
+
+                    </div>
+
+                    <div class="row" style="padding:0px; margin:0px">
+
+                        <div class="col-md-12">
+                            <label id="lbEwallet">Confirm New Password</label>
+                            <div class="md-form" style="padding:0px; margin:0px">
+                                <input type="password" style="padding:0px; margin:0px" onfocus="ResetField(2)" id="txtRePass" name="txtRePass" class="form-control validate">
+
+                            </div>
+                            <label style="color:red" id="lbRePass"></label>
+                        </div>
+
+                    </div>
+
+
+                    <div class="row">
+                        <img src="/Images/loading.gif" id="imgLoading" style="position: absolute; display:none">
+                        <div class="col-md-12 text-center">
+                            <input type="button" style="padding:5px 30px; cursor:pointer; height:35px" onclick="ChangePassWord()" value="Confirm" class="btn-primary">
+                        </div>
+                    </div>
+
+                </form>
+
+                <br>
+
+            </div>
+            <!--Footer-->
+            <div class="modal-footer">
+                <img id="imgLoadingBooking" src="/Images/loading.gif" style="display:none">
+                <a id="2lvlModal-cancel" class="btn btn-default waves-effect waves-light" onclick="CloseModal()" data-dismiss="modal" contenteditable="true">Close</a>
+                @*<a id="2lvlModal-learnMore" class="btn btn-danger" onclick="ConfirmBooking()" contenteditable="true">Confirm</a>*@
+
+            </div>
+        </div>
+
+        <!--/.Content-->
+    </div>
+
+
+</div>
