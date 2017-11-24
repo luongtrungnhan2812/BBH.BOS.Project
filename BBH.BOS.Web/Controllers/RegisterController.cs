@@ -13,7 +13,7 @@ using System.Net;
 using Newtonsoft.Json.Linq;
 //using BBC.Core.Utils.Common;
 using BBH.BOS.Shared;
-
+using BBH.BOS.Web.SendMailByVerifyMember;
 namespace BBH.BOS.Web.Controllers
 {
     public class RegisterController : Controller
@@ -21,7 +21,9 @@ namespace BBH.BOS.Web.Controllers
         // GET: Register
         [Dependency]
         protected IIMemberService repository { get; set; }
-        
+
+        SendMailSvcClient sentMail = new SendMailSvcClient();
+
         public ActionResult Index()
         {
             //if (Session["Email"] == null)
@@ -138,6 +140,7 @@ namespace BBH.BOS.Web.Controllers
                     int returnAdminID = repository.InsertMember(member);
                     if (returnAdminID > 0)
                     {
+                       bool rsSendMail= sentMail.SendMailByVerifyMember(email); 
                         member = repository.GetMemberDetailByEmail(email);
                         Member_WalletBO memberWallet = new Member_WalletBO();
                         if(member!=null)
@@ -149,21 +152,9 @@ namespace BBH.BOS.Web.Controllers
                             memberWallet.NumberCoin = 0;
                         }
                         bool rs_ = repository.InsertMemberWallet(memberWallet);
-                        if (rs_)
-                        {
-                            Session["Email"] = email;
-                            //Session["Points"] = member.Points;
-
-                            //if (Session["username"] == null)
-                            //{
-                            //    Session["username"] = member.Email;
-
-                            //}
-                            Session["memberid"] = member.MemberID;
-                            //Session["ewallet"] = member.E_Wallet;
-                            Session["MemberInfomation"] = member;
-                        }
+                       
                         result = "registerSuccess";
+                       
                     }
                     else
                     {
@@ -183,6 +174,29 @@ namespace BBH.BOS.Web.Controllers
         public void SetTimeoutSession()
         {
             Session["Result"] = null;
+        }
+        
+        public ActionResult VerifyEmailMember(string email)
+        {
+            bool rs = false;
+            rs = repository.UpdateIsActiveByEmail(email,1);
+            if (rs)
+            {
+                MemberBO mem = repository.GetMemberDetailByEmail(email);
+                if (mem != null)
+                {
+                    Session["Email"] = email;
+
+                    Session["memberid"] = mem.MemberID;
+                    Session["MemberInfomation"] = mem;
+                    Response.Redirect("/");
+                }
+            }
+            else
+            {
+                Response.Redirect("/errorpage");
+            }
+            return View();
         }
     }
 }

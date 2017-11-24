@@ -116,5 +116,33 @@ namespace BBH.BOS.Respository
             }
             return row;
         }
+        public bool UpdateIsActive(int memberID, int isActive)
+        {
+            bool row = false;
+            string fileLog = Path.GetDirectoryName(Path.Combine(pathLog));
+            try
+            {
+                row = Proxy.UpdateIsActive(memberID,isActive);
+            }
+            catch (Exception ex)
+            {
+                Utility.WriteLog(fileLog, ex.Message);
+            }
+            return row;
+        }
+        public bool UpdateIsActiveByEmail(string email, int isActive)
+        {
+            bool row = false;
+            string fileLog = Path.GetDirectoryName(Path.Combine(pathLog));
+            try
+            {
+                row = Proxy.UpdateIsActiveByEmail(email, isActive);
+            }
+            catch (Exception ex)
+            {
+                Utility.WriteLog(fileLog, ex.Message);
+            }
+            return row;
+        }
     }
 }

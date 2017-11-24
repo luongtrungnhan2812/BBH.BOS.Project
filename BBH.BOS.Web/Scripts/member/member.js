@@ -224,9 +224,9 @@ $('#txtE_Wallet').on("keypress", function (e) {
 $(document).ready(function () {
     var result = $('#hdResult').val();
     if (result == 'registerSuccess')
-    {    
-                    setTimeout(function () { window.location.href = ('/login'); }, 1000);
-                    $('#txtEmail').val('');
+    {
+        alertify.alert("Register success,please go to mail actives account!!");
+        $('#txtEmail').val('');
                     $('#txtPassword').val('');
                     $('#txtRePassword').val('');
                     $('#txtFullName').val('');
