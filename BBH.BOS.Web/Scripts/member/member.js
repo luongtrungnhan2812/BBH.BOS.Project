@@ -226,24 +226,30 @@ $(document).ready(function () {
     if (result == 'registerSuccess')
     {    
                     setTimeout(function () { window.location.href = ('/login'); }, 1000);
-                    $('#txtEmail').text('');
-                    $('#txtPassword').text('');
-                    $('#txtRePassword').text('');
-
-                    $('#txtFullName').text('');
-                    $('#txtMobile').text('');
+                    $('#txtEmail').val('');
+                    $('#txtPassword').val('');
+                    $('#txtRePassword').val('');
+                    $('#txtFullName').val('');
+                    $('#txtMobile').val('');
     }
-    else if (result == 'RegisterFaile')
+     if (result == 'RegisterFaile')
     {
         alertify.error('Error Register. Please contact with administrator');
     }
-    else if (result == 'EmailExist')
+     if (result == 'EmailExist')
     {
         $('#lbEmail').text('This email has used by another');
         $('#lbEmail').css('display', '');
     }
-   else if (result == 'errorCaptcha')
+    if (result == 'errorCaptcha')
     {
+
+        $('#txtEmail').val($('#hdEmail').val());
+        $('#txtPassword').val($('#hdPassword').val());
+        $('#txtRePassword').val($('#hdPassword').val());
+
+        $('#txtFullName').val($('#hdFullName').val());
+        $('#txtMobile').val($('#hdMobile').val());
         alertify.error('Please confirm captcha !');
     }
 
@@ -269,32 +275,37 @@ function RegisterMember() {
     var checkReg = true;
     var checkPassword = CheckPassword(password);
     if (email == '') {
-        checkReg = false;
+        
         $('#lbEmail').text('Please input email');
         $('#lbEmail').css('display', '');
+        checkReg = false;
     }
     else {
         if (!isValidEmailAddress(email)) {
-            checkReg = false;
             $('#lbEmail').text('Invalid email address.');
             $('#lbEmail').css('display', '');
+          
+            checkReg = false;
         }
     }
 
     if (password == '') {
-        checkReg = false;
+       
         $('#lbPass').text('Please input password');
         $('#lbPass').css('display', '');
+        checkReg = false;
     }
     else if (password.length < 8) {
-        checkReg = false;
+       
         $('#lbPass').text('Your password must be more than 8 characters');
         $('#lbPass').css('display', '');
+        checkReg = false;
     }
     if (repassword == '') {
-        checkReg = false;
+        
         $('#lbRePass').text('Please input Repassword');
         $('#lbRePass').css('display', '');
+        checkReg = false;
     }
     else {
         if (password != repassword) {
@@ -304,18 +315,20 @@ function RegisterMember() {
 
     }
     if (fullName == '') {
-        checkReg = false;
+        
         $('#lbFullname').text('Please input fullname');
         $('#lbFullname').css('display', '');
+        checkReg = false;
     }
     if (mobile == '') {
         checkReg = true;
     }
     else {
         if (mobile.length < 10 || mobile.length > 13) {
-            checkReg = false;
+            
             $('#lbMobile').text('mobile number faile ');
             $('#lbMobile').css('display', '');
+            checkReg = false;
         }
     }
 

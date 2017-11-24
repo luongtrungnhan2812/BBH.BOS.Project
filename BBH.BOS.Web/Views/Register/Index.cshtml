@@ -110,6 +110,10 @@
         </div>
     </div>
     <input type="hidden" id="hdResult" value="@Session["Result"]" />
+    <input type="hidden" id="hdEmail" value="@TempData["EmailRegister"]" />
+    <input type="hidden" id="hdPassword" value="@TempData["PasswordRegister"]" />
+    <input type="hidden" id="hdFullName" value="@TempData["FullNameRegister"]" />
+    <input type="hidden" id="hdMobile" value="@TempData["MobileRegister"]" />
 
     @*<input type="hidden" id="hdRedirect" value="@ViewData["UrlRedirect"]" />
         <input type="hidden" id="hdLanguage" value="@Session["Language"]" />*@

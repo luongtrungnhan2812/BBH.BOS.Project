@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
 using System.Web;
 using System.Web.Mvc;
 using BBH.BOS.Domain;
@@ -12,6 +11,8 @@ using Microsoft.Practices.Unity;
 using System.Configuration;
 using System.Net;
 using Newtonsoft.Json.Linq;
+//using BBC.Core.Utils.Common;
+using BBH.BOS.Shared;
 
 namespace BBH.BOS.Web.Controllers
 {
@@ -91,6 +92,18 @@ namespace BBH.BOS.Web.Controllers
             //}
             //else if (memberID == 0)
             //{
+
+            string email = Request["txtEmail"];
+            string password = Request["txtPassword"];
+            string mobile = Request["txtMobile"];
+            string fullName = Request["txtFullName"];
+
+            TempData["EmailRegister"] = email;
+            TempData["PasswordRegister"] = password;
+            TempData["FullNameRegister"] = fullName;
+            TempData["MobileRegister"] = mobile;
+
+
             string response = Request.Form["g-recaptcha-response"];
             string secretKey = "6LfhJyUUAAAAAPKM6Hl87lD0mVKa-0zPKNR53W_j";/* ConfigurationManager.AppSettings["SecrecKey"];*/// "6LfhJyUUAAAAAPKM6Hl87lD0mVKa-0zPKNR53W_j";
             var client = new WebClient();
@@ -103,15 +116,11 @@ namespace BBH.BOS.Web.Controllers
             }
             else
             {
-                string email = Request.Form["txtEmail"];
-                string password = Request.Form["txtPassword"];
-                string mobile = Request.Form["txtMobile"];
-                string fullName = Request.Form["txtFullName"];
-
+               
                      member.FullName = fullName;
                     member.Email = email;
                     member.Mobile = mobile;
-                    member.Password = password;
+                member.Password = Utility.MaHoaMD5(password);
                     member.IsActive = 1;
                     member.IsDelete = 0;
                     //member.Hashkey = "1234";
@@ -122,7 +131,7 @@ namespace BBH.BOS.Web.Controllers
                 bool checkEmail = repository.CheckEmailExists(email);
                 if (checkEmail)
                 {
-                    Response.Write("EmailExist");
+                    result="EmailExist";
                 }
                 else
                 {
@@ -131,7 +140,14 @@ namespace BBH.BOS.Web.Controllers
                     {
                         member = repository.GetMemberDetailByEmail(email);
                         Member_WalletBO memberWallet = new Member_WalletBO();
-
+                        if(member!=null)
+                        {
+                            memberWallet.IndexWallet = member.MemberID;
+                            memberWallet.IsActive = 1;
+                            memberWallet.IsDelete = 0;
+                            memberWallet.MemberID = member.MemberID;
+                            memberWallet.NumberCoin = 0;
+                        }
                         bool rs_ = repository.InsertMemberWallet(memberWallet);
                         if (rs_)
                         {

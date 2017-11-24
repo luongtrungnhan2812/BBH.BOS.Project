@@ -32,7 +32,7 @@
                 <div class="card">
 @using (Html.BeginForm("LoginMember", "Login", FormMethod.Post))
 {
-                    @*<form action="/Login/LoginMember" method="post" id="myForm">*@
+                    @*<form action="/Login/LoginMember" method="post" id="myForm" @*onsubmit="return false">*@
                         <div class="card-block">
                             <!--Header-->
                             <div class="form-header">
@@ -51,11 +51,11 @@
                             </div>
                             <div class="g-recaptcha" id="captcha" data-sitekey="6LfhJyUUAAAAANmMFHQ7ARUoDEwgs3Zy-W6bwCo1" style="margin-left: 49px;"></div><br />
                             <div class="text-center">
-                                <button type="submit" onclick="return LoginMember()" class="btn btn-primary">Login</button>
+                                <button type="submit" @*onclick="return LoginMember()"*@ class="btn btn-primary">Login</button>
                             </div>
                         </div>
                     @*</form>*@
-}
+  }
 
                     <div class="">
                         <div class="modal-footer text-center">
