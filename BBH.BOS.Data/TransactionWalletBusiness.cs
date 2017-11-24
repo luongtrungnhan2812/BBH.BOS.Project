@@ -33,20 +33,22 @@ namespace BBH.BOS.Data
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    TransactionCoinBO transaction = new TransactionCoinBO();
-                    transaction.CreateDate = DateTime.Parse(reader["CreateDate"].ToString());
-                    transaction.ExpireDate = DateTime.Parse(reader["ExpireDate"].ToString());
-                    transaction.MemberID = int.Parse(reader["MemberID"].ToString());
-                    transaction.Note = reader["Note"].ToString();
-                    transaction.QRCode = reader["QRCode"].ToString();
-                    transaction.Status = int.Parse(reader["Status"].ToString());
-                    transaction.TransactionBitcoin = reader["TransactionBitcoin"].ToString();
-                    transaction.TransactionID = reader["TransactionID"].ToString();
-                    transaction.TypeTransactionID = int.Parse(reader["TypeTransactionID"].ToString());
-                    transaction.ValueTransaction = int.Parse(reader["ValueTransaction"].ToString());
-                    transaction.WalletAddressID = reader["WalletAddressID"].ToString();
-                    transaction.WalletID = int.Parse(reader["WalletID"].ToString());
-                    transaction.TotalRecord = int.Parse(reader["TOTALROWS"].ToString());
+                    TransactionCoinBO transaction = new TransactionCoinBO
+                    {
+                        CreateDate = DateTime.Parse(reader["CreateDate"].ToString()),
+                        ExpireDate = DateTime.Parse(reader["ExpireDate"].ToString()),
+                        MemberID = int.Parse(reader["MemberID"].ToString()),
+                        Note = reader["Note"].ToString(),
+                        QRCode = reader["QRCode"].ToString(),
+                        Status = int.Parse(reader["Status"].ToString()),
+                        TransactionBitcoin = reader["TransactionBitcoin"].ToString(),
+                        TransactionID = reader["TransactionID"].ToString(),
+                        TypeTransactionID = int.Parse(reader["TypeTransactionID"].ToString()),
+                        ValueTransaction = int.Parse(reader["ValueTransaction"].ToString()),
+                        WalletAddressID = reader["WalletAddressID"].ToString(),
+                        WalletID = int.Parse(reader["WalletID"].ToString()),
+                        TotalRecord = int.Parse(reader["TOTALROWS"].ToString())
+                    };
                     lstTransaction.Add(transaction);
 
                 }
@@ -77,20 +79,22 @@ namespace BBH.BOS.Data
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    TransactionCoinBO transaction = new TransactionCoinBO();
-                    transaction.CreateDate = DateTime.Parse(reader["CreateDate"].ToString());
-                    transaction.ExpireDate = DateTime.Parse(reader["ExpireDate"].ToString());
-                    transaction.MemberID = int.Parse(reader["MemberID"].ToString());
-                    transaction.Note = reader["Note"].ToString();
-                    transaction.QRCode = reader["QRCode"].ToString();
-                    transaction.Status = int.Parse(reader["Status"].ToString());
-                    transaction.TransactionBitcoin = reader["TransactionBitcoin"].ToString();
-                    transaction.TransactionID = reader["TransactionID"].ToString();
-                    transaction.TypeTransactionID = int.Parse(reader["TypeTransactionID"].ToString());
-                    transaction.ValueTransaction = int.Parse(reader["ValueTransaction"].ToString());
-                    transaction.WalletAddressID = reader["WalletAddressID"].ToString();
-                    transaction.WalletID = int.Parse(reader["WalletID"].ToString());
-                    transaction.TotalRecord = int.Parse(reader["TOTALROWS"].ToString());
+                    TransactionCoinBO transaction = new TransactionCoinBO
+                    {
+                        CreateDate = DateTime.Parse(reader["CreateDate"].ToString()),
+                        ExpireDate = DateTime.Parse(reader["ExpireDate"].ToString()),
+                        MemberID = int.Parse(reader["MemberID"].ToString()),
+                        Note = reader["Note"].ToString(),
+                        QRCode = reader["QRCode"].ToString(),
+                        Status = int.Parse(reader["Status"].ToString()),
+                        TransactionBitcoin = reader["TransactionBitcoin"].ToString(),
+                        TransactionID = reader["TransactionID"].ToString(),
+                        TypeTransactionID = int.Parse(reader["TypeTransactionID"].ToString()),
+                        ValueTransaction = int.Parse(reader["ValueTransaction"].ToString()),
+                        WalletAddressID = reader["WalletAddressID"].ToString(),
+                        WalletID = int.Parse(reader["WalletID"].ToString()),
+                        TotalRecord = int.Parse(reader["TOTALROWS"].ToString())
+                    };
                     lstTransaction.Add(transaction);
 
                 }

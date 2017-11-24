@@ -30,28 +30,30 @@ namespace BBH.BOS.Data
                 SqlDataReader reader = command.ExecuteReader();
                 if (reader.Read())
                 {
-                    objMemberBO = new MemberInformationBO();
-                    objMemberBO.Address = reader["Address"].ToString();
-                    objMemberBO.Avatar = reader["Avatar"].ToString();
-                    //objMemberBO.Birdthday = DateTime.Parse(reader["Birdthday"].ToString());
-                    //objMemberBO.CreateDate = DateTime.Parse((reader["CreateDate"].ToString()));
-                    //objMemberBO.DeleteDate = DateTime.Parse(reader["DeleteDate"].ToString());
-                    objMemberBO.DeleteUser = reader["DeleteUser"].ToString();
-                    objMemberBO.Email = reader["Email"].ToString();
-                    //objMemberBO.ExpireTimeLink = DateTime.Parse(reader["ExpireTimeLink"].ToString());
-                    objMemberBO.FullName = reader["FullName"].ToString();
-                    objMemberBO.Gender = int.Parse(reader["Gender"].ToString());
-                    objMemberBO.IndexWallet = int.Parse(reader["IndexWallet"].ToString());
-                    objMemberBO.IsActive = int.Parse(reader["IsActive"].ToString());
-                    objMemberBO.IsDelete = int.Parse(reader["IsDelete"].ToString());
-                    objMemberBO.LinkActive = reader["LinkActive"].ToString();
-                    objMemberBO.MemberID = int.Parse(reader["MemberID"].ToString());
-                    objMemberBO.Mobile = reader["Mobile"].ToString();
-                    objMemberBO.NumberCoin = float.Parse(reader["NumberCoin"].ToString());
-                    //objMemberBO.TotalRecord = int.Parse(reader["TotalRecord"].ToString());
-                    //objMemberBO.UpdateDate = DateTime.Parse(reader["UpdateDate"].ToString());
-                    objMemberBO.UpdateUser = reader["UpdateUser"].ToString();
-                    objMemberBO.WalletID = int.Parse(reader["WalletID"].ToString());
+                    objMemberBO = new MemberInformationBO
+                    {
+                        Address = reader["Address"].ToString(),
+                        Avatar = reader["Avatar"].ToString(),
+                        //objMemberBO.Birdthday = DateTime.Parse(reader["Birdthday"].ToString());
+                        //objMemberBO.CreateDate = DateTime.Parse((reader["CreateDate"].ToString()));
+                        //objMemberBO.DeleteDate = DateTime.Parse(reader["DeleteDate"].ToString());
+                        DeleteUser = reader["DeleteUser"].ToString(),
+                        Email = reader["Email"].ToString(),
+                        //objMemberBO.ExpireTimeLink = DateTime.Parse(reader["ExpireTimeLink"].ToString());
+                        FullName = reader["FullName"].ToString(),
+                        Gender = int.Parse(reader["Gender"].ToString()),
+                        IndexWallet = int.Parse(reader["IndexWallet"].ToString()),
+                        IsActive = int.Parse(reader["IsActive"].ToString()),
+                        IsDelete = int.Parse(reader["IsDelete"].ToString()),
+                        LinkActive = reader["LinkActive"].ToString(),
+                        MemberID = int.Parse(reader["MemberID"].ToString()),
+                        Mobile = reader["Mobile"].ToString(),
+                        NumberCoin = float.Parse(reader["NumberCoin"].ToString()),
+                        //objMemberBO.TotalRecord = int.Parse(reader["TotalRecord"].ToString());
+                        //objMemberBO.UpdateDate = DateTime.Parse(reader["UpdateDate"].ToString());
+                        UpdateUser = reader["UpdateUser"].ToString(),
+                        WalletID = int.Parse(reader["WalletID"].ToString())
+                    };
                 }
                 return objMemberBO;
             }
@@ -130,27 +132,28 @@ namespace BBH.BOS.Data
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    MemberBO member = new MemberBO();
-
-                    member.MemberID = int.Parse(reader["MemberID"].ToString());
-                    member.Password = reader["Password"].ToString();
-                    member.Email = reader["Email"].ToString();
-                    member.CreateDate = DateTime.Parse(reader["CreateDate"].ToString());
-                    member.Address = reader["Address"].ToString();
-                    member.Avatar = reader["Avatar"].ToString();
-                    member.Birdthday = DateTime.Parse(reader["Birdthday"].ToString());
-                    member.DeleteDate = DateTime.Parse(reader["DeleteDate"].ToString());
-                    member.DeleteUser = reader["DeleteUser"].ToString();
-                    member.ExpireTimeLink = DateTime.Parse(reader["ExpireTimeLink"].ToString());
-                    member.FullName = reader["FullName"].ToString();
-                    member.Gender = int.Parse(reader["Gender"].ToString());
-                    member.IsActive = int.Parse(reader["IsActive"].ToString());
-                    member.IsDelete = int.Parse(reader["IsDelete"].ToString());
-                    member.LinkActive = reader["LinkActive"].ToString();
-                    member.Mobile = reader["Mobile"].ToString();
-                    member.UpdateDate = DateTime.Parse(reader["UpdateDate"].ToString());
-                    member.UpdateUser = reader["UpdateUser"].ToString();
-                    member.TotalRecord = int.Parse(reader["TOTALROWS"].ToString());
+                    MemberBO member = new MemberBO
+                    {
+                        MemberID = int.Parse(reader["MemberID"].ToString()),
+                        Password = reader["Password"].ToString(),
+                        Email = reader["Email"].ToString(),
+                        CreateDate = DateTime.Parse(reader["CreateDate"].ToString()),
+                        Address = reader["Address"].ToString(),
+                        Avatar = reader["Avatar"].ToString(),
+                        Birdthday = DateTime.Parse(reader["Birdthday"].ToString()),
+                        DeleteDate = DateTime.Parse(reader["DeleteDate"].ToString()),
+                        DeleteUser = reader["DeleteUser"].ToString(),
+                        ExpireTimeLink = DateTime.Parse(reader["ExpireTimeLink"].ToString()),
+                        FullName = reader["FullName"].ToString(),
+                        Gender = int.Parse(reader["Gender"].ToString()),
+                        IsActive = int.Parse(reader["IsActive"].ToString()),
+                        IsDelete = int.Parse(reader["IsDelete"].ToString()),
+                        LinkActive = reader["LinkActive"].ToString(),
+                        Mobile = reader["Mobile"].ToString(),
+                        UpdateDate = DateTime.Parse(reader["UpdateDate"].ToString()),
+                        UpdateUser = reader["UpdateUser"].ToString(),
+                        TotalRecord = int.Parse(reader["TOTALROWS"].ToString())
+                    };
 
                     lstMember.Add(member);
 
@@ -260,11 +263,13 @@ namespace BBH.BOS.Data
                 SqlDataReader reader = command.ExecuteReader();
                 if (reader.Read())
                 {
-                    member = new MemberBO();
-                    member.MemberID = int.Parse(reader["MemberID"].ToString());
-                    member.Email = reader["Email"].ToString();
-                    member.IsActive = int.Parse(reader["IsActive"].ToString());
-                    member.IsDelete = int.Parse(reader["IsDelete"].ToString());
+                    member = new MemberBO
+                    {
+                        MemberID = int.Parse(reader["MemberID"].ToString()),
+                        Email = reader["Email"].ToString(),
+                        IsActive = int.Parse(reader["IsActive"].ToString()),
+                        IsDelete = int.Parse(reader["IsDelete"].ToString())
+                    };
                 }
                 return member;
             }

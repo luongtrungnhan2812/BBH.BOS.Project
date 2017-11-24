@@ -20,7 +20,7 @@ namespace BBH.BOS.Web.Controllers
         string masterKey = ConfigurationManager.AppSettings["KeyBOS"];
         string TimeExpired = ConfigurationManager.AppSettings["TimeExpired"];
         [Dependency]
-        protected ITransactionWalletService objITransactionWalletService { get; set; }
+        protected ITransactionWalletService ObjITransactionWalletService { get; set; }
         // GET: Common
         public ActionResult Index()
         {
@@ -86,7 +86,7 @@ namespace BBH.BOS.Web.Controllers
                     {
                         if (item.Confirm > 5)
                         {
-                            bool boolCheckExistTransactionID = objITransactionWalletService.CheckExistTransactionBitcoin(item.TransactionID.ToString());
+                            bool boolCheckExistTransactionID = ObjITransactionWalletService.CheckExistTransactionBitcoin(item.TransactionID.ToString());
                             if (!boolCheckExistTransactionID)
                             {
                                 if (item.ListCoins != null && item.ListCoins.Count > 0)
@@ -98,24 +98,26 @@ namespace BBH.BOS.Web.Controllers
                                         string strCode = Utility.GenCode();
                                         string tick = DateTime.Now.Ticks.ToString();
                                         transactionCode = Utility.MaHoaMD5(strCode + tick);
-                                        TransactionCoinBO objTransactionCoinBO = new TransactionCoinBO();
-                                        objTransactionCoinBO.CreateDate = DateTime.Now;
-                                        objTransactionCoinBO.ExpireDate = DateTime.Now.AddMinutes(double.Parse(TimeExpired));
-                                        objTransactionCoinBO.MemberID = member.MemberID;
-                                        objTransactionCoinBO.Note = "Received Coins";
-                                        objTransactionCoinBO.QRCode = "";
-                                        objTransactionCoinBO.Status = 0;
-                                        objTransactionCoinBO.TransactionBitcoin = item.TransactionID.ToString();
-                                        objTransactionCoinBO.TransactionID = transactionCode;
-                                        objTransactionCoinBO.TypeTransactionID = 0;
-                                        objTransactionCoinBO.ValueTransaction = float.Parse(itemListCoins.Amount.ToString());
-                                        objTransactionCoinBO.WalletAddressID = userBitPK.GetAddress().ToString();
+                                        TransactionCoinBO objTransactionCoinBO = new TransactionCoinBO
+                                        {
+                                            CreateDate = DateTime.Now,
+                                            ExpireDate = DateTime.Now.AddMinutes(double.Parse(TimeExpired)),
+                                            MemberID = member.MemberID,
+                                            Note = "Received Coins",
+                                            QRCode = "",
+                                            Status = 0,
+                                            TransactionBitcoin = item.TransactionID.ToString(),
+                                            TransactionID = transactionCode,
+                                            TypeTransactionID = 0,
+                                            ValueTransaction = float.Parse(itemListCoins.Amount.ToString()),
+                                            WalletAddressID = userBitPK.GetAddress().ToString()
+                                        };
                                         //objTransactionCoinBO.WalletID = destination.ToString();
-                                        bool rs_ = objITransactionWalletService.InsertTransactionCoin(objTransactionCoinBO);
+                                        bool rs_ = ObjITransactionWalletService.InsertTransactionCoin(objTransactionCoinBO);
                                         if (rs_)
                                         {
                                             //double pointChange = ((double.Parse(itemListCoins.Amount.ToString())) * PointValue) / CoinValue;
-                                            rs = objITransactionWalletService.UpdatePointsMemberFE(member.MemberID, double.Parse(itemListCoins.Amount.ToString()));
+                                            rs = ObjITransactionWalletService.UpdatePointsMemberFE(member.MemberID, double.Parse(itemListCoins.Amount.ToString()));
                                             if (!rs)
                                             {
                                                 break;
@@ -156,14 +158,16 @@ namespace BBH.BOS.Web.Controllers
                     {
                         lstCoin.Add(e);
                     }
-                    TransactionReceivedCoins objTransactionReceivedCoins = new TransactionReceivedCoins();
-                    objTransactionReceivedCoins.ListCoins = lstCoin;
-                    objTransactionReceivedCoins.TransactionID = op.TransactionId;
-                    objTransactionReceivedCoins.Confirm = op.Confirmations;
+                    TransactionReceivedCoins objTransactionReceivedCoins = new TransactionReceivedCoins
+                    {
+                        ListCoins = lstCoin,
+                        TransactionID = op.TransactionId,
+                        Confirm = op.Confirmations
+                    };
                     list.Add(objTransactionReceivedCoins);
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 list = null;
             }

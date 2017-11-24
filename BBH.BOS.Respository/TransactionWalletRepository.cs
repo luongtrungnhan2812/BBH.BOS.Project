@@ -17,7 +17,7 @@ namespace BBH.BOS.Respository
             {
                 return Proxy.ListTransactionWalletBySearch(memberID, fromDate, toDate, start, end);
             }
-            catch (Exception ex)
+            catch
             {
                 return null;
             }
@@ -28,7 +28,7 @@ namespace BBH.BOS.Respository
             {
                 return Proxy.ListTransactionWalletByMember(memberID, start, end);
             }
-            catch (Exception ex)
+            catch
             {
                 return null;
             }
@@ -39,7 +39,7 @@ namespace BBH.BOS.Respository
             {
                 return Proxy.CheckExistTransactionBitcoin(strTransactionID);
             }
-            catch (Exception ex)
+            catch
             {
                 return false;
             }
@@ -50,7 +50,7 @@ namespace BBH.BOS.Respository
             {
                 return Proxy.InsertTransactionCoin(transaction);
             }
-            catch (Exception ex)
+            catch
             {
                 return false;
             }
@@ -61,7 +61,7 @@ namespace BBH.BOS.Respository
             {
                 return Proxy.UpdatePointsMemberFE(memberID, points);
             }
-            catch (Exception ex)
+            catch
             {
                 return false;
             }
