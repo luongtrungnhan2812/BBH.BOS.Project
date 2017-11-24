@@ -25,7 +25,7 @@ namespace BBH.BOS.Domain.Interfaces
         [OperationContract]
         MemberBO GetMemberDetailByEmail(string email);
         [OperationContract]
-        bool InsertMemberWallet(Member_WalletBO member);
+        bool InsertMemberWallet(Member_WalletBO objMember_WalletBO);
 
 
 
