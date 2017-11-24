@@ -224,30 +224,44 @@ function ResetForm(id) {
     }
 }
 $(document).ready(function () {
-    var result = $('#hdResult').val();
-    if (result == 'loginSuccess')
-    {
-        window.location.href = '/';
-    }
-    else if (result == 'loginfaile')
-    {
-        alertify.error("Email or password is wrongly");
-    }
-    else if (result == 'captchafaile')
-    {
-        alertify.error('Please confirm captcha !');
-    }
-
-    //setTimeout(function () {
-    //    $.ajax({
-    //        type: "post",
-    //        async: true,
-    //        url: "/Login/SetTimeoutSession",
-    //        success: function () {
-    //        }
-    //    })
-    //}, 10);
+    //var result = $('#hdResult').val();
+    //if (result == 'loginSuccess')
+    //{
+    //    window.location.href = '/';
+    //}
+    //else if (result == 'loginfaile')
+    //{
+    //    alertify.error("Email or password is wrongly");
+    //}
+    //else if (result == 'captchafaile')
+    //{
+    //    alertify.error('Please confirm captcha !');
+    //}
+    OnLoad();
+    
+    
 });
+function OnLoad() {
+    var userName = $("#hdUsername").val();
+    var passWord = $("#hdPassword").val();
+    var result = $("#hdResult").val();
+    if (userName != "-1" && passWord != "-1") {
+        $("#txtEmail").val(userName);
+        $("#txtPassword").val(passWord);
+        if (result != "-1")
+        {
+            if (result == "loginSuccess")
+            {
+                window.location.href = '/Home/Index';
+            }
+            else
+            {
+                lbError.text(result);
+                lbError.value(result);
+            }
+        }
+    }
+}
 function LoginMember() {
     //var language = $('#hdLanguage').val();
     //var urlRedirect = $('#hdRedirect').val();

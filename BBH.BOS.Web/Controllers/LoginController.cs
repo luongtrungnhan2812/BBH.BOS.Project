@@ -25,6 +25,9 @@ namespace BBH.BOS.Web.Controllers
         // GET: Login
         public ActionResult Index()
         {
+            ViewBag.Username = "-1";
+            ViewBag.Password = "-1";
+            ViewBag.Result = "-1";
             return View();
         }
         public ActionResult EditAccount()
@@ -36,10 +39,13 @@ namespace BBH.BOS.Web.Controllers
             return View();
         }
         [HttpPost]
-        public string LoginMember()
+        public ActionResult LoginMember()
         {
+            ViewBag.Result = "-1";
             string result = "";
             string strCapcha = Request["g-recaptcha-response"].ToString();
+            string email = Request.Form["txtEmail"];
+            string pass = Request.Form["txtPassword"];
             var response = strCapcha;
             var client = new WebClient();
             result = client.DownloadString(string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", secretKey, response));
@@ -47,17 +53,14 @@ namespace BBH.BOS.Web.Controllers
             var status = (bool)obj.SelectToken("success");
             if (status == false)
             {
-                result = "captchafaile";
+                ViewBag.Result = "captchafaile";
             }
             else
             {
-                string email = Request.Form["txtEmail"];
-                string pass = Request.Form["txtPassword"];
-
                 MemberBO member = services.LoginAccount(email, pass);
                 if(member!=null)
                 {
-                    result = "loginSuccess";
+                    ViewBag.Result = "loginSuccess";
                     if (Session["username"] == null)
                     {
 
@@ -74,12 +77,12 @@ namespace BBH.BOS.Web.Controllers
                 }
                 else
                 {
-                    result = "loginfaile";
+                    ViewBag.Result = "loginfaile";
                 }
             }
-            Session["result"] = result;
-            Response.Redirect("/login");
-            return result;
+            ViewBag.Username = email;
+            ViewBag.Password = pass;
+            return View("Index");
         }
 
         [HttpPost]
