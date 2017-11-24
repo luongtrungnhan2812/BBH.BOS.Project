@@ -12,6 +12,7 @@ using Microsoft.Practices.Unity;
 using System.Configuration;
 using System.Net;
 using Newtonsoft.Json.Linq;
+using BBH.BOS.Shared;
 
 namespace BBH.BOS.Web.Controllers
 {
@@ -57,7 +58,8 @@ namespace BBH.BOS.Web.Controllers
             }
             else
             {
-                MemberInformationBO member = services.LoginAccount(email, pass);
+                string strpass = Utility.MaHoaMD5(pass);
+                MemberInformationBO member = services.LoginAccount(email, strpass);
                 if(member!=null)
                 {
                     ViewBag.Result = "loginSuccess";
