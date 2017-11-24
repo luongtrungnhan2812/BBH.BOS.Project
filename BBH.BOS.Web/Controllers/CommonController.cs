@@ -62,6 +62,7 @@ namespace BBH.BOS.Web.Controllers
         }
         public ActionResult PartialDashboard()
         {
+            LoadPoint();
             return PartialView();
         }
         public void LoadPoint()
