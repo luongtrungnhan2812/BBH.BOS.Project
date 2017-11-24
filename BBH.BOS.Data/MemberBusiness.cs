@@ -43,12 +43,12 @@ namespace BBH.BOS.Data
                     objMemberBO.Gender = int.Parse(reader["Gender"].ToString());
                     objMemberBO.IndexWallet = int.Parse(reader["IndexWallet"].ToString());
                     objMemberBO.IsActive = int.Parse(reader["IsActive"].ToString());
-                    objMemberBO.IsDelete = int.Parse(reader["Email"].ToString());
+                    objMemberBO.IsDelete = int.Parse(reader["IsDelete"].ToString());
                     objMemberBO.LinkActive = reader["LinkActive"].ToString();
                     objMemberBO.MemberID = int.Parse(reader["MemberID"].ToString());
                     objMemberBO.Mobile = reader["Mobile"].ToString();
                     objMemberBO.NumberCoin = float.Parse(reader["NumberCoin"].ToString());
-                    objMemberBO.TotalRecord = int.Parse(reader["Email"].ToString());
+                    //objMemberBO.TotalRecord = int.Parse(reader["TotalRecord"].ToString());
                     //objMemberBO.UpdateDate = DateTime.Parse(reader["UpdateDate"].ToString());
                     objMemberBO.UpdateUser = reader["UpdateUser"].ToString();
                     objMemberBO.WalletID = int.Parse(reader["WalletID"].ToString());
