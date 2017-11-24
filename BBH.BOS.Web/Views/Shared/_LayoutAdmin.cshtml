@@ -166,10 +166,10 @@
                         <i class="fa fa-user"></i> <span class="hidden-sm-down">@Session["Emailmember"]</span>
                     </a>
                     <div class="dropdown-menu dropdown-ins dropdown-menu-right" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="/login">Login</a>
+                        @*<a class="dropdown-item" href="/login">Login</a>*@
                         <a class="dropdown-item" href="/editaccount">Edit account</a>
                         <a class="dropdown-item" data-toggle="modal" data-target="#standardModal1" href="/changepassword">Change Password</a>
-                        <a class="dropdown-item" href="/logout">Log Out</a>
+                        <a class="dropdown-item" href="#" onclick="return LogoutMember()">Log Out</a>
 
                     </div>
                 </li>
@@ -272,7 +272,7 @@
     <script>
         $("#navigation").load("components/navigation.html");
     </script>
-
+    <script src="/Scripts/login/login.js"></script>
     <!-- Bootstrap tooltips -->
     <script src="/Content/js/tether.min.js"></script>
     <!-- Bootstrap core JavaScript -->
@@ -316,3 +316,22 @@
     </footer>
 </body>
 </html>
+@*<script>
+    function LogoutMember() {
+        $.ajax({
+            type: "post",
+            url: "/Login/LogoutMember",
+            async: true,
+            data: {},
+            beforeSend: function () {
+                //$('#imgLoading').css("display", "");
+            },
+            success: function (d) {
+                window.location.href = '/';
+            },
+            error: function () {
+
+            }
+        });
+    }
+</script>*@

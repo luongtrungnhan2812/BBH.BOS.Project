@@ -47,7 +47,7 @@ namespace BBH.BOS.Web.Controllers
             var status = (bool)obj.SelectToken("success");
             if (status == false)
             {
-                result = "loginfaile";
+                result = "captchafaile";
             }
             else
             {
@@ -78,7 +78,7 @@ namespace BBH.BOS.Web.Controllers
                 }
             }
             Session["result"] = result;
-            Response.Redirect("/");
+            Response.Redirect("/login");
             return result;
         }
 
@@ -89,10 +89,11 @@ namespace BBH.BOS.Web.Controllers
         }
 
         [HttpPost]
-        public string LogoutMember(string str)
+        public string LogoutMember(string tr)
         {
-           
+            Session.RemoveAll();
             string result = "";
+            Session["Emailmember"] = null;
             Session["memberid"] = null;
             Session["username"] = null;
             Session["ewallet"] = null;
@@ -101,7 +102,7 @@ namespace BBH.BOS.Web.Controllers
             {
                 Response.Cookies["Login"].Expires = DateTime.Now.AddDays(-1);
             }
-            result = str;
+            result = tr;
             return result;
         }
     }

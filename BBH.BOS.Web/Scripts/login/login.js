@@ -233,20 +233,20 @@ $(document).ready(function () {
     {
         alertify.error("Email or password is wrongly");
     }
-    else if (result == 'loginfaile')
+    else if (result == 'captchafaile')
     {
         alertify.error('Please confirm captcha !');
     }
 
-    setTimeout(function () {
-        $.ajax({
-            type: "post",
-            async: true,
-            url: "/Login/SetTimeoutSession",
-            success: function () {
-            }
-        })
-    }, 10);
+    //setTimeout(function () {
+    //    $.ajax({
+    //        type: "post",
+    //        async: true,
+    //        url: "/Login/SetTimeoutSession",
+    //        success: function () {
+    //        }
+    //    })
+    //}, 10);
 });
 function LoginMember() {
     //var language = $('#hdLanguage').val();
@@ -309,7 +309,24 @@ function LoginMember() {
         //});
     }
 }
+function LogoutMember()
+{
+    $.ajax({
+            type: "post",
+            url: "/Login/LogoutMember",
+            async: true,
+            data: {},
+            beforeSend: function () {
+                //$('#imgLoading').css("display", "");
+            },
+            success: function (d) {
+                window.location.href = '/';
+            },
+            error: function () {
 
+            }
+        });
+}
 //function EnterLogin(event, value) {
 //    var urlRedirect = $('#hdRedirect').val();
 //    if (event.which == 13 || event.keyCode == 13) {
