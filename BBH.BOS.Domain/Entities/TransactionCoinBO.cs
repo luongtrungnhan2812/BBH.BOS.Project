@@ -28,10 +28,12 @@ namespace BBH.BOS.Domain.Entities
         [DataMember]
         public string Note { get; set; }
         [DataMember]
-        public DateTime WalletID { get; set; }
+        public int WalletID { get; set; }
         [DataMember]
         public int TypeTransactionID { get; set; }
         [DataMember]
         public string TransactionBitcoin { get; set; }
+        [DataMember]
+        public double TotalRecord { get; set; }
     }
 }
