@@ -41,7 +41,7 @@ namespace BBH.BOS.Data
                     transaction.QRCode = reader["QRCode"].ToString();
                     transaction.Status = int.Parse(reader["Status"].ToString());
                     transaction.TransactionBitcoin = reader["TransactionBitcoin"].ToString();
-                    transaction.TransactionID = int.Parse(reader["TransactionID"].ToString());
+                    transaction.TransactionID = reader["TransactionID"].ToString();
                     transaction.TypeTransactionID = int.Parse(reader["TypeTransactionID"].ToString());
                     transaction.ValueTransaction = int.Parse(reader["ValueTransaction"].ToString());
                     transaction.WalletAddressID = reader["WalletAddressID"].ToString();
@@ -85,7 +85,7 @@ namespace BBH.BOS.Data
                     transaction.QRCode = reader["QRCode"].ToString();
                     transaction.Status = int.Parse(reader["Status"].ToString());
                     transaction.TransactionBitcoin = reader["TransactionBitcoin"].ToString();
-                    transaction.TransactionID = int.Parse(reader["TransactionID"].ToString());
+                    transaction.TransactionID = reader["TransactionID"].ToString();
                     transaction.TypeTransactionID = int.Parse(reader["TypeTransactionID"].ToString());
                     transaction.ValueTransaction = int.Parse(reader["ValueTransaction"].ToString());
                     transaction.WalletAddressID = reader["WalletAddressID"].ToString();
@@ -121,6 +121,72 @@ namespace BBH.BOS.Data
                 {
                     rs = true;
                     break;
+                }
+                return rs;
+            }
+            catch (Exception ex)
+            {
+                Utilitys.WriteLog(fileLog, ex.Message);
+                return false;
+            }
+            finally
+            {
+                helper.destroy();
+            }
+        }
+        public bool InsertTransactionCoin(TransactionCoinBO transaction)
+        {
+            Sqlhelper helper = new Sqlhelper("", "ConnectionString");
+            try
+            {
+                bool rs = false;
+                string sql = "SP_InsertTransactionCoinFE";
+                SqlParameter[] pa = new SqlParameter[12];
+                pa[0] = new SqlParameter("@TransactionID", transaction.TransactionID);
+                pa[1] = new SqlParameter("@WalletAddressID", transaction.WalletAddressID);
+                pa[2] = new SqlParameter("@MemberID", transaction.MemberID);
+                pa[3] = new SqlParameter("@ValueTransaction", transaction.ValueTransaction);
+                pa[4] = new SqlParameter("@QRCode", transaction.QRCode);
+                pa[5] = new SqlParameter("@CreateDate", transaction.CreateDate);
+                pa[6] = new SqlParameter("@ExpireDate", transaction.ExpireDate);
+                pa[7] = new SqlParameter("@Status", transaction.Status);
+                pa[8] = new SqlParameter("@Note", transaction.Note);
+                pa[9] = new SqlParameter("@WalletID", transaction.WalletID);
+                pa[10] = new SqlParameter("@TypeTransactionID", transaction.TypeTransactionID);
+                pa[11] = new SqlParameter("@TransactionBitcoin", transaction.TransactionBitcoin);
+                SqlCommand command = helper.GetCommand(sql, pa, true);
+                int row = command.ExecuteNonQuery();
+                if (row > 0)
+                {
+                    rs = true;
+                }
+                return rs;
+            }
+            catch (Exception ex)
+            {
+                Utilitys.WriteLog(fileLog, ex.Message);
+                return false;
+            }
+            finally
+            {
+                helper.destroy();
+            }
+        }
+        public bool UpdatePointsMemberFE(int memberID, double points)
+        {
+            Sqlhelper helper = new Sqlhelper("", "ConnectionString");
+            try
+            {
+                bool rs = false;
+                string sql = "SP_UpdatePointsMember_FE";
+                SqlParameter[] pa = new SqlParameter[2];
+                pa[0] = new SqlParameter("@memberID", memberID);
+                pa[1] = new SqlParameter("@points", points);
+                SqlCommand command = helper.GetCommand(sql, pa, true);
+                int row = command.ExecuteNonQuery();
+                if (row > 0)
+                {
+                    rs = true;
                 }
                 return rs;
             }

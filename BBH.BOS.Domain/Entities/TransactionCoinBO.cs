@@ -10,13 +10,13 @@ namespace BBH.BOS.Domain.Entities
     public class TransactionCoinBO
     {
         [DataMember]
-        public int TransactionID { get; set; }
+        public string TransactionID { get; set; }
         [DataMember]
         public string WalletAddressID { get; set; }
         [DataMember]
         public int MemberID { get; set; }
         [DataMember]
-        public int ValueTransaction { get; set; }
+        public float ValueTransaction { get; set; }
         [DataMember]
         public string QRCode { get; set; }
         [DataMember]

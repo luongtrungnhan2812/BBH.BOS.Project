@@ -18,5 +18,9 @@ namespace BBH.BOS.Domain.Interfaces
         IEnumerable<TransactionCoinBO> ListTransactionWalletByMember(int memberID, int start, int end);
         [OperationContract]
         bool CheckExistTransactionBitcoin(string strTransactionID);
+        [OperationContract]
+        bool InsertTransactionCoin(TransactionCoinBO transaction);
+        [OperationContract]
+        bool UpdatePointsMemberFE(int memberID, double points);
     }
 }
