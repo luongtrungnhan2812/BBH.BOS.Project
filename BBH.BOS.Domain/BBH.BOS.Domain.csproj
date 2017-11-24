@@ -46,6 +46,7 @@
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\ExchangeRateBO.cs" />
     <Compile Include="Entities\MemberBO.cs" />
+    <Compile Include="Entities\MemberInformationBO.cs" />
     <Compile Include="Entities\Member_WalletBO.cs" />
     <Compile Include="Entities\PackageBO.cs" />
     <Compile Include="Entities\TransactionCoinBO.cs" />

@@ -15,9 +15,9 @@ namespace BBH.BOS.Respository
     public class MemberRepository : WCFClient<IIMemberService>, IIMemberService
     {
         static string pathLog = ConfigurationManager.AppSettings["PathLog"];
-        public MemberBO LoginAccount(string username, string password)
+        public MemberInformationBO LoginAccount(string username, string password)
         {
-            MemberBO objMemberBO = null;
+            MemberInformationBO objMemberBO = null;
             string fileLog = Path.GetDirectoryName(Path.Combine(pathLog));
             try
             {

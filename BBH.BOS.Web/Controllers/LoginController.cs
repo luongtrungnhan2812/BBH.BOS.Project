@@ -57,7 +57,7 @@ namespace BBH.BOS.Web.Controllers
             }
             else
             {
-                MemberBO member = services.LoginAccount(email, pass);
+                MemberInformationBO member = services.LoginAccount(email, pass);
                 if(member!=null)
                 {
                     ViewBag.Result = "loginSuccess";
