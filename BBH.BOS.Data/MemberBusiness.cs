@@ -312,6 +312,67 @@ namespace BBH.BOS.Data
                 helper.destroy();
             }
         }
+        public bool UpdateIsActive(int memberID, int isActive)
+        {
+            string fileLog = Path.GetDirectoryName(Path.Combine(pathLog, "Logs"));
+            Sqlhelper helper = new Sqlhelper("", "ConnectionString");
+            try
+            {
+                bool rs = false;
+                string sql = "SP_UpdateActive";
+                SqlParameter[] pa = new SqlParameter[2];
+                pa[0] = new SqlParameter("@isActive", isActive);
+                pa[1] = new SqlParameter("@memberID", memberID);
+
+                SqlCommand command = helper.GetCommand(sql, pa, true);
+                int row = command.ExecuteNonQuery();
+                if (row > 0)
+                {
+                    rs = true;
+                }
+                return rs;
+            }
+            catch (Exception ex)
+            {
+                Utilitys.WriteLog(fileLog, ex.Message);
+                return false;
+            }
+            finally
+            {
+                helper.destroy();
+            }
+        }
+
+        public bool UpdateIsActiveByEmail(string email, int isActive)
+        {
+            string fileLog = Path.GetDirectoryName(Path.Combine(pathLog, "Logs"));
+            Sqlhelper helper = new Sqlhelper("", "ConnectionString");
+            try
+            {
+                bool rs = false;
+                string sql = "SP_UpdateActiveByEmail";
+                SqlParameter[] pa = new SqlParameter[2];
+                pa[0] = new SqlParameter("@isActive", isActive);
+                pa[1] = new SqlParameter("@email", email);
+
+                SqlCommand command = helper.GetCommand(sql, pa, true);
+                int row = command.ExecuteNonQuery();
+                if (row > 0)
+                {
+                    rs = true;
+                }
+                return rs;
+            }
+            catch (Exception ex)
+            {
+                Utilitys.WriteLog(fileLog, ex.Message);
+                return false;
+            }
+            finally
+            {
+                helper.destroy();
+            }
+        }
 
     }
 }

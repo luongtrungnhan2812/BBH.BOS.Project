@@ -26,6 +26,11 @@ namespace BBH.BOS.Domain.Interfaces
         MemberBO GetMemberDetailByEmail(string email);
         [OperationContract]
         bool InsertMemberWallet(Member_WalletBO objMember_WalletBO);
+        [OperationContract]
+        bool UpdateIsActive(int memberID, int isActive);
+
+        [OperationContract]
+        bool UpdateIsActiveByEmail(string email, int isActive);
 
 
 
