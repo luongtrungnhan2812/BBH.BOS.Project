@@ -252,7 +252,7 @@ function OnLoad() {
         {
             if (result == "loginSuccess")
             {
-                window.location.href = '/Home/Index';
+                window.location.href = '/Home';
             }
             else
             {

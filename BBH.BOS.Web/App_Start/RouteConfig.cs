@@ -21,7 +21,7 @@ namespace BBH.BOS.Web
             routes.MapRoute("EditAccount", "editaccount", new { controller = "Login", action = "EditAccount" });
             routes.MapRoute("ChangePassword", "changepassword", new { controller = "Login", action = "ChangePassword" });
             routes.MapRoute("Admin", "admin", new { controller = "Admin", action = "Index" });
-
+            routes.MapRoute("Home", "Home", new { controller = "Home", action = "Index" });
 
             routes.MapRoute(
                 name: "Default",
