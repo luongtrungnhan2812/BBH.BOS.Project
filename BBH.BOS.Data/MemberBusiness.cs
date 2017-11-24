@@ -258,7 +258,7 @@ namespace BBH.BOS.Data
                 helper.destroy();
             }
         }
-        public bool InsertMemberWallet(Member_WalletBO member)
+        public bool InsertMemberWallet(Member_WalletBO objMember_WalletBO)
         {
             string fileLog = Path.GetDirectoryName(Path.Combine(pathLog, "Logs"));
             Sqlhelper helper = new Sqlhelper("", "ConnectionString");
@@ -268,11 +268,11 @@ namespace BBH.BOS.Data
                 string sql = "SP_InsertMemberWallet";
                 SqlParameter[] pa = new SqlParameter[5];
              
-                pa[0] = new SqlParameter("@IndexWallet", member.IndexWallet);
-                pa[1] = new SqlParameter("@IsActive", member.IsActive);
-                pa[2] = new SqlParameter("@IsDelete", member.IsDelete);
-                pa[3] = new SqlParameter("@MemberID", member.MemberID);
-                pa[4] = new SqlParameter("@NumberCoin", member.NumberCoin);
+                pa[0] = new SqlParameter("@IndexWallet", objMember_WalletBO.IndexWallet);
+                pa[1] = new SqlParameter("@IsActive", objMember_WalletBO.IsActive);
+                pa[2] = new SqlParameter("@IsDelete", objMember_WalletBO.IsDelete);
+                pa[3] = new SqlParameter("@MemberID", objMember_WalletBO.MemberID);
+                pa[4] = new SqlParameter("@NumberCoin", objMember_WalletBO.NumberCoin);
               
                 SqlCommand command = helper.GetCommand(sql, pa, true);
                 int row = command.ExecuteNonQuery();
