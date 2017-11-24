@@ -13,7 +13,7 @@ namespace BBH.BOS.Domain.Interfaces
     public interface IIMemberService
     {
         [OperationContract]
-        MemberBO LoginAccount(string username, string password);
+        MemberInformationBO LoginAccount(string username, string password);
         [OperationContract]
         IEnumerable<MemberBO> GetListMember(int start, int end);
         [OperationContract]

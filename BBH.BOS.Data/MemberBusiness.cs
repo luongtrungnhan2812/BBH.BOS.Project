@@ -13,13 +13,13 @@ namespace BBH.BOS.Data
     public class MemberBusiness : IIMemberService
     {
         public static string pathLog = ConfigurationManager.AppSettings["PathLog"];
-        public MemberBO LoginAccount(string username, string password)
+        public MemberInformationBO LoginAccount(string username, string password)
         {
             string fileLog = Path.GetDirectoryName(Path.Combine(pathLog, "Logs"));
             Sqlhelper helper = new Sqlhelper("", "ConnectionString");
             try
             {
-                MemberBO objMemberBO = null;
+                MemberInformationBO objMemberBO = null;
                 //string sql = "select UserName,Password,ac.GroupID from admin a left join AccessRight ac on a.AdminID=ac.AdminID where UserName=@userName and Password=@pass and IsActive=1 and IsDelete=0";
                 string sql = "SP_LoginAccount";
                 SqlParameter[] pa = new SqlParameter[2];
@@ -30,8 +30,28 @@ namespace BBH.BOS.Data
                 SqlDataReader reader = command.ExecuteReader();
                 if (reader.Read())
                 {
-                    objMemberBO = new MemberBO();
+                    objMemberBO = new MemberInformationBO();
+                    objMemberBO.Address = reader["Address"].ToString();
+                    objMemberBO.Avatar = reader["Avatar"].ToString();
+                    //objMemberBO.Birdthday = DateTime.Parse(reader["Birdthday"].ToString());
+                    //objMemberBO.CreateDate = DateTime.Parse((reader["CreateDate"].ToString()));
+                    //objMemberBO.DeleteDate = DateTime.Parse(reader["DeleteDate"].ToString());
+                    objMemberBO.DeleteUser = reader["DeleteUser"].ToString();
                     objMemberBO.Email = reader["Email"].ToString();
+                    //objMemberBO.ExpireTimeLink = DateTime.Parse(reader["ExpireTimeLink"].ToString());
+                    objMemberBO.FullName = reader["FullName"].ToString();
+                    objMemberBO.Gender = int.Parse(reader["Gender"].ToString());
+                    objMemberBO.IndexWallet = int.Parse(reader["IndexWallet"].ToString());
+                    objMemberBO.IsActive = int.Parse(reader["IsActive"].ToString());
+                    objMemberBO.IsDelete = int.Parse(reader["Email"].ToString());
+                    objMemberBO.LinkActive = reader["LinkActive"].ToString();
+                    objMemberBO.MemberID = int.Parse(reader["MemberID"].ToString());
+                    objMemberBO.Mobile = reader["Mobile"].ToString();
+                    objMemberBO.NumberCoin = float.Parse(reader["NumberCoin"].ToString());
+                    objMemberBO.TotalRecord = int.Parse(reader["Email"].ToString());
+                    //objMemberBO.UpdateDate = DateTime.Parse(reader["UpdateDate"].ToString());
+                    objMemberBO.UpdateUser = reader["UpdateUser"].ToString();
+                    objMemberBO.WalletID = int.Parse(reader["WalletID"].ToString());
                 }
                 return objMemberBO;
             }
