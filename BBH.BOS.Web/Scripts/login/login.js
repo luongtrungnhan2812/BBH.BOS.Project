@@ -334,7 +334,7 @@ function LogoutMember()
                 //$('#imgLoading').css("display", "");
             },
             success: function (d) {
-                window.location.href = '/';
+                window.location.href = '/login';
             },
             error: function () {
 
