@@ -11,9 +11,9 @@ using Microsoft.Practices.Unity;
 using System.Configuration;
 using System.Net;
 using Newtonsoft.Json.Linq;
-//using BBC.Core.Utils.Common;
 using BBH.BOS.Shared;
-using BBH.BOS.Web.SendMailByVerifyMember;
+using BBH.BOS.Web.SentMailServices;
+
 namespace BBH.BOS.Web.Controllers
 {
     public class RegisterController : Controller
@@ -22,6 +22,7 @@ namespace BBH.BOS.Web.Controllers
         [Dependency]
         protected IIMemberService repository { get; set; }
 
+        string secKey = ConfigurationManager.AppSettings["SecrecKey"];
         SendMailSvcClient sentMail = new SendMailSvcClient();
 
         public ActionResult Index()
@@ -107,7 +108,7 @@ namespace BBH.BOS.Web.Controllers
 
 
             string response = Request.Form["g-recaptcha-response"];
-            string secretKey = "6LfhJyUUAAAAAPKM6Hl87lD0mVKa-0zPKNR53W_j";/* ConfigurationManager.AppSettings["SecrecKey"];*/// "6LfhJyUUAAAAAPKM6Hl87lD0mVKa-0zPKNR53W_j";
+            string secretKey ="6LfhJyUUAAAAAPKM6Hl87lD0mVKa-0zPKNR53W_j";
             var client = new WebClient();
             var result1 = client.DownloadString(string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", secretKey, response));
             var obj = JObject.Parse(result1);

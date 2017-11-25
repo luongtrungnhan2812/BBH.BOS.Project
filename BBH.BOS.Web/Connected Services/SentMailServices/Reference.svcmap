@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="e32e5dd8-b4ae-4112-a2bc-990adbd05d37" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="1e72987f-a548-44b0-948d-232b3a423a83" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,10 +22,10 @@
     <MetadataSource Address="http://sendmailservice.wan2save.vn/SendMailSvc.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="SendMailSvc.disco" MetadataType="Disco" ID="2ce59a35-78d1-4b44-9010-cd2503427f48" SourceId="1" SourceUrl="http://sendmailservice.wan2save.vn/SendMailSvc.svc?disco" />
-    <MetadataFile FileName="SendMailSvc.wsdl" MetadataType="Wsdl" ID="33bc54f9-e359-41f3-94f6-c56829628868" SourceId="1" SourceUrl="http://sendmailservice.wan2save.vn/SendMailSvc.svc?wsdl" />
-    <MetadataFile FileName="SendMailSvc.xsd" MetadataType="Schema" ID="8d78ab31-57af-4717-8e64-d45cba7cb008" SourceId="1" SourceUrl="http://sendmailservice.wan2save.vn/SendMailSvc.svc?xsd=xsd0" />
-    <MetadataFile FileName="SendMailSvc1.xsd" MetadataType="Schema" ID="970bc9f6-a79f-4bf5-bb2f-d2d6b1514b6f" SourceId="1" SourceUrl="http://sendmailservice.wan2save.vn/SendMailSvc.svc?xsd=xsd1" />
+    <MetadataFile FileName="SendMailSvc.disco" MetadataType="Disco" ID="ebc506d0-8fad-4986-93d5-97acf9bceb01" SourceId="1" SourceUrl="http://sendmailservice.wan2save.vn/SendMailSvc.svc?disco" />
+    <MetadataFile FileName="SendMailSvc.wsdl" MetadataType="Wsdl" ID="4eb6832c-8c53-4922-aaa1-1db9bf2018a0" SourceId="1" SourceUrl="http://sendmailservice.wan2save.vn/SendMailSvc.svc?wsdl" />
+    <MetadataFile FileName="SendMailSvc.xsd" MetadataType="Schema" ID="a7cea9cb-2485-42a3-b590-3cfa49438273" SourceId="1" SourceUrl="http://sendmailservice.wan2save.vn/SendMailSvc.svc?xsd=xsd0" />
+    <MetadataFile FileName="SendMailSvc1.xsd" MetadataType="Schema" ID="e2240778-1f8f-44e6-b3e2-821579b74a51" SourceId="1" SourceUrl="http://sendmailservice.wan2save.vn/SendMailSvc.svc?xsd=xsd1" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

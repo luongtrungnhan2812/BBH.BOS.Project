@@ -226,6 +226,7 @@ $(document).ready(function () {
     if (result == 'registerSuccess')
     {
         alertify.alert("Register success,please go to mail actives account!!");
+        window.location.href = ('/login');
         $('#txtEmail').val('');
                     $('#txtPassword').val('');
                     $('#txtRePassword').val('');

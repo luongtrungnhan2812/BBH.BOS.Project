@@ -197,7 +197,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="Connected Services\SendMailByVerifyMember\Reference.cs">
+    <Compile Include="Connected Services\SentMailServices\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -216,10 +216,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\SendMailByVerifyMember\SendMailSvc.disco" />
-    <None Include="Connected Services\SendMailByVerifyMember\configuration91.svcinfo" />
-    <None Include="Connected Services\SendMailByVerifyMember\configuration.svcinfo" />
-    <None Include="Connected Services\SendMailByVerifyMember\Reference.svcmap">
+    <None Include="Connected Services\SentMailServices\SendMailSvc.disco" />
+    <None Include="Connected Services\SentMailServices\configuration91.svcinfo" />
+    <None Include="Connected Services\SentMailServices\configuration.svcinfo" />
+    <None Include="Connected Services\SentMailServices\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -720,11 +720,11 @@
     <Content Include="Content\sass\mdb\pro\_tabs.scss" />
     <Content Include="Content\sass\mdb\pro\_toasts.scss" />
     <Content Include="App_Data\IoC.config" />
-    <None Include="Connected Services\SendMailByVerifyMember\SendMailSvc.wsdl" />
-    <None Include="Connected Services\SendMailByVerifyMember\SendMailSvc.xsd">
+    <None Include="Connected Services\SentMailServices\SendMailSvc.wsdl" />
+    <None Include="Connected Services\SentMailServices\SendMailSvc.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\SendMailByVerifyMember\SendMailSvc1.xsd">
+    <None Include="Connected Services\SentMailServices\SendMailSvc1.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -799,7 +799,7 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\SendMailByVerifyMember\" />
+    <WCFMetadataStorage Include="Connected Services\SentMailServices\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BBH.BOS.Web.SendMailByVerifyMember {
+namespace BBH.BOS.Web.SentMailServices {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SendMailByVerifyMember.ISendMailSvc")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SentMailServices.ISendMailSvc")]
     public interface ISendMailSvc {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISendMailSvc/SendMailCustomizeByTemplate", ReplyAction="http://tempuri.org/ISendMailSvc/SendMailCustomizeByTemplateResponse")]
@@ -35,12 +35,12 @@ namespace BBH.BOS.Web.SendMailByVerifyMember {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface ISendMailSvcChannel : BBH.BOS.Web.SendMailByVerifyMember.ISendMailSvc, System.ServiceModel.IClientChannel {
+    public interface ISendMailSvcChannel : BBH.BOS.Web.SentMailServices.ISendMailSvc, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class SendMailSvcClient : System.ServiceModel.ClientBase<BBH.BOS.Web.SendMailByVerifyMember.ISendMailSvc>, BBH.BOS.Web.SendMailByVerifyMember.ISendMailSvc {
+    public partial class SendMailSvcClient : System.ServiceModel.ClientBase<BBH.BOS.Web.SentMailServices.ISendMailSvc>, BBH.BOS.Web.SentMailServices.ISendMailSvc {
         
         public SendMailSvcClient() {
         }
