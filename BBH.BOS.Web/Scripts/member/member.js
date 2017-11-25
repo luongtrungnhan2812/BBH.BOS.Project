@@ -223,26 +223,52 @@ $('#txtE_Wallet').on("keypress", function (e) {
 
 $(document).ready(function () {
     var result = $('#hdResult').val();
+    
     if (result == 'registerSuccess')
     {
-        alertify.alert("Register success,please go to mail actives account!!");
-        window.location.href = ('/login');
+        //alertify.alert("Register success,please go to mail actives account!!");
+        //alertify.prompt("Register success,please go to mail actives account!!", "Default value",
+        //    function (evt, value) {
+        //        alertify.success('Ok: ' + 'http://localhost:52993/login');
+        //    },
+        //window.showAlert = function () {
+            alertify.alert('<span>Register success,please go to mail actives account!!</span> <a href="https://mail.google.com">login email</a>');
+        //}
+
+        //window.showConfirm = function () {
+        //    alertify.confirm('<a href="javascript:showAlert();">Show Alert</a>');
+        //}
+        alertify.alert().setting('modal', true);
+        //alertify.confirm().setting('modal', true);
+
+        //window.showAlert();
+
+        //window.location.href = ('/login');
         $('#txtEmail').val('');
                     $('#txtPassword').val('');
                     $('#txtRePassword').val('');
                     $('#txtFullName').val('');
                     $('#txtMobile').val('');
     }
-     if (result == 'RegisterFaile')
+   else if (result == 'EmailExist')
     {
-        alertify.error('Error Register. Please contact with administrator');
-    }
-     if (result == 'EmailExist')
-    {
+        $('#txtEmail').val($('#hdEmail').val());
+        $('#txtPassword').val($('#hdPassword').val());
+        $('#txtRePassword').val($('#hdPassword').val());
+
+        $('#txtFullName').val($('#hdFullName').val());
+        $('#txtMobile').val($('#hdMobile').val());
+
         $('#lbEmail').text('This email has used by another');
         $('#lbEmail').css('display', '');
     }
-    if (result == 'errorCaptcha')
+    else if (result == 'RegisterFaile')
+    {
+        alertify.error('Error Register. Please contact with administrator');
+    }
+    
+   
+    else if(result == 'errorCaptcha')
     {
 
         $('#txtEmail').val($('#hdEmail').val());
@@ -251,9 +277,11 @@ $(document).ready(function () {
 
         $('#txtFullName').val($('#hdFullName').val());
         $('#txtMobile').val($('#hdMobile').val());
-        alertify.error('Please confirm captcha !');
+        //alertify.error('Please confirm captcha !');
+        $('#lbrecaptcha').text('Please confirm captcha !');
+        $('#lbrecaptcha').css('display', '');
     }
-
+   
     setTimeout(function () {
         $.ajax({
             type: "post",
@@ -275,6 +303,7 @@ function RegisterMember() {
 
     var checkReg = true;
     var checkPassword = CheckPassword(password);
+    var checkRepassword = CheckPassword(repassword);
     if (email == '') {
         
         $('#lbEmail').text('Please input email');
@@ -289,19 +318,26 @@ function RegisterMember() {
             checkReg = false;
         }
     }
-
+   
     if (password == '') {
-       
+
         $('#lbPass').text('Please input password');
         $('#lbPass').css('display', '');
         checkReg = false;
     }
     else if (password.length < 8) {
-       
+
         $('#lbPass').text('Your password must be more than 8 characters');
         $('#lbPass').css('display', '');
         checkReg = false;
     }
+    //else {
+    //    if (!checkPassword) {
+    //        $('#lbPass').text(' password not Invalid');
+    //        $('#lbPass').css('display', '');
+    //        checkReg = false;
+    //    }
+    //}
     if (repassword == '') {
         
         $('#lbRePass').text('Please input Repassword');
@@ -322,7 +358,9 @@ function RegisterMember() {
         checkReg = false;
     }
     if (mobile == '') {
-        checkReg = true;
+        $('#lbMobile').text('Please input mobile');
+        $('#lbMobile').css('display', '');
+        checkReg = false;
     }
     else {
         if (mobile.length < 10 || mobile.length > 13) {

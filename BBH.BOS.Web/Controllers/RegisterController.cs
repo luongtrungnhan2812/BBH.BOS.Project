@@ -123,10 +123,9 @@ namespace BBH.BOS.Web.Controllers
                      member.FullName = fullName;
                     member.Email = email;
                     member.Mobile = mobile;
-                member.Password = Utility.MaHoaMD5(password);
+                     member.Password = Utility.MaHoaMD5(password);
                     member.IsActive = 0;
                     member.IsDelete = 0;
-                    //member.Hashkey = "1234";
                     member.CreateDate = DateTime.Now;
                     member.Gender = 1;
 

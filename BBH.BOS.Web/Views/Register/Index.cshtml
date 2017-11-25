@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
 
@@ -30,7 +29,7 @@
                 <!--Form with header-->
                 @*@if ((string)Session["Language"] == "EN")
                     {*@
-            @using (Html.BeginForm("RegisterMember", "Register", FormMethod.Post))
+            @using(Html.BeginForm("RegisterMember", "Register", FormMethod.Post))
             {
                 <div class="card" style="top:-75px">
                     <div class="card-block">
@@ -69,12 +68,14 @@
 
                         </div>
                         <div class="g-recaptcha" data-sitekey="6LfhJyUUAAAAANmMFHQ7ARUoDEwgs3Zy-W6bwCo1" style="margin-left: 49px;"></div><br />
+                        <label id="lbrecaptcha" style="color:red; display:none;margin-left: 49px;" class="" ></label>
 
                         <div class="text-center">
                             @*<img src="/Images/loading.gif" id="imgLoading" style="position: absolute; display:none">*@
-                            <input type="submit" class="btn btn-primary" onclick="return RegisterMember()" value="Sign Up">
+                            <input type="submit" class="btn btn-primary" onclick="return RegisterMember()" value="SIGN UP">
                             @*<button class="btn btn-primary" onclick="return RegisterMember()">Sign Up</button>*@
-                            <button class="btn btn-primary" onclick="window.location.href='/login'">Sign In</button>
+                            @*<button class="btn btn-primary" onclick="window.location.href='/login'" style="height: 50px;">Sign In</button>*@
+                            <a href="/login" class="btn btn-primary"  style="height: 50px;">Sign In</a>
                         </div>
                     </div>
 
