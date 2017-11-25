@@ -183,7 +183,16 @@ function CheckSpecialCharacter(value) {
     }
     return checkReg;
 }
+function ResetField(id) {
+    if (id == 1) {
+        $('#lbPassword').text('');
 
+    }
+    if (id == 2) {
+        $('#lbRePass').text('');
+
+    }
+}
 function CheckSpecialUserNameCharacter(value) {
     var checkReg = true;
     var count = 0;
@@ -220,6 +229,12 @@ $('#txtE_Wallet').on("keypress", function (e) {
         e.preventDefault();
     }
 });
+function CloseModal() {
+    $('#standardModal').removeClass('show');
+    $('#standardModal').css("display", "none");
+    $('.modal-backdrop.fade.show').css('opacity', '0');
+    $('.modal-backdrop.fade.show').css('display', 'none');
+}
 
 $(document).ready(function () {
     var result = $('#hdResult').val();
@@ -422,5 +437,58 @@ function RegisterMember() {
 
         //    }
         //});
+    }
+}
+
+function ChangePassWord() {
+    var checkReg = true;
+    var password = $('#txtNewPass').val();
+    var rePassword = $('#txtRePass').val();
+    var checkpass = CheckPassword(password);
+
+    if (password == '' || password.length < 8) {
+        $('#lbPassword').text('Password at least 8 character');
+
+        checkReg = false;
+    }
+    if (password != rePassword) {
+        $('#lbRePass').text('Password confirm wrong');
+
+        checkReg = false;
+    }
+    if (!checkReg) {
+        return false;
+    }
+    else {
+        $('#imgLoading').css("display", "");
+        $.ajax({
+            type: "post",
+            url: "/Member/UpdatePassMember",
+            async: true,
+            data: { password: password },
+            beforeSend: function () {
+                $('#imgLoading').css("display", "");
+            },
+            success: function (d) {
+                $('#imgLoading').css("display", "none");
+                if (d == 'UpdatePassSuccess') {
+                    $('#txtNewPass').val('');
+                    $('#txtRePass').val('');
+                    alertify.alert('Update password success')
+
+                    setTimeout(function () { window.location.reload(); }, 3000);
+                }
+
+                else {
+
+                    alertify.error('Update error. Please contact with administrator');
+
+                }
+
+            },
+            error: function () {
+
+            }
+        });
     }
 }

@@ -72,29 +72,6 @@ namespace BBH.BOS.Web.Controllers
         {
             string result = "";
             MemberBO member = new MemberBO();
-            //if (Session["Email"] == null)
-            //{
-            //    Response.Redirect("/login");
-            //}
-            //else
-            //{
-            //if ((int)Session["GroupID"] != 1)
-            //{
-            //    Response.Redirect("/");
-            //}
-            //if (memberID > 0)
-            //{
-            //    member.FullName = fullName;
-            //    member.Email = email;
-            //    member.Mobile = mobile;
-
-
-            //    bool rs = repository.UpdateMember( member,memberID);
-
-
-            //}
-            //else if (memberID == 0)
-            //{
 
             string email = Request["txtEmail"];
             string password = Request["txtPassword"];
@@ -128,7 +105,7 @@ namespace BBH.BOS.Web.Controllers
                     member.IsDelete = 0;
                     member.CreateDate = DateTime.Now;
                     member.Gender = 1;
-
+                member.Avatar = "";
                   
                 bool checkEmail = repository.CheckEmailExists(email);
                 if (checkEmail)

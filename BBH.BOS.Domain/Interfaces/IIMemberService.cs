@@ -31,6 +31,8 @@ namespace BBH.BOS.Domain.Interfaces
 
         [OperationContract]
         bool UpdateIsActiveByEmail(string email, int isActive);
+        [OperationContract]
+        bool UpdatePasswordMember(string email, string password);
 
 
 

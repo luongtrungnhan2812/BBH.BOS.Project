@@ -144,5 +144,20 @@ namespace BBH.BOS.Respository
             }
             return row;
         }
+
+        public bool UpdatePasswordMember(string email, string password)
+        {
+            bool row = false;
+            string fileLog = Path.GetDirectoryName(Path.Combine(pathLog));
+            try
+            {
+                row = Proxy.UpdatePasswordMember(email, password);
+            }
+            catch (Exception ex)
+            {
+                Utility.WriteLog(fileLog, ex.Message);
+            }
+            return row;
+        }
     }
 }
