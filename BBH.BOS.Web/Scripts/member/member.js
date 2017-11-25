@@ -492,3 +492,61 @@ function ChangePassWord() {
         });
     }
 }
+
+function ForgotPassword()
+{
+    var checkEmail = true;
+    var email = $('#txtReEmail').val();
+
+    if (email == '')
+    {
+        checkEmail = false;
+        $('#lbreEmail').text('Please input email!');
+        $('#lbreEmail').css('display','');
+    }
+    else if (!isValidEmailAddress(email)) {
+            $('#lbreEmail').text('Invalid email address.');
+            $('#lbreEmail').css('display', '');
+
+            checkReg = true;
+        
+    }
+    if (!checkEmail)
+    {
+        return false;
+    }
+    else {
+        $('#imgLoading').css("display", "");
+        $.ajax({
+            type: "post",
+            url: "/Member/SendMailResetPassword",
+            async: true,
+            data: { email: email },
+            beforeSend: function () {
+                $('#imgLoading').css("display", "");
+            },
+            success: function (d) {
+                $('#imgLoading').css("display", "none");
+                if (d == 'ResetPassSuccess') {
+                   
+                    alertify.alert('<span>Reset Password success,please go to mail get account!!</span> <a href="http://localhost:52993/login">login</a>');
+                    $('#txtReEmail').val('');
+
+                }
+                else if (d == 'EmailNotExit')
+                {
+                    alertify.error("Email No Register!");
+                }
+                else {
+
+                    alertify.error('ResetPassWord error. Please contact with administrator');
+
+                }
+
+            },
+            error: function () {
+
+            }
+        });
+    }
+}

@@ -2,6 +2,7 @@
 using BBH.BOS.Domain.Entities;
 using BBH.BOS.Domain.Interfaces;
 using BBH.BOS.Shared;
+using BBH.BOS.Web.SentMailServices;
 using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,9 @@ namespace BBH.BOS.Web.Controllers
     {
         [Dependency]
         protected IIMemberService memberServices { get; set; }
+
+        SendMailSvcClient sentMail = new SendMailSvcClient();
+
         // GET: Member
         public ActionResult Index()
         {
@@ -40,6 +44,33 @@ namespace BBH.BOS.Web.Controllers
                     {
                         result = "UpdatePassSuccess";
                     }
+                }
+            }
+            return result;
+        }
+
+       public string SendMailResetPassword(string email)
+        {
+            string result = "";
+
+            bool checkEmailexit = memberServices.CheckEmailExists(email);
+            if(!checkEmailexit)
+            {
+                result = "EmailNotExit";
+            }
+            else
+            {
+                string genPass = Utility.GenCode();
+                string pass = Utility.MaHoaMD5(genPass);
+
+                //if(pass != null || pass != "")
+                //{
+                    memberServices.UpdatePasswordMember(email, pass);
+                //}
+                bool resetPass = sentMail.SendMailResetPassword(email, genPass);
+                if(resetPass)
+                {
+                    result = "ResetPassSuccess";
                 }
             }
             return result;

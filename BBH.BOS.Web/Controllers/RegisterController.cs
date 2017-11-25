@@ -117,7 +117,7 @@ namespace BBH.BOS.Web.Controllers
                     int returnAdminID = repository.InsertMember(member);
                     if (returnAdminID > 0)
                     {
-                       bool rsSendMail= sentMail.SendMailByVerifyMember(email); 
+                       bool rsSendMail= sentMail.SendMailByVerifyMember(email);
                         member = repository.GetMemberDetailByEmail(email);
                         Member_WalletBO memberWallet = new Member_WalletBO();
                         if(member!=null)
