@@ -52,26 +52,40 @@ namespace BBH.BOS.Web.Controllers
        public string SendMailResetPassword(string email)
         {
             string result = "";
-
-            bool checkEmailexit = memberServices.CheckEmailExists(email);
-            if(!checkEmailexit)
+            if (email == "")
             {
-                result = "EmailNotExit";
+                result = "emtry";
             }
             else
             {
-                string genPass = Utility.GenCode();
-                string pass = Utility.MaHoaMD5(genPass);
-
-                //if(pass != null || pass != "")
-                //{
-                    memberServices.UpdatePasswordMember(email, pass);
-                //}
-                bool resetPass = sentMail.SendMailResetPassword(email, genPass);
-                if(resetPass)
+                bool checkEmailexit = memberServices.CheckEmailExists(email);
+                if (!checkEmailexit)
                 {
-                    result = "ResetPassSuccess";
+                    result = "EmailNotExit";
                 }
+                else
+                {
+                    string genPass = Utility.GenCode();
+                    string pass = Utility.MaHoaMD5(genPass);
+                    try
+                    {
+                        if (pass != "")
+                        {
+                            memberServices.UpdatePasswordMember(email, pass);
+                        }
+                        bool resetPass = sentMail.SendMailResetPassword(email, genPass);
+                        if (resetPass)
+                        {
+                            result = "ResetPassSuccess";
+                        }
+                        else
+                        {
+                            result = "ResetPassfaile";
+                        }
+                    }
+                    catch { }
+                }
+                
             }
             return result;
         }

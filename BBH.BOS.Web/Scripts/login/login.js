@@ -202,7 +202,16 @@ function CheckSpecialUserNameCharacter(value) {
     }
     return checkReg;
 }
+function ResetField(id) {
+    if (id == 1) {
+        $('#lbPassword').text('');
 
+    }
+    if (id == 2) {
+        $('#lbRePass').text('');
+
+    }
+}
 
 function ResetForm(id) {
     switch (id) {
@@ -254,12 +263,18 @@ function OnLoad() {
             {
                 window.location.href = '/Home';
             }
-            else
+            else if (result =='loginfaile')
             {
-                lbError.text(result);
-                lbError.value(result);
+                alertify.error("email or password not Invalid ");
+                //lbError.text(result);
+                //lbError.value(result);
+            }
+            else if (result =='captchafaile') {
+                $('#lbrecaptcha').text('Please confirm captcha !');
+                $('#lbrecaptcha').css('display', '');
             }
         }
+      
     }
 }
 function LoginMember() {
@@ -272,20 +287,20 @@ function LoginMember() {
     if (email == '') {
         checkReg = false;
         $('#lbEmail').text('Please input email');
-       
+        $('#lbEmail').css('display', '');
     }
     else {
         if (!isValidEmailAddress(email)) {
             checkReg = false;
             $('#lbEmail').text('Email is not correct format');
-            
+            $('#lbEmail').css('display', '');
         }
     }
    
     if (password == '') {
         checkReg = false;
         $('#lbPass').text('Please input password');
-       
+        $('#lbPass').css('display', '');
     }
     if (!checkReg) {
         return false;

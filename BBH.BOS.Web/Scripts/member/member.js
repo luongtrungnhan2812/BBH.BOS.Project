@@ -237,36 +237,25 @@ function CloseModal() {
 }
 
 $(document).ready(function () {
+    Onload();
+});
+function Onload()
+{
     var result = $('#hdResult').val();
-    
-    if (result == 'registerSuccess')
-    {
-        //alertify.alert("Register success,please go to mail actives account!!");
-        //alertify.prompt("Register success,please go to mail actives account!!", "Default value",
-        //    function (evt, value) {
-        //        alertify.success('Ok: ' + 'http://localhost:52993/login');
-        //    },
-        //window.showAlert = function () {
-            alertify.alert('<span>Register success,please go to mail actives account!!</span> <a href="https://mail.google.com">login email</a>');
-        //}
 
-        //window.showConfirm = function () {
-        //    alertify.confirm('<a href="javascript:showAlert();">Show Alert</a>');
-        //}
+    if (result == 'registerSuccess') {
+
+        alertify.alert('<span>Register success,please go to mail actives account!!</span> <a href="https://mail.google.com">login email</a>');
         alertify.alert().setting('modal', true);
-        //alertify.confirm().setting('modal', true);
-
-        //window.showAlert();
-
         //window.location.href = ('/login');
         $('#txtEmail').val('');
-                    $('#txtPassword').val('');
-                    $('#txtRePassword').val('');
-                    $('#txtFullName').val('');
-                    $('#txtMobile').val('');
+        $('#txtPassword').val('');
+        $('#txtRePassword').val('');
+        $('#txtFullName').val('');
+        $('#txtMobile').val('');
     }
-   else if (result == 'EmailExist')
-    {
+   
+    else if (result == 'EmailExist') {
         $('#txtEmail').val($('#hdEmail').val());
         $('#txtPassword').val($('#hdPassword').val());
         $('#txtRePassword').val($('#hdPassword').val());
@@ -277,15 +266,10 @@ $(document).ready(function () {
         $('#lbEmail').text('This email has used by another');
         $('#lbEmail').css('display', '');
     }
-    else if (result == 'RegisterFaile')
-    {
+    else if (result == 'RegisterFaile') {
         alertify.error('Error Register. Please contact with administrator');
     }
-    
-   
-    else if(result == 'errorCaptcha')
-    {
-
+    else if (result == 'errorCaptcha') {
         $('#txtEmail').val($('#hdEmail').val());
         $('#txtPassword').val($('#hdPassword').val());
         $('#txtRePassword').val($('#hdPassword').val());
@@ -296,7 +280,7 @@ $(document).ready(function () {
         $('#lbrecaptcha').text('Please confirm captcha !');
         $('#lbrecaptcha').css('display', '');
     }
-   
+
     setTimeout(function () {
         $.ajax({
             type: "post",
@@ -306,8 +290,7 @@ $(document).ready(function () {
             }
         })
     }, 10);
-});
-
+}
 function RegisterMember() {
 
     var email = $('#txtEmail').val();
@@ -504,12 +487,14 @@ function ForgotPassword()
         $('#lbreEmail').text('Please input email!');
         $('#lbreEmail').css('display','');
     }
-    else if (!isValidEmailAddress(email)) {
+    else
+    {
+        if (!isValidEmailAddress(email)) {
             $('#lbreEmail').text('Invalid email address.');
             $('#lbreEmail').css('display', '');
 
-            checkReg = true;
-        
+            checkReg = false;
+        }
     }
     if (!checkEmail)
     {
@@ -531,18 +516,21 @@ function ForgotPassword()
                    
                     alertify.alert('<span>Reset Password success,please go to mail get account!!</span> <a href="http://localhost:52993/login">login</a>');
                     $('#txtReEmail').val('');
+                    setTimeout(function () { window.location.reload(); }, 5000);
 
                 }
-                else if (d == 'EmailNotExit')
+                else if (d == 'emtry')
+                {
+                    $('#lbreEmail').text('Please input email!');
+                    $('#lbreEmail').css('display', '');
+                }
+                else if (d== 'EmailNotExit')
                 {
                     alertify.error("Email No Register!");
                 }
-                else {
-
+                else if (d =='ResetPassfaile'){
                     alertify.error('ResetPassWord error. Please contact with administrator');
-
                 }
-
             },
             error: function () {
 

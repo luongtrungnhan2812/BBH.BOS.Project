@@ -22,7 +22,7 @@ namespace BBH.BOS.Web.Controllers
         [Dependency]
         protected IIMemberService repository { get; set; }
 
-        string secKey = ConfigurationManager.AppSettings["SecrecKey"];
+        string secretKey = ConfigurationManager.AppSettings["secretKey"];
         SendMailSvcClient sentMail = new SendMailSvcClient();
 
         public ActionResult Index()
@@ -84,9 +84,10 @@ namespace BBH.BOS.Web.Controllers
             TempData["MobileRegister"] = mobile;
 
 
-            string response = Request.Form["g-recaptcha-response"];
-            string secretKey ="6LfhJyUUAAAAAPKM6Hl87lD0mVKa-0zPKNR53W_j";
+            string strCaptcha = Request["g-recaptcha-response"].ToString();
+           // string secretKey = secKey;/*"6LfhJyUUAAAAAPKM6Hl87lD0mVKa-0zPKNR53W_j";*/
             var client = new WebClient();
+            var response = strCaptcha;
             var result1 = client.DownloadString(string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", secretKey, response));
             var obj = JObject.Parse(result1);
             var status = (bool)obj.SelectToken("success");
@@ -96,17 +97,17 @@ namespace BBH.BOS.Web.Controllers
             }
             else
             {
-               
-                     member.FullName = fullName;
-                    member.Email = email;
-                    member.Mobile = mobile;
-                     member.Password = Utility.MaHoaMD5(password);
-                    member.IsActive = 0;
-                    member.IsDelete = 0;
-                    member.CreateDate = DateTime.Now;
-                    member.Gender = 1;
+
+                member.FullName = fullName;
+                member.Email = email;
+                member.Mobile = mobile;
+                member.Password = Utility.MaHoaMD5(password);
+                member.IsActive = 0;
+                member.IsDelete = 0;
+                member.CreateDate = DateTime.Now;
+                member.Gender = 1;
                 member.Avatar = "";
-                  
+
                 bool checkEmail = repository.CheckEmailExists(email);
                 if (checkEmail)
                 {
@@ -114,33 +115,39 @@ namespace BBH.BOS.Web.Controllers
                 }
                 else
                 {
+
                     int returnAdminID = repository.InsertMember(member);
                     if (returnAdminID > 0)
                     {
-                       bool rsSendMail= sentMail.SendMailByVerifyMember(email);
-                        member = repository.GetMemberDetailByEmail(email);
-                        Member_WalletBO memberWallet = new Member_WalletBO();
-                        if(member!=null)
+                        try
                         {
-                            memberWallet.IndexWallet = member.MemberID;
-                            memberWallet.IsActive = 1;
-                            memberWallet.IsDelete = 0;
-                            memberWallet.MemberID = member.MemberID;
-                            memberWallet.NumberCoin = 0;
+                            bool rsSendMail = sentMail.SendMailByVerifyMember(email);
+                           
+                            member = repository.GetMemberDetailByEmail(email);
+                            Member_WalletBO memberWallet = new Member_WalletBO();
+                            if (member != null)
+                            {
+                                memberWallet.IndexWallet = member.MemberID;
+                                memberWallet.IsActive = 1;
+                                memberWallet.IsDelete = 0;
+                                memberWallet.MemberID = member.MemberID;
+                                memberWallet.NumberCoin = 0;
+                            }
+                            bool rs_ = repository.InsertMemberWallet(memberWallet);
+                            if (rs_)
+                            {
+                                result = "registerSuccess";
+                            }
                         }
-                        bool rs_ = repository.InsertMemberWallet(memberWallet);
-                       
-                        result = "registerSuccess";
-                       
+                        catch { }
                     }
                     else
                     {
                         result = "RegisterFaile";
                     }
-                    //result = "insertsuccess";
+
                 }
-                
-                
+
             }
             Session["Result"] = result;
             Response.Redirect("/registermember");

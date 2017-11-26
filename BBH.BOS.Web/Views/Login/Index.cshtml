@@ -36,20 +36,26 @@
                         <div class="card-block">
                             <!--Header-->
                             <div class="form-header">
-                                <h3><i class="fa fa-lock"></i> Login:</h3>
+                                <h3><i class="fa fa-lock"></i> Login</h3>
                             </div>
                             <!--Body-->
                             <div class="md-form">
                                 <i class="fa fa-envelope prefix"></i>
-                                <input type="text" id="txtEmail" name="txtEmail" onfocus="ResetForm(1)" class="form-control" required>
-                                <label id="lbEmail" for="form2">Email</label>
+                                <input type="text" id="txtEmail" name="txtEmail" onfocus="ResetForm('lbEmail', this.value)" class="form-control" required>
+                                @*<label id="lbEmail" for="form2">Email</label>*@
+                                <label id="lbEmail" style="color:red; display:none" class=""></label>
+
                             </div>
                             <div class="md-form">
                                 <i class="fa fa-lock prefix"></i>
-                                <input type="password" id="txtPassword" name="txtPassword" onfocus="ResetForm(3)" class="form-control" required>
-                                <label id="lbPass" for="form4">Password</label>
+                                <input type="password" id="txtPassword" name="txtPassword" onfocus="ResetForm('lbPass', this.value)" class="form-control" required>
+                                @*<label id="lbPass" for="form4">Password</label>*@
+                                <label id="lbPass" style="color:red; display:none" class=""></label>
+
                             </div>
                             <div class="g-recaptcha" id="captcha" data-sitekey="6LfhJyUUAAAAANmMFHQ7ARUoDEwgs3Zy-W6bwCo1" style="margin-left: 49px;"></div><br />
+                            <label id="lbrecaptcha" style="color:red; display:none;margin-left: 49px;" class=""></label>
+
                             <div class="text-center">
                                 <button type="submit" onclick="return LoginMember()" class="btn btn-primary">Login</button>
                             </div>
