@@ -71,11 +71,11 @@ namespace BBH.BOS.Web.Controllers
                     }
                    
                     Session["memberid"] = member.MemberID;
-                    //Session["ewallet"] = member.E_Wallet;
-                    //Session["Points"] = member.Points;
+                    Session["Avatar"] = member.Avatar;
+                    Session["FullName"] = member.FullName;
+                    Session["Mobile"] = member.Mobile;
                     Session["MemberInfomation"] = member;
                     Session["Emailmember"] = email;
-                    Session["FullName"] = member.FullName;
                 }
                 else
                 {

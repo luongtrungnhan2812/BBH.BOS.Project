@@ -170,10 +170,13 @@ namespace BBH.BOS.Web.Controllers
                 if (mem != null)
                 {
                     Session["Email"] = email;
-
+                    Session["Avatar"] = mem.Avatar;
+                    Session["FullName"] = mem.FullName;
+                    Session["Mobile"] = mem.Mobile;
                     Session["memberid"] = mem.MemberID;
                     Session["MemberInfomation"] = mem;
                     Response.Redirect("/");
+                    
                 }
             }
             else

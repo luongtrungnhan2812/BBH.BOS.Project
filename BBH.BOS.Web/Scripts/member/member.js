@@ -222,13 +222,13 @@ function functionx(evt) {
     $('#' + id).css('display', 'none');
 }
 
-$('#txtE_Wallet').on("keypress", function (e) {
-    var lenght = $(this).val().length;
+//$('#txtE_Wallet').on("keypress", function (e) {
+//    var lenght = $(this).val().length;
 
-    if (lenght > 15) {
-        e.preventDefault();
-    }
-});
+//    if (lenght > 15) {
+//        e.preventDefault();
+//    }
+//});
 function CloseModal() {
     $('#standardModal').removeClass('show');
     $('#standardModal').css("display", "none");
@@ -423,6 +423,90 @@ function RegisterMember() {
     }
 }
 
+function UpdateMember()
+{
+    var memberID = $('#hdmemberID').val();
+    var email = $('#txtEmail').val();
+    var fullName = $('#txtFullName').val();
+    var mobile = $('#txtMobile').val();
+    var avatar = $('#avatar').val();
+
+    var checkReg = true;
+   
+    if (email == '') {
+
+        $('#lbEmail').text('Please input email');
+        $('#lbEmail').css('display', '');
+        checkReg = false;
+    }
+    else {
+        if (!isValidEmailAddress(email)) {
+            $('#lbEmail').text('Invalid email address.');
+            $('#lbEmail').css('display', '');
+
+            checkReg = false;
+        }
+    }
+   
+       if (fullName == '') {
+
+        $('#lbFullname').text('Please input fullname');
+        $('#lbFullname').css('display', '');
+        checkReg = false;
+    }
+    if (mobile == '') {
+        $('#lbMobile').text('Please input mobile');
+        $('#lbMobile').css('display', '');
+        checkReg = false;
+    }
+    else {
+        if (mobile.length < 10 || mobile.length > 13) {
+
+            $('#lbMobile').text('mobile number faile ');
+            $('#lbMobile').css('display', '');
+            checkReg = false;
+        }
+    }
+
+    if (!checkReg) {
+        return false;
+    }
+    else {
+        $('#imgLoading').css("display", "");
+        $.ajax({
+            type: "post",
+            url: "/Member/UpdatePrototypeMember",
+            async: true,
+            data: { memberID: memberID, email: email, fullName: fullName, mobile: mobile, avatar: avatar },
+            beforeSend: function () {
+                $('#imgLoading').css("display", "");
+            },
+            success: function (d) {
+                $('#imgLoading').css("display", "none");
+                if (d == 'UpdateSuccess') {
+                    $('#txtEmail').val('');
+                    $('#txtFullName').val('');
+                     $('#txtMobile').val('');
+                     $('#avatar').val('');
+
+                     alertify.success('Update success');
+
+                    setTimeout(function () { window.location.reload(); }, 3000);
+                }
+
+                else {
+
+                    alertify.error('Update error. Please contact with administrator');
+
+                }
+
+            },
+            error: function () {
+
+            }
+        });
+    }
+}
 function ChangePassWord() {
     var checkReg = true;
     var password = $('#txtNewPass').val();

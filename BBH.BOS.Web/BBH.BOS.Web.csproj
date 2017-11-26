@@ -767,6 +767,7 @@
     <Content Include="Views\Common\PartialDashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="imageAvatar\" />
     <Folder Include="Views\Default\" />
   </ItemGroup>
   <ItemGroup>

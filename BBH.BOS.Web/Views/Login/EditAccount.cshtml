@@ -40,7 +40,7 @@
                             <!-- /.Card title -->
                             <!-- Card content -->
                             <div class="card-block text-center">
-                                <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" alt="User Photo" class="rounded-circle contact-avatar my-2 mx-auto" />
+                                <img src="@Session["Avatar"]" alt="User Photo" id="avatar" class="rounded-circle contact-avatar my-2 mx-auto" />
 
                                 <p class="text-muted"><small>Profile photo will be changed automatically</small></p>
 
@@ -91,14 +91,14 @@
                                         <!--First column-->
                                         <div class="col-md-6">
                                             <div class="md-form">
-                                                <input type="text" id="txtEmail" name="txtEmail" class="form-control validate">
+                                                <input type="text" id="txtEmail" name="txtEmail" class="form-control validate" value="@Session["Email"]">
                                                 <label for="form81" data-error="wrong" data-success="right">Email Address</label>
                                             </div>
                                         </div>
                                         <!--Second column-->
                                         <div class="col-md-6">
                                             <div class="md-form">
-                                                <input type="text" id="txtFullName" name="txtFullName" class="form-control validate">
+                                                <input type="text" id="txtFullName" name="txtFullName" value="@Session["FullName"]" class="form-control validate">
                                                 <label for="form82" data-error="wrong" data-success="right">Full Name</label>
                                             </div>
                                         </div>
@@ -109,7 +109,7 @@
                                         <!--First column-->
                                         <div class="col-md-6">
                                             <div class="md-form">
-                                                <input type="text" id="txtMobile" name="txtMobile" class="form-control validate">
+                                                <input type="text" id="txtMobile" name="txtMobile" value="@Session["Mobile"]" class="form-control validate">
                                                 <label for="form76">Phone</label>
                                             </div>
                                         </div>
@@ -128,7 +128,7 @@
                                     <!-- Fourth row -->
                                     <div class="row">
                                         <div class="col-md-12 text-center">
-                                            <input type="submit" value="Update Account" class="btn btn-primary">
+                                            <input type="button" value="Update Account" onclick="return UpdateMember()" class="btn btn-primary">
                                         </div>
                                     </div>
                                     <!-- /.Fourth row -->
@@ -146,6 +146,7 @@
         </section>
         <!-- /.Section: Edit Account -->
     </div>
+    <input type="hidden" id="hdmemberID" name="hdmemberID" value="" />
 </main>
 
-
+<script src="/Scripts/member/member.js"></script>
