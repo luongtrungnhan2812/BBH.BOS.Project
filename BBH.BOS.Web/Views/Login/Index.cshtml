@@ -86,9 +86,9 @@
                 </div>
                 <!--Body-->
                 <div class="modal-body">
-                    <form>
+                    @*<form>*@
                         <!--First row-->
-                        <div class="row" style="padding:0px; margin:0px">
+                        @*<div class="row" style="padding:0px; margin:0px">
 
                             <div class="col-md-12">
                                 <label id="lbEwallet">Email Address:</label>
@@ -100,18 +100,50 @@
                                 <label style="color:red" id="lbPassword"></label>
                             </div>
 
+                        </div>*@
+
+                        <div class="col-md-12 col-md-offset-4">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <div class="text-center">
+                                        <h3><i class="fa fa-lock fa-4x"></i></h3>
+                                        <h2 class="text-center">Forgot Password?</h2>
+                                        <p>You can reset your password here.</p>
+                                        <div class="panel-body">
+                                            <form>
+                                                <div class="row" style="padding:0px; margin:0px">
+
+                                                    <div class="col-md-12">
+                                                        <label id="lbEwallet" style="font-weight:bold">Email Address:</label>
+                                                        <div class="md-form" style="padding:0px; margin:0px">
+                                                            <input type="text" style="padding:0px; margin:0px" onfocus="ResetForm('lbreEmail', this.value)" id="txtReEmail" placeholder="email address" class="form-control"  oninvalid="setCustomValidity('Please enter a valid email address!')" name="txtReEmail" @*class="form-control validate"*@>
+                                                            <label id="lbreEmail" style="color:red; display:none" class=""></label>
+
+                                                        </div>
+                                                        <label style="color:red" id="lbPassword"></label>
+                                                    </div>
+
+                                                </div>
+                                            </form>
+                                          
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-
-
 
                         <div class="row">
                             <img src="/Images/loading.gif" id="imgLoading" style="position: absolute; display:none">
                             <div class="col-md-12 text-center">
-                                <input type="button" style="padding:5px 30px; cursor:pointer; height:35px" onclick="ForgotPassword()" value="Sent" class="btn-primary">
+                                <input type="button" style="padding:5px 30px; cursor:pointer; height:50px" onclick="ForgotPassword()" value="Send My Password" class="btn-primary">
                             </div>
+                            @*<div class="form-group" style="padding: 13px 30px;cursor: pointer; height: 49px;margin: 0 0 0 95px;">
+                                <input class="btn btn-lg btn-primary btn-block" style="padding: 13px 30px;" value="Send My Password" onclick="ForgotPassword()" type="button">
+                            </div>*@
                         </div>
 
-                    </form>
+                    @*</form>*@
 
                     <br>
 

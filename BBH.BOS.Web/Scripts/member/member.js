@@ -516,7 +516,7 @@ function ForgotPassword()
                    
                     alertify.alert('<span>Reset Password success,please go to mail get account!!</span> <a href="http://localhost:52993/login">login</a>');
                     $('#txtReEmail').val('');
-                    setTimeout(function () { window.location.reload(); }, 5000);
+                    setTimeout(function () { window.location.reload("/login"); }, 5000);
 
                 }
                 else if (d == 'emtry')
