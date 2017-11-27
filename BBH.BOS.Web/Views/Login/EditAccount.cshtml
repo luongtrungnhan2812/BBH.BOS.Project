@@ -40,9 +40,10 @@
                             <!-- /.Card title -->
                             <!-- Card content -->
                             <div class="card-block text-center">
-                                <img src="@Session["Avatar"]" alt="User Photo" id="avatar" class="rounded-circle contact-avatar my-2 mx-auto" />
+                                <img src="/Images/images.png" style="height:100px;width:100px; border-radius:100px" alt="User Photo" id="avatar" class="rounded-circle contact-avatar my-2 mx-auto" />
 
                                 <p class="text-muted"><small>Profile photo will be changed automatically</small></p>
+                                <input type="file" id="fileup" name="fileup" value="Upload New Photo" />
 
                                 <button class="btn btn-primary">Upload New Photo</button><br>
                                 <button class="btn btn-danger">Delete</button>
@@ -91,7 +92,7 @@
                                         <!--First column-->
                                         <div class="col-md-6">
                                             <div class="md-form">
-                                                <input type="text" id="txtEmail" name="txtEmail" class="form-control validate" value="@Session["Email"]">
+                                                <input type="text" id="txtEmail" name="txtEmail" class="form-control validate" value="@Session["Emailmember"]">
                                                 <label for="form81" data-error="wrong" data-success="right">Email Address</label>
                                             </div>
                                         </div>

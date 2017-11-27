@@ -166,6 +166,7 @@ namespace BBH.BOS.Web.Controllers
             rs = repository.UpdateIsActiveByEmail(email,1);
             if (rs)
             {
+                //MemberInformationBO mem = repository.GetMemberDetailByEmail(email);
                 MemberBO mem = repository.GetMemberDetailByEmail(email);
                 if (mem != null)
                 {
@@ -174,7 +175,7 @@ namespace BBH.BOS.Web.Controllers
                     Session["FullName"] = mem.FullName;
                     Session["Mobile"] = mem.Mobile;
                     Session["memberid"] = mem.MemberID;
-                    Session["MemberInfomation"] = mem;
+                    //Session["MemberInfomation"] = mem;
                     Response.Redirect("/");
                     
                 }

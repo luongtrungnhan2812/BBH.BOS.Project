@@ -110,7 +110,7 @@ namespace BBH.BOS.Web.Controllers
                 string mon = string.Format("{0:MM}", System.DateTime.Now);
                 string day = string.Format("{0:dd}", System.DateTime.Now);
 
-                string filePath = Server.MapPath("~/Areas/Admin/PostImage/" + years + "/" + mon + "/" + day + "/");
+                string filePath = Server.MapPath("~/imageAvatar/" + years + "/" + mon + "/" + day + "/");
                 if (!Directory.Exists(filePath))
                 {
                     Directory.CreateDirectory(filePath);
@@ -120,7 +120,7 @@ namespace BBH.BOS.Web.Controllers
                 img =Utility.EncodeString(img) + ".jpg";
                 string images = filePath + img;
                 fileup.SaveAs(images);
-                avatar = "/imageAvatar/" + years + "/" + mon + "/" + day + "/" + img;
+                avatar = "~/imageAvatar/" + years + "/" + mon + "/" + day + "/" + img;
                 //string filePath = Server.MapPath("~/Areas/Admin/ImagePost/" + fileup.FileName);
                 //fileup.SaveAs(filePath);
                 //imageUrl = "/Areas/Admin/ImagePost/" + fileup.FileName;

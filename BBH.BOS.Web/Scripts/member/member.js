@@ -429,7 +429,7 @@ function UpdateMember()
     var email = $('#txtEmail').val();
     var fullName = $('#txtFullName').val();
     var mobile = $('#txtMobile').val();
-    var avatar = $('#avatar').val();
+    var avatar = $('#fileup').val();
 
     var checkReg = true;
    
@@ -487,7 +487,7 @@ function UpdateMember()
                     $('#txtEmail').val('');
                     $('#txtFullName').val('');
                      $('#txtMobile').val('');
-                     $('#avatar').val('');
+                     $('#fileup').val('');
 
                      alertify.success('Update success');
 
