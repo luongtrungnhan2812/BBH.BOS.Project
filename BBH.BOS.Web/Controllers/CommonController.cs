@@ -22,6 +22,8 @@ namespace BBH.BOS.Web.Controllers
         string TimeExpired = ConfigurationManager.AppSettings["TimeExpired"];
         [Dependency]
         protected ITransactionWalletService ObjITransactionWalletService { get; set; }
+        [Dependency]
+        protected IPackgeServices ObjIPackgeServices { get; set; }
         // GET: Common
         public ActionResult Index()
         {
@@ -59,7 +61,8 @@ namespace BBH.BOS.Web.Controllers
         }
         public ActionResult BuyPackage()
         {
-            return PartialView(GenHtmlListPackage());
+            ViewBag.strHtmlPackage = GenHtmlListPackage();
+            return PartialView();
         }
         public ActionResult PartialDashboard()
         {
@@ -188,9 +191,10 @@ namespace BBH.BOS.Web.Controllers
         }
         private string GenHtmlListPackage()
         {
-            List<PackageBO> lstPackageBO = new List<PackageBO>();
+            IEnumerable<PackageBO> lstPackageBO = null;
             StringBuilder strBuilder = new StringBuilder();
-            if (lstPackageBO != null && lstPackageBO.Count > 0)
+            lstPackageBO = ObjIPackgeServices.ListAllPackage(1, 10);
+            if (lstPackageBO != null && lstPackageBO.Count() > 0)
             {
                 int i = 1;
                 foreach (var item in lstPackageBO)

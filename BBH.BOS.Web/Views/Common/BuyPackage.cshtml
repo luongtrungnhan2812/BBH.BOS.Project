@@ -24,7 +24,7 @@
             <tr id="table_th"> <th> Package</th> <th> Price</th> <th> EU Coin</th> </tr>
         </thead>
         <tbody>
-            <tr data-id="1">
+            @*<tr data-id="1">
                 <td> TINY</td>
                 <td> <i class="fa fa-usd"> </i> 100</td>
                 <td> <span class="icon-clp-icon"> </span> 56.18</td>
@@ -53,7 +53,8 @@
                 <td> ANGEL</td>
                 <td> <i class="fa fa-usd"> </i> 10, 000</td>
                 <td> <span class="icon-clp-icon"> </span> 5, 617.98</td>
-            </tr>
+            </tr>*@
+            @Html.Raw(ViewBag.strHtmlPackage)
         </tbody>
     </table>
     <div class="form-group">
