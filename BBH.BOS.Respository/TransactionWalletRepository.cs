@@ -66,5 +66,16 @@ namespace BBH.BOS.Respository
                 return false;
             }
         }
+        public TransactionCoinBO transactionCoinByID(string strTransactionID)
+        {
+            try
+            {
+                return Proxy.transactionCoinByID(strTransactionID);
+            }
+            catch
+            {
+                return null;
+            }
+        }
     }
 }

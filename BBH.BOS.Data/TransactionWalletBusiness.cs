@@ -44,9 +44,9 @@ namespace BBH.BOS.Data
                         TransactionBitcoin = reader["TransactionBitcoin"].ToString(),
                         TransactionID = reader["TransactionID"].ToString(),
                         TypeTransactionID = int.Parse(reader["TypeTransactionID"].ToString()),
-                        ValueTransaction = int.Parse(reader["ValueTransaction"].ToString()),
+                        ValueTransaction = double.Parse(reader["ValueTransaction"].ToString()),
                         WalletAddressID = reader["WalletAddressID"].ToString(),
-                        WalletID = int.Parse(reader["WalletID"].ToString()),
+                        WalletID = reader["WalletID"].ToString(),
                         TotalRecord = int.Parse(reader["TOTALROWS"].ToString())
                     };
                     lstTransaction.Add(transaction);
@@ -90,15 +90,57 @@ namespace BBH.BOS.Data
                         TransactionBitcoin = reader["TransactionBitcoin"].ToString(),
                         TransactionID = reader["TransactionID"].ToString(),
                         TypeTransactionID = int.Parse(reader["TypeTransactionID"].ToString()),
-                        ValueTransaction = float.Parse(reader["ValueTransaction"].ToString()),
+                        ValueTransaction = double.Parse(reader["ValueTransaction"].ToString()),
                         WalletAddressID = reader["WalletAddressID"].ToString(),
-                        WalletID = int.Parse(reader["WalletID"].ToString()),
+                        WalletID = reader["WalletID"].ToString(),
                         TotalRecord = int.Parse(reader["TOTALROWS"].ToString())
                     };
                     lstTransaction.Add(transaction);
 
                 }
                 return lstTransaction;
+            }
+            catch (Exception ex)
+            {
+                Utilitys.WriteLog(fileLog, ex.Message);
+                return null;
+            }
+            finally
+            {
+                helper.destroy();
+            }
+        }
+        public TransactionCoinBO transactionCoinByID(string strTransactionID)
+        {
+            Sqlhelper helper = new Sqlhelper("", "ConnectionString");
+            try
+            {
+                string sql = "SP_TransactionWalletByID";
+                SqlParameter[] pa = new SqlParameter[1];
+                pa[0] = new SqlParameter("@transactionid", strTransactionID);
+                SqlCommand command = helper.GetCommand(sql, pa, true);
+                SqlDataReader reader = command.ExecuteReader();
+                TransactionCoinBO objTransactionCoinBO = new TransactionCoinBO();
+                if (reader.Read())
+                {
+                    objTransactionCoinBO = new TransactionCoinBO
+                    {
+                        CreateDate = DateTime.Parse(reader["CreateDate"].ToString()),
+                        ExpireDate = DateTime.Parse(reader["ExpireDate"].ToString()),
+                        MemberID = int.Parse(reader["MemberID"].ToString()),
+                        Note = reader["Note"].ToString(),
+                        QRCode = reader["QRCode"].ToString(),
+                        Status = int.Parse(reader["Status"].ToString()),
+                        TransactionBitcoin = reader["TransactionBitcoin"].ToString(),
+                        TransactionID = reader["TransactionID"].ToString(),
+                        TypeTransactionID = int.Parse(reader["TypeTransactionID"].ToString()),
+                        ValueTransaction = double.Parse(reader["ValueTransaction"].ToString()),
+                        WalletAddressID = reader["WalletAddressID"].ToString(),
+                        WalletID = reader["WalletID"].ToString()
+                        //TotalRecord = int.Parse(reader["TOTALROWS"].ToString())
+                    };
+                }
+                return objTransactionCoinBO;
             }
             catch (Exception ex)
             {

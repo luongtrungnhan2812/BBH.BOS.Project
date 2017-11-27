@@ -744,6 +744,7 @@
     <Content Include="Scripts\package\package.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\wallet\wallet.js" />
     <Content Include="Unity.Mvc4.README.txt" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -769,6 +770,7 @@
     <Content Include="Views\Wallet\WalletBTC.cshtml" />
     <Content Include="Views\Common\PartialDashboard.cshtml" />
     <Content Include="Views\Package\Index.cshtml" />
+    <Content Include="Views\Wallet\WalletEU.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="imageAvatar\" />

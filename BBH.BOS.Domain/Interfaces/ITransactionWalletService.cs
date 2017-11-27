@@ -22,5 +22,8 @@ namespace BBH.BOS.Domain.Interfaces
         bool InsertTransactionCoin(TransactionCoinBO transaction);
         [OperationContract]
         bool UpdatePointsMemberFE(int memberID, double points);
+        [OperationContract]
+        TransactionCoinBO transactionCoinByID(string strTransactionID);
+        
     }
 }

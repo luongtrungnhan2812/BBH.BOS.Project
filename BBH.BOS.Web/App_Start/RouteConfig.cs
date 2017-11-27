@@ -23,7 +23,7 @@ namespace BBH.BOS.Web
             routes.MapRoute("Admin", "admin", new { controller = "Admin", action = "Index" });
             routes.MapRoute("Home", "Home", new { controller = "Home", action = "Index" });
             routes.MapRoute("BTC Wallet", "btcwallet", new { controller = "Wallet", action = "WalletBTC" });
-
+            routes.MapRoute("EU Wallet", "euwallet", new { controller = "Wallet", action = "WalletEU" });
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
