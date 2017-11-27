@@ -90,7 +90,7 @@ namespace BBH.BOS.Data
                         TransactionBitcoin = reader["TransactionBitcoin"].ToString(),
                         TransactionID = reader["TransactionID"].ToString(),
                         TypeTransactionID = int.Parse(reader["TypeTransactionID"].ToString()),
-                        ValueTransaction = int.Parse(reader["ValueTransaction"].ToString()),
+                        ValueTransaction = float.Parse(reader["ValueTransaction"].ToString()),
                         WalletAddressID = reader["WalletAddressID"].ToString(),
                         WalletID = int.Parse(reader["WalletID"].ToString()),
                         TotalRecord = int.Parse(reader["TOTALROWS"].ToString())
