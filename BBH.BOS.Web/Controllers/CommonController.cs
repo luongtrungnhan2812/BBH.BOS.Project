@@ -23,7 +23,7 @@ namespace BBH.BOS.Web.Controllers
         [Dependency]
         protected ITransactionWalletService ObjITransactionWalletService { get; set; }
         [Dependency]
-        protected IPackgeServices ObjIPackgeServices { get; set; }
+        protected IPackageService ObjIPackgeServices { get; set; }
         // GET: Common
         public ActionResult Index()
         {
@@ -201,8 +201,8 @@ namespace BBH.BOS.Web.Controllers
                 {
                     strBuilder.Append("<tr data-id='" + i + "'>");
                     strBuilder.Append("<td> " + item.PackageName + " </td>");
-                    strBuilder.Append("<td><i class='fa fa-usd'></i> " + item.PackageValue + "</td>");
-                    strBuilder.Append("<td><span class='icon-clp-icon'></span> " + item.PackageValue + "</td>");
+                    strBuilder.Append("<td><i class='fa fa-usd'></i> " + item.PackageName + "</td>");
+                    strBuilder.Append("<td><span class='icon-clp-icon'></span> " + item.PackageName + "</td>");
                     strBuilder.Append("</tr>");
                     i++;
                 }
