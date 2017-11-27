@@ -53,6 +53,7 @@
     <Compile Include="Entities\TransactionPackageBO.cs" />
     <Compile Include="Entities\TypeTransactionBO.cs" />
     <Compile Include="Interfaces\IIMemberService.cs" />
+    <Compile Include="Interfaces\IPackageService.cs" />
     <Compile Include="Interfaces\ITransactionWalletService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

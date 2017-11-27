@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="MemberServices.svc" />
+    <Content Include="PackageServices.svc" />
     <Content Include="TransactionWallet.svc" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
