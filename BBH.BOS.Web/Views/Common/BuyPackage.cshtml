@@ -12,11 +12,16 @@
     .alert {
         border-radius: 3px;
     }
+    .custom_check {
+        position: unset !important;
+        left: unset !important;
+        visibility: unset !important;
+    }
 </style>
     <div id="msg_package"> </div>
     <table class="table" id="myTable">
         <thead>
-            <tr id="table_th"> <th> Package</th> <th> Price</th> <th> CLP</th> </tr>
+            <tr id="table_th"> <th> Package</th> <th> Price</th> <th> EU Coin</th> </tr>
         </thead>
         <tbody>
             <tr data-id="1">
@@ -53,7 +58,7 @@
     </table>
     <div class="form-group">
         <div class="checkbox_register icheck">
-            <input type="checkbox" name="terms" id="termsPackage"> <a href="/package-term-condition.html" target="_blank"> Term and condition</a>
+            <input class="custom_check" type="checkbox" name="terms" id="termsPackage"> <a href="/package-term-condition.html" target="_blank"> Term and condition</a>
         </div>
         <span class="help-block"> </span>
     </div>

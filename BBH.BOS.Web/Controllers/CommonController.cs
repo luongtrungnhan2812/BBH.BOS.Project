@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -58,7 +59,7 @@ namespace BBH.BOS.Web.Controllers
         }
         public ActionResult BuyPackage()
         {
-            return PartialView();
+            return PartialView(GenHtmlListPackage());
         }
         public ActionResult PartialDashboard()
         {
@@ -184,6 +185,25 @@ namespace BBH.BOS.Web.Controllers
             }
             return list;
 
+        }
+        private string GenHtmlListPackage()
+        {
+            List<PackageBO> lstPackageBO = new List<PackageBO>();
+            StringBuilder strBuilder = new StringBuilder();
+            if (lstPackageBO != null && lstPackageBO.Count > 0)
+            {
+                int i = 1;
+                foreach (var item in lstPackageBO)
+                {
+                    strBuilder.Append("<tr data-id='" + i + "'>");
+                    strBuilder.Append("<td> " + item.PackageName + " </td>");
+                    strBuilder.Append("<td><i class='fa fa-usd'></i> " + item.PackageValue + "</td>");
+                    strBuilder.Append("<td><span class='icon-clp-icon'></span> " + item.PackageValue + "</td>");
+                    strBuilder.Append("</tr>");
+                    i++;
+                }
+            }
+            return strBuilder.ToString();
         }
     }
 }
