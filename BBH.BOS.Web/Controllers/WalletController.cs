@@ -1,6 +1,7 @@
 ﻿using BBH.BOS.Domain.Entities;
 using BBH.BOS.Domain.Interfaces;
 using Microsoft.Practices.Unity;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,8 +47,9 @@ namespace BBH.BOS.Web.Controllers
                 {
                     foreach (var item in lstTransactionPointsBO)
                     {
-                        strBuilder.Append(@"<tr class='none-top-border'>");
-                        strBuilder.Append(@"<td> " + item.TransactionBitcoin + " </td>");
+                        string color = "#fff";
+                        strBuilder.Append(@"<tr class='none-top-border' style='cursor:pointer; background-color:" + color + "' onclick=\"ShowTransactionWalletDetail('" + item.TransactionID + "')\">");
+                        strBuilder.Append(@"<td> " + item.TransactionID + " </td>");
                         strBuilder.Append(@"<td> " + item.WalletAddressID + " </td>");
                         strBuilder.Append(@"<td>" + item.ValueTransaction + "</td>");
                         strBuilder.Append(@"<td>" + item.CreateDate.ToString("dd/MM/yyyy") + "</td>");
@@ -62,6 +64,18 @@ namespace BBH.BOS.Web.Controllers
                 return "";
             }
 
+        }
+        [HttpPost]
+        public string DetailWallet(string strTransactionId)
+        {
+            string json = "";
+            TransactionCoinBO objTransactionCoinBO = new TransactionCoinBO();
+            objTransactionCoinBO = transactionWallet.transactionCoinByID(strTransactionId.Trim());
+            if (objTransactionCoinBO != null)
+            {
+                json = JsonConvert.SerializeObject(objTransactionCoinBO);
+            }
+            return json.ToString();
         }
     }
 }
