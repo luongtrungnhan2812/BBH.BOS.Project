@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MemberBusiness.cs" />
+    <Compile Include="PackageBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TransactionWalletBusiness.cs" />
   </ItemGroup>

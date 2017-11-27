@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E3A1618A-F464-4DE8-953C-8E6AD5224D48}</ProjectGuid>
+    <ProjectGuid>{4DD0C300-5A8C-4C2D-8911-E1FB236E8E58}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BBH.BOS.Domain</RootNamespace>
-    <AssemblyName>BBH.BOS.Domain</AssemblyName>
+    <RootNamespace>BBH.BOSCMS.Domain</RootNamespace>
+    <AssemblyName>BBH.BOSCMS.Domain</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -43,23 +42,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\BaseEntity.cs" />
-    <Compile Include="Entities\ExchangeRateBO.cs" />
-    <Compile Include="Entities\MemberBO.cs" />
-    <Compile Include="Entities\MemberInformationBO.cs" />
-    <Compile Include="Entities\Member_WalletBO.cs" />
-    <Compile Include="Entities\PackageBO.cs" />
-    <Compile Include="Entities\TransactionCoinBO.cs" />
-    <Compile Include="Entities\TransactionPackageBO.cs" />
-    <Compile Include="Entities\TypeTransactionBO.cs" />
-    <Compile Include="Interfaces\IIMemberService.cs" />
-    <Compile Include="Interfaces\IPackageService.cs" />
-    <Compile Include="Interfaces\ITransactionWalletService.cs" />
+    <Compile Include="Interfaces\IPackgeServices.cs" />
+    <Compile Include="PackageBO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
