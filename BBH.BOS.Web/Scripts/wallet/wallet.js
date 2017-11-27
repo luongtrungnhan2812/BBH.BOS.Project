@@ -15,7 +15,7 @@
             if (json !== "") {
                 $("#txtTransactionID").val(json.TransactionID);
                 $("#txtYourWalletAddress").val(json.WalletAddressID);
-                $("#txtReceivedWalletAddress").val(json.WalletAddressID);
+                $("#txtReceivedWalletAddress").val(json.WalletID);
                 $("#txtBTC").val(json.ValueTransaction);
                 $("#txtTransactionBitcoin").val(json.TransactionBitcoin);
                 $("#txtCreateDate").val(json.CreateDate);

@@ -51,8 +51,9 @@ namespace BBH.BOS.Web.Controllers
                         strBuilder.Append(@"<tr class='none-top-border' style='cursor:pointer; background-color:" + color + "' onclick=\"ShowTransactionWalletDetail('" + item.TransactionID + "')\">");
                         strBuilder.Append(@"<td> " + item.TransactionID + " </td>");
                         strBuilder.Append(@"<td> " + item.WalletAddressID + " </td>");
-                        strBuilder.Append(@"<td>" + item.ValueTransaction + "</td>");
+                        strBuilder.Append(@"<td>" + item.ValueTransaction.ToString() + "</td>");
                         strBuilder.Append(@"<td>" + item.CreateDate.ToString("dd/MM/yyyy") + "</td>");
+                        strBuilder.Append(@"<td><a class='blue-text' data-toggle='tooltip' data-placement='top' title='' data-original-title='See results'><i class='fa fa-eye'></i></a></td>");
                         strBuilder.Append(@"</ tr >");
                     }
 

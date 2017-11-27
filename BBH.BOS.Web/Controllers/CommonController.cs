@@ -120,7 +120,8 @@ namespace BBH.BOS.Web.Controllers
                                             TransactionID = transactionCode,
                                             TypeTransactionID = 0,
                                             ValueTransaction = float.Parse(itemListCoins.Amount.ToString()),
-                                            WalletAddressID = userBitPK.GetAddress().ToString()
+                                            WalletAddressID = userBitPK.GetAddress().ToString(),
+                                            WalletID = destination.ToString()
                                         };
                                         //objTransactionCoinBO.WalletID = destination.ToString();
                                         bool rs_ = ObjITransactionWalletService.InsertTransactionCoin(objTransactionCoinBO);

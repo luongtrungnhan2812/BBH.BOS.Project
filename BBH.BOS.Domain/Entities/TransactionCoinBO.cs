@@ -16,7 +16,7 @@ namespace BBH.BOS.Domain.Entities
         [DataMember]
         public int MemberID { get; set; }
         [DataMember]
-        public float ValueTransaction { get; set; }
+        public double ValueTransaction { get; set; }
         [DataMember]
         public string QRCode { get; set; }
         [DataMember]
@@ -28,7 +28,7 @@ namespace BBH.BOS.Domain.Entities
         [DataMember]
         public string Note { get; set; }
         [DataMember]
-        public int WalletID { get; set; }
+        public string WalletID { get; set; }
         [DataMember]
         public int TypeTransactionID { get; set; }
         [DataMember]

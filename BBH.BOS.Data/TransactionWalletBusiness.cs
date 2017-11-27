@@ -44,9 +44,9 @@ namespace BBH.BOS.Data
                         TransactionBitcoin = reader["TransactionBitcoin"].ToString(),
                         TransactionID = reader["TransactionID"].ToString(),
                         TypeTransactionID = int.Parse(reader["TypeTransactionID"].ToString()),
-                        ValueTransaction = int.Parse(reader["ValueTransaction"].ToString()),
+                        ValueTransaction = double.Parse(reader["ValueTransaction"].ToString()),
                         WalletAddressID = reader["WalletAddressID"].ToString(),
-                        WalletID = int.Parse(reader["WalletID"].ToString()),
+                        WalletID = reader["WalletID"].ToString(),
                         TotalRecord = int.Parse(reader["TOTALROWS"].ToString())
                     };
                     lstTransaction.Add(transaction);
@@ -90,9 +90,9 @@ namespace BBH.BOS.Data
                         TransactionBitcoin = reader["TransactionBitcoin"].ToString(),
                         TransactionID = reader["TransactionID"].ToString(),
                         TypeTransactionID = int.Parse(reader["TypeTransactionID"].ToString()),
-                        ValueTransaction = float.Parse(reader["ValueTransaction"].ToString()),
+                        ValueTransaction = double.Parse(reader["ValueTransaction"].ToString()),
                         WalletAddressID = reader["WalletAddressID"].ToString(),
-                        WalletID = int.Parse(reader["WalletID"].ToString()),
+                        WalletID = reader["WalletID"].ToString(),
                         TotalRecord = int.Parse(reader["TOTALROWS"].ToString())
                     };
                     lstTransaction.Add(transaction);
@@ -134,9 +134,9 @@ namespace BBH.BOS.Data
                         TransactionBitcoin = reader["TransactionBitcoin"].ToString(),
                         TransactionID = reader["TransactionID"].ToString(),
                         TypeTransactionID = int.Parse(reader["TypeTransactionID"].ToString()),
-                        ValueTransaction = float.Parse(reader["ValueTransaction"].ToString()),
+                        ValueTransaction = double.Parse(reader["ValueTransaction"].ToString()),
                         WalletAddressID = reader["WalletAddressID"].ToString(),
-                        WalletID = int.Parse(reader["WalletID"].ToString())
+                        WalletID = reader["WalletID"].ToString()
                         //TotalRecord = int.Parse(reader["TOTALROWS"].ToString())
                     };
                 }
