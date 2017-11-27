@@ -63,6 +63,15 @@ namespace BBH.BOS.Web.Controllers
         public ActionResult PartialDashboard()
         {
             LoadPoint();
+            if (Session["MemberInfomation"] != null)
+            {
+                MemberInformationBO member = (MemberInformationBO)Session["MemberInfomation"];
+                ViewBag.NumberCoin = member.NumberCoin.ToString();
+            }
+            else
+            {
+                ViewBag.NumberCoin = "0";
+            }
             return PartialView();
         }
         public void LoadPoint()
