@@ -78,5 +78,19 @@ namespace BBH.BOS.Web.Controllers
             }
             return json.ToString();
         }
+        public ActionResult WalletEU()
+        {
+            if (Session["MemberInfomation"] != null)
+            {
+                MemberInformationBO member = (MemberInformationBO)Session["MemberInfomation"];
+                ViewBag.NumberEUCoin = member.NumberCoin.ToString();
+            }
+            else
+            {
+                ViewBag.NumberEUCoin = "0";
+            }
+            ViewBag.strHtmlTransactionCoin = GenHtml_TractionCoin();
+            return View();
+        }
     }
 }

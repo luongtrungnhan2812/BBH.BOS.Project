@@ -767,6 +767,7 @@
     <Content Include="Views\Common\BuyPackage.cshtml" />
     <Content Include="Views\Wallet\WalletBTC.cshtml" />
     <Content Include="Views\Common\PartialDashboard.cshtml" />
+    <Content Include="Views\Wallet\WalletEU.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="imageAvatar\" />
