@@ -16,7 +16,7 @@ namespace BBH.BOS.Web
             routes.MapRoute("MemberIndex", "member", new { controller = "Member", action = "Index" });
             routes.MapRoute("RegisterMember", "registermember", new { controller = "Register", action = "Index" });
             routes.MapRoute("LoginMember", "login", new { controller = "Login", action = "Index" });
-            //routes.MapRoute("LogoutMember", "logout", new { controller = "Login", action = "LogoutMember" });
+            routes.MapRoute("Package", "package", new { controller = "Package", action = "Index" });
 
             routes.MapRoute("EditAccount", "editaccount", new { controller = "Login", action = "EditAccount" });
             routes.MapRoute("ChangePassword", "changepassword", new { controller = "Login", action = "ChangePassword" });

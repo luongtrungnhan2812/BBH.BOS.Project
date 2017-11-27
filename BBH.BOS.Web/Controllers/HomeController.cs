@@ -10,10 +10,10 @@ namespace BBH.BOS.Web.Controllers
     {
         public ActionResult Index()
         {
-            if (Session["MemberInfomation"] == null)
-            {
-                Response.Redirect("/login");
-            }
+            //if (Session["MemberInfomation"] == null)
+            //{
+            //    Response.Redirect("/login");
+            //}
             return View();
         }
 
