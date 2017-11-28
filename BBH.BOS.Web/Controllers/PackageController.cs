@@ -52,5 +52,11 @@ namespace BBH.BOS.Web.Controllers
             TempData["TotalRecord"] = totalRecord;
             return View();
         }
+        [HttpPost]
+        public string InsertTransactionPackage(string packageID)
+        {
+            string result = "success";
+            return result;
+        }
     }
 }
