@@ -1,0 +1,330 @@
+﻿@using BBH.BOS.Domain.Entities;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<main class="" style="padding-top: 5.5rem; margin-left: 5%; margin-right: 5%;">
+    <div class="container-fluid">
+
+        <!--Section: Conditions-->
+        <section class="section">
+            <div class="row">
+                <div class="row white z-depth-1 mb-r col-lg-12" style="margin-bottom: 0rem !important;left:23px">
+
+                    <!-- Navigation -->
+                    <div class="col-md-4">
+                        <h4 class="h4-responsive mt-1"><a href="/package">Package</a></h4>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="md-form">
+                            <input placeholder="Search..." type="text" id="form5" class="form-control">
+
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-md-right">
+                        <a href="#" class="btn btn-secondary waves-effect waves-light">Search</a>
+                        <a href="#" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#standardModal"><i class="fa fa-print left"></i> Create New</a>
+                    </div>
+                    <!-- /.Navigation -->
+
+                </div>
+            </div>
+
+            <!--First row-->
+            <div class="row">
+
+                <!--Crucial button-->
+                @*<div class="col-12 text-center">
+                        <h2 class="h2-responsive m-b-2">Create new modal</h2>
+                        <a class="btn btn-primary btn-lg" data-toggle="modal" data-target="#standardModal"><i class="fa fa-plus left"></i> Standard Modal</a>
+                        <a class="btn btn-primary btn-lg" data-toggle="modal" data-target="#sidedModal"><i class="fa fa-plus left"></i> Side Modal</a>
+                        <a class="btn btn-primary btn-lg" data-toggle="modal" data-target="#actionsList"><i class="fa fa-plus left"></i> Side Modal Fluid</a>
+                    </div>*@
+                <!--/Crucial button-->
+
+                <br>
+
+                <div class="col-md-12">
+                    <!--Card-->
+                    <div class="card card-cascade narrower">
+
+                        <!--Admin panel-->
+                        <div class="admin-panel indigo-admin-panel">
+
+                            <!--Second row-->
+                            <div class="row m-b-0">
+                                <!--First column-->
+                                <div class="col-md-12">
+
+                                    <!--Panel content-->
+                                    <div class="card-block p-y-0">
+
+                                        <!--Table-->
+                                        <table class="table table-striped table-bordered responsive">
+                                            <!--Table head-->
+                                            <thead>
+                                                <tr>
+                                                    <th>PackageID</th>
+                                                    <th>CoinID</th>
+                                                    
+                                                    <th>PackageValue</th>
+                                                    <th>CreateDate</th>
+                                                    @*<th>Status</th>*@
+                                                    <th>Confirm</th>
+                                                </tr>
+                                            </thead>
+                                            <!--/Table head-->
+                                            <!--Table body-->
+                                            <tbody id="tbodyListPackage">
+
+                                                @if (ViewData["PackageCoin"] != null)
+                                                {
+                                                    IEnumerable<Package_CoinBO> lstPackageCoin = (IEnumerable<Package_CoinBO>)ViewData["PackageCoin"];
+                                                    if (lstPackageCoin != null && lstPackageCoin.Count() > 0)
+                                                    {
+                                                        foreach (Package_CoinBO package in lstPackageCoin)
+                                                        {
+                                                            //string titleIsDelete = "";
+                                                            //string isDelete = "";
+
+                                                            <tr id="trpackage_@package.PackageID" class="none-top-border">
+                                                                <td class="center">@package.PackageID</td>
+                                                                <td class="center">@package.CoinID</td>
+                                                                <td class="center">@package.PackageValue</td>
+
+                                                                <td class="center">@package.CreateDate.ToString("dd/MM/yyyy HH:mm:ss")</td>
+
+                                                               
+                                                            <td class="center">
+                                                                <img src="/Images/loading.gif" id="imgLoading_@package.PackageID" style="position: absolute; display:none ; float: right; width: 30px; margin-left: 45px; ">
+                                                                <a class="teal-text" data-toggle="modal" data-placement="top" title="Edit" href="javascript:void(0)" onclick="ShowPopUpEditPackage('@package.PackageID','@package.CoinID')" data-target="#standardModal"><i class="fa fa-pencil"></i></a>
+                                                                <a class="red-text" data-toggle="modal" data-placement="top" title="Remove" href="javascript:void(0)" onclick="ConfirmPackage('@package.PackageID')"><i class="fa fa-times"></i></a>
+
+                                                               
+
+                                                            </td>
+
+                                                        </tr>
+                                                        }
+                                                    }
+                                                }
+
+                                            </tbody>
+
+                                            <!--/Table body-->
+                                        </table>
+                                        <!--/Table-->
+                                        @{Html.RenderAction("Index", "Paging");}
+                                    </div>
+                                    <!--/.Panel content-->
+
+                                </div>
+                                <!--/First column-->
+                            </div>
+                            <!--/Second row-->
+
+                        </div>
+                        <!--/Admin panel-->
+
+                    </div>
+                    <!--/.Card-->
+                </div>
+
+            </div>
+            <!--/First row-->
+            <!--Second row-->
+            <div class="row">
+
+                <div class="col-md-12">
+                    <!--Card-->
+                    <div class="card card-cascade narrower">
+
+                        <!--Admin panel-->
+                        <div class="admin-panel indigo-admin-panel">
+
+                            <!--Second row-->
+                            <div class="row m-b-0">
+                                <!--First column-->
+                                <div class="col-md-12">
+
+                                    <!--Panel content-->
+                                    <div class="card-block">
+                                        <div class="table-responsive">
+                                            <!--Table-->
+                                            <table class="table table-hover mb-0">
+                                                <!--Table head-->
+                                                <thead>
+                                                    <tr>
+                                                        <th>Term</th>
+                                                        <th>Indexed URL</th>
+                                                        <th>Engine</th>
+                                                        <th>Rank</th>
+                                                        <th>Day</th>
+                                                        <th>Week</th>
+                                                        <th>Month</th>
+                                                        <th>Local</th>
+                                                        <th>Global</th>
+                                                    </tr>
+                                                </thead>
+                                                <!--/Table head-->
+                                                <!--Table body-->
+                                                <tbody>
+                                                    <tr class="none-top-border">
+                                                        <td>Material Design</td>
+                                                        <td>http://example.com</td>
+                                                        <td>Google.com</td>
+                                                        <td><strong>3</strong></td>
+                                                        <td>2 <span class="badge big-badge primary-color green">1 <i class="fa fa-arrow-circle-up"></i></span></td>
+                                                        <td>2 <span class="badge big-badge primary-color red">1 <i class="fa fa-arrow-circle-down"></i></span></td>
+                                                        <td>2 <span class="badge big-badge primary-color grey">0 </span></td>
+                                                        <td>200 (US)</td>
+                                                        <td>2000</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Material Design</td>
+                                                        <td>http://example.com</td>
+                                                        <td>Google.com</td>
+                                                        <td><strong>3</strong></td>
+                                                        <td>2 <span class="badge big-badge primary-color green">1 <i class="fa fa-arrow-circle-up"></i></span></td>
+                                                        <td>2 <span class="badge big-badge primary-color red">1 <i class="fa fa-arrow-circle-down"></i></span></td>
+                                                        <td>2 <span class="badge big-badge primary-color grey">0 </span></td>
+                                                        <td>200 (US)</td>
+                                                        <td>2000</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Material Design</td>
+                                                        <td>http://example.com</td>
+                                                        <td>Google.com</td>
+                                                        <td><strong>3</strong></td>
+                                                        <td>2 <span class="badge big-badge primary-color green">1 <i class="fa fa-arrow-circle-up"></i></span></td>
+                                                        <td>2 <span class="badge big-badge primary-color red">1 <i class="fa fa-arrow-circle-down"></i></span></td>
+                                                        <td>2 <span class="badge big-badge primary-color grey">0 </span></td>
+                                                        <td>200 (US)</td>
+                                                        <td>2000</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Material Design</td>
+                                                        <td>http://example.com</td>
+                                                        <td>Google.com</td>
+                                                        <td><strong>3</strong></td>
+                                                        <td>2 <span class="badge big-badge primary-color green">1 <i class="fa fa-arrow-circle-up"></i></span></td>
+                                                        <td>2 <span class="badge big-badge primary-color red">1 <i class="fa fa-arrow-circle-down"></i></span></td>
+                                                        <td>2 <span class="badge big-badge primary-color grey">0 </span></td>
+                                                        <td>200 (US)</td>
+                                                        <td>2000</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Material Design</td>
+                                                        <td>http://example.com</td>
+                                                        <td>Google.com</td>
+                                                        <td><strong>3</strong></td>
+                                                        <td>2 <span class="badge big-badge primary-color green">1 <i class="fa fa-arrow-circle-up"></i></span></td>
+                                                        <td>2 <span class="badge big-badge primary-color red">1 <i class="fa fa-arrow-circle-down"></i></span></td>
+                                                        <td>2 <span class="badge big-badge primary-color grey">0 </span></td>
+                                                        <td>200 (US)</td>
+                                                        <td>2000</td>
+                                                    </tr>
+                                                </tbody>
+                                                <!--/Table body-->
+                                            </table>
+                                            <!--/Table-->
+                                        </div>
+                                    </div>
+                                    <!--/.Panel content-->
+
+                                </div>
+                                <!--/First column-->
+                            </div>
+                            <!--/Second row-->
+
+                        </div>
+                        <!--/Admin panel-->
+
+                    </div>
+                    <!--/.Card-->
+                </div>
+
+            </div>
+            <!--/Second row-->
+
+        </section>
+        <!--/Section: Conditions-->
+    </div>
+</main>
+<input type="hidden" id="hdPackageID" name="hdPackageID" value="0" />
+
+@*=========================================PopUpEdit-Insert=========================================*@
+<div class="modal fade" id="standardModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <!--Content-->
+        <div class="modal-content" style="width:500px">
+            <!--Header-->
+            <div class="modal-header white-text" style="background-color: #154771">
+                <p class="heading" contenteditable="true" style="color:#fff">Package Information </p>
+            </div>
+            <!--Body-->
+            <div class="modal-body" style="padding-bottom:0px">
+                <form>
+                    <div class="col-md-2">
+                        <div class="controls">
+                            <select id="cbMember" class="form-control" data-rel="chosen">
+                                <option value="0">Select PackageID</option>
+                                @if (ViewData["ListPackage"] != null)
+                                {
+                                    IEnumerable<PackageBO>lstPackage = (IEnumerable<PackageBO>)ViewData["ListPackage"];
+                                    if (lstPackage != null && lstPackage.Count() > 0)
+                                    {
+                                        foreach (PackageBO package in lstPackage)
+                                        {
+                                            <option value="@package.PackageID">@package.PackageID</option>
+                                        }
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="controls">
+                            <select id="cbMember" class="form-control" data-rel="chosen">
+                                <option value="0">Select CoinID</option>
+                                @if (ViewData["ListPackage"] != null)
+                                {
+                                    IEnumerable<PackageBO> lstPackage = (IEnumerable<PackageBO>)ViewData["ListPackage"];
+                                    if (lstPackage != null && lstPackage.Count() > 0)
+                                    {
+                                        foreach (PackageBO package in lstPackage)
+                                        {
+                                            <option value="@package.PackageID">@package.PackageID</option>
+                                        }
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom:15px">
+                        <div class="col-md-12">
+                            <div class="md-form">
+                                <input type="text" onfocus="ResetForm('lbErrorPackageValue', this.value)" id="txtPackageValue" name="txtPackageValue" placeholder="package value" class="form-control validate">
+
+                            </div>
+                            <label id="lbErrorPackageValue" style="color:red; display:none" class=""></label>
+                        </div>
+                    </div>
+                </form>
+                <br>
+
+            </div>
+            <!--Footer-->
+            <div class="modal-footer">
+                <img id="imgLoading" src="/Images/loading.gif" style="display:none">
+                <a id="2lvlModal-learnMore" class="btn btn-danger" onclick="SavePackageCoin()" contenteditable="true">Save</a>
+
+            </div>
+        </div>
+        <!--/.Content-->
+
+    </div>
+</div>
+

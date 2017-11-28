@@ -36,7 +36,7 @@ namespace BBH.BOS.Data
                     packageCoin.PackageID = int.Parse(reader["PackageID"].ToString());
 
                     packageCoin.CoinID = int.Parse(reader["CoinID"].ToString());
-                    packageCoin.PackageValue = int.Parse(reader["PackageValue"].ToString());
+                    packageCoin.PackageValue = double.Parse(reader["PackageValue"].ToString());
                     packageCoin.CreateDate = DateTime.Parse(reader["CreateDate"].ToString());
 
                     packageCoin.TotalRecord = int.Parse(reader["TOTALROWS"].ToString());

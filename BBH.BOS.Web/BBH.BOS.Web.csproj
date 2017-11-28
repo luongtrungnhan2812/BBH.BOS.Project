@@ -49,6 +49,7 @@
     <Reference Include="BBC.Core.Common">
       <HintPath>..\Share dll\BBC.Core.Common.dll</HintPath>
     </Reference>
+    <Reference Include="BBC.Core.WebService, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -208,6 +209,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Controllers\PackageController.cs" />
+    <Compile Include="Controllers\Package_CoinController.cs" />
     <Compile Include="Controllers\PagingController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\WalletController.cs" />
@@ -762,6 +764,7 @@
     <Content Include="Scripts\noty\themes\bootstrap.js" />
     <Content Include="Scripts\noty\themes\default.js" />
     <Content Include="Scripts\noty\themes\relax.js" />
+    <Content Include="Scripts\packagecoin\packagecoin.js" />
     <Content Include="Scripts\package\package.js" />
     <Content Include="Scripts\package\transactionPackage.js" />
     <Content Include="Scripts\respond.js" />
@@ -795,6 +798,7 @@
     <Content Include="Views\Package\Index.cshtml" />
     <Content Include="Views\Wallet\WalletEU.cshtml" />
     <Content Include="Views\Paging\Index.cshtml" />
+    <Content Include="Views\Package_Coin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="imageAvatar\" />

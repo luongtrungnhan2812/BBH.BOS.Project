@@ -14,7 +14,7 @@ namespace BBH.BOS.Domain.Entities
         [DataMember]
         public int CoinID { get; set; }
         [DataMember]
-        public int PackageValue { get; set; }
+        public double PackageValue { get; set; }
         [DataMember]
         public DateTime CreateDate { get; set; }
         [DataMember]
