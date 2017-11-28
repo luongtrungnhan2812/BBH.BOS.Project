@@ -52,5 +52,120 @@ namespace BBH.BOS.Web.Controllers
             TempData["TotalRecord"] = totalRecord;
             return View();
         }
+        [HttpPost]
+        public string UpdateIsDeletePackage(PackageBO package, int packageID, int isDelete)
+        {
+            string result = "";
+            //PackageBO package = new PackageBO();
+            int statusNew = -1;
+            if (isDelete == 1)
+            {
+                statusNew = 0;
+            }
+            else
+            {
+                statusNew = 1;
+            }
+            package.IsDelete = statusNew;
+            package.DeleteDate = DateTime.Now;
+            package.DeleteUser = (string)Session["FullName"];
+
+            bool rs = Packagerepository.UpdateIsDeletePackage(package, packageID, statusNew);
+            if (rs)
+            {
+
+                result = "success";
+            }
+            return result;
+        }
+
+        [HttpPost]
+        public string SavePackage(int packageID, string packageName)
+        {
+            string result = "";
+            PackageBO package = new PackageBO();
+
+            if (Session["Emailmember"] == null)
+            {
+                Response.Redirect("/login");
+            }
+            if (packageID > 0)
+            {
+                try
+                {
+                    package.PackageName = packageName;
+                    package.IsActive = 1;
+                    package.UpdateDate = DateTime.Now;
+                    package.UpdateUser = (string)Session["FullName"];
+
+                    bool updatePackage = Packagerepository.UpdatePackage(package, packageID);
+                    if (updatePackage)
+                    {
+                        result = "Updatesuccess";
+                    }
+                    else
+                    {
+                        result = "Updatefaile";
+                    }
+                }
+                catch { result = "Erorr"; }
+            }
+            else if (packageID == 0)
+            {
+                try
+                {
+                    package.PackageName = packageName;
+                    package.IsActive = 1;
+                    package.IsDelete = 1;
+                    package.CreateDate = DateTime.Now;
+                    package.CreateUser = (string)Session["FullName"];
+                    //package.DeleteDate = DateTime.Parse("1/1/1990");
+                    //package.DeleteUser = "";
+                    //package.UpdateDate = DateTime.Parse("1/1/1990");
+                    //package.UpdateUser = "";
+
+                    bool checkExitsPackageName = Packagerepository.CheckPackageNameExists(packageName);
+                    if (checkExitsPackageName)
+                    {
+                        result = "PackageNameExist";
+                    }
+                    else
+                    {
+                        bool insert = Packagerepository.InsertPackage(package);
+                        if (insert)
+                        {
+                            result = "Updatesuccess";
+                        }
+                        else
+                        {
+                            result = "Updatefaile";
+                        }
+                    }
+                }
+                catch { result = "Erorr"; }
+            }
+            //else if(result=="delete")
+            //{
+            //    try
+            //    {
+            //        package.PackageName = packageName;
+            //        package.IsDelete = 0;
+            //        package.DeleteDate = DateTime.Now;
+            //        package.DeleteUser = (string)Session["FullName"];
+
+            //        bool updatePackage = Packagerepository.UpdatePackage(package, packageID);
+            //        if (updatePackage)
+            //        {
+            //            result = "Updatesuccess";
+            //        }
+            //        else
+            //        {
+            //            result = "Updatefaile";
+            //        }
+            //    }
+            //    catch { result = "Erorr"; }
+            //}
+            return result;
+        }
     }
 }
