@@ -16,10 +16,10 @@ namespace BBH.BOS.Web.Controllers
         // GET: Package
         public ActionResult Index(string p)
         {
-            //if (Session["UserName"] == null)
-            //{
-            //    Response.Redirect("/login");
-            //}
+            if (Session["UserName"] == null)
+            {
+                Response.Redirect("/login");
+            }
 
 
             int totalRecord = 0;
@@ -51,12 +51,6 @@ namespace BBH.BOS.Web.Controllers
             }
             TempData["TotalRecord"] = totalRecord;
             return View();
-        }
-        [HttpPost]
-        public string InsertTransactionPackage(string packageID)
-        {
-            string result = "success";
-            return result;
         }
     }
 }

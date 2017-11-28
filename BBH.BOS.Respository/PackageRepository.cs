@@ -30,13 +30,13 @@ namespace BBH.BOS.Respository
             }
         }
 
-        public bool LockAndUnlockPackage(int packageID, int isActive)
+        public bool UpdateIsDeletePackage(PackageBO package,int packageID, int isDelete)
         {
             bool row = false;
             string fileLog = Path.GetDirectoryName(Path.Combine(pathLog));
             try
             {
-                row = Proxy.LockAndUnlockPackage(packageID,isActive);
+                row = Proxy.UpdateIsDeletePackage(package,packageID, isDelete);
             }
             catch (Exception ex)
             {
@@ -45,13 +45,13 @@ namespace BBH.BOS.Respository
             return row;
         }
 
-        public bool UpdateMember(PackageBO package, int packageID)
+        public bool UpdatePackage(PackageBO package, int packageID)
         {
             bool row = false;
             string fileLog = Path.GetDirectoryName(Path.Combine(pathLog));
             try
             {
-                row = Proxy.UpdateMember(package,packageID);
+                row = Proxy.UpdatePackage(package,packageID);
             }
             catch (Exception ex)
             {
@@ -74,5 +74,21 @@ namespace BBH.BOS.Respository
             }
             return row;
         }
+
+        public bool CheckPackageNameExists(string packageName)
+        {
+            bool row = false;
+            string fileLog = Path.GetDirectoryName(Path.Combine(pathLog));
+            try
+            {
+                row = Proxy.CheckPackageNameExists(packageName);
+            }
+            catch (Exception ex)
+            {
+                Utility.WriteLog(fileLog, ex.Message);
+            }
+            return row;
+        }
+
     }
 }
