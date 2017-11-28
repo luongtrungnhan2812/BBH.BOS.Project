@@ -14,6 +14,8 @@ namespace BBH.BOS.Domain.Entities
         [DataMember]
         public int PackageID { get; set; }
         [DataMember]
+        public int CoinID { get; set; }
+        [DataMember]
         public int MemberID { get; set; }
         [DataMember]
         public string TransactionCode { get; set; }
