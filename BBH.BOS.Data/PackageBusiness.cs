@@ -66,17 +66,17 @@ namespace BBH.BOS.Data
             Sqlhelper helper = new Sqlhelper("", "ConnectionString");
             try
             {
-                SqlParameter[] pa = new SqlParameter[9];
+                SqlParameter[] pa = new SqlParameter[5];
                 string sql = "SP_InsertPackage";
                 pa[0] = new SqlParameter("@packageName", package.PackageName);
                 pa[1] = new SqlParameter("@isActive", package.IsActive);
                 pa[2] = new SqlParameter("@isDelete", package.IsDelete);
                 pa[3] = new SqlParameter("@createDate", package.CreateDate);
                 pa[4] = new SqlParameter("@createUser", package.CreateUser);
-                pa[5] = new SqlParameter("@updateDate", package.UpdateDate);
-                pa[6] = new SqlParameter("@updateUser", package.UpdateUser);
-                pa[7] = new SqlParameter("@deleteDate", package.DeleteDate);
-                pa[8] = new SqlParameter("@deleteUser", package.DeleteUser);
+                //pa[5] = new SqlParameter("@updateDate", package.UpdateDate);
+                //pa[6] = new SqlParameter("@updateUser", package.UpdateUser);
+                //pa[7] = new SqlParameter("@deleteDate", package.DeleteDate);
+                //pa[8] = new SqlParameter("@deleteUser", package.DeleteUser);
 
                 SqlCommand command = helper.GetCommand(sql, pa, true);
                 //adminID = Convert.ToInt32(command.ExecuteScalar());
@@ -101,24 +101,26 @@ namespace BBH.BOS.Data
         }
 
 
-        public bool UpdateMember(PackageBO package, int packageID)
+        public bool UpdatePackage(PackageBO package, int packageID)
         {
             string fileLog = Path.GetDirectoryName(Path.Combine(pathLog, "Logs"));
             Sqlhelper helper = new Sqlhelper("", "ConnectionString");
             try
             {
-                SqlParameter[] pa = new SqlParameter[10];
+                SqlParameter[] pa = new SqlParameter[5];
                 string sql = "SP_UpdatePackage";
-                pa[0] = new SqlParameter("@packageName", package.PackageName);
-                pa[1] = new SqlParameter("@isActive", package.IsActive);
-                pa[2] = new SqlParameter("@isDelete", package.IsDelete);
-                pa[3] = new SqlParameter("@createDate", package.CreateDate);
-                pa[4] = new SqlParameter("@createUser", package.CreateUser);
-                pa[5] = new SqlParameter("@updateDate", package.UpdateDate);
-                pa[6] = new SqlParameter("@updateUser", package.UpdateUser);
-                pa[7] = new SqlParameter("@deleteDate", package.DeleteDate);
-                pa[8] = new SqlParameter("@deleteUser", package.DeleteUser);
-                pa[9] = new SqlParameter("@packageID", package.PackageID);
+
+                pa[0] = new SqlParameter("@packageID", packageID);
+                pa[1] = new SqlParameter("@packageName", package.PackageName);
+                pa[2] = new SqlParameter("@isActive", package.IsActive);
+                //pa[2] = new SqlParameter("@isDelete", package.IsDelete);
+                //pa[3] = new SqlParameter("@createDate", package.CreateDate);
+                //pa[4] = new SqlParameter("@createUser", package.CreateUser);
+                pa[3] = new SqlParameter("@updateDate", package.UpdateDate);
+                pa[4] = new SqlParameter("@updateUser", package.UpdateUser);
+                //pa[7] = new SqlParameter("@deleteDate", package.DeleteDate);
+                //pa[8] = new SqlParameter("@deleteUser", package.DeleteUser);
+                
 
                 SqlCommand command = helper.GetCommand(sql, pa, true);
                 //adminID = Convert.ToInt32(command.ExecuteScalar());
@@ -141,17 +143,24 @@ namespace BBH.BOS.Data
                 helper.destroy();
             }
         }
-        public bool LockAndUnlockPackage(int packageID, int isActive)
+
+        public bool UpdateIsDeletePackage(PackageBO package,int packageID, int isDelete)
         {
             string fileLog = Path.GetDirectoryName(Path.Combine(pathLog, "Logs"));
             Sqlhelper helper = new Sqlhelper("", "ConnectionString");
             try
             {
                 bool rs = false;
-                string sql = "SP_LockAndUnlockPackage";
-                SqlParameter[] pa = new SqlParameter[2];
-                pa[0] = new SqlParameter("@isActive", isActive);
-                pa[1] = new SqlParameter("@packageID", packageID);
+                string sql = "SP_DeletePackage";
+                SqlParameter[] pa = new SqlParameter[4];
+
+                pa[0] = new SqlParameter("@packageID", packageID);
+               
+                //pa[1] = new SqlParameter("@packageName", package.PackageName);
+                pa[1] = new SqlParameter("@isDelete", isDelete);
+
+                pa[2] = new SqlParameter("@deleteDate", package.DeleteDate);
+                pa[3] = new SqlParameter("@deleteUser", package.DeleteUser);
                 SqlCommand command = helper.GetCommand(sql, pa, true);
                 int row = command.ExecuteNonQuery();
                 if (row > 0)
@@ -170,6 +179,65 @@ namespace BBH.BOS.Data
                 helper.destroy();
             }
         }
+
+        public bool CheckPackageNameExists(string packageName)
+        {
+            string fileLog = Path.GetDirectoryName(Path.Combine(pathLog, "Logs"));
+            Sqlhelper helper = new Sqlhelper("", "ConnectionString");
+            try
+            {
+                bool rs = false;
+                string sql = "SP_CheckPackageNameExists";
+                SqlParameter[] pa = new SqlParameter[1];
+                pa[0] = new SqlParameter("@packageName", packageName);
+                SqlCommand command = helper.GetCommand(sql, pa, true);
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    rs = true;
+                }
+                return rs;
+            }
+            catch (Exception ex)
+            {
+                Utilitys.WriteLog(fileLog, ex.Message);
+                return false;
+            }
+            finally
+            {
+                helper.destroy();
+            }
+        }
+
+        //public bool LockAndUnlockPackage(int packageID, int isActive)
+        //{
+        //    string fileLog = Path.GetDirectoryName(Path.Combine(pathLog, "Logs"));
+        //    Sqlhelper helper = new Sqlhelper("", "ConnectionString");
+        //    try
+        //    {
+        //        bool rs = false;
+        //        string sql = "SP_LockAndUnlockPackage";
+        //        SqlParameter[] pa = new SqlParameter[2];
+        //        pa[0] = new SqlParameter("@isActive", isActive);
+        //        pa[1] = new SqlParameter("@packageID", packageID);
+        //        SqlCommand command = helper.GetCommand(sql, pa, true);
+        //        int row = command.ExecuteNonQuery();
+        //        if (row > 0)
+        //        {
+        //            rs = true;
+        //        }
+        //        return rs;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Utilitys.WriteLog(fileLog, ex.Message);
+        //        return false;
+        //    }
+        //    finally
+        //    {
+        //        helper.destroy();
+        //    }
+        //}
 
     }
 }

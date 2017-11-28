@@ -227,12 +227,15 @@
     <Content Include="Content\alertify.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\bootstrap-cerulean.min.css" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\jquery.noty.css" />
     <Content Include="Content\css\mdb.css" />
     <Content Include="Content\css\mdb.min.css" />
     <Content Include="Content\css\mdb\pro\date_picker\_default.css" />
     <Content Include="Content\css\mdb\pro\sections\_templates.css" />
+    <Content Include="Content\css\noty_theme_default.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\img\flags\ad.png" />
     <Content Include="Content\img\flags\ae.png" />
@@ -494,6 +497,7 @@
     <Content Include="Content\js\jquery-2.2.3.min.js" />
     <Content Include="Content\js\jquery-3.1.1.js" />
     <Content Include="Content\js\jquery-3.1.1.min.js" />
+    <Content Include="Content\js\jquery.noty.js" />
     <Content Include="Content\js\mdb.js" />
     <Content Include="Content\js\mdb.min.js" />
     <Content Include="Content\js\modules %28optional%29\animations.js" />

@@ -15,13 +15,15 @@ namespace BBH.BOS.Domain.Interfaces
         IEnumerable<PackageBO> ListAllPackage(int start, int end);
 
         [OperationContract]
-        bool LockAndUnlockPackage(int packageID, int isActive);
+        bool UpdateIsDeletePackage(PackageBO package,int packageID, int isDelete);
 
         [OperationContract]
-        bool UpdateMember(PackageBO package, int packageID);
+        bool UpdatePackage(PackageBO package, int packageID);
 
         [OperationContract]
         bool InsertPackage(PackageBO package);
+        [OperationContract]
+        bool CheckPackageNameExists(string packageName);
 
 
 
