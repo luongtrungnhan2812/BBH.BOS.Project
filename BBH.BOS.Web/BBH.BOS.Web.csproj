@@ -208,6 +208,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Controllers\PackageController.cs" />
+    <Compile Include="Controllers\PagingController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\WalletController.cs" />
     <Compile Include="Global.asax.cs">
@@ -776,6 +777,7 @@
     <Content Include="Views\Common\PartialDashboard.cshtml" />
     <Content Include="Views\Package\Index.cshtml" />
     <Content Include="Views\Wallet\WalletEU.cshtml" />
+    <Content Include="Views\Paging\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="imageAvatar\" />

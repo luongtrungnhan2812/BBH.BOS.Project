@@ -63,6 +63,7 @@
   <ItemGroup>
     <Content Include="MemberServices.svc" />
     <Content Include="PackageServices.svc" />
+    <Content Include="Package_CoinServices.svc" />
     <Content Include="TransactionPackage.svc" />
     <Content Include="TransactionWallet.svc" />
     <Content Include="Web.config">

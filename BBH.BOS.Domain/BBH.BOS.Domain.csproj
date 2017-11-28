@@ -50,11 +50,13 @@
     <Compile Include="Entities\MemberInformationBO.cs" />
     <Compile Include="Entities\Member_WalletBO.cs" />
     <Compile Include="Entities\PackageBO.cs" />
+    <Compile Include="Entities\Package_CoinBO.cs" />
     <Compile Include="Entities\TransactionCoinBO.cs" />
     <Compile Include="Entities\TransactionPackageBO.cs" />
     <Compile Include="Entities\TypeTransactionBO.cs" />
     <Compile Include="Interfaces\IIMemberService.cs" />
     <Compile Include="Interfaces\IPackageService.cs" />
+    <Compile Include="Interfaces\IPackage_CoinServices.cs" />
     <Compile Include="Interfaces\ITransactionPackageService.cs" />
     <Compile Include="Interfaces\ITransactionWalletService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
