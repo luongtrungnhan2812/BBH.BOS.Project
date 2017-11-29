@@ -7,10 +7,15 @@ using System.Threading.Tasks;
 
 namespace BBH.BOS.Domain.Entities
 {
-    public class Package_CoinBO
+    public class PackageInformationBO
     {
         [DataMember]
         public int PackageID { get; set; }
+        [DataMember]
+        public string PackageName { get; set; }
+
+        [DataMember]
+        public int TotalRecord { get; set; }
         [DataMember]
         public int CoinID { get; set; }
         [DataMember]
@@ -20,6 +25,11 @@ namespace BBH.BOS.Domain.Entities
         [DataMember]
         public int IsDelete { get; set; }
         [DataMember]
-        public int TotalRecord { get; set; }
+        public DateTime DeleteDate { get; set; }
+        [DataMember]
+        public string DeleteUser { get; set; }
+        [DataMember]
+        public string CoinName { get; set; }
+
     }
 }

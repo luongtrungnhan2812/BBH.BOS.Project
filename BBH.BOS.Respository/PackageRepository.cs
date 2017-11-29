@@ -89,6 +89,20 @@ namespace BBH.BOS.Respository
             }
             return row;
         }
+        public IEnumerable<PackageInformationBO> ListAllPackageInformation()
+        {
+            string fileLog = Path.GetDirectoryName(Path.Combine(pathLog));
+            try
+            {
+                IEnumerable<PackageInformationBO> package = Proxy.ListAllPackageInformation();
+                return package;
+            }
+            catch (Exception ex)
+            {
+                Utility.WriteLog(fileLog, ex.Message);
+                return null;
+            }
+        }
 
     }
 }

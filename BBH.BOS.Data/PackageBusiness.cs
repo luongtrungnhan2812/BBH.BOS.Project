@@ -238,6 +238,47 @@ namespace BBH.BOS.Data
         //        helper.destroy();
         //    }
         //}
+        public IEnumerable<PackageInformationBO> ListAllPackageInformation()
+        {
+            string fileLog = Path.GetDirectoryName(Path.Combine(pathLog, "Logs"));
+            Sqlhelper helper = new Sqlhelper("", "ConnectionString");
+            try
+            {
+                List<PackageInformationBO> lstPackage = new List<PackageInformationBO>();
+                string sql = "SP_ListAllPackageInformation";
+                
+                SqlCommand command = helper.GetCommandNonParameter(sql, true);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    PackageInformationBO package = new PackageInformationBO();
+                    package.PackageID = int.Parse(reader["PackageID"].ToString());
+                    package.CoinID = int.Parse(reader["CoinID"].ToString());
+
+                    package.PackageName = reader["PackageName"].ToString();
+                    //package.IsDelete = int.Parse(reader["IsDelete"].ToString());
+
+                    //package.CreateDate = DateTime.Parse(reader["CreateDate"].ToString());
+                    package.CoinName = reader["CoinName"].ToString();
+                    package.PackageValue =double.Parse(reader["PackageValue"].ToString());
+                    //package.DeleteUser = reader["DeleteUser"].ToString();
+                    //package.DeleteDate = DateTime.Parse(reader["DeleteDate"].ToString());
+                    //package.TotalRecord = int.Parse(reader["TOTALROWS"].ToString());
+                    lstPackage.Add(package);
+
+                }
+                return lstPackage;
+            }
+            catch (Exception ex)
+            {
+                Utilitys.WriteLog(fileLog, ex.Message);
+                return null;
+            }
+            finally
+            {
+                helper.destroy();
+            }
+        }
 
     }
 }

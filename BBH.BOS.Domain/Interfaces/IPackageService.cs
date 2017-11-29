@@ -24,6 +24,8 @@ namespace BBH.BOS.Domain.Interfaces
         bool InsertPackage(PackageBO package);
         [OperationContract]
         bool CheckPackageNameExists(string packageName);
+        [OperationContract]
+        IEnumerable<PackageInformationBO> ListAllPackageInformation();
 
 
 

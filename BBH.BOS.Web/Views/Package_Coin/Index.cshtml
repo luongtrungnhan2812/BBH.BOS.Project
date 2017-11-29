@@ -99,7 +99,7 @@
                                                                
                                                             <td class="center">
                                                                 <img src="/Images/loading.gif" id="imgLoading_@package.PackageID" style="position: absolute; display:none ; float: right; width: 30px; margin-left: 45px; ">
-                                                                <a class="teal-text" data-toggle="modal" data-placement="top" title="Edit" href="javascript:void(0)" onclick="ShowPopUpEditPackage('@package.PackageID','@package.CoinID')" data-target="#standardModal"><i class="fa fa-pencil"></i></a>
+                                                                <a class="teal-text" data-toggle="modal" data-placement="top" title="Edit" href="javascript:void(0)" onclick="ShowpopupEditpackageCoin('@package.PackageID','@package.CoinID')" data-target="#standardModal"><i class="fa fa-pencil"></i></a>
                                                                 <a class="red-text" data-toggle="modal" data-placement="top" title="Remove" href="javascript:void(0)" onclick="ConfirmPackage('@package.PackageID')"><i class="fa fa-times"></i></a>
 
                                                                
@@ -254,6 +254,7 @@
     </div>
 </main>
 <input type="hidden" id="hdPackageID" name="hdPackageID" value="0" />
+<input type="hidden" id="hdCoinID" name="hdCoinID" value="0" />
 
 @*=========================================PopUpEdit-Insert=========================================*@
 <div class="modal fade" id="standardModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -267,52 +268,56 @@
             <!--Body-->
             <div class="modal-body" style="padding-bottom:0px">
                 <form>
-                    <div class="col-md-2">
-                        <div class="controls">
-                            <select id="cbMember" class="form-control" data-rel="chosen">
-                                <option value="0">Select PackageID</option>
-                                @if (ViewData["ListPackage"] != null)
-                                {
-                                    IEnumerable<PackageBO>lstPackage = (IEnumerable<PackageBO>)ViewData["ListPackage"];
-                                    if (lstPackage != null && lstPackage.Count() > 0)
-                                    {
-                                        foreach (PackageBO package in lstPackage)
-                                        {
-                                            <option value="@package.PackageID">@package.PackageID</option>
-                                        }
-                                    }
-                                }
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="controls">
-                            <select id="cbMember" class="form-control" data-rel="chosen">
-                                <option value="0">Select CoinID</option>
-                                @if (ViewData["ListPackage"] != null)
-                                {
-                                    IEnumerable<PackageBO> lstPackage = (IEnumerable<PackageBO>)ViewData["ListPackage"];
-                                    if (lstPackage != null && lstPackage.Count() > 0)
-                                    {
-                                        foreach (PackageBO package in lstPackage)
-                                        {
-                                            <option value="@package.PackageID">@package.PackageID</option>
-                                        }
-                                    }
-                                }
-                            </select>
-                        </div>
-                    </div>
                     <div class="row" style="margin-bottom:15px">
-                        <div class="col-md-12">
-                            <div class="md-form">
-                                <input type="text" onfocus="ResetForm('lbErrorPackageValue', this.value)" id="txtPackageValue" name="txtPackageValue" placeholder="package value" class="form-control validate">
-
+                        <div class="col-md-6">
+                            <div class="controls">
+                                <select id="cbPackage" name="cbPackage" onchange="ResetForm('lbErrorPackage', this.value)" class="form-control" data-rel="chosen">
+                                    <option value="0">Select PackageID</option>
+                                    @if (ViewData["ListPackage"] != null)
+                                    {
+                                        IEnumerable<PackageBO> lstPackage = (IEnumerable<PackageBO>)ViewData["ListPackage"];
+                                        if (lstPackage != null && lstPackage.Count() > 0)
+                                        {
+                                            foreach (PackageBO package in lstPackage)
+                                            {
+                                                <option value="@package.PackageID">@package.PackageID</option>
+                                            }
+                                        }
+                                    }
+                                </select>
                             </div>
-                            <label id="lbErrorPackageValue" style="color:red; display:none" class=""></label>
                         </div>
-                    </div>
-                </form>
+                        </div>
+                    <div class="row" style="margin-bottom:15px">
+                        <div class="col-md-6">
+                            <div class="controls">
+                                <select id="cbCoin" name="cbCoin" onchange="ResetForm('lbErrorCoin', this.value)" class="form-control" data-rel="chosen">
+                                    <option value="0">Select CoinID</option>
+                                    @if (ViewData["ListPackage"] != null)
+                                    {
+                                        IEnumerable<PackageBO> lstPackage = (IEnumerable<PackageBO>)ViewData["ListPackage"];
+                                        if (lstPackage != null && lstPackage.Count() > 0)
+                                        {
+                                            foreach (PackageBO package in lstPackage)
+                                            {
+                                                <option value="@package.PackageID">@package.PackageID</option>
+                                            }
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="row" style="margin-bottom:15px">
+                            <div class="col-md-12">
+                                <div class="md-form">
+                                    <input type="text" onfocus="ResetForm('lbErrorPackageValue', this.value)" id="txtPackageValue" name="txtPackageValue" placeholder="package value" class="form-control validate">
+
+                                </div>
+                                <label id="lbErrorPackageValue" style="color:red; display:none" class=""></label>
+                            </div>
+                        </div>
+</form>
                 <br>
 
             </div>

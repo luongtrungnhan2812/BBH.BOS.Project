@@ -189,20 +189,42 @@ namespace BBH.BOS.Web.Controllers
             return list;
 
         }
+        //private string GenHtmlListPackage()
+        //{
+        //    IEnumerable<PackageBO> lstPackageBO = null;
+        //    StringBuilder strBuilder = new StringBuilder();
+        //    lstPackageBO = ObjIPackgeServices.ListAllPackage(1, 10);
+        //    if (lstPackageBO != null && lstPackageBO.Count() > 0)
+        //    {
+        //        int i = 1;
+        //        foreach (var item in lstPackageBO)
+        //        {
+        //            strBuilder.Append("<tr data-id='" + i + "'>");
+        //            strBuilder.Append("<td> " + item.PackageName + " </td>");
+        //            strBuilder.Append("<td><i class='fa fa-usd'></i> " + item.PackageName + "</td>");
+        //            strBuilder.Append("<td><span class='icon-clp-icon'></span> " + item.PackageName + "</td>");
+        //            strBuilder.Append("</tr>");
+        //            i++;
+        //        }
+        //    }
+        //    return strBuilder.ToString();
+        //}
         private string GenHtmlListPackage()
         {
-            IEnumerable<PackageBO> lstPackageBO = null;
+            IEnumerable<PackageInformationBO> lstPackageInformationBO = null;
             StringBuilder strBuilder = new StringBuilder();
-            lstPackageBO = ObjIPackgeServices.ListAllPackage(1, 10);
-            if (lstPackageBO != null && lstPackageBO.Count() > 0)
+            lstPackageInformationBO = ObjIPackgeServices.ListAllPackageInformation();
+            if (lstPackageInformationBO != null && lstPackageInformationBO.Count() > 0)
             {
                 int i = 1;
-                foreach (var item in lstPackageBO)
+                foreach (PackageInformationBO item in lstPackageInformationBO)
                 {
                     strBuilder.Append("<tr data-id='" + i + "'>");
                     strBuilder.Append("<td> " + item.PackageName + " </td>");
-                    strBuilder.Append("<td><i class='fa fa-usd'></i> " + item.PackageName + "</td>");
-                    strBuilder.Append("<td><span class='icon-clp-icon'></span> " + item.PackageName + "</td>");
+                    strBuilder.Append("<td><i class='fa fa-usd'></i> " + item.PackageValue + "</td>");
+                    strBuilder.Append("<td><span class='icon-clp-icon'></span> " + item.CoinName + "</td>");
+                    strBuilder.Append("<td><span class='icon-clp-icon'></span> " + item.CoinName + "</td>");
+
                     strBuilder.Append("</tr>");
                     i++;
                 }
