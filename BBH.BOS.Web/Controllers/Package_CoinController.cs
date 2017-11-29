@@ -17,8 +17,8 @@ namespace BBH.BOS.Web.Controllers
         [Dependency]
         protected PackageRepository packageRopository { get; set; }
 
-        //[Dependency]
-        //protected CoinRepository coinRopository { get; set; }
+        [Dependency]
+        protected CoinRepository coinRopository { get; set; }
 
         // GET: Package_Coin
         public ActionResult Index(string p)
@@ -61,7 +61,94 @@ namespace BBH.BOS.Web.Controllers
             IEnumerable<PackageBO> lstPackage = packageRopository.ListAllPackage(start, end);
             ViewData["ListPackage"] = lstPackage;
 
+            IEnumerable<CoinBO> lstCoin = coinRopository.ListAllCoin();
+            ViewData["ListCoin"] = lstCoin;
+
             return View();
         }
+
+        [HttpPost]
+        public string UpdateIsDeletePackageCoin(Package_CoinBO packageCoin, int packageID,int coinID, int isDelete)
+        {
+            string result = "";
+            //PackageBO package = new PackageBO();
+            int statusNew = -1;
+            if (isDelete == 1)
+            {
+                statusNew = 0;
+            }
+            else
+            {
+                statusNew = 1;
+            }
+            packageCoin.IsDelete = statusNew;
+            packageCoin.DeleteDate = DateTime.Now;
+            packageCoin.DeleteUser = (string)Session["FullName"];
+
+            bool rs = packageCoinRepository.UpdateIsDeletePackageCoin(packageCoin, packageID, coinID, statusNew);
+            if (rs)
+            {
+
+                result = "success";
+            }
+            return result;
+        }
+
+        [HttpPost]
+        public string SavePackage(int packageID,int coinID, double packageValue)
+        {
+            string result = "";
+            Package_CoinBO packageCoin = new Package_CoinBO();
+
+            if (Session["Emailmember"] == null)
+            {
+                Response.Redirect("/login");
+            }
+            if (packageID > 0)
+            {
+                try
+                {
+                    packageCoin.PackageValue = packageValue;
+                    packageCoin.CoinID = coinID;
+                    //package.UpdateDate = DateTime.Now;
+                    //package.UpdateUser = (string)Session["FullName"];
+
+                    bool updatePackage = packageCoinRepository.UpdatePackageCoin(packageCoin, packageID,coinID);
+                    if (updatePackage)
+                    {
+                        result = "Updatesuccess";
+                    }
+                    else
+                    {
+                        result = "Updatefaile";
+                    }
+                }
+                catch { result = "Erorr"; }
+            }
+            else if (packageID == 0)
+            {
+                try
+                {
+                    packageCoin.PackageID = packageID;
+                    packageCoin.CoinID = coinID;
+                    packageCoin.IsDelete = 0;
+                    packageCoin.CreateDate = DateTime.Now;
+                                                         
+                        bool insert = packageCoinRepository.InsertPackageCoin(packageCoin);
+                        if (insert)
+                        {
+                            result = "Updatesuccess";
+                        }
+                        else
+                        {
+                            result = "Updatefaile";
+                        }
+                }
+                catch { result = "Erorr"; }
+            }
+           
+            return result;
+        }
+
     }
 }

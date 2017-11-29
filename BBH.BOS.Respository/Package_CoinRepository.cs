@@ -29,5 +29,50 @@ namespace BBH.BOS.Respository
                 return null;
             }
         }
+
+         public bool InsertPackageCoin(Package_CoinBO packageCoin)
+          {
+            bool row = false;
+            string fileLog = Path.GetDirectoryName(Path.Combine(pathLog));
+            try
+            {
+                row = Proxy.InsertPackageCoin(packageCoin);
+            }
+            catch (Exception ex)
+            {
+                Utility.WriteLog(fileLog, ex.Message);
+            }
+            return row;
+        }
+
+          public bool UpdatePackageCoin(Package_CoinBO packageCoin, int packageID, int coinID)
+           {
+            bool row = false;
+            string fileLog = Path.GetDirectoryName(Path.Combine(pathLog));
+            try
+            {
+                row = Proxy.UpdatePackageCoin(packageCoin, packageID,coinID);
+            }
+            catch (Exception ex)
+            {
+                Utility.WriteLog(fileLog, ex.Message);
+            }
+            return row;
+        }
+
+        public bool UpdateIsDeletePackageCoin(Package_CoinBO package, int packageID, int coinID, int isDelete)
+        {
+            bool row = false;
+            string fileLog = Path.GetDirectoryName(Path.Combine(pathLog));
+            try
+            {
+                row = Proxy.UpdateIsDeletePackageCoin(package, packageID, coinID,isDelete);
+            }
+            catch (Exception ex)
+            {
+                Utility.WriteLog(fileLog, ex.Message);
+            }
+            return row;
+        }
     }
 }

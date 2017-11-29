@@ -14,5 +14,14 @@ namespace BBH.BOS.Domain.Interfaces
         [OperationContract]
         IEnumerable<Package_CoinBO> ListAllPackageCoin(int start, int end);
 
+        [OperationContract]
+        bool InsertPackageCoin(Package_CoinBO packageCoin);
+
+        [OperationContract]
+        bool UpdatePackageCoin(Package_CoinBO packageCoin, int packageID, int coinID);
+        [OperationContract]
+        bool UpdateIsDeletePackageCoin(Package_CoinBO package, int packageID, int coinID, int isDelete);
+
+
     }
 }

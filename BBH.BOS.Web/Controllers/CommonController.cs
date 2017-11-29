@@ -222,8 +222,10 @@ namespace BBH.BOS.Web.Controllers
                     strBuilder.Append("<tr data-id='" + i + "'>");
                     strBuilder.Append("<td> " + item.PackageName + " </td>");
                     strBuilder.Append("<td><i class='fa fa-usd'></i> " + item.PackageValue + "</td>");
-                    strBuilder.Append("<td><span class='icon-clp-icon'></span> " + item.CoinName + "</td>");
-                    strBuilder.Append("<td><span class='icon-clp-icon'></span> " + item.CoinName + "</td>");
+                    strBuilder.Append("<td><i class='fa fa-usd'></i> " + item.PackageValue + "</td>");
+                    strBuilder.Append("<td><i class='fa fa-usd'></i> " + item.PackageValue + "</td>");
+                    //strBuilder.Append("<td><span class='icon-clp-icon'></span> " + item.CoinName + "</td>");
+
 
                     strBuilder.Append("</tr>");
                     i++;

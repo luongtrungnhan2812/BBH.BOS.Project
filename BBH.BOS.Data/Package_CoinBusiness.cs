@@ -55,6 +55,122 @@ namespace BBH.BOS.Data
                 helper.destroy();
             }
         }
-       
+        public bool InsertPackageCoin(Package_CoinBO packageCoin)
+        {
+            string fileLog = Path.GetDirectoryName(Path.Combine(pathLog, "Logs"));
+            Sqlhelper helper = new Sqlhelper("", "ConnectionString");
+            try
+            {
+                SqlParameter[] pa = new SqlParameter[5];
+                string sql = "SP_InsertPackageCoin";
+
+                pa[0] = new SqlParameter("@packageID", packageCoin.PackageID);
+                pa[1] = new SqlParameter("@coinID", packageCoin.CoinID);
+                pa[2] = new SqlParameter("@packageValue", packageCoin.PackageValue);
+                pa[3] = new SqlParameter("@createDate", packageCoin.CreateDate);
+                pa[4] = new SqlParameter("@isDelete", packageCoin.IsDelete);
+                //pa[5] = new SqlParameter("@updateDate", package.UpdateDate);
+                //pa[6] = new SqlParameter("@updateUser", package.UpdateUser);
+                //pa[7] = new SqlParameter("@deleteDate", package.DeleteDate);
+                //pa[8] = new SqlParameter("@deleteUser", package.DeleteUser);
+
+                SqlCommand command = helper.GetCommand(sql, pa, true);
+                //adminID = Convert.ToInt32(command.ExecuteScalar());
+                //return adminID;
+                int row = command.ExecuteNonQuery();
+                bool rs = false;
+                if (row > 0)
+                {
+                    rs = true;
+                }
+                return rs;
+            }
+            catch (Exception ex)
+            {
+                Utilitys.WriteLog(fileLog, "Exception insert Package : " + ex.Message);
+                return false;
+            }
+            finally
+            {
+                helper.destroy();
+            }
+        }
+        public bool UpdatePackageCoin(Package_CoinBO packageCoin, int packageID,int coinID)
+        {
+            string fileLog = Path.GetDirectoryName(Path.Combine(pathLog, "Logs"));
+            Sqlhelper helper = new Sqlhelper("", "ConnectionString");
+            try
+            {
+                SqlParameter[] pa = new SqlParameter[4];
+                string sql = "SP_UpdatePackageCoin";
+
+                pa[0] = new SqlParameter("@packageID", packageID);
+                pa[1] = new SqlParameter("@coinID", coinID);
+
+                pa[2] = new SqlParameter("@packageName", packageCoin.PackageValue);
+                //pa[3] = new SqlParameter("@createDate", packageCoin.CreateDate);
+                //pa[2] = new SqlParameter("@isDelete", package.IsDelete);
+                //pa[3] = new SqlParameter("@createDate", package.CreateDate);
+                //pa[4] = new SqlParameter("@createUser", package.CreateUser);
+                //pa[3] = new SqlParameter("@updateDate", package.UpdateDate);
+                //pa[4] = new SqlParameter("@updateUser", package.UpdateUser);
+                //pa[7] = new SqlParameter("@deleteDate", package.DeleteDate);
+                //pa[8] = new SqlParameter("@deleteUser", package.DeleteUser);
+
+
+                SqlCommand command = helper.GetCommand(sql, pa, true);
+                //adminID = Convert.ToInt32(command.ExecuteScalar());
+                //return adminID;
+                int row = command.ExecuteNonQuery();
+                bool rs = false;
+                if (row > 0)
+                {
+                    rs = true;
+                }
+                return rs;
+            }
+            catch (Exception ex)
+            {
+                Utilitys.WriteLog(fileLog, "Exception update package : " + ex.Message);
+                return false;
+            }
+            finally
+            {
+                helper.destroy();
+            }
+        }
+        public bool UpdateIsDeletePackageCoin(Package_CoinBO package, int packageID,int coinID, int isDelete)
+        {
+            string fileLog = Path.GetDirectoryName(Path.Combine(pathLog, "Logs"));
+            Sqlhelper helper = new Sqlhelper("", "ConnectionString");
+            try
+            {
+                bool rs = false;
+                string sql = "SP_DeletePackageCoin";
+                SqlParameter[] pa = new SqlParameter[5];
+
+                pa[0] = new SqlParameter("@packageID", packageID);
+                pa[1] = new SqlParameter("@coinID", package.CoinID);
+                pa[2] = new SqlParameter("@isDelete", isDelete);
+                pa[3] = new SqlParameter("@deleteDate", package.DeleteDate);
+                pa[4] = new SqlParameter("@deleteUser", package.DeleteUser);
+                SqlCommand command = helper.GetCommand(sql, pa, true);
+                int row = command.ExecuteNonQuery();
+                if (row > 0)
+                {
+                    rs = true;
+                }
+                return rs;
+            }
+            catch (Exception ex)
+            {
+                Utilitys.WriteLog(fileLog, ex.Message);
+                return false;
+            }
+            finally
+            {
+                helper.destroy();
+            }
+        }
     }
 }

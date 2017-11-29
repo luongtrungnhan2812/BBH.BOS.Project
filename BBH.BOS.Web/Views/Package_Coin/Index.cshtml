@@ -68,7 +68,8 @@
                                                 <tr>
                                                     <th>PackageID</th>
                                                     <th>CoinID</th>
-                                                    
+                                                    @*<th>PackageName</th>
+                                                    <th>CoinName</th>*@
                                                     <th>PackageValue</th>
                                                     <th>CreateDate</th>
                                                     @*<th>Status</th>*@
@@ -99,9 +100,12 @@
                                                                
                                                             <td class="center">
                                                                 <img src="/Images/loading.gif" id="imgLoading_@package.PackageID" style="position: absolute; display:none ; float: right; width: 30px; margin-left: 45px; ">
-                                                                <a class="teal-text" data-toggle="modal" data-placement="top" title="Edit" href="javascript:void(0)" onclick="ShowpopupEditpackageCoin('@package.PackageID','@package.CoinID')" data-target="#standardModal"><i class="fa fa-pencil"></i></a>
-                                                                <a class="red-text" data-toggle="modal" data-placement="top" title="Remove" href="javascript:void(0)" onclick="ConfirmPackage('@package.PackageID')"><i class="fa fa-times"></i></a>
-
+                                                                <a class="teal-text" data-toggle="modal" data-placement="top" title="Edit" href="javascript:void(0)" onclick="ShowpopupEditpackageCoin('@package.PackageID','@package.CoinID','@package.PackageValue')" data-target="#standardModal"><i class="fa fa-pencil"></i></a>
+                                                                @if (package.IsDelete == 0)
+                                                                {
+                                                                  
+                                                                    <a class="red-text" data-toggle="modal" data-placement="top" title="Remove" href="javascript:void(0)" onclick="ConfirmPackage_Coin('@package.PackageID','@package.IsDelete')"><i class="fa fa-times"></i></a>
+                                                                }
                                                                
 
                                                             </td>
@@ -280,7 +284,7 @@
                                         {
                                             foreach (PackageBO package in lstPackage)
                                             {
-                                                <option value="@package.PackageID">@package.PackageID</option>
+                                                <option value="@package.PackageID">@package.PackageName</option>
                                             }
                                         }
                                     }
@@ -293,14 +297,14 @@
                             <div class="controls">
                                 <select id="cbCoin" name="cbCoin" onchange="ResetForm('lbErrorCoin', this.value)" class="form-control" data-rel="chosen">
                                     <option value="0">Select CoinID</option>
-                                    @if (ViewData["ListPackage"] != null)
+                                    @if (ViewData["ListCoin"] != null)
                                     {
-                                        IEnumerable<PackageBO> lstPackage = (IEnumerable<PackageBO>)ViewData["ListPackage"];
-                                        if (lstPackage != null && lstPackage.Count() > 0)
+                                        IEnumerable<CoinBO> lstCoin = (IEnumerable<CoinBO>)ViewData["ListCoin"];
+                                        if (lstCoin != null && lstCoin.Count() > 0)
                                         {
-                                            foreach (PackageBO package in lstPackage)
+                                            foreach (CoinBO coin in lstCoin)
                                             {
-                                                <option value="@package.PackageID">@package.PackageID</option>
+                                                <option value="@coin.CoinID">@coin.CoinName</option>
                                             }
                                         }
                                     }
@@ -333,3 +337,4 @@
     </div>
 </div>
 
+<script src="/Scripts/packagecoin/packagecoin.js"></script>

@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CoinBusiness.cs" />
     <Compile Include="MemberBusiness.cs" />
     <Compile Include="PackageBusiness.cs" />
     <Compile Include="Package_CoinBusiness.cs" />
