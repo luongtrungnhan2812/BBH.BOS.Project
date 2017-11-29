@@ -216,17 +216,65 @@ namespace BBH.BOS.Web.Controllers
             lstPackageInformationBO = ObjIPackgeServices.ListAllPackageInformation();
             if (lstPackageInformationBO != null && lstPackageInformationBO.Count() > 0)
             {
-                int i = 1;
+                List<string> lstPackageID = new List<string>();
+                List<string> lstCoinID = new List<string>();
+                List<string> lstCoinName = new List<string>();
                 foreach (PackageInformationBO item in lstPackageInformationBO)
                 {
-                    strBuilder.Append("<tr data-id='" + i + "'>");
-                    strBuilder.Append("<td> " + item.PackageName + " </td>");
-                    strBuilder.Append("<td><i class='fa fa-usd'></i> " + item.PackageValue + "</td>");
-                    strBuilder.Append("<td><span class='icon-clp-icon'></span> " + item.CoinName + "</td>");
-                    strBuilder.Append("<td><span class='icon-clp-icon'></span> " + item.CoinName + "</td>");
-
+                    if (lstPackageID.IndexOf(item.PackageID.ToString()) == -1)
+                    {
+                        lstPackageID.Add(item.PackageID.ToString());
+                    }
+                    if (lstCoinID.IndexOf(item.CoinID.ToString()) == -1)
+                    {
+                        lstCoinID.Add(item.CoinID.ToString());
+                    }
+                    if (lstCoinName.IndexOf(item.CoinName.ToString()) == -1)
+                    {
+                        lstCoinName.Add(item.CoinName.ToString());
+                    }
+                }
+                if (lstPackageID.Count > 0 && lstCoinID.Count > 0 && lstCoinName.Count > 0)
+                {
+                    IEnumerable<PackageInformationBO> lstPackageInformationBOTemp = null;
+                    strBuilder.Append("<thead>");
+                    strBuilder.Append("<tr id = 'table_th' >");
+                    strBuilder.Append("<th> Package </th>");
+                    for (int k = 0; k < lstCoinName.Count; k++)
+                    {
+                        strBuilder.Append("<th> "+ lstCoinName[k] + " </th>");
+                    }
                     strBuilder.Append("</tr>");
-                    i++;
+                    strBuilder.Append("</thead>");
+                    strBuilder.Append("<tbody>");
+                    for (int i = 0; i < lstPackageID.Count; i++)
+                    {
+                        strBuilder.Append("<tr data-id='" + i + "'>");
+                        lstPackageInformationBOTemp = lstPackageInformationBO.Where(x => x.PackageID == int.Parse(lstPackageID[i])).ToList();
+                        if (lstPackageInformationBOTemp.Count() > 0)
+                        {
+                            foreach (var item in lstPackageInformationBOTemp)
+                            {
+                                strBuilder.Append("<td> " + item.PackageName + " </td>");
+                                break;
+                            }
+                        }
+                        for (int j = 0; j < lstCoinID.Count; j++)
+                        {
+                            if (lstPackageInformationBOTemp.Count() > 0)
+                            {
+                                foreach (var item in lstPackageInformationBOTemp)
+                                {
+                                    if (lstCoinID[j] == item.CoinID.ToString())
+                                    {
+                                        strBuilder.Append("<td> " + item.PackageValue + " </td>"); 
+                                    }
+                                }
+                            }
+                        }
+                        strBuilder.Append("</tr>");
+                    }
+                    strBuilder.Append("</tbody>");
                 }
             }
             return strBuilder.ToString();
