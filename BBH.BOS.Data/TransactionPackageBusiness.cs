@@ -23,16 +23,16 @@ namespace BBH.BOS.Data
             {
                 bool rs = false;
                 string sql = "SP_InsertTransactionPackageFE";
-                SqlParameter[] pa = new SqlParameter[8];
-                pa[0] = new SqlParameter("@memberID", transaction.MemberID);
-                pa[1] = new SqlParameter("@packageID", transaction.PackageID);
-                pa[1] = new SqlParameter("@coinID", transaction.CoinID);
-                pa[2] = new SqlParameter("@status", transaction.Status);
-                pa[3] = new SqlParameter("@createDate", transaction.CreateDate);
-                pa[4] = new SqlParameter("@expireDate", transaction.ExpireDate);
-                pa[5] = new SqlParameter("@transactionbitcoin", transaction.TransactionBitcoin);
-                pa[6] = new SqlParameter("@note", transaction.Note);
-                pa[7] = new SqlParameter("@transactioncode", transaction.TransactionCode);
+                SqlParameter[] pa = new SqlParameter[9];
+                pa[0] = new SqlParameter("@memberid", transaction.MemberID);
+                pa[1] = new SqlParameter("@packageid", transaction.PackageID);
+                pa[2] = new SqlParameter("@coinid", transaction.CoinID);
+                pa[3] = new SqlParameter("@createdate", transaction.CreateDate);
+                pa[4] = new SqlParameter("@expiredate", transaction.ExpireDate);
+                pa[5] = new SqlParameter("@status", transaction.Status);
+                pa[6] = new SqlParameter("@transactioncode", transaction.TransactionCode);
+                pa[7] = new SqlParameter("@note", transaction.Note);
+                pa[8] = new SqlParameter("@transactionbitcoin", transaction.TransactionBitcoin);
                 SqlCommand command = helper.GetCommand(sql, pa, true);
                 int row = command.ExecuteNonQuery();
                 if (row > 0)

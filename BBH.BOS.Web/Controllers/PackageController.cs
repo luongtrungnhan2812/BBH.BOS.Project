@@ -1,5 +1,6 @@
 ﻿using BBH.BOS.Domain.Entities;
 using BBH.BOS.Domain.Interfaces;
+using BBH.BOS.Shared;
 using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
@@ -13,12 +14,14 @@ namespace BBH.BOS.Web.Controllers
     {
         [Dependency]
         protected IPackageService Packagerepository { get; set; }
+        [Dependency]
+        protected ITransactionPackageService TransactionPackageRepository { get; set; }
         // GET: Package
         public ActionResult Index(string p)
         {
             if (Session["UserName"] == null)
             {
-                Response.Redirect("/login");
+                Response.Redirect("/");
             }
 
 
@@ -80,7 +83,7 @@ namespace BBH.BOS.Web.Controllers
         }
 
         [HttpPost]
-        public string SavePackage(int packageID, string packageName,double packageValue)
+        public string SavePackage(int packageID, string packageName, double packageValue)
         {
             string result = "";
             PackageBO package = new PackageBO();
@@ -168,6 +171,42 @@ namespace BBH.BOS.Web.Controllers
             //    catch { result = "Erorr"; }
             //}
             return result;
+        }
+
+        [HttpPost]
+        public string InsertTransactionPackage(string packageId, string coinId)
+        {
+            MemberInformationBO member = new MemberInformationBO();
+            if (Session["MemberInfomation"] != null)
+            {
+                member = (MemberInformationBO)Session["MemberInfomation"];
+            }
+            else
+            {
+                Response.Redirect("/");
+            }
+            string result = "Fail";
+            string strCode = Utility.GenCode();
+            string tick = DateTime.Now.Ticks.ToString();
+            string transactionCode = Utility.MaHoaMD5(strCode + tick);
+            TransactionPackageBO objTransactionPackageBO = new TransactionPackageBO();
+            objTransactionPackageBO.CoinID = int.Parse(coinId);
+            objTransactionPackageBO.CreateDate = DateTime.Now;
+            objTransactionPackageBO.ExpireDate = DateTime.Now.AddDays(30);
+            objTransactionPackageBO.ExchangeRateID = -1;
+            objTransactionPackageBO.MemberID = member.MemberID;
+            objTransactionPackageBO.Note = "Buy package";
+            objTransactionPackageBO.PackageID = int.Parse(packageId);
+            objTransactionPackageBO.Status = 1;
+            objTransactionPackageBO.TransactionCode = transactionCode;
+            objTransactionPackageBO.TransactionBitcoin = "";
+            bool rs = TransactionPackageRepository.InsertTransactionPackage(objTransactionPackageBO);
+            if (rs)
+            {
+                result = "success";
+            }
+            return result;
+
         }
     }
 }
