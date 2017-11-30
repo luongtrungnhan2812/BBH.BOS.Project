@@ -189,18 +189,19 @@ namespace BBH.BOS.Web.Controllers
             string strCode = Utility.GenCode();
             string tick = DateTime.Now.Ticks.ToString();
             string transactionCode = Utility.MaHoaMD5(strCode + tick);
-            TransactionPackageBO objTransactionPackageBO = new TransactionPackageBO();
-            objTransactionPackageBO.CoinID = int.Parse(coinId);
-            objTransactionPackageBO.CreateDate = DateTime.Now;
-            objTransactionPackageBO.ExpireDate = DateTime.Now.AddDays(30);
-            objTransactionPackageBO.ExchangeRateID = -1;
-            objTransactionPackageBO.MemberID = member.MemberID;
-            objTransactionPackageBO.Note = "Buy package";
-            objTransactionPackageBO.PackageID = int.Parse(packageId);
-            objTransactionPackageBO.Status = 1;
-            objTransactionPackageBO.TransactionCode = transactionCode;
-            objTransactionPackageBO.TransactionBitcoin = "";
-            bool rs = TransactionPackageRepository.InsertTransactionPackage(objTransactionPackageBO);
+            bool rs = TransactionPackageRepository.InsertTransactionPackage(new TransactionPackageBO
+            {
+                CoinID = int.Parse(coinId),
+                CreateDate = DateTime.Now,
+                ExpireDate = DateTime.Now.AddDays(30),
+                ExchangeRateID = -1,
+                MemberID = member.MemberID,
+                Note = "Buy package",
+                PackageID = int.Parse(packageId),
+                Status = 1,
+                TransactionCode = transactionCode,
+                TransactionBitcoin = ""
+            });
             if (rs)
             {
                 result = "success";

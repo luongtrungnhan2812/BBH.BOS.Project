@@ -9,37 +9,6 @@
         }
     });
 });
-//$('#btn_submit').on('click', function () {
-//    //var CurrentPackageID = $('#myTable > tbody  > tr.checked').attr("data-id");
-//    var ChosenPackageID = $('#myTable > tbody  > tr.selected').attr("data-id");
-//    //if (CurrentPackageID >= ChosenPackageID)
-//    //{
-//    //    alert(CurrentPackageID);
-//    //}
-//    if (ChosenPackageID != '')
-//    {
-//        $.ajax({
-//            type: "POST",
-//            async: true,
-//            url: "/Package/InsertTransactionPackage",
-//            data: { packageID: ChosenPackageID},
-//            beforeSend: function () {
-
-//            },
-//            success: function (d) {
-//                if (d == 'success') {
-
-//                    noty({ text: "Update Success", layout: "bottomRight", type: "information" });
-//                    //setTimeout(function () { window.location.reload(); }, 2000);
-//                    //alert(d);
-//                }
-//            },
-//            error: function (e) {
-
-//            }
-//        });
-//    }
-//});
 $('#btn_submit').on('click', function () {
     debugger
     var ChosenPackageID = $('#myTable > tbody  > tr.selected').attr("data-id");
