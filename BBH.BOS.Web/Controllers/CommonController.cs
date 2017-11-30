@@ -61,7 +61,18 @@ namespace BBH.BOS.Web.Controllers
         }
         public ActionResult BuyPackage()
         {
-            ViewBag.strHtmlPackage = GenHtmlListPackage();
+            List<string> lststrHtml = new List<string>();
+            lststrHtml = GenHtmlListPackage();
+            if (lststrHtml.Count > 1)
+            {
+                ViewBag.strHtmlPackage = lststrHtml[0];
+                ViewBag.strHtmlRadioCheck = lststrHtml[1];
+            }
+            else
+            {
+                ViewBag.strHtmlPackage = "";
+                ViewBag.strHtmlRadioCheck = "";
+            }
             return PartialView();
         }
         public ActionResult PartialDashboard()
@@ -209,10 +220,12 @@ namespace BBH.BOS.Web.Controllers
         //    }
         //    return strBuilder.ToString();
         //}
-        private string GenHtmlListPackage()
+        private List<string> GenHtmlListPackage()
         {
+            List<string> lststrHtml = new List<string>();
             IEnumerable<PackageInformationBO> lstPackageInformationBO = null;
             StringBuilder strBuilder = new StringBuilder();
+            StringBuilder strBuilderRadioCheck = new StringBuilder();
             lstPackageInformationBO = ObjIPackgeServices.ListAllPackageInformation();
             if (lstPackageInformationBO != null && lstPackageInformationBO.Count() > 0)
             {
@@ -243,7 +256,7 @@ namespace BBH.BOS.Web.Controllers
                     strBuilder.Append("<th> Coin </th>");
                     for (int k = 0; k < lstCoinName.Count; k++)
                     {
-                        strBuilder.Append("<th> "+ lstCoinName[k] + " </th>");
+                        strBuilder.Append("<th> " + lstCoinName[k] + " </th>");
                     }
                     strBuilder.Append("</tr>");
                     strBuilder.Append("</thead>");
@@ -269,7 +282,7 @@ namespace BBH.BOS.Web.Controllers
                                 {
                                     if (lstCoinID[j] == item.CoinID.ToString())
                                     {
-                                        strBuilder.Append("<td> " + item.Price + " </td>"); 
+                                        strBuilder.Append("<td> " + item.Price + " </td>");
                                     }
                                 }
                             }
@@ -278,8 +291,23 @@ namespace BBH.BOS.Web.Controllers
                     }
                     strBuilder.Append("</tbody>");
                 }
+
+                if (lstCoinName.Count > 0)
+                {
+                    string strChecked = "checked";
+                    foreach (var item in lstCoinName)
+                    {
+                        strBuilderRadioCheck.Append("<div class='form-group'>");
+                        strBuilderRadioCheck.Append("<input name = 'group1' type='radio' id='chk" + item + "' checked='" + strChecked + "' class='with-gap'>");
+                        strBuilderRadioCheck.Append("<label for='chk" + item + "'>By " + item + "</label>");
+                        strBuilderRadioCheck.Append("</div>");
+                        strChecked = "";
+                    }
+                }
             }
-            return strBuilder.ToString();
+            lststrHtml.Add(strBuilder.ToString());
+            lststrHtml.Add(strBuilderRadioCheck.ToString());
+            return lststrHtml;
         }
     }
 }

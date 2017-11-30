@@ -37,33 +37,10 @@
 </style>
 <div id="msg_package"> </div>
 <table class="table" id="myTable">
-    @*<thead>
-            <tr id="table_th"> <th> Package</th> <th> Price</th> <th> EU Coin</th> </tr>
-        </thead>
-        <tbody>*@
     @Html.Raw(ViewBag.strHtmlPackage)
-    @*</tbody>*@
 </table>
-@*<div class="form-group">
-    <div class="text_center">
-        <input class="custom_check" type="radio" name="terms" id="ckbtc"><label for="ckbtc">By BTC</label>
-        <input class="custom_check" type="radio" name="terms" id="ckusd"><label for="ckusd">By USD</label>
-    </div>
-</div>*@
 <div class="form-inline text_center">
-
-    <div class="form-group">
-        <input name="group1" type="radio" id="radio11" checked="checked" class="with-gap">
-        <label for="radio11">Option 1</label>
-    </div>
-
-    <div class="form-group">
-        <input name="group1" type="radio" id="radio21" class="with-gap">
-        <label for="radio21">Option 2</label>
-    </div>
-
-    
-
+    @Html.Raw(ViewBag.strHtmlRadioCheck)
 </div>
 <div class="form-group">
     <div class="checkbox_register icheck">
