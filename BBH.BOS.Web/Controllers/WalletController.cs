@@ -15,6 +15,8 @@ namespace BBH.BOS.Web.Controllers
     {
         [Dependency]
         protected ITransactionWalletService transactionWallet { get; set; }
+        [Dependency]
+        protected ITransactionPackageService transactionPackage { get; set; }
         // GET: Wallet
         public ActionResult WalletBTC()
         {
@@ -89,8 +91,42 @@ namespace BBH.BOS.Web.Controllers
             {
                 ViewBag.NumberEUCoin = "0";
             }
-            ViewBag.strHtmlTransactionCoin = GenHtml_TractionCoin();
+            ViewBag.strHtmlTransactionPackage = GenHtml_TractionPackage();
             return View();
+        }
+        public string GenHtml_TractionPackage()
+        {
+            StringBuilder strBuilder = new StringBuilder();
+            int memberID = -1;
+            try
+            {
+                IEnumerable<TransactionPackageBO> lstTransactionPackageBO = null;
+                if (Session["MemberInfomation"] != null)
+                {
+                    MemberInformationBO member = (MemberInformationBO)Session["MemberInfomation"];
+                    memberID = member.MemberID;
+                }
+                lstTransactionPackageBO = transactionPackage.ListTransactionPackageByMember(memberID);
+                if (lstTransactionPackageBO != null && lstTransactionPackageBO.Count() > 0)
+                {
+                    foreach (var item in lstTransactionPackageBO)
+                    {
+                        strBuilder.Append("<tr>");
+                        strBuilder.Append("<td><span class='badge green'>" + (item.Status == 1 ? "Active" : "InActive") + "</span></td>");
+                        strBuilder.Append("<td> " + item.PackageName + " </ td >");
+                        strBuilder.Append("<td> " + item.Note + " </ td >");
+                        strBuilder.Append("<td class='hour'><small><span class='grey-text'><i class='fa fa-clock-o' aria-hidden='true'></i> "+item.CreateDate.ToString("dd/MM/yyyy hh:ss:mm")+"</span></small></td>");
+                        strBuilder.Append("</tr>");
+                    }
+
+                }
+                return strBuilder.ToString();
+            }
+            catch
+            {
+                return "";
+            }
+
         }
     }
 }
