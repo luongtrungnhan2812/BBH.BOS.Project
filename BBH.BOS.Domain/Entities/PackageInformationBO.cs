@@ -21,6 +21,8 @@ namespace BBH.BOS.Domain.Entities
         [DataMember]
         public double PackageValue { get; set; }
         [DataMember]
+        public double Price { get; set; }
+        [DataMember]
         public DateTime CreateDate { get; set; }
         [DataMember]
         public int IsDelete { get; set; }

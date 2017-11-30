@@ -61,7 +61,18 @@ namespace BBH.BOS.Web.Controllers
         }
         public ActionResult BuyPackage()
         {
-            ViewBag.strHtmlPackage = GenHtmlListPackage();
+            List<string> lststrHtml = new List<string>();
+            lststrHtml = GenHtmlListPackage();
+            if (lststrHtml.Count > 1)
+            {
+                ViewBag.strHtmlPackage = lststrHtml[0];
+                ViewBag.strHtmlRadioCheck = lststrHtml[1];
+            }
+            else
+            {
+                ViewBag.strHtmlPackage = "";
+                ViewBag.strHtmlRadioCheck = "";
+            }
             return PartialView();
         }
         public ActionResult PartialDashboard()
@@ -209,18 +220,22 @@ namespace BBH.BOS.Web.Controllers
         //    }
         //    return strBuilder.ToString();
         //}
-        private string GenHtmlListPackage()
+        private List<string> GenHtmlListPackage()
         {
+            List<string> lststrHtml = new List<string>();
             IEnumerable<PackageInformationBO> lstPackageInformationBO = null;
             StringBuilder strBuilder = new StringBuilder();
+            StringBuilder strBuilderRadioCheck = new StringBuilder();
             lstPackageInformationBO = ObjIPackgeServices.ListAllPackageInformation();
             if (lstPackageInformationBO != null && lstPackageInformationBO.Count() > 0)
             {
                 List<string> lstPackageID = new List<string>();
                 List<string> lstCoinID = new List<string>();
                 List<string> lstCoinName = new List<string>();
+                List<string> lstCoin = new List<string>();
                 foreach (PackageInformationBO item in lstPackageInformationBO)
                 {
+                    string strCoin = "";
                     if (lstPackageID.IndexOf(item.PackageID.ToString()) == -1)
                     {
                         lstPackageID.Add(item.PackageID.ToString());
@@ -228,10 +243,16 @@ namespace BBH.BOS.Web.Controllers
                     if (lstCoinID.IndexOf(item.CoinID.ToString()) == -1)
                     {
                         lstCoinID.Add(item.CoinID.ToString());
+                        strCoin += item.CoinID.ToString() + ";";
                     }
                     if (lstCoinName.IndexOf(item.CoinName.ToString()) == -1)
                     {
                         lstCoinName.Add(item.CoinName.ToString());
+                        strCoin += item.CoinName.ToString();
+                    }
+                    if (strCoin != "")
+                    {
+                        lstCoin.Add(strCoin);
                     }
                 }
                 if (lstPackageID.Count > 0 && lstCoinID.Count > 0 && lstCoinName.Count > 0)
@@ -240,22 +261,24 @@ namespace BBH.BOS.Web.Controllers
                     strBuilder.Append("<thead>");
                     strBuilder.Append("<tr id = 'table_th' >");
                     strBuilder.Append("<th> Package </th>");
+                    strBuilder.Append("<th> Coin </th>");
                     for (int k = 0; k < lstCoinName.Count; k++)
                     {
-                        strBuilder.Append("<th> "+ lstCoinName[k] + " </th>");
+                        strBuilder.Append("<th> " + lstCoinName[k] + " </th>");
                     }
                     strBuilder.Append("</tr>");
                     strBuilder.Append("</thead>");
                     strBuilder.Append("<tbody>");
                     for (int i = 0; i < lstPackageID.Count; i++)
                     {
-                        strBuilder.Append("<tr data-id='" + i + "'>");
+                        strBuilder.Append("<tr data-id='" + lstPackageID[i] + "'>");
                         lstPackageInformationBOTemp = lstPackageInformationBO.Where(x => x.PackageID == int.Parse(lstPackageID[i])).ToList();
                         if (lstPackageInformationBOTemp.Count() > 0)
                         {
                             foreach (var item in lstPackageInformationBOTemp)
                             {
                                 strBuilder.Append("<td> " + item.PackageName + " </td>");
+                                strBuilder.Append("<td> " + item.PackageValue + " </td>");
                                 break;
                             }
                         }
@@ -267,7 +290,7 @@ namespace BBH.BOS.Web.Controllers
                                 {
                                     if (lstCoinID[j] == item.CoinID.ToString())
                                     {
-                                        strBuilder.Append("<td> " + item.PackageValue + " </td>"); 
+                                        strBuilder.Append("<td> " + item.Price + " </td>");
                                     }
                                 }
                             }
@@ -276,8 +299,27 @@ namespace BBH.BOS.Web.Controllers
                     }
                     strBuilder.Append("</tbody>");
                 }
+
+                if (lstCoin.Count > 0)
+                {
+                    string strChecked = "checked";
+                    foreach (var item in lstCoin)
+                    {
+                        string[] strArray = item.Split(';');
+                        if (strArray.Count() > 1)
+                        {
+                            strBuilderRadioCheck.Append("<div class='form-group'>");
+                            strBuilderRadioCheck.Append("<input name = 'groupCheckPackage' type='radio' data-value='"+ strArray[0] + "' id='chk" + strArray[1] + "' checked='" + strChecked + "' class='with-gap'>");
+                            strBuilderRadioCheck.Append("<label for='chk" + strArray[1] + "'>By " + strArray[1] + "</label>");
+                            strBuilderRadioCheck.Append("</div>");
+                            strChecked = "";
+                        }
+                    }
+                }
             }
-            return strBuilder.ToString();
+            lststrHtml.Add(strBuilder.ToString());
+            lststrHtml.Add(strBuilderRadioCheck.ToString());
+            return lststrHtml;
         }
     }
 }

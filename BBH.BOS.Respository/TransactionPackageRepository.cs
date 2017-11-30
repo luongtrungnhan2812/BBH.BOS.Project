@@ -22,5 +22,16 @@ namespace BBH.BOS.Respository
                 return false;
             }
         }
+        public IEnumerable<TransactionPackageBO> ListTransactionPackageByMember(int memberID)
+        {
+            try
+            {
+                return Proxy.ListTransactionPackageByMember(memberID);
+            }
+            catch
+            {
+                return null;
+            }
+        }
     }
 }

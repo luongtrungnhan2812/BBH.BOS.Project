@@ -265,6 +265,7 @@ namespace BBH.BOS.Data
                     //package.DeleteUser = reader["DeleteUser"].ToString();
                     //package.DeleteDate = DateTime.Parse(reader["DeleteDate"].ToString());
                     //package.TotalRecord = int.Parse(reader["TOTALROWS"].ToString());
+                    package.Price = double.Parse(reader["Price"].ToString());
                     lstPackage.Add(package);
 
                 }

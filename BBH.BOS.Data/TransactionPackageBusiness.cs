@@ -23,16 +23,16 @@ namespace BBH.BOS.Data
             {
                 bool rs = false;
                 string sql = "SP_InsertTransactionPackageFE";
-                SqlParameter[] pa = new SqlParameter[8];
-                pa[0] = new SqlParameter("@memberID", transaction.MemberID);
-                pa[1] = new SqlParameter("@packageID", transaction.PackageID);
-                pa[1] = new SqlParameter("@coinID", transaction.CoinID);
-                pa[2] = new SqlParameter("@status", transaction.Status);
-                pa[3] = new SqlParameter("@createDate", transaction.CreateDate);
-                pa[4] = new SqlParameter("@expireDate", transaction.ExpireDate);
-                pa[5] = new SqlParameter("@transactionbitcoin", transaction.TransactionBitcoin);
-                pa[6] = new SqlParameter("@note", transaction.Note);
-                pa[7] = new SqlParameter("@transactioncode", transaction.TransactionCode);
+                SqlParameter[] pa = new SqlParameter[9];
+                pa[0] = new SqlParameter("@memberid", transaction.MemberID);
+                pa[1] = new SqlParameter("@packageid", transaction.PackageID);
+                pa[2] = new SqlParameter("@coinid", transaction.CoinID);
+                pa[3] = new SqlParameter("@createdate", transaction.CreateDate);
+                pa[4] = new SqlParameter("@expiredate", transaction.ExpireDate);
+                pa[5] = new SqlParameter("@status", transaction.Status);
+                pa[6] = new SqlParameter("@transactioncode", transaction.TransactionCode);
+                pa[7] = new SqlParameter("@note", transaction.Note);
+                pa[8] = new SqlParameter("@transactionbitcoin", transaction.TransactionBitcoin);
                 SqlCommand command = helper.GetCommand(sql, pa, true);
                 int row = command.ExecuteNonQuery();
                 if (row > 0)
@@ -51,45 +51,43 @@ namespace BBH.BOS.Data
                 helper.destroy();
             }
         }
-        //public IEnumerable<TransactionPackageBO> ListTransactionPackageByMember(int memberID)
-        //{
-        //    Sqlhelper helper = new Sqlhelper("", "ConnectionString");
-        //    try
-        //    {
-        //        List<TransactionPackageBO> lstTransaction = new List<TransactionPackageBO>();
-        //        string sql = "SP_ListTransactionPackageByMemberFE";
-        //        SqlParameter[] pa = new SqlParameter[1];
-        //        pa[0] = new SqlParameter("@memberID", memberID);
-        //        SqlCommand command = helper.GetCommand(sql, pa, true);
-        //        SqlDataReader reader = command.ExecuteReader();
-        //        while (reader.Read())
-        //        {
-        //            TransactionPackageBO transaction = new TransactionPackageBO();
-        //            transaction.MemberID = int.Parse(reader["MemberID"].ToString());
+        public IEnumerable<TransactionPackageBO> ListTransactionPackageByMember(int memberID)
+        {
+            Sqlhelper helper = new Sqlhelper("", "ConnectionString");
+            try
+            {
+                List<TransactionPackageBO> lstTransaction = new List<TransactionPackageBO>();
+                string sql = "SP_ListTransactionByMember";
+                SqlParameter[] pa = new SqlParameter[1];
+                pa[0] = new SqlParameter("@memberID", memberID);
+                SqlCommand command = helper.GetCommand(sql, pa, true);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    TransactionPackageBO transaction = new TransactionPackageBO();
+                    transaction.MemberID = int.Parse(reader["MemberID"].ToString());
+                    transaction.Status = int.Parse(reader["Status"].ToString());
+                    transaction.CoinID = int.Parse(reader["CoinID"].ToString());
+                    transaction.CreateDate = DateTime.Parse(reader["CreateDate"].ToString());
+                    transaction.ExpireDate = DateTime.Parse(reader["ExpireDate"].ToString());
+                    transaction.PackageID = int.Parse(reader["PackageID"].ToString());
+                    transaction.PackageName = reader["PackageName"].ToString();
+                    transaction.TransactionCode = reader["TransactionCode"].ToString();
+                    transaction.Note = reader["Note"].ToString();
+                    lstTransaction.Add(transaction);
 
-        //            transaction.Status = int.Parse(reader["Status"].ToString());
-        //            transaction.CreateDate = DateTime.Parse(reader["CreateDate"].ToString());
-        //            transaction.ExpireDate = DateTime.Parse(reader["ExpireDate"].ToString());
-        //            transaction.PackageID = int.Parse(reader["PackageID"].ToString());
-        //            transaction.PackageName = reader["PackageName"].ToString();
-        //            transaction.TransactionValue = reader["TransactionCode"].ToString();
-        //            transaction.Note = reader["Note"].ToString();
-        //            transaction.Email = reader["Email"].ToString();
-        //            transaction.E_Wallet = reader["E_Wallet"].ToString();
-        //            lstTransaction.Add(transaction);
-
-        //        }
-        //        return lstTransaction;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Utilitys.WriteLog(fileLog, ex.Message);
-        //        return null;
-        //    }
-        //    finally
-        //    {
-        //        helper.destroy();
-        //    }
-        //}
+                }
+                return lstTransaction;
+            }
+            catch (Exception ex)
+            {
+                Utilitys.WriteLog(fileLog, ex.Message);
+                return null;
+            }
+            finally
+            {
+                helper.destroy();
+            }
+        }
     }
 }
