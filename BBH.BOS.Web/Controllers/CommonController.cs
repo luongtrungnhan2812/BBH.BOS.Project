@@ -240,6 +240,7 @@ namespace BBH.BOS.Web.Controllers
                     strBuilder.Append("<thead>");
                     strBuilder.Append("<tr id = 'table_th' >");
                     strBuilder.Append("<th> Package </th>");
+                    strBuilder.Append("<th> Coin </th>");
                     for (int k = 0; k < lstCoinName.Count; k++)
                     {
                         strBuilder.Append("<th> "+ lstCoinName[k] + " </th>");
@@ -249,13 +250,14 @@ namespace BBH.BOS.Web.Controllers
                     strBuilder.Append("<tbody>");
                     for (int i = 0; i < lstPackageID.Count; i++)
                     {
-                        strBuilder.Append("<tr data-id='" + i + "'>");
+                        strBuilder.Append("<tr data-id='" + lstPackageID[i] + "'>");
                         lstPackageInformationBOTemp = lstPackageInformationBO.Where(x => x.PackageID == int.Parse(lstPackageID[i])).ToList();
                         if (lstPackageInformationBOTemp.Count() > 0)
                         {
                             foreach (var item in lstPackageInformationBOTemp)
                             {
                                 strBuilder.Append("<td> " + item.PackageName + " </td>");
+                                strBuilder.Append("<td> " + item.PackageValue + " </td>");
                                 break;
                             }
                         }
@@ -267,7 +269,7 @@ namespace BBH.BOS.Web.Controllers
                                 {
                                     if (lstCoinID[j] == item.CoinID.ToString())
                                     {
-                                        strBuilder.Append("<td> " + item.PackageValue + " </td>"); 
+                                        strBuilder.Append("<td> " + item.Price + " </td>"); 
                                     }
                                 }
                             }
