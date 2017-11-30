@@ -12,34 +12,63 @@
     .alert {
         border-radius: 3px;
     }
+
     .custom_check {
         position: unset !important;
         left: unset !important;
         visibility: unset !important;
     }
+
     tr.checked {
         background-color: #d9edf7 !important;
     }
+
     tr.selected {
         background-color: #5bc0de !important;
     }
+
     .form-group.has-error .help-block {
         color: #dd4b39;
     }
+    .text_center {
+        text-align: center;
+        margin-bottom: 1rem;
+    }
 </style>
-    <div id="msg_package"> </div>
-    <table class="table" id="myTable">
-        @*<thead>
+<div id="msg_package"> </div>
+<table class="table" id="myTable">
+    @*<thead>
             <tr id="table_th"> <th> Package</th> <th> Price</th> <th> EU Coin</th> </tr>
         </thead>
         <tbody>*@
-            @Html.Raw(ViewBag.strHtmlPackage)
-        @*</tbody>*@
-    </table>
-    <div class="form-group">
-        <div class="checkbox_register icheck">
-            <input class="custom_check" type="checkbox" name="terms" id="termsPackage"> <a href="/package-term-condition.html" target="_blank"> Term and condition</a>
-        </div>
-        <span class="help-block"> </span>
+    @Html.Raw(ViewBag.strHtmlPackage)
+    @*</tbody>*@
+</table>
+@*<div class="form-group">
+    <div class="text_center">
+        <input class="custom_check" type="radio" name="terms" id="ckbtc"><label for="ckbtc">By BTC</label>
+        <input class="custom_check" type="radio" name="terms" id="ckusd"><label for="ckusd">By USD</label>
     </div>
+</div>*@
+<div class="form-inline text_center">
+
+    <div class="form-group">
+        <input name="group1" type="radio" id="radio11" checked="checked" class="with-gap">
+        <label for="radio11">Option 1</label>
+    </div>
+
+    <div class="form-group">
+        <input name="group1" type="radio" id="radio21" class="with-gap">
+        <label for="radio21">Option 2</label>
+    </div>
+
+    
+
+</div>
+<div class="form-group">
+    <div class="checkbox_register icheck">
+        <input class="custom_check" type="checkbox" name="terms" id="termsPackage"> <a href="/package-term-condition.html" target="_blank"> Term and condition</a>
+    </div>
+    <span class="help-block"> </span>
+</div>
 
