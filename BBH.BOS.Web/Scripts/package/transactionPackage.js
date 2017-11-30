@@ -10,7 +10,6 @@
     });
 });
 $('#btn_submit').on('click', function () {
-    debugger
     var ChosenPackageID = $('#myTable > tbody  > tr.selected').attr("data-id");
     var CheckValue = $("input[name='groupCheckPackage']:checked").attr("data-value");
     if (!$('#termsPackage').is(':checked')) {
@@ -40,10 +39,11 @@ $('#btn_submit').on('click', function () {
                     },
                     success: function (d) {
                         if (d == 'success') {
-
-                            noty({ text: "Update Success", layout: "bottomRight", type: "information" });
-                            //setTimeout(function () { window.location.reload(); }, 2000);
-                            //alert(d);
+                            swal({
+                                title: 'Success!',
+                                //text: 'Buy success!',
+                                type: 'success'
+                            });
                         }
                     },
                     error: function (e) {
