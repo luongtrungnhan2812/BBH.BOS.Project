@@ -39,9 +39,10 @@
     }
 }
 
-function ShowPopUpEditPackage(packageID, packageName) {
+function ShowPopUpEditPackage(packageID, packageName,packageValue) {
     $('#hdPackageID').val(packageID);
     $('#txtPackageName').val(packageName);
+    $('#txtPackageValue').val(packageValue);
 }
 function ResetForm(id, value) {
     $('#' + id).text('');
@@ -51,6 +52,7 @@ function SavePackage() {
     var checkReg = true;
     var packageID = $('#hdPackageID').val();
     var packageName = $('#txtPackageName').val();
+    var packageValue = $('#txtPackageValue').val();
     
 
     if (packageName == '') {
@@ -58,7 +60,13 @@ function SavePackage() {
         $('#lbErrorPackageName').css('display', '');
         checkReg = false;
     }
-    
+
+    if (packageValue == '') {
+        $('#lbErrorPackageValue').text('Please input package Value');
+        $('#lbErrorPackageValue').css('display', '');
+        checkReg = false;
+    }
+
     if (!checkReg) {
         return false;
     }
@@ -68,7 +76,7 @@ function SavePackage() {
             type: "post",
             async: true,
             url: "/Package/SavePackage",
-            data: { packageID: packageID, packageName: packageName },
+            data: { packageID: packageID, packageName: packageName, packageValue: packageValue },
             beforeSend: function () {
                 $('#imgLoading').css("display", "");
             },

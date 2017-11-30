@@ -80,7 +80,7 @@ namespace BBH.BOS.Web.Controllers
         }
 
         [HttpPost]
-        public string SavePackage(int packageID, string packageName)
+        public string SavePackage(int packageID, string packageName,double packageValue)
         {
             string result = "";
             PackageBO package = new PackageBO();
@@ -94,6 +94,7 @@ namespace BBH.BOS.Web.Controllers
                 try
                 {
                     package.PackageName = packageName;
+                    package.PackageValue = packageValue;
                     package.IsActive = 1;
                     package.UpdateDate = DateTime.Now;
                     package.UpdateUser = (string)Session["FullName"];
@@ -115,6 +116,7 @@ namespace BBH.BOS.Web.Controllers
                 try
                 {
                     package.PackageName = packageName;
+                    package.PackageValue = packageValue;
                     package.IsActive = 1;
                     package.IsDelete = 1;
                     package.CreateDate = DateTime.Now;

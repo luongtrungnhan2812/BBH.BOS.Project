@@ -34,6 +34,7 @@ namespace BBH.BOS.Data
                     package.PackageID = int.Parse(reader["PackageID"].ToString());
 
                     package.PackageName = reader["PackageName"].ToString();
+                    package.PackageValue = double.Parse(reader["PackageValue"].ToString());
                     package.IsActive = int.Parse(reader["IsActive"].ToString());
                     package.IsDelete = int.Parse(reader["IsDelete"].ToString());
 
@@ -66,13 +67,14 @@ namespace BBH.BOS.Data
             Sqlhelper helper = new Sqlhelper("", "ConnectionString");
             try
             {
-                SqlParameter[] pa = new SqlParameter[5];
+                SqlParameter[] pa = new SqlParameter[6];
                 string sql = "SP_InsertPackage";
                 pa[0] = new SqlParameter("@packageName", package.PackageName);
-                pa[1] = new SqlParameter("@isActive", package.IsActive);
-                pa[2] = new SqlParameter("@isDelete", package.IsDelete);
-                pa[3] = new SqlParameter("@createDate", package.CreateDate);
-                pa[4] = new SqlParameter("@createUser", package.CreateUser);
+                pa[1] = new SqlParameter("@packageValue", package.PackageValue);
+                pa[2] = new SqlParameter("@isActive", package.IsActive);
+                pa[3] = new SqlParameter("@isDelete", package.IsDelete);
+                pa[4] = new SqlParameter("@createDate", package.CreateDate);
+                pa[5] = new SqlParameter("@createUser", package.CreateUser);
                 //pa[5] = new SqlParameter("@updateDate", package.UpdateDate);
                 //pa[6] = new SqlParameter("@updateUser", package.UpdateUser);
                 //pa[7] = new SqlParameter("@deleteDate", package.DeleteDate);
@@ -107,17 +109,18 @@ namespace BBH.BOS.Data
             Sqlhelper helper = new Sqlhelper("", "ConnectionString");
             try
             {
-                SqlParameter[] pa = new SqlParameter[5];
+                SqlParameter[] pa = new SqlParameter[6];
                 string sql = "SP_UpdatePackage";
 
                 pa[0] = new SqlParameter("@packageID", packageID);
                 pa[1] = new SqlParameter("@packageName", package.PackageName);
-                pa[2] = new SqlParameter("@isActive", package.IsActive);
+                pa[2] = new SqlParameter("@packageValue", package.PackageValue);
+                pa[3] = new SqlParameter("@isActive", package.IsActive);
                 //pa[2] = new SqlParameter("@isDelete", package.IsDelete);
                 //pa[3] = new SqlParameter("@createDate", package.CreateDate);
                 //pa[4] = new SqlParameter("@createUser", package.CreateUser);
-                pa[3] = new SqlParameter("@updateDate", package.UpdateDate);
-                pa[4] = new SqlParameter("@updateUser", package.UpdateUser);
+                pa[4] = new SqlParameter("@updateDate", package.UpdateDate);
+                pa[5] = new SqlParameter("@updateUser", package.UpdateUser);
                 //pa[7] = new SqlParameter("@deleteDate", package.DeleteDate);
                 //pa[8] = new SqlParameter("@deleteUser", package.DeleteUser);
                 
@@ -256,7 +259,7 @@ namespace BBH.BOS.Data
                     package.CoinID = int.Parse(reader["CoinID"].ToString());
 
                     package.PackageName = reader["PackageName"].ToString();
-                    //package.IsDelete = int.Parse(reader["IsDelete"].ToString());
+                    package.PackageValue = double.Parse(reader["PackageValue"].ToString());
 
                     //package.CreateDate = DateTime.Parse(reader["CreateDate"].ToString());
                     package.CoinName = reader["CoinName"].ToString();

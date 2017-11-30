@@ -68,9 +68,9 @@
                                                 <tr>
                                                     <th>PackageID</th>
                                                     <th>PackageName</th>
+                                                    <th>PackageValue</th>
                                                     <th>CreateUser</th>
                                                     <th>CreateDate</th>
-                                                    <th>Status</th>
                                                     <th>Confirm</th>
                                                 </tr>
                                             </thead>
@@ -85,39 +85,41 @@
                                                     {
                                                         foreach (PackageBO package in lstPackage)
                                                         {
-                                                            string titleIsDelete = "";
-                                                            string isDelete = "";
+                                                            //string titleIsDelete = "";
+                                                            //string isDelete = "";
                                                             //if (package.IsDelete == 0)
                                                             //{
                                                             //    isDelete = "Not confirm";
                                                             //    titleIsDelete = "Confirm";
                                                             //}
-                                                             if (package.IsDelete == 1)
-                                                            {
-                                                                isDelete = "Actived";
-                                                                titleIsDelete = "Actived";
-                                                            }
-                                                            else if (package.IsDelete == 0)
-                                                            {
-                                                                isDelete = "Deleted";
-                                                                titleIsDelete = "";
-                                                            }
+                                                            // if (package.IsDelete == 1)
+                                                            //{
+                                                            //    isDelete = "Actived";
+                                                            //    titleIsDelete = "Actived";
+                                                            //}
+                                                            //else if (package.IsDelete == 0)
+                                                            //{
+                                                            //    isDelete = "Deleted";
+                                                            //    titleIsDelete = "";
+                                                            //}
 
 
                                                             <tr id="trpackage_@package.PackageID" class="none-top-border">
                                                                 <td class="center">@package.PackageID</td>
                                                                 <td class="center">@package.PackageName</td>
+                                                                <td class="center">@package.PackageValue</td>
+
                                                                 <td class="center">@Session["FullName"]</td>
                                                                 <td class="center">@package.CreateDate.ToString("dd/MM/yyyy HH:mm:ss")</td>
 
-                                                                <td class="center">
+                                                                @*<td class="center">
                                                                     <span class="label-success label label-default">@isDelete
                                                                     </span>
-                                                                </td>
+                                                                </td>*@
                                                                 <td class="center">
                                                                     <img src="/Images/loading.gif" id="imgLoading_@package.PackageID" style="position: absolute; display:none ; float: right; width: 30px; margin-left: 45px; ">
                                                                     @*<a class="btn btn-info btn-sm" href="javascript:void(0)" onclick="ShowPopUpEditPackage('@package.PackageID','@package.PackageName')" data-toggle="modal" data-target="#standardModal"><i class="glyphicon glyphicon-edit icon-white"></i>Edit</a>*@
-                                                                    <a class="teal-text" data-toggle="modal" data-placement="top" title="Edit" href="javascript:void(0)" onclick="ShowPopUpEditPackage('@package.PackageID','@package.PackageName')" data-target="#standardModal"><i class="fa fa-pencil"></i></a>
+                                                                    <a class="teal-text" data-toggle="modal" data-placement="top" title="Edit" href="javascript:void(0)" onclick="ShowPopUpEditPackage('@package.PackageID','@package.PackageName','@package.PackageValue')" data-target="#standardModal"><i class="fa fa-pencil"></i></a>
 
                                                                     @if (package.IsDelete == 1)
                                                                     {
@@ -299,10 +301,30 @@
                         <!--First column-->
                         <div class="col-md-12">
                             <div class="md-form">
+                                <label>PackageName:</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="md-form">
                                 <input type="text" onfocus="ResetForm('lbErrorPackageName', this.value)" id="txtPackageName" name="txtPackageName" placeholder="package name" class="form-control validate">
 
                             </div>
                             <label id="lbErrorPackageName" style="color:red; display:none" class=""></label>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom:15px">
+                        <!--First column-->
+                        <div class="col-md-12">
+                            <div class="md-form">
+                                <label>PackageValue:</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="md-form">
+                                <input type="text" onfocus="ResetForm('lbErrorPackageValue', this.value)" id="txtPackageValue" name="txtPackageValue" placeholder="package value" class="form-control validate">
+
+                            </div>
+                            <label id="lbErrorPackageValue" style="color:red; display:none" class=""></label>
                         </div>
                     </div>
                 </form>
