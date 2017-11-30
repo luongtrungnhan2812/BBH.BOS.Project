@@ -1,1 +1,1 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="BBH.BOS.WCF.CoinBusiness" %>
+﻿<%@ ServiceHost Language = "C#" Debug="true" Service="BBH.BOS.Data.CoinBusiness" %>

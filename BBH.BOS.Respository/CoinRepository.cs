@@ -29,6 +29,5 @@ namespace BBH.BOS.Respository
                 return null;
             }
         }
-
     }
 }

@@ -118,7 +118,7 @@ namespace BBH.BOS.Web.Controllers
                     package.PackageName = packageName;
                     package.PackageValue = packageValue;
                     package.IsActive = 1;
-                    package.IsDelete = 1;
+                    package.IsDelete = 0;
                     package.CreateDate = DateTime.Now;
                     package.CreateUser = (string)Session["FullName"];
                     //package.DeleteDate = DateTime.Parse("1/1/1990");

@@ -107,7 +107,7 @@ namespace BBH.BOS.Data
                 pa[0] = new SqlParameter("@packageID", packageID);
                 pa[1] = new SqlParameter("@coinID", coinID);
 
-                pa[2] = new SqlParameter("@packageName", packageCoin.PackageValue);
+                pa[2] = new SqlParameter("@packageValue", packageCoin.PackageValue);
                 //pa[3] = new SqlParameter("@createDate", packageCoin.CreateDate);
                 //pa[2] = new SqlParameter("@isDelete", package.IsDelete);
                 //pa[3] = new SqlParameter("@createDate", package.CreateDate);
@@ -147,13 +147,15 @@ namespace BBH.BOS.Data
             {
                 bool rs = false;
                 string sql = "SP_DeletePackageCoin";
-                SqlParameter[] pa = new SqlParameter[5];
+                SqlParameter[] pa = new SqlParameter[6];
 
                 pa[0] = new SqlParameter("@packageID", packageID);
                 pa[1] = new SqlParameter("@coinID", package.CoinID);
-                pa[2] = new SqlParameter("@isDelete", isDelete);
-                pa[3] = new SqlParameter("@deleteDate", package.DeleteDate);
-                pa[4] = new SqlParameter("@deleteUser", package.DeleteUser);
+                pa[2] = new SqlParameter("@packageValue", package.PackageValue);
+
+                pa[3] = new SqlParameter("@isDelete", isDelete);
+                pa[4] = new SqlParameter("@deleteDate", package.DeleteDate);
+                pa[5] = new SqlParameter("@deleteUser", package.DeleteUser);
                 SqlCommand command = helper.GetCommand(sql, pa, true);
                 int row = command.ExecuteNonQuery();
                 if (row > 0)

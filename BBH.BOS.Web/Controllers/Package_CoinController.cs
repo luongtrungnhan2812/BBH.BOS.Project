@@ -61,14 +61,14 @@ namespace BBH.BOS.Web.Controllers
             IEnumerable<PackageBO> lstPackage = packageRopository.ListAllPackage(start, end);
             ViewData["ListPackage"] = lstPackage;
 
-            IEnumerable<CoinBO> lstCoin = coinRopository.ListAllCoin();
-            ViewData["ListCoin"] = lstCoin;
+            //IEnumerable<CoinBO> lstCoin = coinRopository.ListAllCoin();
+            //ViewData["ListCoin"] = lstCoin;
 
             return View();
         }
 
         [HttpPost]
-        public string UpdateIsDeletePackageCoin(Package_CoinBO packageCoin, int packageID,int coinID, int isDelete)
+        public string UpdateIsDeletePackageCoin(Package_CoinBO packageCoin, int packageID,int coinID,double packageValue, int isDelete)
         {
             string result = "";
             //PackageBO package = new PackageBO();
@@ -82,6 +82,7 @@ namespace BBH.BOS.Web.Controllers
                 statusNew = 1;
             }
             packageCoin.IsDelete = statusNew;
+            packageCoin.PackageValue = packageValue;
             packageCoin.DeleteDate = DateTime.Now;
             packageCoin.DeleteUser = (string)Session["FullName"];
 
@@ -100,15 +101,16 @@ namespace BBH.BOS.Web.Controllers
             string result = "";
             Package_CoinBO packageCoin = new Package_CoinBO();
 
-            if (Session["Emailmember"] == null)
-            {
-                Response.Redirect("/login");
-            }
-            if (packageID > 0)
+            //if (Session["Emailmember"] == null)
+            //{
+            //    Response.Redirect("/login");
+            //}
+            if (packageID == 0)
             {
                 try
                 {
                     packageCoin.PackageValue = packageValue;
+                    packageCoin.PackageID = packageID;
                     packageCoin.CoinID = coinID;
                     //package.UpdateDate = DateTime.Now;
                     //package.UpdateUser = (string)Session["FullName"];
@@ -125,12 +127,13 @@ namespace BBH.BOS.Web.Controllers
                 }
                 catch { result = "Erorr"; }
             }
-            else if (packageID == 0)
+            else if (packageID > 0)
             {
                 try
                 {
                     packageCoin.PackageID = packageID;
                     packageCoin.CoinID = coinID;
+                    packageCoin.PackageValue = packageValue;
                     packageCoin.IsDelete = 0;
                     packageCoin.CreateDate = DateTime.Now;
                                                          

@@ -32,12 +32,10 @@ namespace BBH.BOS.Data
                 {
                     PackageBO package = new PackageBO();
                     package.PackageID = int.Parse(reader["PackageID"].ToString());
-
                     package.PackageName = reader["PackageName"].ToString();
                     package.PackageValue = double.Parse(reader["PackageValue"].ToString());
                     package.IsActive = int.Parse(reader["IsActive"].ToString());
                     package.IsDelete = int.Parse(reader["IsDelete"].ToString());
-
                     package.CreateDate = DateTime.Parse(reader["CreateDate"].ToString());
                     package.CreateUser = reader["CreateUser"].ToString();
                     package.UpdateDate = DateTime.Parse(reader["UpdateDate"].ToString());
@@ -282,6 +280,7 @@ namespace BBH.BOS.Data
                 helper.destroy();
             }
         }
+
 
     }
 }

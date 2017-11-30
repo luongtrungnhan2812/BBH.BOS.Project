@@ -15,7 +15,7 @@
 
                     <!-- Navigation -->
                     <div class="col-md-4">
-                        <h4 class="h4-responsive mt-1"><a href="/package">Package</a></h4>
+                        <h4 class="h4-responsive mt-1"><a href="/coin">Coin</a></h4>
                     </div>
                     <div class="col-md-4">
                         <div class="md-form">
@@ -66,74 +66,41 @@
                                             <!--Table head-->
                                             <thead>
                                                 <tr>
-                                                    <th>PackageID</th>
-                                                    <th>PackageName</th>
-                                                    <th>PackageValue</th>
-                                                    <th>CreateUser</th>
-                                                    <th>CreateDate</th>
-                                                    <th>Confirm</th>
+                                                   
+                                                    <th>CoinID</th>
+                                                    <th>CoinName</th>
+                                                   <td>Confirm</td>
                                                 </tr>
                                             </thead>
                                             <!--/Table head-->
                                             <!--Table body-->
                                             <tbody id="tbodyListPackage">
 
-                                                @if (ViewData["Package"] != null)
+                                                @if (ViewData["ListCoin"] != null)
                                                 {
-                                                    IEnumerable<PackageBO> lstPackage = (IEnumerable<PackageBO>)ViewData["Package"];
-                                                    if (lstPackage != null && lstPackage.Count() > 0)
+                                                    IEnumerable<CoinBO> lstCoin = (IEnumerable<CoinBO>)ViewData["ListCoin"];
+                                                    if (lstCoin != null && lstCoin.Count() > 0)
                                                     {
-                                                        foreach (PackageBO package in lstPackage)
+                                                        foreach (CoinBO coin in lstCoin)
                                                         {
                                                             //string titleIsDelete = "";
                                                             //string isDelete = "";
-                                                            //if (package.IsDelete == 0)
-                                                            //{
-                                                            //    isDelete = "Not confirm";
-                                                            //    titleIsDelete = "Confirm";
-                                                            //}
-                                                            // if (package.IsDelete == 1)
-                                                            //{
-                                                            //    isDelete = "Actived";
-                                                            //    titleIsDelete = "Actived";
-                                                            //}
-                                                            //else if (package.IsDelete == 0)
-                                                            //{
-                                                            //    isDelete = "Deleted";
-                                                            //    titleIsDelete = "";
-                                                            //}
 
+                                                            <tr id="trpackage_@coin.CoinID" class="none-top-border">
+                                                                <td class="center">@coin.CoinID</td>
+                                                                <td class="center">@coin.CoinName</td>
+                                                              
 
-                                                            <tr id="trpackage_@package.PackageID" class="none-top-border">
-                                                                <td class="center">@package.PackageID</td>
-                                                                <td class="center">@package.PackageName</td>
-                                                                <td class="center">@package.PackageValue</td>
-
-                                                                <td class="center">@Session["FullName"]</td>
-                                                                <td class="center">@package.CreateDate.ToString("dd/MM/yyyy HH:mm:ss")</td>
-
-                                                                @*<td class="center">
-                                                                    <span class="label-success label label-default">@isDelete
-                                                                    </span>
-                                                                </td>*@
                                                                 <td class="center">
-                                                                    <img src="/Images/loading.gif" id="imgLoading_@package.PackageID" style="position: absolute; display:none ; float: right; width: 30px; margin-left: 45px; ">
-                                                                    @*<a class="btn btn-info btn-sm" href="javascript:void(0)" onclick="ShowPopUpEditPackage('@package.PackageID','@package.PackageName')" data-toggle="modal" data-target="#standardModal"><i class="glyphicon glyphicon-edit icon-white"></i>Edit</a>*@
-                                                                    <a class="teal-text" data-toggle="modal" data-placement="top" title="Edit" href="javascript:void(0)" onclick="ShowPopUpEditPackage('@package.PackageID','@package.PackageName','@package.PackageValue')" data-target="#standardModal"><i class="fa fa-pencil"></i></a>
-
-                                                                    @if (package.IsDelete == 0)
+                                                                    <img src="/Images/loading.gif" id="imgLoading_@coin.CoinID" style="position: absolute; display:none ; float: right; width: 30px; margin-left: 45px; ">
+                                                                    <a class="teal-text" data-toggle="modal" data-placement="top" title="Edit" href="javascript:void(0)" onclick="ShowpopupEditCoin('@coin.CoinID','@coin.CoinName')" data-target="#standardModal"><i class="fa fa-pencil"></i></a>
+                                                                    @if (coin.IsDelete == 0)
                                                                     {
-                                                                        @*<a class="btn btn-info btn-sm" href="javascript:void(0)" onclick="ConfirmPackage('@package.PackageID','1')" title="@titleIsDelete">
-                                                                            <i class="glyphicon glyphicon-edit icon-white"></i>
-                                                                            Confirm
-                                                                        </a>*@
-                                                                        @*<a class="btn btn-warning btn-sm" href="javascript:void(0)" onclick="ConfirmPackage('@package.PackageID','1')" title="Delete">
-                                                                            <i class="glyphicon glyphicon-trash icon-white"></i>
-                                                                            Delete
-                                                                        </a>*@
-                                                                        <a class="red-text" data-toggle="modal" data-placement="top" title="Remove"  href="javascript:void(0)" onclick="ConfirmPackage('@package.PackageID','@package.IsDelete')"><i class="fa fa-times"></i></a>
+
+                                                                        <a class="red-text" data-toggle="modal" data-placement="top" title="Remove" href="javascript:void(0)" onclick="ConfirmCoin('@coin.CoinID','@coin.IsDelete')"><i class="fa fa-times"></i></a>
                                                                     }
-                                                                   
+
+
                                                                 </td>
 
                                                             </tr>
@@ -283,63 +250,7 @@
         <!--/Section: Conditions-->
     </div>
 </main>
-<input type="hidden" id="hdPackageID" name="hdPackageID" value="0" />
 
-@*=========================================PopUpEdit-Insert=========================================*@
-<div class="modal fade" id="standardModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <!--Content-->
-        <div class="modal-content" style="width:500px">
-            <!--Header-->
-            <div class="modal-header white-text" style="background-color: #154771">
-                <p class="heading" contenteditable="true" style="color:#fff">Package Information </p>
-            </div>
-            <!--Body-->
-            <div class="modal-body" style="padding-bottom:0px">
-                <form>
-                    <div class="row" style="margin-bottom:15px">
-                        <!--First column-->
-                        <div class="col-md-12">
-                            <div class="md-form">
-                                <label>PackageName:</label>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="md-form">
-                                <input type="text" onfocus="ResetForm('lbErrorPackageName', this.value)" id="txtPackageName" name="txtPackageName" placeholder="package name" class="form-control validate">
 
-                            </div>
-                            <label id="lbErrorPackageName" style="color:red; display:none" class=""></label>
-                        </div>
-                    </div>
-                    <div class="row" style="margin-bottom:15px">
-                        <!--First column-->
-                        <div class="col-md-12">
-                            <div class="md-form">
-                                <label>PackageValue:</label>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="md-form">
-                                <input type="text" onfocus="ResetForm('lbErrorPackageValue', this.value)" id="txtPackageValue" name="txtPackageValue" placeholder="package value" class="form-control validate">
 
-                            </div>
-                            <label id="lbErrorPackageValue" style="color:red; display:none" class=""></label>
-                        </div>
-                    </div>
-                </form>
-                <br>
 
-            </div>
-            <!--Footer-->
-            <div class="modal-footer">
-                <img id="imgLoading" src="/Images/loading.gif" style="display:none">
-                <a id="2lvlModal-learnMore" class="btn btn-danger" onclick="SavePackage()" contenteditable="true">Save</a>
-
-            </div>
-        </div>
-        <!--/.Content-->
-
-    </div>
-</div>
-<script src="/Scripts/package/package.js"></script>

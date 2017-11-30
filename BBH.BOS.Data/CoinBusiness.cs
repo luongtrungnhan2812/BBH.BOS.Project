@@ -31,8 +31,8 @@ namespace BBH.BOS.Data
                     CoinBO packageCoin = new CoinBO();
 
                     packageCoin.CoinID = int.Parse(reader["CoinID"].ToString());
-                    packageCoin.CoinName = reader["PackageValue"].ToString();
-                    packageCoin.IsDelete = int.Parse(reader["CreateDate"].ToString());
+                    packageCoin.CoinName = reader["CoinName"].ToString();
+                    packageCoin.IsDelete = int.Parse(reader["IsDelete"].ToString());
 
                     //packageCoin.TotalRecord = int.Parse(reader["TOTALROWS"].ToString());
                     lstPackage.Add(packageCoin);
@@ -50,5 +50,6 @@ namespace BBH.BOS.Data
                 helper.destroy();
             }
         }
+
     }
 }

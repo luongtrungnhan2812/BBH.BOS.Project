@@ -104,7 +104,7 @@
                                                                 @if (package.IsDelete == 0)
                                                                 {
                                                                   
-                                                                    <a class="red-text" data-toggle="modal" data-placement="top" title="Remove" href="javascript:void(0)" onclick="ConfirmPackage_Coin('@package.PackageID','@package.IsDelete')"><i class="fa fa-times"></i></a>
+                                                                    <a class="red-text" data-toggle="modal" data-placement="top" title="Remove" href="javascript:void(0)" onclick="ConfirmPackage_Coin('@package.PackageID','@package.CoinID','@package.IsDelete')"><i class="fa fa-times"></i></a>
                                                                 }
                                                                
 
@@ -258,7 +258,7 @@
     </div>
 </main>
 <input type="hidden" id="hdPackageID" name="hdPackageID" value="0" />
-<input type="hidden" id="hdCoinID" name="hdCoinID" value="0" />
+@*<input type="hidden" id="hdCoinID" name="hdCoinID" value="0" />*@
 
 @*=========================================PopUpEdit-Insert=========================================*@
 <div class="modal fade" id="standardModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -267,8 +267,17 @@
         <div class="modal-content" style="width:500px">
             <!--Header-->
             <div class="modal-header white-text" style="background-color: #154771">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
                 <p class="heading" contenteditable="true" style="color:#fff">Package Information </p>
             </div>
+            @*<div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">Mining Package</h4>
+            </div>*@
             <!--Body-->
             <div class="modal-body" style="padding-bottom:0px">
                 <form>
@@ -290,12 +299,15 @@
                                     }
                                 </select>
                             </div>
+                            <label id="lbErrorPackage" style="color:red; display:none" class=""></label>
                         </div>
                         </div>
                     <div class="row" style="margin-bottom:15px">
                         <div class="col-md-6">
                             <div class="controls">
-                                <select id="cbCoin" name="cbCoin" onchange="ResetForm('lbErrorCoin', this.value)" class="form-control" data-rel="chosen">
+                                <input type="text" onfocus="ResetForm('lbErrorCoinID', this.value)" id="txtCoinID" name="txtCoinID" placeholder="id Coin " class="form-control validate">
+
+                                @*<select id="cbCoin" name="cbCoin" onchange="ResetForm('lbErrorCoin', this.value)" class="form-control" data-rel="chosen">
                                     <option value="0">Select CoinID</option>
                                     @if (ViewData["ListCoin"] != null)
                                     {
@@ -308,8 +320,9 @@
                                             }
                                         }
                                     }
-                                </select>
+                                </select>*@
                             </div>
+                            <label id="lbErrorCoinID" style="color:red; display:none" class=""></label>
                         </div>
                         </div>
                         <div class="row" style="margin-bottom:15px">
