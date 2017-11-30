@@ -51,45 +51,43 @@ namespace BBH.BOS.Data
                 helper.destroy();
             }
         }
-        //public IEnumerable<TransactionPackageBO> ListTransactionPackageByMember(int memberID)
-        //{
-        //    Sqlhelper helper = new Sqlhelper("", "ConnectionString");
-        //    try
-        //    {
-        //        List<TransactionPackageBO> lstTransaction = new List<TransactionPackageBO>();
-        //        string sql = "SP_ListTransactionPackageByMemberFE";
-        //        SqlParameter[] pa = new SqlParameter[1];
-        //        pa[0] = new SqlParameter("@memberID", memberID);
-        //        SqlCommand command = helper.GetCommand(sql, pa, true);
-        //        SqlDataReader reader = command.ExecuteReader();
-        //        while (reader.Read())
-        //        {
-        //            TransactionPackageBO transaction = new TransactionPackageBO();
-        //            transaction.MemberID = int.Parse(reader["MemberID"].ToString());
+        public IEnumerable<TransactionPackageBO> ListTransactionPackageByMember(int memberID)
+        {
+            Sqlhelper helper = new Sqlhelper("", "ConnectionString");
+            try
+            {
+                List<TransactionPackageBO> lstTransaction = new List<TransactionPackageBO>();
+                string sql = "SP_ListTransactionByMember";
+                SqlParameter[] pa = new SqlParameter[1];
+                pa[0] = new SqlParameter("@memberID", memberID);
+                SqlCommand command = helper.GetCommand(sql, pa, true);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    TransactionPackageBO transaction = new TransactionPackageBO();
+                    transaction.MemberID = int.Parse(reader["MemberID"].ToString());
+                    transaction.Status = int.Parse(reader["Status"].ToString());
+                    transaction.CoinID = int.Parse(reader["CoinID"].ToString());
+                    transaction.CreateDate = DateTime.Parse(reader["CreateDate"].ToString());
+                    transaction.ExpireDate = DateTime.Parse(reader["ExpireDate"].ToString());
+                    transaction.PackageID = int.Parse(reader["PackageID"].ToString());
+                    transaction.PackageName = reader["PackageName"].ToString();
+                    transaction.TransactionCode = reader["TransactionCode"].ToString();
+                    transaction.Note = reader["Note"].ToString();
+                    lstTransaction.Add(transaction);
 
-        //            transaction.Status = int.Parse(reader["Status"].ToString());
-        //            transaction.CreateDate = DateTime.Parse(reader["CreateDate"].ToString());
-        //            transaction.ExpireDate = DateTime.Parse(reader["ExpireDate"].ToString());
-        //            transaction.PackageID = int.Parse(reader["PackageID"].ToString());
-        //            transaction.PackageName = reader["PackageName"].ToString();
-        //            transaction.TransactionValue = reader["TransactionCode"].ToString();
-        //            transaction.Note = reader["Note"].ToString();
-        //            transaction.Email = reader["Email"].ToString();
-        //            transaction.E_Wallet = reader["E_Wallet"].ToString();
-        //            lstTransaction.Add(transaction);
-
-        //        }
-        //        return lstTransaction;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Utilitys.WriteLog(fileLog, ex.Message);
-        //        return null;
-        //    }
-        //    finally
-        //    {
-        //        helper.destroy();
-        //    }
-        //}
+                }
+                return lstTransaction;
+            }
+            catch (Exception ex)
+            {
+                Utilitys.WriteLog(fileLog, ex.Message);
+                return null;
+            }
+            finally
+            {
+                helper.destroy();
+            }
+        }
     }
 }

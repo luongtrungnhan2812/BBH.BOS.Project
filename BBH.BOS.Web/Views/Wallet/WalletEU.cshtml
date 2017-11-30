@@ -119,43 +119,221 @@
         <!--/.Second row-->
         <!-- Third row -->
 
-        <div class="row mb-0">
-            <!--First column-->
-            <div class="col-md-12">
+        <div class="row">
 
-                <!--Panel content-->
-                <div class="card-block pt-0" style="    background-color: #fff;">
+            <!-- First column -->
 
-                    <div class="table-responsive">
+            <div class="col-md-6">
+                <!--Panel-->
+                <div class="card mb-r">
+                    <div class="card-header white-text">
+                        Transaction Package
+                    </div>
+                    <div class="card-block">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Status</th>
+                                        <th>Package Name</th>
+                                        <th>Info</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbodyTransactionPackage">
+                                    <tr>
+                                        <td><span class="badge green">Open</span></td>
+                                        <td>Lorem ipsum dolor</td>
+                                        <td>John Doe</td>
+                                        <td class="hour"><small><span class="grey-text"><i class="fa fa-clock-o" aria-hidden="true"></i> 12 min</span></small></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="badge green">Open</span></td>
+                                        <td>Lorem ipsum dolor</td>
+                                        <td>John Doe</td>
+                                        <td class="hour"><small><span class="grey-text"><i class="fa fa-clock-o" aria-hidden="true"></i> 12 min</span></small></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="badge warning-color">In progress</span></td>
+                                        <td>Lorem ipsum dolor</td>
+                                        <td>John Doe</td>
+                                        <td class="hour"><small><span class="grey-text"><i class="fa fa-clock-o" aria-hidden="true"></i> 12 min</span></small></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="badge warning-color">In progress</span></td>
+                                        <td>Lorem ipsum dolor</td>
+                                        <td>John Doe</td>
+                                        <td class="hour"><small><span class="grey-text"><i class="fa fa-clock-o" aria-hidden="true"></i> 12 min</span></small></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="badge red">Closed</span></td>
+                                        <td>Lorem ipsum dolor</td>
+                                        <td>John Doe</td>
+                                        <td class="hour"><small><span class="grey-text"><i class="fa fa-clock-o" aria-hidden="true"></i> 12 min</span></small></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="badge red">Closed</span></td>
+                                        <td>Lorem ipsum dolor</td>
+                                        <td>John Doe</td>
+                                        <td class="hour"><small><span class="grey-text"><i class="fa fa-clock-o" aria-hidden="true"></i> 12 min</span></small></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="badge red">Closed</span></td>
+                                        <td>Lorem ipsum dolor</td>
+                                        <td>John Doe</td>
+                                        <td class="hour"><small><span class="grey-text"><i class="fa fa-clock-o" aria-hidden="true"></i> 12 min</span></small></td>
+                                    </tr>
+                                </tbody>
+                            </table>
 
-                        <!--Table-->
-                        <table class="table table-hover">
-                            <!--Table head-->
-                            <thead>
-                                <tr class="primary-color">
-                                    <th>TransactionID</th>
-                                    <th>Wallet</th>
-                                    <th>Coin</th>
-                                    <th>Create</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <!--/Table head-->
-                            <!--Table body-->
-                            <tbody id="IdTractionCoin">
-                                @Html.Raw(ViewBag.strHtmlTransactionCoin)
-                            </tbody>
-                            <!--/Table body-->
-                        </table>
-                        <!--/Table-->
+                        </div>
 
                     </div>
-
                 </div>
-                <!--/.Panel content-->
+                <!--/.Panel-->
+                <!-- Panel -->
+
+
+                <div class="card mb-r">
+                    <div class="card-header white-text">
+                        Recent comments and replies
+                    </div>
+                    <div class="card-block">
+
+                        <table class="table no-header">
+                            <tbody>
+                                <tr>
+                                    <td>John Doe</td>
+                                    <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</td>
+                                    <td class="hour"><small><span class="grey-text float-right"><i class="fa fa-clock-o" aria-hidden="true"></i> 12 min</span></small></td>
+                                </tr>
+                                <tr>
+                                    <td>Merry Joe</td>
+                                    <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</td>
+                                    <td class="hour"><small><span class="grey-text float-right"><i class="fa fa-clock-o" aria-hidden="true"></i> 12 min</span></small></td>
+                                </tr>
+                                <tr>
+                                    <td>Jessie Doe</td>
+                                    <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</td>
+                                    <td class="hour"><small><span class="grey-text float-right"><i class="fa fa-clock-o" aria-hidden="true"></i> 12 min</span></small></td>
+                                </tr>
+                                <tr>
+                                    <td>Tyler Doe</td>
+                                    <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</td>
+                                    <td class="hour"><small><span class="grey-text float-right"><i class="fa fa-clock-o" aria-hidden="true"></i> 12 min</span></small></td>
+                                </tr>
+                                <tr>
+                                    <td>Janusz Joe</td>
+                                    <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</td>
+                                    <td class="hour"><small><span class="grey-text float-right"><i class="fa fa-clock-o" aria-hidden="true"></i> 12 min</span></small></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <a href="#" class="btn btn-primary waves-effect waves-light">See more</a>
+
+                    </div>
+                </div>
+                <!-- /.Panel -->
 
             </div>
-            <!--/First column-->
+
+            <!-- /.First column -->
+
+            <div class="col-md-6">
+
+                <!--Panel-->
+                <div class="card mb-r">
+                    <div class="card-header white-text">
+                        Users activity
+                    </div>
+                    <div class="card-block">
+                        <div class="row mb-1">
+                            <div class="col-4">
+                                <small>Pages/Visits</small>
+                                <h4>139 419</h4>
+                            </div>
+                            <div class="col-4">
+                                <small>New visitors</small>
+                                <h4>51.94%</h4>
+                            </div>
+                            <div class="col-4">
+                                <small>Last week</small>
+                                <h4>51 932</h4>
+                            </div>
+                        </div>
+                        <div class="row mb-1">
+                            <div class="col-4">
+                                <small>Pages/Visits</small>
+                                <h4>139 419</h4>
+                            </div>
+                            <div class="col-4">
+                                <small>New visitors</small>
+                                <h4>51.94%</h4>
+                            </div>
+                            <div class="col-4">
+                                <small>Last week</small>
+                                <h4>51 932</h4>
+                            </div>
+                        </div>
+
+                        <div class="row mb-1">
+                            <div class="col-4">
+                                <small>Pages/Visits</small>
+                                <h4>139 419</h4>
+                            </div>
+                            <div class="col-4">
+                                <small>New visitors</small>
+                                <h4>51.94%</h4>
+                            </div>
+                            <div class="col-4">
+                                <small>Last week</small>
+                                <h4>51 932</h4>
+                            </div>
+                        </div>
+
+                        <a href="#" class="btn btn-primary waves-effect waves-light">See more</a>
+                    </div>
+                </div>
+                <!--/.Panel-->
+                <!-- Panel -->
+                <div class="card mb-r text-center py-3 danger-color white-text">
+                    <div class="widget-icon-large mb-1">
+                        <i class="fa fa-bell"></i>
+                    </div>
+                    <h4 class="h4-responsive">28 warning messages</h4>
+                </div>
+                <!-- /.Panel -->
+                <!-- Panel -->
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <h4 class="h4-responsive"><span class="badge big-badge info-color">8K</span> Fans</h4>
+                    </div>
+                    <div class="col-4">
+                        <h4 class="h4-responsive"><span class="badge big-badge primary-color">21K</span> Orders</h4>
+                    </div>
+                    <div class="col-4">
+                        <h4 class="h4-responsive"><span class="badge big-badge secondary-color">8K</span> Fans</h4>
+                    </div>
+                </div>
+
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <h4 class="h4-responsive"><span class="badge big-badge stylish-color">14K</span> Total likes</h4>
+                    </div>
+                    <div class="col-4">
+                        <h4 class="h4-responsive"><span class="badge big-badge success-color">14K</span> Users</h4>
+                    </div>
+                    <div class="col-4">
+                        <h4 class="h4-responsive"><span class="badge big-badge default-color">1.2K</span> Online</h4>
+                    </div>
+                </div>
+                <!-- ./Panel -->
+            </div>
+
+            <!-- Second column -->
+            <!-- /.Second column -->
+
         </div>
 
         <!-- /.Third row -->
