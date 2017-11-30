@@ -261,14 +261,14 @@ function OnLoad() {
         {
             if (result == "loginSuccess")
             {
+                $('#hdUsername').val('');
+                $('#hdPassword').val('');
                 window.location.href = '/Home';
             }
             else if (result =='loginfaile')
             {
                 alertify.error("email or password not Invalid ");
-                //lbError.text(result);
-                //lbError.value(result);
-            }
+          }
             else if (result =='captchafaile') {
                 $('#lbrecaptcha').text('Please confirm captcha !');
                 $('#lbrecaptcha').css('display', '');

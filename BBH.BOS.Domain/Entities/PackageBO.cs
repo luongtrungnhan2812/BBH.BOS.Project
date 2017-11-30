@@ -13,7 +13,8 @@ namespace BBH.BOS.Domain.Entities
         public int PackageID { get; set; }
         [DataMember]
         public string PackageName { get; set; }
-        
+        [DataMember]
+        public double PackageValue { get; set; }
         [DataMember]
         public int TotalRecord { get; set; }
     }
