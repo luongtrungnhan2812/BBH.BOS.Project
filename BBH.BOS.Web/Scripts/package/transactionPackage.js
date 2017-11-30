@@ -41,6 +41,9 @@
 //    }
 //});
 $('#btn_submit').on('click', function () {
+    debugger
+    var ChosenPackageID = $('#myTable > tbody  > tr.selected').attr("data-id");
+    var CheckValue = $("input[name='groupCheckPackage']:checked").attr("data-value");
     if (!$('#termsPackage').is(':checked')) {
         $("#termsPackage").parents("div.form-group").addClass('has-error');
         $("#termsPackage").parents("div.form-group").find('.help-block').text('Please checked term');
@@ -48,7 +51,7 @@ $('#btn_submit').on('click', function () {
     } else {
         $("#termsPackage").parents("div.form-group").removeClass('has-error');
         $("#termsPackage").parents("div.form-group").find('.help-block').text('');
-        //if (packageIdPick > packageId) {
+        if (ChosenPackageID != undefined) {
         swal({
             title: "Are you sure?",
             type: "warning",
@@ -62,7 +65,7 @@ $('#btn_submit').on('click', function () {
                     type: "POST",
                     async: true,
                     url: "/Package/InsertTransactionPackage",
-                    data: { packageID: ChosenPackageID },
+                    data: { packageID: ChosenPackageID, coinID: CheckValue },
                     beforeSend: function () {
 
                     },
@@ -80,10 +83,10 @@ $('#btn_submit').on('click', function () {
                 });
             });
 
-        //} else {
-        //    swal('You select invalid package')
-        //    return false;
-        //}
+        } else {
+            swal('You must select package')
+            return false;
+        }
     }
 
 });

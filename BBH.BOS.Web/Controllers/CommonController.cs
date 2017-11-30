@@ -232,8 +232,10 @@ namespace BBH.BOS.Web.Controllers
                 List<string> lstPackageID = new List<string>();
                 List<string> lstCoinID = new List<string>();
                 List<string> lstCoinName = new List<string>();
+                List<string> lstCoin = new List<string>();
                 foreach (PackageInformationBO item in lstPackageInformationBO)
                 {
+                    string strCoin = "";
                     if (lstPackageID.IndexOf(item.PackageID.ToString()) == -1)
                     {
                         lstPackageID.Add(item.PackageID.ToString());
@@ -241,10 +243,16 @@ namespace BBH.BOS.Web.Controllers
                     if (lstCoinID.IndexOf(item.CoinID.ToString()) == -1)
                     {
                         lstCoinID.Add(item.CoinID.ToString());
+                        strCoin += item.CoinID.ToString() + ";";
                     }
                     if (lstCoinName.IndexOf(item.CoinName.ToString()) == -1)
                     {
                         lstCoinName.Add(item.CoinName.ToString());
+                        strCoin += item.CoinName.ToString();
+                    }
+                    if (strCoin != "")
+                    {
+                        lstCoin.Add(strCoin);
                     }
                 }
                 if (lstPackageID.Count > 0 && lstCoinID.Count > 0 && lstCoinName.Count > 0)
@@ -292,16 +300,20 @@ namespace BBH.BOS.Web.Controllers
                     strBuilder.Append("</tbody>");
                 }
 
-                if (lstCoinName.Count > 0)
+                if (lstCoin.Count > 0)
                 {
                     string strChecked = "checked";
-                    foreach (var item in lstCoinName)
+                    foreach (var item in lstCoin)
                     {
-                        strBuilderRadioCheck.Append("<div class='form-group'>");
-                        strBuilderRadioCheck.Append("<input name = 'group1' type='radio' id='chk" + item + "' checked='" + strChecked + "' class='with-gap'>");
-                        strBuilderRadioCheck.Append("<label for='chk" + item + "'>By " + item + "</label>");
-                        strBuilderRadioCheck.Append("</div>");
-                        strChecked = "";
+                        string[] strArray = item.Split(';');
+                        if (strArray.Count() > 1)
+                        {
+                            strBuilderRadioCheck.Append("<div class='form-group'>");
+                            strBuilderRadioCheck.Append("<input name = 'groupCheckPackage' type='radio' data-value='"+ strArray[0] + "' id='chk" + strArray[1] + "' checked='" + strChecked + "' class='with-gap'>");
+                            strBuilderRadioCheck.Append("<label for='chk" + strArray[1] + "'>By " + strArray[1] + "</label>");
+                            strBuilderRadioCheck.Append("</div>");
+                            strChecked = "";
+                        }
                     }
                 }
             }
