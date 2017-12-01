@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace BBH.BOS.Data
 {
-    public class TransactionPackageBusiness: ITransactionPackageService
+    public class TransactionPackageBusiness : ITransactionPackageService
     {
         public static string pathLog = ConfigurationManager.AppSettings["PathLog"];
         static string fileLog = Path.GetDirectoryName(Path.Combine(pathLog, "Logs"));
@@ -78,6 +78,44 @@ namespace BBH.BOS.Data
 
                 }
                 return lstTransaction;
+            }
+            catch (Exception ex)
+            {
+                Utilitys.WriteLog(fileLog, ex.Message);
+                return null;
+            }
+            finally
+            {
+                helper.destroy();
+            }
+        }
+        public TransactionPackageBO DetailTransactionPackage(int memberID, string strTransactionCode)
+        {
+            Sqlhelper helper = new Sqlhelper("", "ConnectionString");
+            try
+            {
+                TransactionPackageBO objTransactionPackageBO = new TransactionPackageBO();
+                string sql = "SP_ListTransactionPackageByCode";
+                SqlParameter[] pa = new SqlParameter[2];
+                pa[0] = new SqlParameter("@memberID", memberID);
+                pa[1] = new SqlParameter("@transactioncode", strTransactionCode);
+                SqlCommand command = helper.GetCommand(sql, pa, true);
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    TransactionPackageBO transaction = new TransactionPackageBO();
+                    transaction.MemberID = int.Parse(reader["MemberID"].ToString());
+                    transaction.Status = int.Parse(reader["Status"].ToString());
+                    transaction.CoinID = int.Parse(reader["CoinID"].ToString());
+                    transaction.CreateDate = DateTime.Parse(reader["CreateDate"].ToString());
+                    transaction.ExpireDate = DateTime.Parse(reader["ExpireDate"].ToString());
+                    transaction.PackageID = int.Parse(reader["PackageID"].ToString());
+                    transaction.PackageName = reader["PackageName"].ToString();
+                    transaction.TransactionCode = reader["TransactionCode"].ToString();
+                    transaction.Note = reader["Note"].ToString();
+
+                }
+                return objTransactionPackageBO;
             }
             catch (Exception ex)
             {
