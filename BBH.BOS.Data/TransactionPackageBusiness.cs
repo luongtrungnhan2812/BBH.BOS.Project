@@ -94,7 +94,7 @@ namespace BBH.BOS.Data
             Sqlhelper helper = new Sqlhelper("", "ConnectionString");
             try
             {
-                TransactionPackageBO objTransactionPackageBO = new TransactionPackageBO();
+                TransactionPackageBO transaction = new TransactionPackageBO();
                 string sql = "SP_ListTransactionPackageByCode";
                 SqlParameter[] pa = new SqlParameter[2];
                 pa[0] = new SqlParameter("@memberID", memberID);
@@ -103,7 +103,7 @@ namespace BBH.BOS.Data
                 SqlDataReader reader = command.ExecuteReader();
                 if (reader.Read())
                 {
-                    TransactionPackageBO transaction = new TransactionPackageBO();
+                  
                     transaction.MemberID = int.Parse(reader["MemberID"].ToString());
                     transaction.Status = int.Parse(reader["Status"].ToString());
                     transaction.CoinID = int.Parse(reader["CoinID"].ToString());
@@ -117,7 +117,7 @@ namespace BBH.BOS.Data
                     transaction.CoinName = reader["CoinName"].ToString();
                     transaction.Note = reader["Note"].ToString();
                 }
-                return objTransactionPackageBO;
+                return transaction;
             }
             catch (Exception ex)
             {
