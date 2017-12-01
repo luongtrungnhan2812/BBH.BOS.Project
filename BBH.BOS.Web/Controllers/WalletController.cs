@@ -115,7 +115,8 @@ namespace BBH.BOS.Web.Controllers
                         strBuilder.Append("<td><span class='badge green'>" + (item.Status == 1 ? "Active" : "InActive") + "</span></td>");
                         strBuilder.Append("<td> " + item.PackageName + " </ td >");
                         strBuilder.Append("<td> " + item.Note + " </ td >");
-                        strBuilder.Append("<td class='hour'><small><span class='grey-text'><i class='fa fa-clock-o' aria-hidden='true'></i> "+item.CreateDate.ToString("dd/MM/yyyy hh:ss:mm")+"</span></small></td>");
+                        strBuilder.Append("<td class='hour'><small><span class='grey-text'><i class='fa fa-clock-o' aria-hidden='true'></i> " + item.CreateDate.ToString("dd/MM/yyyy hh:ss:mm") + "</span></small></td>");
+                        strBuilder.Append("<td><a class='blue-text' data-toggle='tooltip' data-placement='top' data-toggle='modal' data-target='#myModalDetailTransactionPackage' title='' data-original-title='See results' onclick=\"ShowTransactionPackageDetail('" + memberID + "','" + item.TransactionCode + "')\"><i class='fa fa-eye'></i></a></td>");
                         strBuilder.Append("</tr>");
                     }
 
@@ -127,6 +128,19 @@ namespace BBH.BOS.Web.Controllers
                 return "";
             }
 
+        }
+
+        [HttpPost]
+        public string DetailTransactionPackage(int memberID, string strTransactionCode)
+        {
+            string json = "";
+            TransactionPackageBO objTransactionPackageBO = new TransactionPackageBO();
+            objTransactionPackageBO = transactionPackage.DetailTransactionPackage(memberID, strTransactionCode);
+            if (objTransactionPackageBO != null && objTransactionPackageBO.TransactionCode != null && objTransactionPackageBO.TransactionCode != "")
+            {
+                json = JsonConvert.SerializeObject(objTransactionPackageBO);
+            }
+            return json.ToString();
         }
     }
 }

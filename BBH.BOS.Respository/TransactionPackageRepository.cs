@@ -33,5 +33,16 @@ namespace BBH.BOS.Respository
                 return null;
             }
         }
+        public TransactionPackageBO DetailTransactionPackage(int memberID, string strTransactionCode)
+        {
+            try
+            {
+                return Proxy.DetailTransactionPackage(memberID, strTransactionCode);
+            }
+            catch
+            {
+                return null;
+            }
+        }
     }
 }

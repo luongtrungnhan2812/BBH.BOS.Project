@@ -1,0 +1,88 @@
+﻿<div class="modal fade modal-ext show" id="myModalDetailWallet" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;">
+    <div class="modal-dialog modal-lg" role="document" style="margin: 10px auto; height: 100%;">
+        <div class="modal-content" style="padding: 0px; width:auto;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="CloseModalTransactionWallet()"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title w-100" id="myModalLabel">Detail Information</h4>
+            </div>
+            <div class="modal-body" style="padding: 30px 0px 0px;padding-top: 0px;">
+                <div class="panel panel-login">
+                    <div class="panel-body">
+                        <div class="col-lg-12" style="margin:0 auto">
+                            <div class="card card-cascade mb-r" style="display: block;">
+                                <div class="admin-panel info-admin-panel">
+                                    <div class="card-block">
+                                        <form>
+                                            <div class="row" style="padding-bottom:0px; padding-top:0px; margin-bottom:0px; margin-top:0px">
+
+                                                <div class="col-md-12">
+                                                    <label id="lbEwallet">TransactionID</label>
+                                                    <div class="md-form" style="padding-bottom:0px; padding-top:0px; margin-bottom:0px; margin-top:0px">
+                                                        <input type="text" style="padding-bottom:0px; padding-top:0px;margin-top:0px" value="" id="txtTransactionID" name="txtTransactionID" class="form-control validate">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-bottom:0px; padding-top:0px; margin-bottom:0px; margin-top:0px">
+                                                <div class="col-md-12">
+                                                    <label id="lbEwallet" style="margin-bottom:0px">Your Wallet Address</label>
+                                                    <div class="md-form" style="padding-bottom:0px; padding-top:0px; margin-bottom:0px; margin-top:0px">
+                                                        <input type="text" style="padding:0px" id="txtYourWalletAddress" name="txtYourWalletAddress" class="form-control validate">
+                                                    </div>
+                                                    <label style="color:red" id="lbPoint"></label>
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-bottom:0px; padding-top:0px; margin-bottom:0px; margin-top:0px">
+                                                <div class="col-md-12">
+                                                    <label id="lbEwallet" style="margin-bottom:0px">Received Wallet Address</label>
+                                                    <div class="md-form" style="padding-bottom:0px; padding-top:0px; margin-bottom:0px; margin-top:0px">
+                                                        <input type="text" style="padding:0px" id="txtReceivedWalletAddress" name="txtReceivedWalletAddress" class="form-control validate">
+                                                    </div>
+                                                    <label style="color:red" id="lbPoint"></label>
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-bottom:0px; padding-top:0px; margin-bottom:0px; margin-top:0px">
+                                                <div class="col-md-12">
+                                                    <label id="lbEwallet" style="margin-bottom:0px">BTC</label>
+                                                    <div class="md-form" style="padding-bottom:0px; padding-top:0px; margin-bottom:0px; margin-top:0px">
+                                                        <input type="text" style="padding:0px" id="txtBTC" name="txtBTC" class="form-control validate">
+                                                    </div>
+                                                    <label style="color:red" id="lbPoint"></label>
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-bottom:0px; padding-top:0px; margin-bottom:0px; margin-top:0px">
+                                                <div class="col-md-12">
+                                                    <label id="lbEwallet" style="margin-bottom:0px">TransactionBitcoin</label>
+                                                    <div class="md-form" style="padding-bottom:0px; padding-top:0px; margin-bottom:0px; margin-top:0px">
+                                                        <input type="text" style="padding:0px" id="txtTransactionBitcoin" name="txtTransactionBitcoin" class="form-control validate">
+                                                    </div>
+                                                    <label style="color:red" id="lbPoint"></label>
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-bottom:0px; padding-top:0px; margin-bottom:0px; margin-top:0px">
+                                                <div class="col-md-6">
+                                                    <label id="lbEwallet" style="margin-bottom:0px">CreateDate</label>
+                                                    <div class="md-form" style="padding-bottom:0px; padding-top:0px; margin-bottom:0px; margin-top:0px">
+                                                        <input type="text" style="padding:0px" id="txtCreateDate" name="txtCreateDate" class="form-control validate">
+                                                    </div>
+                                                    <label style="color:red" id="lbPoint"></label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label id="lbEwallet" style="margin-bottom:0px">ExpiredDate</label>
+                                                    <div class="md-form" style="padding-bottom:0px; padding-top:0px; margin-bottom:0px; margin-top:0px">
+                                                        <input type="text" style="padding:0px" id="txtExpiredDate" name="txtExpiredDate" class="form-control validate">
+                                                    </div>
+                                                    <label style="color:red" id="lbPoint"></label>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

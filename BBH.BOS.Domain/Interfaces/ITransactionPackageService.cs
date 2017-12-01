@@ -16,5 +16,7 @@ namespace BBH.BOS.Domain.Interfaces
         bool InsertTransactionPackage(TransactionPackageBO objTransactionPackageBO);
         [OperationContract]
         IEnumerable<TransactionPackageBO> ListTransactionPackageByMember(int memberID);
+        [OperationContract]
+        TransactionPackageBO DetailTransactionPackage(int memberID, string strTransactionCode);
     }
 }
