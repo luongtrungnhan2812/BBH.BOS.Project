@@ -1,5 +1,6 @@
 ﻿using BBC.Core.Database;
 using BBH.BOS.Domain.Entities;
+using BBH.BOS.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace BBH.BOS.Data
 {
-    public class CoinBusiness
+    public class CoinBusiness : ICoinServices
     {
         public static string pathLog = ConfigurationManager.AppSettings["PathLog"];
         public IEnumerable<CoinBO> ListAllCoin()

@@ -66,7 +66,22 @@ namespace BBH.BOS.Respository
             string fileLog = Path.GetDirectoryName(Path.Combine(pathLog));
             try
             {
-                row = Proxy.UpdateIsDeletePackageCoin(package, packageID, coinID,isDelete);
+                row = Proxy.UpdateIsDeletePackageCoin(package, packageID,coinID, isDelete);
+            }
+            catch (Exception ex)
+            {
+                Utility.WriteLog(fileLog, ex.Message);
+            }
+            return row;
+        }
+
+        public bool CheckPackageID_CoinIDExist(int packageID, int coinID)
+        {
+            bool row = false;
+            string fileLog = Path.GetDirectoryName(Path.Combine(pathLog));
+            try
+            {
+                row = Proxy.CheckPackageID_CoinIDExist(packageID, coinID);
             }
             catch (Exception ex)
             {

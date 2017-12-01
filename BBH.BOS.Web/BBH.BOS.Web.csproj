@@ -234,6 +234,22 @@
     <Content Include="Content\css\bootstrap-cerulean.min.css" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\chosen\chosen-sprite%402x.png" />
+    <Content Include="Content\css\chosen\chosen-sprite.png" />
+    <Content Include="Content\css\chosen\chosen.css" />
+    <Content Include="Content\css\chosen\chosen.jquery.js" />
+    <Content Include="Content\css\chosen\chosen.jquery.min.js" />
+    <Content Include="Content\css\chosen\chosen.min.css" />
+    <Content Include="Content\css\chosen\chosen.proto.js" />
+    <Content Include="Content\css\chosen\chosen.proto.min.js" />
+    <Content Include="Content\css\chosen\docsupport\chosen.png" />
+    <Content Include="Content\css\chosen\docsupport\oss-credit.png" />
+    <Content Include="Content\css\chosen\docsupport\prism.css" />
+    <Content Include="Content\css\chosen\docsupport\prism.js" />
+    <Content Include="Content\css\chosen\docsupport\style.css" />
+    <Content Include="Content\css\chosen\index.html" />
+    <Content Include="Content\css\chosen\index.proto.html" />
+    <Content Include="Content\css\chosen\options.html" />
     <Content Include="Content\css\jquery.noty.css" />
     <Content Include="Content\css\mdb.css" />
     <Content Include="Content\css\mdb.min.css" />
@@ -738,6 +754,7 @@
     <None Include="Connected Services\SentMailServices\SendMailSvc1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Content\css\chosen\.bower.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

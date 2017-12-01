@@ -22,6 +22,7 @@ namespace BBH.BOS.Domain.Interfaces
         [OperationContract]
         bool UpdateIsDeletePackageCoin(Package_CoinBO package, int packageID, int coinID, int isDelete);
 
-
+        [OperationContract]
+        bool CheckPackageID_CoinIDExist(int packageID, int coinID);
     }
 }

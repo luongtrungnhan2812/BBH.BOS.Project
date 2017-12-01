@@ -147,15 +147,14 @@ namespace BBH.BOS.Data
             {
                 bool rs = false;
                 string sql = "SP_DeletePackageCoin";
-                SqlParameter[] pa = new SqlParameter[6];
+                SqlParameter[] pa = new SqlParameter[5];
 
                 pa[0] = new SqlParameter("@packageID", packageID);
-                pa[1] = new SqlParameter("@coinID", package.CoinID);
-                pa[2] = new SqlParameter("@packageValue", package.PackageValue);
+                pa[1] = new SqlParameter("@coinID", coinID);
 
-                pa[3] = new SqlParameter("@isDelete", isDelete);
-                pa[4] = new SqlParameter("@deleteDate", package.DeleteDate);
-                pa[5] = new SqlParameter("@deleteUser", package.DeleteUser);
+                pa[2] = new SqlParameter("@isDelete", isDelete);
+                pa[3] = new SqlParameter("@deleteDate", package.DeleteDate);
+                pa[4] = new SqlParameter("@deleteUser", package.DeleteUser);
                 SqlCommand command = helper.GetCommand(sql, pa, true);
                 int row = command.ExecuteNonQuery();
                 if (row > 0)
@@ -174,5 +173,36 @@ namespace BBH.BOS.Data
                 helper.destroy();
             }
         }
+
+        public bool CheckPackageID_CoinIDExist(int packageID, int coinID)
+        {
+            string fileLog = Path.GetDirectoryName(Path.Combine(pathLog, "Logs"));
+            Sqlhelper helper = new Sqlhelper("", "ConnectionString");
+            try
+            {
+                bool rs = false;
+                string sql = "SP_CheckPackageID_CoinIDExist";
+                SqlParameter[] pa = new SqlParameter[2];
+                pa[0] = new SqlParameter("@packageID", packageID);
+                pa[1] = new SqlParameter("@coinID", coinID);
+
+                SqlCommand command = helper.GetCommand(sql, pa, true);
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    rs = true;
+                }
+                return rs;
+            }
+            catch (Exception ex)
+            {
+                Utilitys.WriteLog(fileLog, "Exception CheckPackageID_CoinIDExist admin : " + ex.Message); return false;
+            }
+            finally
+            {
+                helper.destroy();
+            }
+        }
+
     }
 }

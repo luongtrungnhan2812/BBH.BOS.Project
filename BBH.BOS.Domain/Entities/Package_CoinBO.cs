@@ -29,5 +29,8 @@ namespace BBH.BOS.Domain.Entities
         public string DeleteUser { get; set; }
         [DataMember]
         public int TotalRecord { get; set; }
+
+        public PackageBO package = new PackageBO();
+       
     }
 }
