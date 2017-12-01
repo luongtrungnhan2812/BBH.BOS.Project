@@ -116,7 +116,7 @@ namespace BBH.BOS.Web.Controllers
                         strBuilder.Append("<td> " + item.PackageName + " </ td >");
                         strBuilder.Append("<td> " + item.Note + " </ td >");
                         strBuilder.Append("<td class='hour'><small><span class='grey-text'><i class='fa fa-clock-o' aria-hidden='true'></i> " + item.CreateDate.ToString("dd/MM/yyyy hh:ss:mm") + "</span></small></td>");
-                        strBuilder.Append("<td><a class='blue-text' data-toggle='tooltip' data-placement='top' title='' data-original-title='See results'><i class='fa fa-eye'></i></a></td>");
+                        strBuilder.Append("<td><a class='blue-text' data-toggle='tooltip' data-placement='top' title='' data-original-title='See results' onclick=\"ShowTransactionWalletDetail('" + memberID + "','" + item.TransactionCode + "')\"><i class='fa fa-eye'></i></a></td>");
                         strBuilder.Append("</tr>");
                     }
 

@@ -31,5 +31,11 @@ namespace BBH.BOS.Domain.Entities
         public string TransactionBitcoin { get; set; }
         [DataMember]
         public string PackageName { get; set; }
+        [DataMember]
+        public float PackageValue { get; set; }
+        [DataMember]
+        public float CoinValue { get; set; }
+        [DataMember]
+        public string CoinName { get; set; }
     }
 }

@@ -111,9 +111,11 @@ namespace BBH.BOS.Data
                     transaction.ExpireDate = DateTime.Parse(reader["ExpireDate"].ToString());
                     transaction.PackageID = int.Parse(reader["PackageID"].ToString());
                     transaction.PackageName = reader["PackageName"].ToString();
-                    transaction.TransactionCode = reader["TransactionCode"].ToString();
+                    transaction.TransactionCode = reader["TransactionCode"].ToString(); 
+                    transaction.PackageValue = float.Parse(reader["PackageValue"].ToString()); 
+                    transaction.CoinValue = float.Parse(reader["CoinValue"].ToString());
+                    transaction.CoinName = reader["CoinName"].ToString();
                     transaction.Note = reader["Note"].ToString();
-
                 }
                 return objTransactionPackageBO;
             }
