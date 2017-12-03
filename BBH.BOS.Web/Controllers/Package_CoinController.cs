@@ -51,6 +51,7 @@ namespace BBH.BOS.Web.Controllers
                 end = (page * intPageSize);
             }
             IEnumerable<Package_CoinBO> lstPackageCoin = packageCoinRepository.ListAllPackageCoin(start, end);
+            //IEnumerable<Package_CoinBO> lstPackageCoin = packageCoinRepository.ListAllPackage_Coin();
             ViewData["PackageCoin"] = lstPackageCoin;
             if (lstPackageCoin != null && lstPackageCoin.Count() > 0)
             {
@@ -58,7 +59,7 @@ namespace BBH.BOS.Web.Controllers
             }
             TempData["TotalRecord"] = totalRecord;
 
-            IEnumerable<PackageBO> lstPackage = packageRopository.ListAllPackage(start, end);
+            IEnumerable<PackageBO> lstPackage = packageRopository.ListAllPackage(1, 100);
             ViewData["ListPackage"] = lstPackage;
 
             IEnumerable<CoinBO> lstCoin = coinRopository.ListAllCoin();
@@ -129,7 +130,7 @@ namespace BBH.BOS.Web.Controllers
         }
 
         [HttpPost]
-        public string SavePackageCoin(int packageID,int coinID, double packageValue)
+        public string SavePackageCoin(int hdPackageID,int hdCoinID,int packageID,int coinID, double packageValue)
         {
             string result = "";
             Package_CoinBO packageCoin = new Package_CoinBO();
@@ -138,35 +139,10 @@ namespace BBH.BOS.Web.Controllers
             {
                 Response.Redirect("/login");
             }
-            if (packageID == 0)
-            {
-                try
-                {
-                    packageCoin.PackageValue = packageValue;
-                    packageCoin.PackageID = packageID;
-                    packageCoin.CoinID = coinID;
-
-                    bool CheckPackageID_CoinIDExist = packageCoinRepository.CheckPackageID_CoinIDExist(packageID, coinID);
-                    if (CheckPackageID_CoinIDExist)
-                    {
-                        result = "PackageCoinIDExist";
-                    }
-                    else
-                    {
-                        bool updatePackage = packageCoinRepository.UpdatePackageCoin(packageCoin, packageID, coinID);
-                        if (updatePackage)
-                        {
-                            result = "Updatesuccess";
-                        }
-                        else
-                        {
-                            result = "Updatefaile";
-                        }
-                    }
-                }
-                catch { result = "Erorr"; }
-            }
-            else if (packageID >0)
+            //int hdPackageID = 0;
+            //int hdCoin = 0;
+            if (hdPackageID == 0 && hdCoinID == 0)
+            //if(packageID>0)
             {
                 try
                 {
@@ -193,6 +169,35 @@ namespace BBH.BOS.Web.Controllers
                             result = "Updatefaile";
                         }
                     }
+                }
+                catch { result = "Erorr"; }
+            }
+
+            else if (hdPackageID > 0 && hdCoinID>0)
+            {
+                try
+                {
+                    packageCoin.PackageValue = packageValue;
+                    packageCoin.PackageID = packageID;
+                    packageCoin.CoinID = coinID;
+
+                    //bool CheckPackageID_CoinIDExist = packageCoinRepository.CheckPackageID_CoinIDExist(packageID, coinID);
+                    //if (CheckPackageID_CoinIDExist)
+                    //{
+                    //    result = "PackageCoinIDExist";
+                    //}
+                    //else
+                    //{
+                        bool updatePackage = packageCoinRepository.UpdatePackageCoin(packageCoin, packageID, coinID);
+                        if (updatePackage)
+                        {
+                            result = "Updatesuccess";
+                        }
+                        else
+                        {
+                            result = "Updatefaile";
+                        }
+                    //}
                 }
                 catch { result = "Erorr"; }
             }

@@ -29,7 +29,20 @@ namespace BBH.BOS.Respository
                 return null;
             }
         }
-
+        public IEnumerable<Package_CoinBO> ListAllPackage_Coin()
+        {
+            string fileLog = Path.GetDirectoryName(Path.Combine(pathLog));
+            try
+            {
+                IEnumerable<Package_CoinBO> packageCoin = Proxy.ListAllPackage_Coin();
+                return packageCoin;
+            }
+            catch (Exception ex)
+            {
+                Utility.WriteLog(fileLog, ex.Message);
+                return null;
+            }
+        }
          public bool InsertPackageCoin(Package_CoinBO packageCoin)
           {
             bool row = false;

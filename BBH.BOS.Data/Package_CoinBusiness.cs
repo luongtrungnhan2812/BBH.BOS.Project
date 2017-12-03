@@ -36,6 +36,9 @@ namespace BBH.BOS.Data
                     packageCoin.PackageID = int.Parse(reader["PackageID"].ToString());
 
                     packageCoin.CoinID = int.Parse(reader["CoinID"].ToString());
+                    packageCoin.PackageName = reader["PackageName"].ToString();
+
+                    packageCoin.CoinName = reader["CoinName"].ToString();
                     packageCoin.PackageValue = double.Parse(reader["PackageValue"].ToString());
                     packageCoin.CreateDate = DateTime.Parse(reader["CreateDate"].ToString());
 
@@ -55,6 +58,47 @@ namespace BBH.BOS.Data
                 helper.destroy();
             }
         }
+        public IEnumerable<Package_CoinBO> ListAllPackage_Coin()
+        {
+            string fileLog = Path.GetDirectoryName(Path.Combine(pathLog, "Logs"));
+            Sqlhelper helper = new Sqlhelper("", "ConnectionString");
+            try
+            {
+                List<Package_CoinBO> lstPackage = new List<Package_CoinBO>();
+                string sql = "SP_ListAllPackage_Coin";
+
+                SqlCommand command = helper.GetCommandNonParameter(sql, true);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    Package_CoinBO packageCoin = new Package_CoinBO();
+                    packageCoin.PackageID = int.Parse(reader["PackageID"].ToString());
+
+                    packageCoin.CoinID = int.Parse(reader["CoinID"].ToString());
+                    packageCoin.PackageName = reader["PackageName"].ToString();
+
+                    packageCoin.CoinName = reader["CoinName"].ToString();
+                   
+                    packageCoin.PackageValue = double.Parse(reader["PackageValue"].ToString());
+                    packageCoin.CreateDate = DateTime.Parse(reader["CreateDate"].ToString());
+
+                    //packageCoin.TotalRecord = int.Parse(reader["TOTALROWS"].ToString());
+                    lstPackage.Add(packageCoin);
+
+                }
+                return lstPackage;
+            }
+            catch (Exception ex)
+            {
+                Utilitys.WriteLog(fileLog, ex.Message);
+                return null;
+            }
+            finally
+            {
+                helper.destroy();
+            }
+        }
+
         public bool InsertPackageCoin(Package_CoinBO packageCoin)
         {
             string fileLog = Path.GetDirectoryName(Path.Combine(pathLog, "Logs"));

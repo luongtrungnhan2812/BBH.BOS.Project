@@ -1,14 +1,24 @@
 ﻿function ShowpopupEditpackageCoin(packageID, coinID, packageValue)
 {
+    var hdPackageID = packageID;
+    var hdCoinID = coinID;
+  
     $('#hdPackageID').val(packageID);
     $('#hdCoinID').val(coinID);
     $('#cbPackage option[value=' + packageID + ']').attr('selected', true);
     $('#cbPackage').trigger('chosen:updated')
     $('#cbCoin option[value=' + coinID + ']').attr('selected', true);
     $('#cbCoin').trigger('chosen:updated')
-    //$('#txtCoinID').val(coinID);
     $('#txtPackageValue').val(packageValue);
-    
+
+    //$('#cbPackage option[value=' + packageID + ']').attr('readonly', true);
+    //$('#cbPackage').trigger('chosen:updated')
+    //$('#cbCoin option[value=' + coinID + ']').attr('readonly', true);
+    //$('#cbCoin').trigger('chosen:updated')
+
+    //$('#cbPackage').attr("readonly", true);
+    //$('#cbCoin').attr("readonly", true);
+
     setTimeout(function () {
         $('#cbPackage').chosen({
             width: '200px'
@@ -22,8 +32,11 @@
 }
 function ShowPopupInsert()
 {
-    $('#cbPackage option[value=0]').attr('selected', true);
-    $('#cbCoin option[value=0]').attr('selected', true);
+    $('#hdPackageID').val(0);
+    $('#hdCoinID').val(0);
+
+    //$('#cbPackage option[value=0]').attr('selected', true);
+    //$('#cbCoin option[value=0]').attr('selected', true);
     $('#txtPackageValue').val('');
 }
 function ConfirmPackage_Coin(packageID,coinID, isDelete) {
@@ -76,11 +89,22 @@ function ResetForm(id, value) {
 //        return false;
 //    }
 //}
+function close()
+{
+    $('#hdPackageID').val(0);
+    $('#hdCoinID').val(0);
+
+    $('#cbPackage option[value=0]').attr('selected', true);
+    $('#cbCoin option[value=0]').attr('selected', true);
+    $('#txtPackageValue').val('');
+}
 function SavePackageCoin() {
     var checkReg = true;
+    var hdPackageID = $('#hdPackageID').val();
+    var hdCoinID = $('#hdCoinID').val();
+
     var packageID = $('#cbPackage').val();
     var coinID = $('#cbCoin').val();
-    //var coinID = $('#txtCoinID').val();
   
     var packageValue = $('#txtPackageValue').val();
 
@@ -102,9 +126,6 @@ function SavePackageCoin() {
         checkReg = false;
     }
 
-    
-
-   
     if (!checkReg) {
         return false;
     }
@@ -114,7 +135,7 @@ function SavePackageCoin() {
             type: "post",
             async: true,
             url: "/Package_Coin/SavePackageCoin",
-            data: { packageID: packageID, coinID: coinID, packageValue: packageValue },
+            data: { hdPackageID: hdPackageID, hdCoinID: hdCoinID, packageID: packageID, coinID: coinID, packageValue: packageValue },
             beforeSend: function () {
                 $('#imgLoading').css("display", "");
             },
@@ -130,66 +151,6 @@ function SavePackageCoin() {
                 }
                 else if (d == 'PackageCoinIDExist') {
                     noty({ text: "Package_Coin Exist", layout: "bottomRight", type: "error" });
-                }
-                else if (d == 'error') {
-                    alertify.error('error! please contact admin');
-                }
-
-            },
-            error: function (e) {
-
-            }
-        });
-    }
-}
-function UpdatePackageCoin() {
-    var checkReg = true;
-    var packageID = $('#cbPackage').val();
-    //var coinID = $('#cbCoin').val();
-    var coinID = $('#txtCoinID').val();
-
-    var packageValue = $('#txtPackageValue').val();
-
-
-    if (packageValue == '') {
-        $('#lbErrorPackageValue').text('Please input packagecoin name');
-        $('#lbErrorPackageValue').css('display', '');
-        checkReg = false;
-    }
-
-    if (coinID == '') {
-        $('#lbErrorCoinID').text('Please input id coin ');
-        $('#lbErrorCoinID').css('display', '');
-        checkReg = false;
-    }
-
-    if (packageID == '0') {
-        $('#lbErrorGroupAdmin').text('Please select function');
-        $('#lbErrorGroupAdmin').css('display', '');
-        checkReg = false;
-    }
-    if (!checkReg) {
-        return false;
-    }
-    else {
-        $('#imgLoading').css("display", "");
-        $.ajax({
-            type: "post",
-            async: true,
-            url: "/Package_Coin/UpdatePackageCoin",
-            data: { packageID: packageID, coinID: coinID, packageValue: packageValue },
-            beforeSend: function () {
-                $('#imgLoading').css("display", "");
-            },
-            success: function (d) {
-                $('#imgLoading').css("display", "none");
-                if (d == 'Updatesuccess') {
-                    noty({ text: "Update success", layout: "bottomRight", type: "information" });
-                    setTimeout(function () { window.location.reload(); }, 1000);
-                }
-
-                else if (d == 'Updatefaile') {
-                    alertify.error('Updatefaile');
                 }
                 else if (d == 'error') {
                     alertify.error('error! please contact admin');

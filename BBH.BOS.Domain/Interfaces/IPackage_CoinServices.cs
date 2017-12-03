@@ -15,6 +15,9 @@ namespace BBH.BOS.Domain.Interfaces
         IEnumerable<Package_CoinBO> ListAllPackageCoin(int start, int end);
 
         [OperationContract]
+         IEnumerable<Package_CoinBO> ListAllPackage_Coin();
+
+        [OperationContract]
         bool InsertPackageCoin(Package_CoinBO packageCoin);
 
         [OperationContract]

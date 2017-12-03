@@ -7,9 +7,11 @@
 
 <main class="" style="padding-top: 5.5rem; margin-left: 5%; margin-right: 5%;">
     <div class="container-fluid">
+        @{Html.RenderAction("PartialDashboard", "Common", null);}
 
         <!--Section: Conditions-->
         <section class="section">
+
             <div class="row">
                 <div class="row white z-depth-1 mb-r col-lg-12" style="margin-bottom: 0rem !important;left:23px">
 
@@ -67,20 +69,20 @@
                                             <thead>
                                                 <tr>
                                                     @*<th>PackageID</th>
-                                                    <th>CoinID</th>*@
+                                                        <th>CoinID</th>*@
                                                     <th>PackageName</th>
                                                     <th>CoinName</th>
                                                     <th>PackageValue</th>
                                                     <th>CreateDate</th>
                                                     @*<th>Status</th>*@
                                                     <th>Confirm</th>
-                                                    
+
                                                 </tr>
                                             </thead>
                                             <!--/Table head-->
                                             <!--Table body-->
                                             <tbody id="tbodyListPackage">
-                                                
+
                                                 @if (ViewData["PackageCoin"] != null)
                                                 {
                                                     IEnumerable<Package_CoinBO> lstPackageCoin = (IEnumerable<Package_CoinBO>)ViewData["PackageCoin"];
@@ -92,23 +94,25 @@
                                                             //string isDelete = "";
 
                                                             <tr id="trpackage_@package.PackageID" class="none-top-border">
-                                                                <td class="center">@package.PackageID</td>
-                                                                <td class="center">@package.CoinID</td>
+                                                                <td class="center">@package.PackageName</td>
+                                                                <td class="center">@package.CoinName</td>
                                                                 <td class="center">@package.PackageValue</td>
 
                                                                 <td class="center">@package.CreateDate.ToString("dd/MM/yyyy HH:mm:ss")</td>
 
-                                                               
-                                                            <td class="center">
-                                                                <img src="/Images/loading.gif" id="imgLoading_@package.PackageID" style="position: absolute; display:none ; float: right; width: 30px; margin-left: 45px; ">
-                                                                <a class="teal-text" id="Edit" name="Edit" data-toggle="modal" data-placement="top" title="Edit" href="javascript:void(0)" onclick="ShowpopupEditpackageCoin('@package.PackageID','@package.CoinID','@package.PackageValue')" data-target="#standardModal"><i class="fa fa-pencil"></i></a>
-                                                                @if (package.IsDelete == 0)
-                                                                {
-                                                                   <a class="red-text" data-toggle="modal" data-placement="top" title="Remove" href="javascript:void(0)" onclick="ConfirmPackage_Coin('@package.PackageID','@package.CoinID','@package.IsDelete')"><i class="fa fa-times"></i></a>
-                                                                }
-                                                              </td>
 
-                                                        </tr>
+                                                                <td class="center">
+                                                                    <img src="/Images/loading.gif" id="imgLoading_@package.PackageID" style="position: absolute; display:none ; float: right; width: 30px; margin-left: 45px; ">
+                                                                    <a href="javascript:void(0)" onclick="ShowPopupInsert()" class="teal-text" data-placement="top" id="Create" name="Create" data-toggle="modal" data-target="#standardModal"><i class="fa fa-plus"></i></a>
+
+                                                                    <a class="teal-text" id="Edit" name="Edit" data-toggle="modal" data-placement="top" title="Edit" href="javascript:void(0)" onclick="ShowpopupEditpackageCoin('@package.PackageID','@package.CoinID','@package.PackageValue')" data-target="#standardModal"><i class="fa fa-pencil"></i></a>
+                                                                    @if (package.IsDelete == 0)
+                                                                    {
+                                                                        <a class="red-text" data-toggle="modal" data-placement="top" title="Remove" href="javascript:void(0)" onclick="ConfirmPackage_Coin('@package.PackageID','@package.CoinID','@package.IsDelete')"><i class="fa fa-times"></i></a>
+                                                                    }
+                                                                </td>
+
+                                                            </tr>
                                                         }
                                                     }
                                                 }
@@ -250,13 +254,15 @@
 
             </div>
             <!--/Second row-->
-
+            <!--Classic admin cards-->
+            <!--/Classic admin cards-->
         </section>
         <!--/Section: Conditions-->
     </div>
 </main>
 <input type="hidden" id="hdPackageID" name="hdPackageID" value="0" />
 <input type="hidden" id="hdCoinID" name="hdCoinID" value="0" />
+
 
 @*=========================================PopUpEdit-Insert=========================================*@
 <div class="modal fade" id="standardModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -265,21 +271,49 @@
         <div class="modal-content" style="width:500px">
             <!--Header-->
             <div class="modal-header white-text" style="background-color: #154771">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="close()">
                     <span aria-hidden="true">×</span>
                 </button>
                 <p class="heading" contenteditable="true" style="color:#fff">Package Information </p>
             </div>
             @*<div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-                <h4 class="modal-title">Mining Package</h4>
-            </div>*@
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title">Mining Package</h4>
+                </div>*@
             <!--Body-->
             <div class="modal-body" style="padding-bottom:0px">
                 <form>
                     <div class="row" style="margin-bottom:15px">
+                        <div class="box col-md-12">
+                            <div class="col-md-4">
+                                <label>Package Name:</label>
+                            </div>
+                             <div class="col-md-7">
+                                <div class="controls">
+                                    <select id="cbPackage" onfocus="ResetForm('lbErrorPackage', this.value)" class="form-control" data-rel="chosen">
+                                        <option value="0">Select Package name</option>
+                                        @if (ViewData["ListPackage"] != null)
+                                        {
+                                            IEnumerable<PackageBO> lstPackage = (IEnumerable<PackageBO>)ViewData["ListPackage"];
+                                            if (lstPackage != null && lstPackage.Count() > 0)
+                                            {
+                                                foreach (PackageBO package in lstPackage)
+                                                {
+                                                    <option value="@package.PackageID">@package.PackageName</option>
+                                                }
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                                <label id="lbErrorPackage" style="color:red; display:none" class=""></label>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    @*<div class="row" style="margin-bottom:15px">
                         <div class="box col-md-12">
                             <div class="col-md-6">
                                 <div class="controls">
@@ -300,14 +334,41 @@
                                 </div>
                                 <label id="lbErrorPackage" style="color:red; display:none" class=""></label>
 
-                                </div>
                             </div>
                         </div>
+                    </div>*@
                     <div class="row" style="margin-bottom:15px">
+                        <div class="box col-md-12">
+                            <div class="col-md-4">
+                                <label>Coin Name:</label>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="controls">
+                                    @*<input type="text" onfocus="ResetForm('lbErrorCoinID', this.value)" id="txtCoinID" name="txtCoinID" placeholder="id Coin " class="form-control validate">*@
+
+                                    <select id="cbCoin" class="form-control" onfocus="ResetForm('lbErrorCoinID', this.value)" data-rel="chosen">
+                                        <option value="0">Select Coin name</option>
+                                        @if (ViewData["ListCoin"] != null)
+                                        {
+                                            IEnumerable<CoinBO> lstCoin = (IEnumerable<CoinBO>)ViewData["ListCoin"];
+                                            if (lstCoin != null && lstCoin.Count() > 0)
+                                            {
+                                                foreach (CoinBO coin in lstCoin)
+                                                {
+                                                    <option value="@coin.CoinID">@coin.CoinName</option>
+                                                }
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                                <label id="lbErrorCoinID" style="color:red; display:none" class=""></label>
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="row" style="margin-bottom:15px">
                         <div class="box col-md-12">
                             <div class="col-md-6">
                                 <div class="controls">
-                                    @*<input type="text" onfocus="ResetForm('lbErrorCoinID', this.value)" id="txtCoinID" name="txtCoinID" placeholder="id Coin " class="form-control validate">*@
 
                                     <select id="cbCoin" class="form-control" onfocus="ResetForm('lbErrorCoinID', this.value)" data-rel="chosen">
                                         <option value="0">Select CoinID</option>
@@ -325,32 +386,46 @@
                                     </select>
                                 </div>
                                 <label id="lbErrorCoinID" style="color:red; display:none" class=""></label>
-                                </div>
                             </div>
-                            
                         </div>
-                        <div class="row" style="margin-bottom:15px">
-                            <div class="box col-md-12">
-                                <div class="col-md-12">
-                                    <div class="md-form">
-                                        <input type="text" onfocus="ResetForm('lbErrorPackageValue', this.value)" id="txtPackageValue" name="txtPackageValue" placeholder="package value" onkeypress="return functionx(event)" class="form-control validate">
 
-                                    </div>
-                                    <label id="lbErrorPackageValue" style="color:red; display:none" class=""></label>
-                                </div>
-                                </div>
+                    </div>*@
+                    <div class="row" style="margin-bottom:15px">
+                        <div class="box col-md-12">
+                            <div class="col-md-4">
+                                <label>Package Value:</label>
                             </div>
-</form>
+                            <div class="col-md-7">
+                                <div class="md-form">
+                                    <input type="text" onfocus="ResetForm('lbErrorPackageValue', this.value)" id="txtPackageValue" name="txtPackageValue" placeholder="package value" @*onkeypress="return functionx(event)"*@ class="form-control validate">
+
+                                </div>
+                                <label id="lbErrorPackageValue" style="color:red; display:none" class=""></label>
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="row" style="margin-bottom:15px">
+                        <div class="box col-md-12">
+                            <div class="col-md-12">
+                                <div class="md-form">
+                                    <input type="text" onfocus="ResetForm('lbErrorPackageValue', this.value)" id="txtPackageValue" name="txtPackageValue" placeholder="package value" class="form-control validate">
+
+                                </div>
+                                <label id="lbErrorPackageValue" style="color:red; display:none" class=""></label>
+                            </div>
+                        </div>
+                    </div>*@
+                </form>
                 <br>
 
             </div>
             <!--Footer-->
             <div class="modal-footer">
                 <img id="imgLoading" src="/Images/loading.gif" style="display:none">
-              
-                <a id="2lvlModal-learnMore" class="btn btn-danger" onclick="SavePackageCoin()" contenteditable="true" name="cmd">Save</a>
+
+                <a id="2lvlModal-learnMore" class="btn btn-danger" onclick="SavePackageCoin()" contenteditable="false" name="cmd">Save</a>
                 @*<a id="2lvlModal-learnMore" class="btn btn-danger" onclick="UpdatePackageCoin()" style="display:none"  contenteditable="true" name="cmd">Update</a>*@
-                
+
 
             </div>
         </div>
@@ -359,7 +434,6 @@
     </div>
 </div>
 
-@*=========================================PopUpEdit-Insert=========================================*@
 
 
 
