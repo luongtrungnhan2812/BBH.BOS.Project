@@ -55,6 +55,10 @@ function ShowPopUpEditPackage(packageID, packageName,packageValue) {
     $('#txtPackageName').attr("readonly", true);
 
 }
+function test1()
+{
+
+}
 function ShowpopupInsert()
 {
     $('#hdPackageID').val(0);
