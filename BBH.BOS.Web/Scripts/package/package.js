@@ -67,6 +67,10 @@ function ResetForm(id, value) {
     $('#' + id).text('');
     $('#' + id).css('display', 'none');
 }
+function test()
+{
+
+}
 function SavePackage() {
     var checkReg = true;
     var packageID = $('#hdPackageID').val();
