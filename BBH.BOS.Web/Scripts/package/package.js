@@ -38,11 +38,30 @@
         });
     }
 }
-
+$(document).ready(function () {
+    var packageID = $('#hdPackageID').val();
+    if (packageID > 0) {
+        $('#txtPackageName').attr("readonly", true);
+    }
+    else {
+        $('#txtPackageName').attr("readonly", false);
+    }
+});
 function ShowPopUpEditPackage(packageID, packageName,packageValue) {
     $('#hdPackageID').val(packageID);
     $('#txtPackageName').val(packageName);
     $('#txtPackageValue').val(packageValue);
+
+    $('#txtPackageName').attr("readonly", true);
+
+}
+function ShowpopupInsert()
+{
+    $('#hdPackageID').val(0);
+    $('#txtPackageName').val('');
+    $('#txtPackageValue').val('');
+
+    //$('#txtPackageName').attr("readonly", true);
 }
 function ResetForm(id, value) {
     $('#' + id).text('');

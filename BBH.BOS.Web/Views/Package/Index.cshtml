@@ -26,7 +26,7 @@
                     </div>
                     <div class="col-md-4 text-md-right">
                         <a href="#" class="btn btn-secondary waves-effect waves-light">Search</a>
-                        <a href="#" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#standardModal"><i class="fa fa-print left"></i> Create New</a>
+                        @*<a href="#" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#standardModal"><i class="fa fa-print left"></i> Create New</a>*@
                     </div>
                     <!-- /.Navigation -->
 
@@ -119,7 +119,7 @@
                                                                 </td>*@
                                                                 <td class="center">
                                                                     <img src="/Images/loading.gif" id="imgLoading_@package.PackageID" style="position: absolute; display:none ; float: right; width: 30px; margin-left: 45px; ">
-                                                                    @*<a class="btn btn-info btn-sm" href="javascript:void(0)" onclick="ShowPopUpEditPackage('@package.PackageID','@package.PackageName')" data-toggle="modal" data-target="#standardModal"><i class="glyphicon glyphicon-edit icon-white"></i>Edit</a>*@
+                                                                    <a href="javascript:void(0)" onclick="ShowpopupInsert()" class="teal-text" data-toggle="modal" data-target="#standardModal"><i class="fa fa-plus"></i></a>
                                                                     <a class="teal-text" data-toggle="modal" data-placement="top" title="Edit" href="javascript:void(0)" onclick="ShowPopUpEditPackage('@package.PackageID','@package.PackageName','@package.PackageValue')" data-target="#standardModal"><i class="fa fa-pencil"></i></a>
 
                                                                     @if (package.IsDelete == 0)
@@ -293,6 +293,9 @@
         <div class="modal-content" style="width:500px">
             <!--Header-->
             <div class="modal-header white-text" style="background-color: #154771">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="close()">
+                    <span aria-hidden="true">×</span>
+                </button>
                 <p class="heading" contenteditable="true" style="color:#fff">Package Information </p>
             </div>
             <!--Body-->
