@@ -12,7 +12,7 @@
         <!--Section: Conditions-->
         <section class="section">
 
-            @*<div class="row">
+            <div class="row">
                 <div class="row white z-depth-1 mb-r col-lg-12" style="margin-bottom: 0rem !important;left:23px">
 
                     
@@ -33,7 +33,7 @@
                   
 
                 </div>
-            </div>*@
+            </div>
 
             <!--First row-->
             <div class="row">
@@ -104,9 +104,9 @@
 
                                                                 <td class="center">
                                                                     <img src="/Images/loading.gif" id="imgLoading_@package.PackageID" style="position: absolute; display:none ; float: right; width: 30px; margin-left: 45px; ">
-                                                                    <a href="javascript:void(0)" onclick="ShowPopupInsert()" class="teal-text" data-placement="top" id="Create" name="Create" data-toggle="modal" data-target="#standardModal"><i class="fa fa-plus"></i></a>
+                                                                    @*<a href="javascript:void(0)" onclick="ShowPopupInsert()" class="teal-text" data-placement="top"  data-toggle="modal" data-target="#standardModal"><i class="fa fa-plus"></i></a>*@
 
-                                                                    <a class="teal-text" id="Edit" name="Edit" data-toggle="modal" data-placement="top" title="Edit" href="javascript:void(0)" onclick="ShowpopupEditpackageCoin('@package.PackageID','@package.CoinID','@package.PackageValue')" data-target="#standardModal"><i class="fa fa-pencil"></i></a>
+                                                                    <a class="teal-text" data-toggle="modal" data-placement="top" title="Edit" href="javascript:void(0)" onclick="ShowpopupEditpackageCoin('@package.PackageID','@package.CoinID','@package.PackageValue')" data-target="#standardModal"><i class="fa fa-pencil"></i></a>
                                                                     @if (package.IsDelete == 0)
                                                                     {
                                                                         <a class="red-text" data-toggle="modal" data-placement="top" title="Remove" href="javascript:void(0)" onclick="ConfirmPackage_Coin('@package.PackageID','@package.CoinID','@package.IsDelete')"><i class="fa fa-times"></i></a>

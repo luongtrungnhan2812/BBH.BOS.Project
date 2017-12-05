@@ -1,23 +1,42 @@
-﻿function ShowpopupEditpackageCoin(packageID, coinID, packageValue)
+﻿function ShowPopupInsert() {
+    $('#hdPackageID').val(0);
+    $('#hdCoinID').val(0);
+    $('#cbPackage').attr("disabled", false);
+    $('#cbCoin').attr("disabled", false);
+
+    $('#cbPackage option[value=0]').attr('selected', true);
+    $('#cbPackage').chosen('destroy');
+    $('#cbCoin option[value=0]').attr('selected', true);
+    $('#cbCoin').chosen('destroy');
+
+    $('#txtPackageValue').val('');
+    //setTimeout(function () {
+    //    $('#cbPackage option[value=0]').attr('selected', true);
+    //    $('#cbPackage').trigger('chosen:updated');
+       
+    //}, 500);
+    //setTimeout(function () {
+    //    $('#cbCoin option[value=0]').attr('selected', true);
+    //    $('#cbCoin').trigger('chosen:updated');
+    //}, 500);
+}
+
+function ShowpopupEditpackageCoin(packageID, coinID, packageValue)
 {
     var hdPackageID = packageID;
     var hdCoinID = coinID;
   
     $('#hdPackageID').val(packageID);
     $('#hdCoinID').val(coinID);
-    $('#cbPackage option[value=' + packageID + ']').attr('selected', true);
-    $('#cbPackage').trigger('chosen:updated')
-    $('#cbCoin option[value=' + coinID + ']').attr('selected', true);
-    $('#cbCoin').trigger('chosen:updated')
-    $('#txtPackageValue').val(packageValue);
-
-    //$('#cbPackage option[value=' + packageID + ']').attr('disabled', true);
-    //$('#cbPackage').trigger('chosen:updated')
-    //$('#cbCoin option[value=' + coinID + ']').attr('disabled', true);
-    //$('#cbCoin').trigger('chosen:updated')
-
     $('#cbPackage').attr("disabled", true);
     $('#cbCoin').attr("disabled", true);
+
+    $('#cbPackage option[value=' + packageID + ']').attr('selected', true);
+    $('#cbPackage').trigger('chosen:updated');
+    $('#cbCoin option[value=' + coinID + ']').attr('selected', true);
+    $('#cbCoin').trigger('chosen:updated');
+    $('#txtPackageValue').val(packageValue);
+
 
     setTimeout(function () {
         $('#cbPackage').chosen({
@@ -29,33 +48,6 @@
             width: '200px'
         });
     }, 500);
-}
-function ShowPopupInsert(packageID, coinID)
-{
-    $('#hdPackageID').val(0);
-    $('#hdCoinID').val(0);
-    $('#cbPackage option[value=' + packageID + ']').attr('selected', true);
-    $('#cbPackage').trigger('chosen:updated')
-    $('#cbCoin option[value=' + coinID + ']').attr('selected', true);
-    $('#cbCoin').trigger('chosen:updated')
-
-    //$('#cbPackage option[value=0]').attr('selected', true);
-    //$('#cbPackage').trigger('chosen:updated')
-    //$('#cbCoin option[value=0]').attr('selected', true);
-    //$('#cbPackage').trigger('chosen:updated')
-
-    $('#txtPackageValue').val('');
-    //var hdPackageID = packageID;
-    //var hdCoinID = coinID;
-
-    //$('#hdPackageID').val('');
-    //$('#hdCoinID').val('');
-    //$('#cbPackage option[value=0]').attr('selected', true);
-    //$('#cbPackage').trigger('chosen:updated')
-    //$('#cbCoin option[value=0]').attr('selected', true);
-    //$('#cbCoin').trigger('chosen:updated')
-    //$('#txtPackageValue').val('');
-
 }
 function ConfirmPackage_Coin(packageID,coinID, isDelete) {
     var textMessage = '';
@@ -117,22 +109,39 @@ function ResetForm(id, value) {
 //    //var coinID = hdCoinID;
 
 //    if (packageID > 0 && coinID > 0) {
-//        $('#cbPackage').attr("disabled", true);
-//        $('#cbCoin').attr("disabled", true);
+//        //$('#cbPackage').attr("disabled", true);
+//        //$('#cbCoin').attr("disabled", true);
+//        ShowpopupEditpackageCoin(packageID, coinID, packageValue);
 //    }
 //    else /*if (packageID == 0 && coinID == 0*/{
-//        $('#cbPackage').attr("disabled", false);
-//        $('#cbCoin').attr("disabled", false);
+//        //$('#cbPackage').attr("disabled", false);
+//        //$('#cbCoin').attr("disabled", false);
+//        ShowPopupInsert();
 //    }
 //});
 function close()
 {
     $('#hdPackageID').val('');
     $('#hdCoinID').val('');
+    //$('#cbPackage').attr("disabled", false);
+    //$('#cbCoin').attr("disabled", false);
 
-    $('#cbPackage option[value=0]').attr('selected', true);
-    $('#cbCoin option[value=0]').attr('selected', true);
+    //$('#cbPackage option[value=0]').attr('selected', true);
+    //$('#cbPackage').chosen('destroy');
+    //$('#cbCoin option[value=0]').attr('selected', true);
+    //$('#cbCoin').chosen('destroy');
+
     $('#txtPackageValue').val('');
+
+    setTimeout(function () {
+        //$('#cbPackage option[value=0]').attr('selected', true);
+        $('#cbPackage').chosen('destroy');
+        //$('#cbCoin option[value=0]').attr('selected', true);
+        $('#cbCoin').chosen('destroy');
+      
+    },100);
+   
+
 }
 function SavePackageCoin() {
     var checkReg = true;
