@@ -23,7 +23,7 @@ namespace BBH.BOS.Web.Controllers
             if (Session["MemberInfomation"] != null)
             {
                 MemberInformationBO member = (MemberInformationBO)Session["MemberInfomation"];
-                ViewBag.NumberCoin = member.NumberCoin.ToString();
+                ViewBag.NumberCoin = double.Parse(member.NumberCoin.ToString()).ToString();
             }
             else
             {
@@ -85,11 +85,12 @@ namespace BBH.BOS.Web.Controllers
             if (Session["MemberInfomation"] != null)
             {
                 MemberInformationBO member = (MemberInformationBO)Session["MemberInfomation"];
-                ViewBag.NumberEUCoin = Math.Round(member.NumberCoin, 8).ToString();
+                ViewBag.NumberCoin = double.Parse(member.NumberCoin.ToString()).ToString();
             }
             else
             {
-                ViewBag.NumberEUCoin = "0";
+                ViewBag.NumberCoin = "0";
+
             }
             ViewBag.strHtmlTransactionPackage = GenHtml_TractionPackage();
             return View();

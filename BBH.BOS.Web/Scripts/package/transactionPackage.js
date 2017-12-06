@@ -45,9 +45,13 @@ $('#btn_submit').on('click', function () {
                                     type: 'success'
                                 });
                                 setTimeout(function () {
-                                    window.location.reload();
+                                    location.reload();
 
-                                },1000);
+                                });
+                                setTimeout(function () {
+                                    location.reload();
+
+                                });
                             }
                             else {
                                 swal({
