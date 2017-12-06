@@ -86,7 +86,7 @@ namespace BBH.BOS.Web.Controllers
             if (Session["MemberInfomation"] != null)
             {
                 MemberInformationBO member = (MemberInformationBO)Session["MemberInfomation"];
-                ViewBag.NumberCoin = member.NumberCoin.ToString();
+                ViewBag.NumberCoin = Math.Round(member.NumberCoin, 8).ToString();
             }
             else
             {
@@ -346,12 +346,12 @@ namespace BBH.BOS.Web.Controllers
             lstTransactionPackageBO = ObjITransactionPackageService.ListTransactionPackageByMember(memberID);
             if (lstTransactionPackageBO != null && lstTransactionPackageBO.Count() > 0)
             {
-                float numberCoin = 0;
+                double numberCoin = 0;
                 foreach (var item in lstTransactionPackageBO)
                 {
                     numberCoin += item.PackageValue;
                 }
-                ViewBag.EuCoin = numberCoin.ToString();
+                ViewBag.EuCoin = Math.Round(numberCoin, 8).ToString();
             }
 
         }

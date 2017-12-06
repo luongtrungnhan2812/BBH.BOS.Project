@@ -27,5 +27,7 @@ namespace BBH.BOS.Domain.Interfaces
 
         [OperationContract]
         bool CheckPackageID_CoinIDExist(int packageID, int coinID);
+        [OperationContract]
+        Package_CoinBO GetCoinValueByID(int packageID, int coinID);
     }
 }

@@ -23,7 +23,7 @@ namespace BBH.BOS.Data
             {
                 bool rs = false;
                 string sql = "SP_InsertTransactionPackageFE";
-                SqlParameter[] pa = new SqlParameter[9];
+                SqlParameter[] pa = new SqlParameter[10];
                 pa[0] = new SqlParameter("@memberid", transaction.MemberID);
                 pa[1] = new SqlParameter("@packageid", transaction.PackageID);
                 pa[2] = new SqlParameter("@coinid", transaction.CoinID);
@@ -33,6 +33,7 @@ namespace BBH.BOS.Data
                 pa[6] = new SqlParameter("@transactioncode", transaction.TransactionCode);
                 pa[7] = new SqlParameter("@note", transaction.Note);
                 pa[8] = new SqlParameter("@transactionbitcoin", transaction.TransactionBitcoin);
+                pa[9] = new SqlParameter("@packagevalue", transaction.PackageValue);
                 SqlCommand command = helper.GetCommand(sql, pa, true);
                 int row = command.ExecuteNonQuery();
                 if (row > 0)
@@ -104,7 +105,7 @@ namespace BBH.BOS.Data
                 SqlDataReader reader = command.ExecuteReader();
                 if (reader.Read())
                 {
-                  
+
                     transaction.MemberID = int.Parse(reader["MemberID"].ToString());
                     transaction.Status = int.Parse(reader["Status"].ToString());
                     transaction.CoinID = int.Parse(reader["CoinID"].ToString());
@@ -112,8 +113,8 @@ namespace BBH.BOS.Data
                     transaction.ExpireDate = DateTime.Parse(reader["ExpireDate"].ToString());
                     transaction.PackageID = int.Parse(reader["PackageID"].ToString());
                     transaction.PackageName = reader["PackageName"].ToString();
-                    transaction.TransactionCode = reader["TransactionCode"].ToString(); 
-                    transaction.PackageValue = float.Parse(reader["PackageValue"].ToString()); 
+                    transaction.TransactionCode = reader["TransactionCode"].ToString();
+                    transaction.PackageValue = float.Parse(reader["PackageValue"].ToString());
                     transaction.CoinValue = float.Parse(reader["CoinValue"].ToString());
                     transaction.CoinName = reader["CoinName"].ToString();
                     transaction.Note = reader["Note"].ToString();
