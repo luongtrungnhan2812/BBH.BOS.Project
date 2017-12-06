@@ -65,7 +65,7 @@ function ShowpopupInsert()
     $('#txtPackageName').val('');
     $('#txtPackageValue').val('');
 
-    //$('#txtPackageName').attr("readonly", true);
+    $('#txtPackageName').attr("readonly", false);
 }
 function ResetForm(id, value) {
     $('#' + id).text('');

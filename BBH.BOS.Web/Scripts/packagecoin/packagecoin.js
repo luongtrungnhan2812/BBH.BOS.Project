@@ -1,15 +1,21 @@
 ﻿function ShowPopupInsert() {
     $('#hdPackageID').val(0);
     $('#hdCoinID').val(0);
-    $('#cbPackage').attr("disabled", false);
-    $('#cbCoin').attr("disabled", false);
+  
 
+  
     $('#cbPackage option[value=0]').attr('selected', true);
     $('#cbPackage').chosen('destroy');
+    //$('#cbPackage').trigger('chosen:updated');
     $('#cbCoin option[value=0]').attr('selected', true);
+    //$('#cbCoin').trigger('chosen:updated');
+
     $('#cbCoin').chosen('destroy');
 
     $('#txtPackageValue').val('');
+
+    $('#cbPackage').attr("disabled", false);
+    $('#cbCoin').attr("disabled", false);
     //setTimeout(function () {
     //    $('#cbPackage option[value=0]').attr('selected', true);
     //    $('#cbPackage').trigger('chosen:updated');
@@ -36,17 +42,13 @@ function ShowpopupEditpackageCoin(packageID, coinID, packageValue)
     $('#cbCoin option[value=' + coinID + ']').attr('selected', true);
     $('#cbCoin').trigger('chosen:updated');
     $('#txtPackageValue').val(packageValue);
-
-
+    
     setTimeout(function () {
-        $('#cbPackage').chosen({
-            width: '200px'
-        },500);
+        $('#cbPackage').chosen();
     }, 500);
     setTimeout(function () {
-        $('#cbCoin').chosen({
-            width: '200px'
-        });
+        $('#cbCoin').chosen();
+      
     }, 500);
 }
 function ConfirmPackage_Coin(packageID,coinID, isDelete) {
@@ -126,20 +128,20 @@ function close()
     //$('#cbPackage').attr("disabled", false);
     //$('#cbCoin').attr("disabled", false);
 
-    //$('#cbPackage option[value=0]').attr('selected', true);
-    //$('#cbPackage').chosen('destroy');
-    //$('#cbCoin option[value=0]').attr('selected', true);
-    //$('#cbCoin').chosen('destroy');
+    $('#cbPackage option[value=0]').attr('selected', false);
+    $('#cbPackage').chosen();
+    $('#cbCoin option[value=0]').attr('selected', false);
+    $('#cbCoin').chosen();
 
     $('#txtPackageValue').val('');
 
-    setTimeout(function () {
-        //$('#cbPackage option[value=0]').attr('selected', true);
-        $('#cbPackage').chosen('destroy');
-        //$('#cbCoin option[value=0]').attr('selected', true);
-        $('#cbCoin').chosen('destroy');
+    //setTimeout(function () {
+    //    //$('#cbPackage option[value=0]').attr('selected', true);
+    //    $('#cbPackage').chosen('destroy');
+    //    //$('#cbCoin option[value=0]').attr('selected', true);
+    //    $('#cbCoin').chosen('destroy');
       
-    },100);
+    //},100);
    
 
 }
