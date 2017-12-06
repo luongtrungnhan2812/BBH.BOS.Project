@@ -72,6 +72,7 @@ namespace BBH.BOS.Data
                     transaction.ExpireDate = DateTime.Parse(reader["ExpireDate"].ToString());
                     transaction.PackageID = int.Parse(reader["PackageID"].ToString());
                     transaction.PackageName = reader["PackageName"].ToString();
+                    transaction.PackageValue = float.Parse(reader["PackageValue"].ToString());
                     transaction.TransactionCode = reader["TransactionCode"].ToString();
                     transaction.Note = reader["Note"].ToString();
                     lstTransaction.Add(transaction);
