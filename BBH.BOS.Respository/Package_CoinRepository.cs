@@ -102,5 +102,20 @@ namespace BBH.BOS.Respository
             }
             return row;
         }
+        public Package_CoinBO GetCoinValueByID(int packageID, int coinID)
+        {
+            string fileLog = Path.GetDirectoryName(Path.Combine(pathLog));
+            try
+            {
+                Package_CoinBO packageCoin = Proxy.GetCoinValueByID(packageID, coinID);
+                return packageCoin;
+            }
+            catch (Exception ex)
+            {
+                Utility.WriteLog(fileLog, ex.Message);
+                return null;
+            }
+        }
+
     }
 }

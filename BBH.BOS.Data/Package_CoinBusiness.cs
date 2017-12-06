@@ -247,6 +247,39 @@ namespace BBH.BOS.Data
                 helper.destroy();
             }
         }
+        public Package_CoinBO GetCoinValueByID(int packageID, int coinID)
+        {
+            string fileLog = Path.GetDirectoryName(Path.Combine(pathLog, "Logs"));
+            Sqlhelper helper = new Sqlhelper("", "ConnectionString");
+            Package_CoinBO objPackage_CoinBO = new Package_CoinBO();
+            try
+            {
+                bool rs = false;
+                string sql = "SP_GetCoinValueByID";
+                SqlParameter[] pa = new SqlParameter[2];
+                pa[0] = new SqlParameter("@packageID", packageID);
+                pa[1] = new SqlParameter("@coinID", coinID);
+
+                SqlCommand command = helper.GetCommand(sql, pa, true);
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    objPackage_CoinBO = new Package_CoinBO();
+                    objPackage_CoinBO.PackageID = int.Parse(reader["packageid"].ToString());
+                    objPackage_CoinBO.CoinID = int.Parse(reader["coinid"].ToString());
+                    objPackage_CoinBO.PackageValue = double.Parse(reader["packagevalue"].ToString());
+                }
+                return objPackage_CoinBO;
+            }
+            catch (Exception ex)
+            {
+                Utilitys.WriteLog(fileLog, "Exception CheckPackageID_CoinIDExist admin : " + ex.Message); return null;
+            }
+            finally
+            {
+                helper.destroy();
+            }
+        }
 
     }
 }
