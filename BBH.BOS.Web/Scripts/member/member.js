@@ -250,18 +250,18 @@ function Onload()
         //window.location.href = ('/login');
         $('#txtEmail').val('');
         $('#txtPassword').val('');
-        $('#txtRePassword').val('');
+        //$('#txtRePassword').val('');
         $('#txtFullName').val('');
-        $('#txtMobile').val('');
+        //$('#txtMobile').val('');
     }
    
     else if (result == 'EmailExist') {
         $('#txtEmail').val($('#hdEmail').val());
         $('#txtPassword').val($('#hdPassword').val());
-        $('#txtRePassword').val($('#hdPassword').val());
+        //$('#txtRePassword').val($('#hdPassword').val());
 
         $('#txtFullName').val($('#hdFullName').val());
-        $('#txtMobile').val($('#hdMobile').val());
+        //$('#txtMobile').val($('#hdMobile').val());
 
         $('#lbEmail').text('This email has used by another');
         $('#lbEmail').css('display', '');
@@ -272,10 +272,10 @@ function Onload()
     else if (result == 'errorCaptcha') {
         $('#txtEmail').val($('#hdEmail').val());
         $('#txtPassword').val($('#hdPassword').val());
-        $('#txtRePassword').val($('#hdPassword').val());
+        //$('#txtRePassword').val($('#hdPassword').val());
 
         $('#txtFullName').val($('#hdFullName').val());
-        $('#txtMobile').val($('#hdMobile').val());
+        //$('#txtMobile').val($('#hdMobile').val());
         //alertify.error('Please confirm captcha !');
         $('#lbrecaptcha').text('Please confirm captcha !');
         $('#lbrecaptcha').css('display', '');
@@ -295,16 +295,16 @@ function RegisterMember() {
 
     var email = $('#txtEmail').val();
     var password = $('#txtPassword').val();
-    var repassword = $('#txtRePassword').val();
+    //var repassword = $('#txtRePassword').val();
     var fullName = $('#txtFullName').val();
-    var mobile = $('#txtMobile').val();
+    //var mobile = $('#txtMobile').val();
 
     var checkReg = true;
     var checkPassword = CheckPassword(password);
-    var checkRepassword = CheckPassword(repassword);
+    //var checkRepassword = CheckPassword(repassword);
     if (email == '') {
         
-        $('#lbEmail').text('Please input email');
+        $('#lbEmail').text('Input email');
         $('#lbEmail').css('display', '');
         checkReg = false;
     }
@@ -319,7 +319,7 @@ function RegisterMember() {
    
     if (password == '') {
 
-        $('#lbPass').text('Please input password');
+        $('#lbPass').text('Input Password');
         $('#lbPass').css('display', '');
         checkReg = false;
     }
@@ -329,6 +329,12 @@ function RegisterMember() {
         $('#lbPass').css('display', '');
         checkReg = false;
     }
+    if (fullName == '') {
+
+        $('#lbFullname').text('Input Username');
+        $('#lbFullname').css('display', '');
+        checkReg = false;
+    }
     //else {
     //    if (!checkPassword) {
     //        $('#lbPass').text(' password not Invalid');
@@ -336,38 +342,33 @@ function RegisterMember() {
     //        checkReg = false;
     //    }
     //}
-    if (repassword == '') {
+    //if (repassword == '') {
         
-        $('#lbRePass').text('Please input Repassword');
-        $('#lbRePass').css('display', '');
-        checkReg = false;
-    }
-    else {
-        if (password != repassword) {
-            $('#lbRePass').text('RePassword not match');
-            $('#lbRePass').css('display', '');
-        }
+    //    $('#lbRePass').text('Please input Repassword');
+    //    $('#lbRePass').css('display', '');
+    //    checkReg = false;
+    //}
+    //else {
+    //    if (password != repassword) {
+    //        $('#lbRePass').text('RePassword not match');
+    //        $('#lbRePass').css('display', '');
+    //    }
 
-    }
-    if (fullName == '') {
-        
-        $('#lbFullname').text('Please input fullname');
-        $('#lbFullname').css('display', '');
-        checkReg = false;
-    }
-    if (mobile == '') {
-        $('#lbMobile').text('Please input mobile');
-        $('#lbMobile').css('display', '');
-        checkReg = false;
-    }
-    else {
-        if (mobile.length < 10 || mobile.length > 13) {
+    //}
+   
+    //if (mobile == '') {
+    //    $('#lbMobile').text('Please input mobile');
+    //    $('#lbMobile').css('display', '');
+    //    checkReg = false;
+    //}
+    //else {
+    //    if (mobile.length < 10 || mobile.length > 13) {
             
-            $('#lbMobile').text('mobile number faile ');
-            $('#lbMobile').css('display', '');
-            checkReg = false;
-        }
-    }
+    //        $('#lbMobile').text('mobile number faile ');
+    //        $('#lbMobile').css('display', '');
+    //        checkReg = false;
+    //    }
+    //}
 
     if (!checkReg) {
         return false;
@@ -568,17 +569,17 @@ function ForgotPassword()
     if (email == '')
     {
         checkEmail = false;
-        $('#lbreEmail').text('Please input email!');
+        $('#lbreEmail').text('Input Email!');
         $('#lbreEmail').css('display','');
     }
-    else
-    {
-        if (!isValidEmailAddress(email)) {
-            $('#lbreEmail').text('Invalid email address.');
-            $('#lbreEmail').css('display', '');
-
-            checkReg = false;
-        }
+    //else
+    //{
+   else if (!isValidEmailAddress(email)) {
+        
+        $('#lbreEmail').text('Email Invalid.');
+        $('#lbreEmail').css('display', '');
+        checkReg = false;
+       
     }
     if (!checkEmail)
     {
@@ -598,19 +599,23 @@ function ForgotPassword()
                 $('#imgLoading').css("display", "none");
                 if (d == 'ResetPassSuccess') {
                    
-                    alertify.alert('<span>Reset Password success,please go to mail get account!!</span> <a href="http://localhost:52993/login">login</a>');
+                    alertify.alert('<span>Reset Password success,go to mail get account!!</span> <a href="http://localhost:52993/login">login</a>');
                     $('#txtReEmail').val('');
                     setTimeout(function () { window.location.reload("/login"); }, 5000);
 
                 }
                 else if (d == 'emtry')
                 {
-                    $('#lbreEmail').text('Please input email!');
+                    $('#lbreEmail').text('Input email!');
                     $('#lbreEmail').css('display', '');
                 }
                 else if (d== 'EmailNotExit')
                 {
-                    alertify.error("Email No Register!");
+                    alertify.error("Email Not Register!");
+                }
+                else if (d == 'EmailNotActive')
+                {
+                    alertify.error("E-mail Not Actived");
                 }
                 else if (d =='ResetPassfaile'){
                     alertify.error('ResetPassWord error. Please contact with administrator');

@@ -1422,7 +1422,7 @@ pre code {
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1068px) {
   .col-md {
     -webkit-flex-basis: 0;
         -ms-flex-preferred-size: 0;

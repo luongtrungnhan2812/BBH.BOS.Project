@@ -23,6 +23,9 @@ namespace BBH.BOS.Domain.Interfaces
         [OperationContract]
         bool CheckEmailExists(string email);
         [OperationContract]
+        bool CheckEmailNotActive(string email);
+
+        [OperationContract]
         MemberBO GetMemberDetailByEmail(string email);
         [OperationContract]
         bool InsertMemberWallet(Member_WalletBO objMember_WalletBO);

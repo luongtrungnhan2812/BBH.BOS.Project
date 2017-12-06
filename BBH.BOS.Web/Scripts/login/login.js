@@ -265,12 +265,16 @@ function OnLoad() {
                 $('#hdPassword').val('');
                 window.location.href = '/Home';
             }
+            else if (result == 'EmailNotActive')
+            {
+                alertify.error("E-mail Not Actived");
+            }
             else if (result =='loginfaile')
             {
-                alertify.error("email or password not Invalid ");
-          }
+                alertify.error("Email or Password incorrect!");
+            }
             else if (result =='captchafaile') {
-                $('#lbrecaptcha').text('Please confirm captcha !');
+                $('#lbrecaptcha').text('Confirm captcha !');
                 $('#lbrecaptcha').css('display', '');
             }
         }
@@ -286,7 +290,7 @@ function LoginMember() {
     var checkPassword = CheckPassword(password);
     if (email == '') {
         checkReg = false;
-        $('#lbEmail').text('Please input email');
+        $('#lbEmail').text('Input Email');
         $('#lbEmail').css('display', '');
     }
     else {
@@ -299,7 +303,7 @@ function LoginMember() {
    
     if (password == '') {
         checkReg = false;
-        $('#lbPass').text('Please input password');
+        $('#lbPass').text('Input Password');
         $('#lbPass').css('display', '');
     }
     if (!checkReg) {

@@ -41,31 +41,36 @@
                             <!--Body-->
                             <div class="md-form">
                                 <i class="fa fa-envelope prefix"></i>
-                                <input type="text" id="txtEmail" name="txtEmail" onfocus="ResetForm('lbEmail', this.value)" class="form-control" required>
+                                <input type="text" id="txtEmail" name="txtEmail" onfocus="ResetForm('lbEmail', this.value)" placeholder="E-mail Address" class="form-control" required>
                                 @*<label id="lbEmail" for="form2">Email</label>*@
                                 <label id="lbEmail" style="color:red; display:none" class=""></label>
 
                             </div>
                             <div class="md-form">
                                 <i class="fa fa-lock prefix"></i>
-                                <input type="password" id="txtPassword" name="txtPassword" onfocus="ResetForm('lbPass', this.value)" class="form-control" required>
+                                <input type="password" id="txtPassword" name="txtPassword" onfocus="ResetForm('lbPass', this.value)" placeholder="Passsword" class="form-control" required>
                                 @*<label id="lbPass" for="form4">Password</label>*@
                                 <label id="lbPass" style="color:red; display:none" class=""></label>
 
                             </div>
-                            <div class="g-recaptcha" id="captcha" data-sitekey="6LfhJyUUAAAAANmMFHQ7ARUoDEwgs3Zy-W6bwCo1" style="margin-left: 49px;"></div><br />
-                            <label id="lbrecaptcha" style="color:red; display:none;margin-left: 49px;" class=""></label>
+                            <div class="row">
+                               
+                                    <div class="col-md-12" style="margin-left: 40px;">
+                                        <div class="g-recaptcha" id="captcha" data-sitekey="6LfhJyUUAAAAANmMFHQ7ARUoDEwgs3Zy-W6bwCo1"></div><br />
+                                    </div>
+                                </div>
+                                <label id="lbrecaptcha" style="color:red; display:none;margin-left: 49px;" class=""></label>
 
-                            <div class="text-center">
-                                <button type="submit" onclick="return LoginMember()" class="btn btn-primary">Login</button>
+                                <div class="text-center">
+                                    <button type="submit" onclick="return LoginMember()" class="btn btn-primary">Sing in</button>
+                                </div>
                             </div>
-                        </div>
                     @*</form>*@
 }
 
                     <div class="">
                         <div class="modal-footer text-center">
-                            <a href="/getpassword" style="float:left" data-toggle="modal" data-target="#standardModal1">Forgot password</a> 
+                            <a href="/getpassword" style="float:left" data-toggle="modal" data-target="#standardModal1">Forgot Password</a> 
                             <a href="/registermember">Sign up</a>
                         </div>
 
@@ -116,7 +121,7 @@
                                                     <div class="col-md-12">
                                                         <label id="lbEwallet" style="font-weight:bold">Email Address:</label>
                                                         <div class="md-form" style="padding:0px; margin:0px">
-                                                            <input type="text" style="padding:0px; margin:0px" onfocus="ResetForm('lbreEmail', this.value)" id="txtReEmail" placeholder="email address" class="form-control"  oninvalid="setCustomValidity('Please enter a valid email address!')" name="txtReEmail" @*class="form-control validate"*@>
+                                                            <input type="text" style="padding:0px; margin:0px" onfocus="ResetForm('lbreEmail', this.value)" id="txtReEmail" placeholder="Email Address" class="form-control"  oninvalid="setCustomValidity('Please enter a valid email address!')" name="txtReEmail" @*class="form-control validate"*@>
                                                             <label id="lbreEmail" style="color:red; display:none" class=""></label>
 
                                                         </div>

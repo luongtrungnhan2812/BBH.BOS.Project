@@ -67,25 +67,33 @@ namespace BBH.BOS.Web.Controllers
                 }
                 else
                 {
-                    string genPass = Utility.GenCode();
-                    string pass = Utility.MaHoaMD5(genPass);
-                    try
+                    bool checkNotActive = memberServices.CheckEmailNotActive(email);
+                    if (!checkNotActive)
                     {
-                        if (pass != "")
-                        {
-                            memberServices.UpdatePasswordMember(email, pass);
-                        }
-                        bool resetPass = sentMail.SendMailResetPassword(email, genPass);
-                        if (resetPass)
-                        {
-                            result = "ResetPassSuccess";
-                        }
-                        else
-                        {
-                            result = "ResetPassfaile";
-                        }
+                        result = "EmailNotActive";
                     }
-                    catch { }
+                    else
+                    {
+                        string genPass = Utility.GenCode();
+                        string pass = Utility.MaHoaMD5(genPass);
+                        try
+                        {
+                            if (pass != "")
+                            {
+                                memberServices.UpdatePasswordMember(email, pass);
+                            }
+                            bool resetPass = sentMail.SendMailResetPassword(email, genPass);
+                            if (resetPass)
+                            {
+                                result = "ResetPassSuccess";
+                            }
+                            else
+                            {
+                                result = "ResetPassfaile";
+                            }
+                        }
+                        catch { }
+                    }
                 }
                 
             }

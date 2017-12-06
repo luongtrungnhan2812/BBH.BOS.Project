@@ -35,79 +35,92 @@
                     <div class="card-block">
                         <!--Header-->
                         <div class="form-header">
-                            <h3><i class="fa fa-lock"></i> Sign Up </h3>
+                            <h3><i class="fa fa-lock"></i> Register </h3>
                         </div>
                         <!--Body-->
                         <div class="md-form">
                             <i class="fa fa-envelope prefix"></i>
-                            <input type="text" id="txtEmail" name="txtEmail" onfocus="ResetForm('lbEmail', this.value)" placeholder="username" class="form-control validate">
+                            <input type="text" id="txtEmail" name="txtEmail" onfocus="ResetForm('lbEmail', this.value)" placeholder="E-mail Address" class="form-control validate">
                             <label id="lbEmail" style="color:red; display:none" class=""></label>
                         </div>
-
                         <div class="md-form">
                             <i class="fa fa-lock prefix"></i>
-                            <input type="password" id="txtPassword" name="txtPassword" onfocus="ResetForm('lbPass', this.value)" placeholder="password" class="form-control validate">
+                            <input type="password" id="txtPassword" name="txtPassword" onfocus="ResetForm('lbPass', this.value)" placeholder="Password" class="form-control validate">
                             <label id="lbPass" style="color:red; display:none" class=""></label>
                         </div>
-
-                        <div class="md-form">
-                            <i class="fa fa-lock prefix"></i>
-                            <input type="password" id="txtRePassword" name="txtRePassword" onfocus="ResetForm('lbRePass', this.value)" placeholder="comfirm password" class="form-control validate">
-                            <label id="lbRePass" style="color:red; display:none" class=""></label>
-                        </div>
-
                         <div class="md-form">
                             <i class="fa fa-facebook prefix"></i>
-                            <input type="text" id="txtFullName" name="txtFullName" onfocus="ResetForm('lbFullname', this.value)" placeholder="fullname" class="form-control validate">
+                            <input type="text" id="txtFullName" name="txtFullName" onfocus="ResetForm('lbFullname', this.value)" placeholder="Username" class="form-control validate">
                             <label id="lbFullname" style="color:red; display:none" class=""></label>
                         </div>
-                        <div class="md-form">
-                            <i class="fa fa-mobile prefix"></i>
-                            <input type="text" id="txtMobile" name="txtMobile" onfocus="ResetForm('lbMobile', this.value)" placeholder="mobile" class="form-control validate" onkeypress="return functionx(event)">
-                            <label id="lbMobile" style="color:red; display:none" class=""></label>
 
-                        </div>
-                        <div class="g-recaptcha" data-sitekey="6LfhJyUUAAAAANmMFHQ7ARUoDEwgs3Zy-W6bwCo1" style="margin-left: 49px;"></div><br />
-                        <label id="lbrecaptcha" style="color:red; display:none;margin-left: 49px;" class="" ></label>
+                        @*<div class="md-form">
+                <i class="fa fa-lock prefix"></i>
+                <input type="password" id="txtRePassword" name="txtRePassword" onfocus="ResetForm('lbRePass', this.value)" placeholder="comfirm password" class="form-control validate">
+                <label id="lbRePass" style="color:red; display:none" class=""></label>
+            </div>*@
 
-                        <div class="text-center">
-                            @*<img src="/Images/loading.gif" id="imgLoading" style="position: absolute; display:none">*@
-                            <input type="submit" class="btn btn-primary" onclick="return RegisterMember()" value="SIGN UP">
-                            @*<button class="btn btn-primary" onclick="return RegisterMember()">Sign Up</button>*@
-                            @*<button class="btn btn-primary" onclick="window.location.href='/login'" style="height: 50px;">Sign In</button>*@
-                            <a href="/login" class="btn btn-primary" style="height: 50px;">Sign In</a>
-                        </div>
-                    </div>
 
-                </div>
-            }
-                @*}
-                    else
-                    {*@
-                @*<div class="card">
-                            <div class="card-block">
-                                <div class="form-header">
-                                    <h3><i class="fa fa-lock"></i> Đăng Ký </h3>
-                                </div>
-                                <div class="md-form">
-                                    <i class="fa fa-envelope prefix"></i>
-                                    <input type="text" id="txtEmail" name="txtEmail" onfocus="ResetForm(1)" class="form-control">
-                                </div>
+                        @*<div class="md-form">
+                <i class="fa fa-mobile prefix"></i>
+                <input type="text" id="txtMobile" name="txtMobile" onfocus="ResetForm('lbMobile', this.value)" placeholder="mobile" class="form-control validate" onkeypress="return functionx(event)">
+                <label id="lbMobile" style="color:red; display:none" class=""></label>
 
-                                <div class="md-form">
-                                    <i class="fa fa-lock prefix"></i>
-                                    <input type="password" id="txtPassword" name="txtPassword" onfocus="ResetForm(3)" class="form-control">
-                                </div>
+            </div>*@
+                        <div class="row">
+
+                            <div class="col-md-12" style="margin-left: 40px;">
+                                <div class="g-recaptcha" data-sitekey="6LfhJyUUAAAAANmMFHQ7ARUoDEwgs3Zy-W6bwCo1"></div><br />
+
+                            </div>
+                            </div>
+
+                            <label id="lbrecaptcha" style="color:red; display:none;margin-left: 49px;" class=""></label>
+                 
                                 <div class="text-center">
-                                    <img src="/Images/loading.gif" id="imgLoading" style="position: absolute; display:none">
-                                    <button class="btn btn-primary" onclick="return RegisterMember()">Đăng ký</button>
-                                    <button class="btn btn-primary" onclick="window.location.href='/dang-nhap'">Đăng nhập</button>
+                                    @*<img src="/Images/loading.gif" id="imgLoading" style="position: absolute; display:none">*@
+                                    <input type="submit" class="btn btn-primary" onclick="return RegisterMember()" value="Create Account">
+                                    @*<button class="btn btn-primary" onclick="return RegisterMember()">Sign Up</button>*@
+                                    @*<button class="btn btn-primary" onclick="window.location.href='/login'" style="height: 50px;">Sign In</button>*@
+                                    @*<a href="/login" class="btn btn-primary" style="height: 50px;">Sign In</a>*@
+                                </div>
+                                <div class="row">
+                                    @*<div  class="col-md-5"></div>*@
+                                    <div class="col-md-12" style="text-align:-webkit-right;top:10px">
+                                        <a href="/login">Already have an account?</a>
+                                    </div>
                                 </div>
                             </div>
 
                         </div>
-                    }*@
-            </div>
+                        }
+                        @*}
+            else
+            {*@
+                        @*<div class="card">
+                    <div class="card-block">
+                        <div class="form-header">
+                            <h3><i class="fa fa-lock"></i> Đăng Ký </h3>
+                        </div>
+                        <div class="md-form">
+                            <i class="fa fa-envelope prefix"></i>
+                            <input type="text" id="txtEmail" name="txtEmail" onfocus="ResetForm(1)" class="form-control">
+                        </div>
+
+                        <div class="md-form">
+                            <i class="fa fa-lock prefix"></i>
+                            <input type="password" id="txtPassword" name="txtPassword" onfocus="ResetForm(3)" class="form-control">
+                        </div>
+                        <div class="text-center">
+                            <img src="/Images/loading.gif" id="imgLoading" style="position: absolute; display:none">
+                            <button class="btn btn-primary" onclick="return RegisterMember()">Đăng ký</button>
+                            <button class="btn btn-primary" onclick="window.location.href='/dang-nhap'">Đăng nhập</button>
+                        </div>
+                    </div>
+
+                </div>
+            }*@
+                    </div>
         </div>
     </div>
     <input type="hidden" id="hdResult" value="@Session["Result"]" />
