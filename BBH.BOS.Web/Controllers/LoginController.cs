@@ -58,32 +58,41 @@ namespace BBH.BOS.Web.Controllers
             }
             else
             {
-                string strpass = Utility.MaHoaMD5(pass);
-                MemberInformationBO member = services.LoginAccount(email, strpass);
-                if(member!=null)
+                bool checkNotActive = services.CheckEmailNotActive(email);
+                if (!checkNotActive)
                 {
-                    ViewBag.Result = "loginSuccess";
-                    if (Session["username"] == null)
-                    {
-
-                        Session["username"] = member.Email;
-
-                    }
-                   
-                    Session["memberid"] = member.MemberID;
-                    Session["Avatar"] = member.Avatar;
-                    Session["FullName"] = member.FullName;
-                    Session["Mobile"] = member.Mobile;
-                    Session["MemberInfomation"] = member;
-                    Session["Emailmember"] = email;
+                    ViewBag.Result = "EmailNotActive";
                 }
                 else
                 {
-                    ViewBag.Result = "loginfaile";
+                    string strpass = Utility.MaHoaMD5(pass);
+                    MemberInformationBO member = services.LoginAccount(email, strpass);
+                    if (member != null)
+                    {
+                        ViewBag.Result = "loginSuccess";
+                        if (Session["username"] == null)
+                        {
+
+                            Session["username"] = member.Email;
+
+                        }
+
+                        Session["memberid"] = member.MemberID;
+                        Session["Avatar"] = member.Avatar;
+                        Session["FullName"] = member.FullName;
+                        Session["Mobile"] = member.Mobile;
+                        Session["MemberInfomation"] = member;
+                        Session["Emailmember"] = email;
+                    }
+                    else
+                    {
+                        ViewBag.Result = "loginfaile";
+                    }
                 }
+                ViewBag.Username = email;
+                ViewBag.Password = pass;
             }
-            ViewBag.Username = email;
-            ViewBag.Password = pass;
+           
             return View("Index");
         }
 

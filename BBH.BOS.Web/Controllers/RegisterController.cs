@@ -75,13 +75,13 @@ namespace BBH.BOS.Web.Controllers
 
             string email = Request["txtEmail"];
             string password = Request["txtPassword"];
-            string mobile = Request["txtMobile"];
+            //string mobile = Request["txtMobile"];
             string fullName = Request["txtFullName"];
 
             TempData["EmailRegister"] = email;
             TempData["PasswordRegister"] = password;
             TempData["FullNameRegister"] = fullName;
-            TempData["MobileRegister"] = mobile;
+            //TempData["MobileRegister"] = mobile;
 
 
             string strCaptcha = Request["g-recaptcha-response"].ToString();
@@ -100,7 +100,7 @@ namespace BBH.BOS.Web.Controllers
 
                 member.FullName = fullName;
                 member.Email = email;
-                member.Mobile = mobile;
+                member.Mobile = "";
                 member.Password = Utility.MaHoaMD5(password);
                 member.IsActive = 0;
                 member.IsDelete = 0;
@@ -173,7 +173,7 @@ namespace BBH.BOS.Web.Controllers
                     Session["Email"] = email;
                     Session["Avatar"] = mem.Avatar;
                     Session["FullName"] = mem.FullName;
-                    Session["Mobile"] = mem.Mobile;
+                    //Session["Mobile"] = mem.Mobile;
                     Session["memberid"] = mem.MemberID;
                     //Session["MemberInfomation"] = mem;
                     Response.Redirect("/");

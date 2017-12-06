@@ -88,6 +88,20 @@ namespace BBH.BOS.Respository
             }
             return row;
         }
+        public bool CheckEmailNotActive(string email)
+        {
+            bool row = false;
+            string fileLog = Path.GetDirectoryName(Path.Combine(pathLog));
+            try
+            {
+                row = Proxy.CheckEmailNotActive(email);
+            }
+            catch (Exception ex)
+            {
+                Utility.WriteLog(fileLog, ex.Message);
+            }
+            return row;
+        }
         public MemberBO GetMemberDetailByEmail(string email)
         {
             MemberBO objMemberBO = null;

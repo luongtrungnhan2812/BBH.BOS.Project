@@ -248,6 +248,35 @@ namespace BBH.BOS.Data
                 helper.destroy();
             }
         }
+        public bool CheckEmailNotActive(string email)
+        {
+            string fileLog = Path.GetDirectoryName(Path.Combine(pathLog, "Logs"));
+            Sqlhelper helper = new Sqlhelper("", "ConnectionString");
+            try
+            {
+                bool rs = false;
+                string sql = "SP_CheckEmailNotActive";
+                SqlParameter[] pa = new SqlParameter[1];
+                pa[0] = new SqlParameter("@email", email);
+                SqlCommand command = helper.GetCommand(sql, pa, true);
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    rs = true;
+                }
+                return rs;
+            }
+            catch (Exception ex)
+            {
+                Utilitys.WriteLog(fileLog, ex.Message);
+                return false;
+            }
+            finally
+            {
+                helper.destroy();
+            }
+        }
+
         public MemberBO GetMemberDetailByEmail(string email)
         {
             string fileLog = Path.GetDirectoryName(Path.Combine(pathLog, "Logs"));

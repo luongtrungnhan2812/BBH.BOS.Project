@@ -45,7 +45,7 @@
             position:'bottom-right'
         },
         glossary:{
-            title: '<strong>wan2lot</strong>',
+            title: '<strong>BackOffice</strong>',
             ok: 'OK',
             cancel: 'Cancel',
             acccpt: 'Accept',
