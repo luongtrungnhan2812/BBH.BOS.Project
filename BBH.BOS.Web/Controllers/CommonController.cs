@@ -86,7 +86,7 @@ namespace BBH.BOS.Web.Controllers
             if (Session["MemberInfomation"] != null)
             {
                 MemberInformationBO member = (MemberInformationBO)Session["MemberInfomation"];
-                ViewBag.NumberCoin = member.NumberCoin.ToString();
+                ViewBag.NumberCoin = Math.Round(member.NumberCoin, 8).ToString();
             }
             else
             {
@@ -334,7 +334,7 @@ namespace BBH.BOS.Web.Controllers
             return lststrHtml;
         }
         public void LoadEuVallet()
-         {
+        {
             IEnumerable<TransactionPackageBO> lstTransactionPackageBO = null;
             ViewBag.EuCoin = "0";
             int memberID = -1;
@@ -351,7 +351,7 @@ namespace BBH.BOS.Web.Controllers
                 {
                     numberCoin += item.PackageValue;
                 }
-                ViewBag.EuCoin = numberCoin.ToString();
+                ViewBag.EuCoin = Math.Round(numberCoin, 8).ToString();
             }
 
         }
