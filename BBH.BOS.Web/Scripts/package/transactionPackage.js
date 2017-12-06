@@ -44,6 +44,10 @@ $('#btn_submit').on('click', function () {
                                     text: 'Good job!',
                                     type: 'success'
                                 });
+                                setTimeout(function () {
+                                    window.location.reload();
+
+                                },1000);
                             }
                             else {
                                 swal({
