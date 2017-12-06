@@ -239,6 +239,7 @@ function CloseModal() {
 $(document).ready(function () {
     Onload();
 });
+
 function Onload()
 {
     var result = $('#hdResult').val();
@@ -331,7 +332,7 @@ function RegisterMember() {
     }
     if (fullName == '') {
 
-        $('#lbFullname').text('Input Username');
+        $('#lbFullname').text('Input Fullname');
         $('#lbFullname').css('display', '');
         checkReg = false;
     }
@@ -434,20 +435,20 @@ function UpdateMember()
 
     var checkReg = true;
    
-    if (email == '') {
+    //if (email == '') {
 
-        $('#lbEmail').text('Please input email');
-        $('#lbEmail').css('display', '');
-        checkReg = false;
-    }
-    else {
-        if (!isValidEmailAddress(email)) {
-            $('#lbEmail').text('Invalid email address.');
-            $('#lbEmail').css('display', '');
+    //    $('#lbEmail').text('Please input email');
+    //    $('#lbEmail').css('display', '');
+    //    checkReg = false;
+    //}
+    //else {
+    //    if (!isValidEmailAddress(email)) {
+    //        $('#lbEmail').text('Invalid email address.');
+    //        $('#lbEmail').css('display', '');
 
-            checkReg = false;
-        }
-    }
+    //        checkReg = false;
+    //    }
+    //}
    
        if (fullName == '') {
 
@@ -578,7 +579,7 @@ function ForgotPassword()
         
         $('#lbreEmail').text('Email Invalid.');
         $('#lbreEmail').css('display', '');
-        checkReg = false;
+        checkEmail = false;
        
     }
     if (!checkEmail)
