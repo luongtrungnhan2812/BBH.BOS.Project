@@ -24,6 +24,8 @@ namespace BBH.BOS.Web.Controllers
         protected ITransactionWalletService ObjITransactionWalletService { get; set; }
         [Dependency]
         protected IPackageService ObjIPackgeServices { get; set; }
+        [Dependency]
+        protected IIMemberService ObjIIMemberService { get; set; }
         // GET: Common
         public ActionResult Index()
         {
@@ -163,6 +165,13 @@ namespace BBH.BOS.Web.Controllers
                 //    double memeberPoints = objMemberRepository.GetPointsMember(member.MemberID);
                 //    result = memeberPoints.ToString();
                 //}
+
+                MemberInformationBO ọbjMemberInformationBO = new MemberInformationBO();
+                ọbjMemberInformationBO = ObjIIMemberService.GetInformationMemberByID(member.MemberID);
+                if (ọbjMemberInformationBO != null)
+                {
+                    Session["MemberInfomation"] = ọbjMemberInformationBO;
+                }
 
             }
         }
