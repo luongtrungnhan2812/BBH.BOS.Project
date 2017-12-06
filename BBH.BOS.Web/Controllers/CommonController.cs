@@ -24,6 +24,10 @@ namespace BBH.BOS.Web.Controllers
         protected ITransactionWalletService ObjITransactionWalletService { get; set; }
         [Dependency]
         protected IPackageService ObjIPackgeServices { get; set; }
+        [Dependency]
+        protected IIMemberService ObjIIMemberService { get; set; }
+        [Dependency]
+        protected ITransactionPackageService ObjITransactionPackageService { get; set; }
         // GET: Common
         public ActionResult Index()
         {
@@ -78,6 +82,7 @@ namespace BBH.BOS.Web.Controllers
         public ActionResult PartialDashboard()
         {
             LoadPoint();
+            LoadEuVallet();
             if (Session["MemberInfomation"] != null)
             {
                 MemberInformationBO member = (MemberInformationBO)Session["MemberInfomation"];
@@ -109,7 +114,7 @@ namespace BBH.BOS.Web.Controllers
                 {
                     foreach (TransactionReceivedCoins item in LstUserCoin)
                     {
-                        if (item.Confirm > 5)
+                        if (item.Confirm >= 0)
                         {
                             bool boolCheckExistTransactionID = ObjITransactionWalletService.CheckExistTransactionBitcoin(item.TransactionID.ToString());
                             if (!boolCheckExistTransactionID)
@@ -163,6 +168,13 @@ namespace BBH.BOS.Web.Controllers
                 //    double memeberPoints = objMemberRepository.GetPointsMember(member.MemberID);
                 //    result = memeberPoints.ToString();
                 //}
+
+                MemberInformationBO ọbjMemberInformationBO = new MemberInformationBO();
+                ọbjMemberInformationBO = ObjIIMemberService.GetInformationMemberByID(member.MemberID);
+                if (ọbjMemberInformationBO != null)
+                {
+                    Session["MemberInfomation"] = ọbjMemberInformationBO;
+                }
 
             }
         }
@@ -309,7 +321,7 @@ namespace BBH.BOS.Web.Controllers
                         if (strArray.Count() > 1)
                         {
                             strBuilderRadioCheck.Append("<div class='form-group'>");
-                            strBuilderRadioCheck.Append("<input name = 'groupCheckPackage' type='radio' data-value='"+ strArray[0] + "' id='chk" + strArray[1] + "' checked='" + strChecked + "' class='with-gap'>");
+                            strBuilderRadioCheck.Append("<input name = 'groupCheckPackage' type='radio' data-value='" + strArray[0] + "' id='chk" + strArray[1] + "' checked='" + strChecked + "' class='with-gap'>");
                             strBuilderRadioCheck.Append("<label for='chk" + strArray[1] + "'>By " + strArray[1] + "</label>");
                             strBuilderRadioCheck.Append("</div>");
                             strChecked = "";
@@ -320,6 +332,28 @@ namespace BBH.BOS.Web.Controllers
             lststrHtml.Add(strBuilder.ToString());
             lststrHtml.Add(strBuilderRadioCheck.ToString());
             return lststrHtml;
+        }
+        public void LoadEuVallet()
+        {
+            IEnumerable<TransactionPackageBO> lstTransactionPackageBO = null;
+            ViewBag.EuCoin = "0";
+            int memberID = -1;
+            if (Session["MemberInfomation"] != null)
+            {
+                MemberInformationBO member = (MemberInformationBO)Session["MemberInfomation"];
+                memberID = member.MemberID;
+            }
+            lstTransactionPackageBO = ObjITransactionPackageService.ListTransactionPackageByMember(memberID);
+            if (lstTransactionPackageBO != null && lstTransactionPackageBO.Count() > 0)
+            {
+                float numberCoin = 0;
+                foreach (var item in lstTransactionPackageBO)
+                {
+                    numberCoin += item.PackageValue;
+                }
+                ViewBag.EuCoin = numberCoin.ToString();
+            }
+
         }
     }
 }

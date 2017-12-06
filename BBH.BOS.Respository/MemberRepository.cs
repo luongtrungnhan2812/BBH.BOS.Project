@@ -173,5 +173,19 @@ namespace BBH.BOS.Respository
             }
             return row;
         }
+        public MemberInformationBO GetInformationMemberByID(int memberId)
+        {
+            MemberInformationBO objMemberBO = null;
+            string fileLog = Path.GetDirectoryName(Path.Combine(pathLog));
+            try
+            {
+                objMemberBO = Proxy.GetInformationMemberByID(memberId);
+            }
+            catch (Exception ex)
+            {
+                Utility.WriteLog(fileLog, ex.Message);
+            }
+            return objMemberBO;
+        }
     }
 }
