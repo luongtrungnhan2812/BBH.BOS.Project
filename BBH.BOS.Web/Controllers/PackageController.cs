@@ -16,6 +16,8 @@ namespace BBH.BOS.Web.Controllers
         protected IPackageService Packagerepository { get; set; }
         [Dependency]
         protected ITransactionPackageService TransactionPackageRepository { get; set; }
+        [Dependency]
+        protected IPackage_CoinServices IPackage_CoinServices { get; set; }
         // GET: Package
         public ActionResult Index(string p)
         {
@@ -177,34 +179,57 @@ namespace BBH.BOS.Web.Controllers
         public string InsertTransactionPackage(string packageId, string coinId)
         {
             MemberInformationBO member = new MemberInformationBO();
+            Package_CoinBO objPackage_CoinBO = new Package_CoinBO();
+            double NumberCoin = 0;
+            double PackageValue = 0;
+            string result = "Fail";
             if (Session["MemberInfomation"] != null)
             {
                 member = (MemberInformationBO)Session["MemberInfomation"];
+                NumberCoin = member.NumberCoin;
             }
             else
             {
                 Response.Redirect("/");
             }
-            string result = "Fail";
-            string strCode = Utility.GenCode();
-            string tick = DateTime.Now.Ticks.ToString();
-            string transactionCode = Utility.MaHoaMD5(strCode + tick);
-            bool rs = TransactionPackageRepository.InsertTransactionPackage(new TransactionPackageBO
+            objPackage_CoinBO = IPackage_CoinServices.GetCoinValueByID(int.Parse(packageId), int.Parse(coinId));
+            if(objPackage_CoinBO != null)
             {
-                CoinID = int.Parse(coinId),
-                CreateDate = DateTime.Now,
-                ExpireDate = DateTime.Now.AddDays(30),
-                ExchangeRateID = -1,
-                MemberID = member.MemberID,
-                Note = "Buy package",
-                PackageID = int.Parse(packageId),
-                Status = 1,
-                TransactionCode = transactionCode,
-                TransactionBitcoin = ""
-            });
-            if (rs)
+                PackageValue = objPackage_CoinBO.PackageValue;
+            }
+            if (NumberCoin > 0)
             {
-                result = "success";
+                if (NumberCoin >= PackageValue)
+                {
+                    string strCode = Utility.GenCode();
+                    string tick = DateTime.Now.Ticks.ToString();
+                    string transactionCode = Utility.MaHoaMD5(strCode + tick);
+                    bool rs = TransactionPackageRepository.InsertTransactionPackage(new TransactionPackageBO
+                    {
+                        CoinID = int.Parse(coinId),
+                        CreateDate = DateTime.Now,
+                        ExpireDate = DateTime.Now.AddDays(30),
+                        ExchangeRateID = -1,
+                        MemberID = member.MemberID,
+                        Note = "Buy package",
+                        PackageID = int.Parse(packageId),
+                        Status = 1,
+                        TransactionCode = transactionCode,
+                        TransactionBitcoin = ""
+                    });
+                    if (rs)
+                    {
+                        result = "success";
+                    }
+                }
+                else
+                {
+                    result = "You do not enough coin.";
+                }
+            }
+            else
+            {
+                result = "Please recharge your wallet.";
             }
             return result;
 

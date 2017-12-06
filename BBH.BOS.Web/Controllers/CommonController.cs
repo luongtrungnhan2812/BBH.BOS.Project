@@ -334,7 +334,7 @@ namespace BBH.BOS.Web.Controllers
             return lststrHtml;
         }
         public void LoadEuVallet()
-        {
+         {
             IEnumerable<TransactionPackageBO> lstTransactionPackageBO = null;
             ViewBag.EuCoin = "0";
             int memberID = -1;
