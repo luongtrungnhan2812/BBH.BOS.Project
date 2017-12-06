@@ -85,7 +85,7 @@ namespace BBH.BOS.Web.Controllers
             if (Session["MemberInfomation"] != null)
             {
                 MemberInformationBO member = (MemberInformationBO)Session["MemberInfomation"];
-                ViewBag.NumberEUCoin = member.NumberCoin.ToString();
+                ViewBag.NumberEUCoin = Math.Round(member.NumberCoin, 8).ToString();
             }
             else
             {
