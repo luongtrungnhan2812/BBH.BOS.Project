@@ -12,7 +12,9 @@
                         <input type="text" value="@ViewBag.WalletAddress" class="wallet-address form-control" id="wallet-address" readonly="true">
                         @*<span class="input-group-btn">*@
                             <button class="btn btn-default btnwallet-address" data-clipboard-target="#wallet-address" title="" data-original-title="copy">
-                                <i class="fa fa-clone"></i>
+                                <i class="fa fa-clone" onclick="myFunction()" data-clipboard-text="@ViewBag.WalletAddress" data-tocopy="@ViewBag.WalletAddress">
+                                </i>
+
                             </button>
                         @*</span>*@
                     </div>
@@ -32,3 +34,12 @@
     </div>
     <!-- </div> -->
 </div>
+<script>
+    function myFunction() {
+        var copyText = document.getElementById("wallet-address");
+        copyText.select();
+        document.execCommand("Copy");
+        alertify.success("Copied Sucess ");
+
+    }
+</script>
