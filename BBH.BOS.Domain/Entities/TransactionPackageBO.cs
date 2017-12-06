@@ -32,7 +32,7 @@ namespace BBH.BOS.Domain.Entities
         [DataMember]
         public string PackageName { get; set; }
         [DataMember]
-        public float PackageValue { get; set; }
+        public double PackageValue { get; set; }
         [DataMember]
         public float CoinValue { get; set; }
         [DataMember]

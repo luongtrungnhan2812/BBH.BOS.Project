@@ -215,7 +215,8 @@ namespace BBH.BOS.Web.Controllers
                         PackageID = int.Parse(packageId),
                         Status = 1,
                         TransactionCode = transactionCode,
-                        TransactionBitcoin = ""
+                        TransactionBitcoin = "",
+                        PackageValue = PackageValue
                     });
                     if (rs)
                     {

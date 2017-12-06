@@ -47,8 +47,8 @@ $('#btn_submit').on('click', function () {
                             }
                             else {
                                 swal({
-                                    title: 'Oops...!',
-                                    text: 'Something went wrong !',
+                                    title: 'Warning!',
+                                    text: d,
                                     type: 'error'
                                 });
                             }
