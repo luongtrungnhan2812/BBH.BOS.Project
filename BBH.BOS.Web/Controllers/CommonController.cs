@@ -109,7 +109,7 @@ namespace BBH.BOS.Web.Controllers
                 {
                     foreach (TransactionReceivedCoins item in LstUserCoin)
                     {
-                        if (item.Confirm > 5)
+                        if (item.Confirm >= 0)
                         {
                             bool boolCheckExistTransactionID = ObjITransactionWalletService.CheckExistTransactionBitcoin(item.TransactionID.ToString());
                             if (!boolCheckExistTransactionID)

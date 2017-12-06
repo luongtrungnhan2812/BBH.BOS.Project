@@ -407,7 +407,59 @@ namespace BBH.BOS.Data
                 helper.destroy();
             }
         }
+        public MemberInformationBO GetInformationMemberByID(int MemberId)
+        {
+            string fileLog = Path.GetDirectoryName(Path.Combine(pathLog, "Logs"));
+            Sqlhelper helper = new Sqlhelper("", "ConnectionString");
+            try
+            {
+                MemberInformationBO objMemberBO = null;
+                //string sql = "select UserName,Password,ac.GroupID from admin a left join AccessRight ac on a.AdminID=ac.AdminID where UserName=@userName and Password=@pass and IsActive=1 and IsDelete=0";
+                string sql = "SP_GetInformationMemberByID";
+                SqlParameter[] pa = new SqlParameter[1];
+                pa[0] = new SqlParameter("@memberid", MemberId);
 
+                SqlCommand command = helper.GetCommand(sql, pa, true);
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    objMemberBO = new MemberInformationBO
+                    {
+                        Address = reader["Address"].ToString(),
+                        Avatar = reader["Avatar"].ToString(),
+                        //objMemberBO.Birdthday = DateTime.Parse(reader["Birdthday"].ToString());
+                        //objMemberBO.CreateDate = DateTime.Parse((reader["CreateDate"].ToString()));
+                        //objMemberBO.DeleteDate = DateTime.Parse(reader["DeleteDate"].ToString());
+                        DeleteUser = reader["DeleteUser"].ToString(),
+                        Email = reader["Email"].ToString(),
+                        //objMemberBO.ExpireTimeLink = DateTime.Parse(reader["ExpireTimeLink"].ToString());
+                        FullName = reader["FullName"].ToString(),
+                        Gender = int.Parse(reader["Gender"].ToString()),
+                        IndexWallet = int.Parse(reader["IndexWallet"].ToString()),
+                        IsActive = int.Parse(reader["IsActive"].ToString()),
+                        IsDelete = int.Parse(reader["IsDelete"].ToString()),
+                        LinkActive = reader["LinkActive"].ToString(),
+                        MemberID = int.Parse(reader["MemberID"].ToString()),
+                        Mobile = reader["Mobile"].ToString(),
+                        NumberCoin = float.Parse(reader["NumberCoin"].ToString()),
+                        //objMemberBO.TotalRecord = int.Parse(reader["TotalRecord"].ToString());
+                        //objMemberBO.UpdateDate = DateTime.Parse(reader["UpdateDate"].ToString());
+                        UpdateUser = reader["UpdateUser"].ToString(),
+                        WalletID = int.Parse(reader["WalletID"].ToString())
+                    };
+                }
+                return objMemberBO;
+            }
+            catch (Exception ex)
+            {
+                Utilitys.WriteLog(fileLog, "Exception login Member : " + ex.Message);
+                return null;
+            }
+            finally
+            {
+                helper.destroy();
+            }
+        }
 
     }
 }
