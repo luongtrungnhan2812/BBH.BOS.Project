@@ -218,8 +218,9 @@ namespace BBH.BOS.Web.Controllers
                     list.Add(objTransactionReceivedCoins);
                 }
             }
-            catch
+            catch(Exception ex)
             {
+                Utilitys.WriteLog(fileLog, ex.Message);
                 list = null;
             }
             return list;
