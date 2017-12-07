@@ -17,6 +17,8 @@ namespace BBH.BOS.Web.Controllers
         protected ITransactionWalletService transactionWallet { get; set; }
         [Dependency]
         protected ITransactionPackageService transactionPackage { get; set; }
+        [Dependency]
+        protected IIMemberService services { get; set; }
         // GET: Wallet
         public ActionResult WalletBTC()
         {
@@ -85,7 +87,12 @@ namespace BBH.BOS.Web.Controllers
             if (Session["MemberInfomation"] != null)
             {
                 MemberInformationBO member = (MemberInformationBO)Session["MemberInfomation"];
-                ViewBag.NumberCoin = double.Parse(member.NumberCoin.ToString()).ToString();
+                MemberInformationBO ọbjMemberInformationBO = new MemberInformationBO();
+                ọbjMemberInformationBO = services.GetInformationMemberByID(member.MemberID);
+                if (ọbjMemberInformationBO != null)
+                {
+                    ViewBag.NumberCoin = double.Parse(ọbjMemberInformationBO.NumberCoin.ToString()).ToString();
+                }
             }
             else
             {

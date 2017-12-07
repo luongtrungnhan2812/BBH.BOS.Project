@@ -1,4 +1,5 @@
-﻿using BBH.BOS.Domain.Entities;
+﻿using BBC.Core.Database;
+using BBH.BOS.Domain.Entities;
 using BBH.BOS.Domain.Interfaces;
 using BBH.BOS.Shared;
 using BBH.BOS.Web.Models;
@@ -9,6 +10,7 @@ using QBitNinja.Client.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -20,6 +22,8 @@ namespace BBH.BOS.Web.Controllers
     {
         string masterKey = ConfigurationManager.AppSettings["KeyBOS"];
         string TimeExpired = ConfigurationManager.AppSettings["TimeExpired"];
+        public static string pathLog = ConfigurationManager.AppSettings["PathLog"];
+        static string fileLog = Path.GetDirectoryName(Path.Combine(pathLog, "Logs"));
         [Dependency]
         protected ITransactionWalletService ObjITransactionWalletService { get; set; }
         [Dependency]
@@ -96,86 +100,95 @@ namespace BBH.BOS.Web.Controllers
         }
         public void LoadPoint()
         {
-            string transactionCode = "";
-            string strClientExtKey = masterKey;
-            RandomUtils.Random = new UnsecureRandom();
-            ExtKey masterPubKey = new BitcoinExtKey(strClientExtKey, Network.TestNet);
-            MemberInformationBO member = (MemberInformationBO)Session["MemberInfomation"];
-            bool rs = true;
-            if (member != null)
+            try
             {
-                ExtKey pubkey = masterPubKey.Derive(member.IndexWallet, hardened: true);
-                var clientBitPrivateKey = masterPubKey.PrivateKey;
-                var destination = clientBitPrivateKey.PubKey.GetAddress(Network.TestNet);
-                //check valid amount
-                var userBitPK = pubkey.PrivateKey.GetBitcoinSecret(Network.TestNet);
-                List<TransactionReceivedCoins> LstUserCoin = GetListTransaction(userBitPK);
-                if (LstUserCoin != null && LstUserCoin.Count > 0)
+                string transactionCode = "";
+                string strClientExtKey = masterKey;
+                RandomUtils.Random = new UnsecureRandom();
+                ExtKey masterPubKey = new BitcoinExtKey(strClientExtKey, Network.TestNet);
+                MemberInformationBO member = (MemberInformationBO)Session["MemberInfomation"];
+                bool rs = true;
+                if (member != null)
                 {
-                    foreach (TransactionReceivedCoins item in LstUserCoin)
+                    ExtKey pubkey = masterPubKey.Derive(member.IndexWallet, hardened: true);
+                    var clientBitPrivateKey = masterPubKey.PrivateKey;
+                    var destination = clientBitPrivateKey.PubKey.GetAddress(Network.TestNet);
+                    //check valid amount
+                    var userBitPK = pubkey.PrivateKey.GetBitcoinSecret(Network.TestNet);
+                    List<TransactionReceivedCoins> LstUserCoin = GetListTransaction(userBitPK);
+                    if (LstUserCoin != null && LstUserCoin.Count > 0)
                     {
-                        if (item.Confirm >= 0)
+                        foreach (TransactionReceivedCoins item in LstUserCoin)
                         {
-                            bool boolCheckExistTransactionID = ObjITransactionWalletService.CheckExistTransactionBitcoin(item.TransactionID.ToString());
-                            if (!boolCheckExistTransactionID)
+                            if (item.Confirm >= 0)
                             {
-                                if (item.ListCoins != null && item.ListCoins.Count > 0)
+                                bool boolCheckExistTransactionID = ObjITransactionWalletService.CheckExistTransactionBitcoin(item.TransactionID.ToString());
+                                if (!boolCheckExistTransactionID)
                                 {
-                                    foreach (var itemListCoins in item.ListCoins)
+                                    if (item.ListCoins != null && item.ListCoins.Count > 0)
                                     {
-                                        ////Change bitcoin to point
-                                        //float pointChange = ((float.Parse(strPoint)) * CoinValue) / PointValue;
-                                        string strCode = Utility.GenCode();
-                                        string tick = DateTime.Now.Ticks.ToString();
-                                        transactionCode = Utility.MaHoaMD5(strCode + tick);
-                                        TransactionCoinBO objTransactionCoinBO = new TransactionCoinBO
+                                        foreach (var itemListCoins in item.ListCoins)
                                         {
-                                            CreateDate = DateTime.Now,
-                                            ExpireDate = DateTime.Now.AddMinutes(double.Parse(TimeExpired)),
-                                            MemberID = member.MemberID,
-                                            Note = "Received Coins",
-                                            QRCode = "",
-                                            Status = 0,
-                                            TransactionBitcoin = item.TransactionID.ToString(),
-                                            TransactionID = transactionCode,
-                                            TypeTransactionID = 0,
-                                            ValueTransaction = float.Parse(itemListCoins.Amount.ToString()),
-                                            WalletAddressID = userBitPK.GetAddress().ToString(),
-                                            WalletID = destination.ToString()
-                                        };
-                                        //objTransactionCoinBO.WalletID = destination.ToString();
-                                        bool rs_ = ObjITransactionWalletService.InsertTransactionCoin(objTransactionCoinBO);
-                                        if (rs_)
-                                        {
-                                            //double pointChange = ((double.Parse(itemListCoins.Amount.ToString())) * PointValue) / CoinValue;
-                                            rs = ObjITransactionWalletService.UpdatePointsMemberFE(member.MemberID, double.Parse(itemListCoins.Amount.ToString()));
-                                            if (!rs)
+                                            ////Change bitcoin to point
+                                            //float pointChange = ((float.Parse(strPoint)) * CoinValue) / PointValue;
+                                            string strCode = Utility.GenCode();
+                                            string tick = DateTime.Now.Ticks.ToString();
+                                            transactionCode = Utility.MaHoaMD5(strCode + tick);
+                                            TransactionCoinBO objTransactionCoinBO = new TransactionCoinBO
                                             {
-                                                break;
+                                                CreateDate = DateTime.Now,
+                                                ExpireDate = DateTime.Now.AddMinutes(double.Parse(TimeExpired)),
+                                                MemberID = member.MemberID,
+                                                Note = "Received Coins",
+                                                QRCode = "",
+                                                Status = 0,
+                                                TransactionBitcoin = item.TransactionID.ToString(),
+                                                TransactionID = transactionCode,
+                                                TypeTransactionID = 0,
+                                                ValueTransaction = float.Parse(itemListCoins.Amount.ToString()),
+                                                WalletAddressID = userBitPK.GetAddress().ToString(),
+                                                WalletID = destination.ToString()
+                                            };
+                                            //objTransactionCoinBO.WalletID = destination.ToString();
+                                            bool rs_ = ObjITransactionWalletService.InsertTransactionCoin(objTransactionCoinBO);
+                                            if (rs_)
+                                            {
+                                                //double pointChange = ((double.Parse(itemListCoins.Amount.ToString())) * PointValue) / CoinValue;
+                                                rs = ObjITransactionWalletService.UpdatePointsMemberFE(member.MemberID, double.Parse(itemListCoins.Amount.ToString()));
+                                                if (!rs)
+                                                {
+                                                    break;
+                                                }
                                             }
                                         }
+
+
                                     }
-
-
                                 }
-                            }
 
+                            }
                         }
                     }
-                }
-                //if (rs)
-                //{
-                //    double memeberPoints = objMemberRepository.GetPointsMember(member.MemberID);
-                //    result = memeberPoints.ToString();
-                //}
+                    //if (rs)
+                    //{
+                    //    double memeberPoints = objMemberRepository.GetPointsMember(member.MemberID);
+                    //    result = memeberPoints.ToString();
+                    //}
 
-                MemberInformationBO ọbjMemberInformationBO = new MemberInformationBO();
-                ọbjMemberInformationBO = ObjIIMemberService.GetInformationMemberByID(member.MemberID);
-                if (ọbjMemberInformationBO != null)
-                {
-                    Session["MemberInfomation"] = ọbjMemberInformationBO;
-                }
+                    MemberInformationBO ọbjMemberInformationBO = new MemberInformationBO();
+                    ọbjMemberInformationBO = ObjIIMemberService.GetInformationMemberByID(member.MemberID);
+                    if (ọbjMemberInformationBO != null)
+                    {
+                        Session["MemberInfomation"] = null;
+                        Session["MemberInfomation"] = ọbjMemberInformationBO;
+                    }
 
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Utilitys.WriteLog(fileLog, ex.Message);
             }
         }
         private static List<TransactionReceivedCoins> GetListTransaction(BitcoinSecret sonBitPrivateKey)
@@ -205,8 +218,9 @@ namespace BBH.BOS.Web.Controllers
                     list.Add(objTransactionReceivedCoins);
                 }
             }
-            catch
+            catch(Exception ex)
             {
+                Utilitys.WriteLog(fileLog, ex.Message);
                 list = null;
             }
             return list;
