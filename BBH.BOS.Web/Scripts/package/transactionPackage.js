@@ -106,7 +106,6 @@ function ShowTransactionPackageDetail(memberID, strTransactionCode) {
 
 }
 function CloseTransactionPackageDetail() {
-    debugger
     $("#myModalDetailTransactionPackage").hide();
     $("#over").hide();
 }

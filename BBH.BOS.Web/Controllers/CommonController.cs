@@ -173,6 +173,7 @@ namespace BBH.BOS.Web.Controllers
                 ọbjMemberInformationBO = ObjIIMemberService.GetInformationMemberByID(member.MemberID);
                 if (ọbjMemberInformationBO != null)
                 {
+                    Session["MemberInfomation"] = null;
                     Session["MemberInfomation"] = ọbjMemberInformationBO;
                 }
 

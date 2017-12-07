@@ -20,6 +20,7 @@
                 $("#txtTransactionBitcoin").val(json.TransactionBitcoin);
                 $("#txtCreateDate").val(json.CreateDate);
                 $("#txtExpiredDate").val(json.ExpireDate);
+                $("#myModalDetailWallet").addClass("show");
                 $("#myModalDetailWallet").show();
                 $("#over").show();
             }
@@ -31,6 +32,7 @@
     
 }
 function CloseModalTransactionWallet() {
+    $("#myModalDetailWallet").removeClass("show");
     $("#myModalDetailWallet").hide();
     $("#over").hide();
 }
