@@ -819,6 +819,7 @@
     <Content Include="Views\Paging\Index.cshtml" />
     <Content Include="Views\Package_Coin\Index.cshtml" />
     <Content Include="Views\Coin\Index.cshtml" />
+    <Content Include="Views\Member\UpdatePrototypeMember.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="imageAvatar\" />

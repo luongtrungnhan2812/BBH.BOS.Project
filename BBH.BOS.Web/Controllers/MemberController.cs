@@ -23,6 +23,11 @@ namespace BBH.BOS.Web.Controllers
         // GET: Member
         public ActionResult Index()
         {
+            if (Session["MemberInfomation"] == null)
+            {
+                Response.Redirect("/login");
+            }
+
             return View();
         }
 
@@ -54,96 +59,123 @@ namespace BBH.BOS.Web.Controllers
        public string SendMailResetPassword(string email)
         {
             string result = "";
-            if (email == "")
+            if (Session["MemberInfomation"] == null)
             {
-                result = "emtry";
+                Response.Redirect("/login");
             }
             else
             {
-                bool checkEmailexit = memberServices.CheckEmailExists(email);
-                if (!checkEmailexit)
+                if (email == "")
                 {
-                    result = "EmailNotExit";
+                    result = "emtry";
                 }
                 else
                 {
-                    bool checkNotActive = memberServices.CheckEmailNotActive(email);
-                    if (!checkNotActive)
+                    bool checkEmailexit = memberServices.CheckEmailExists(email);
+                    if (!checkEmailexit)
                     {
-                        result = "EmailNotActive";
+                        result = "EmailNotExit";
                     }
                     else
                     {
-                        string genPass = Utility.GenCode();
-                        string pass = Utility.MaHoaMD5(genPass);
-                        try
+                        bool checkNotActive = memberServices.CheckEmailNotActive(email);
+                        if (!checkNotActive)
                         {
-                            if (pass != "")
-                            {
-                                memberServices.UpdatePasswordMember(email, pass);
-                            }
-                            bool resetPass = sentMail.SendMailResetPassword(email, genPass);
-                            if (resetPass)
-                            {
-                                result = "ResetPassSuccess";
-                            }
-                            else
-                            {
-                                result = "ResetPassfaile";
-                            }
+                            result = "EmailNotActive";
                         }
-                        catch { }
+                        else
+                        {
+                            string genPass = Utility.GenCode();
+                            string pass = Utility.MaHoaMD5(genPass);
+                            try
+                            {
+                                if (pass != "")
+                                {
+                                    memberServices.UpdatePasswordMember(email, pass);
+                                }
+                                bool resetPass = sentMail.SendMailResetPassword(email, genPass);
+                                if (resetPass)
+                                {
+                                    result = "ResetPassSuccess";
+                                }
+                                else
+                                {
+                                    result = "ResetPassfaile";
+                                }
+                            }
+                            catch { }
+                        }
                     }
+
                 }
-                
             }
             return result;
         }
 
+        //[HttpPost]
+        public ActionResult UpdatePrototypeMember()
+        {
+            
+            return View();
+        }
         [HttpPost]
-        public string UpdatePrototypeMember(int memberID,string email, string fullName, string mobile, string avatar, HttpPostedFileBase fileup)
+        public string UpdateMember(int memberID, string email, string fullName, string mobile, string avatar, HttpPostedFileBase fileup, FormCollection frm )
         {
             string result = "";
-            Random r = new Random();
-            string s = r.Next(100000).ToString() + DateTime.Now.ToString() + "" + DateTime.Now.Ticks.ToString();
-            MemberBO member = new MemberBO();
-
-            member.Email = email;
-            member.FullName = fullName;
-            member.Mobile = mobile;
-            //member.Avatar = avatar;
-            if (fileup != null)
+            if (Session["MemberInfomation"] == null)
             {
-                string years = string.Format("{0:yyyy}", System.DateTime.Now);
-                string mon = string.Format("{0:MM}", System.DateTime.Now);
-                string day = string.Format("{0:dd}", System.DateTime.Now);
+                Response.Redirect("/login");
+            }
+            else
+            {
+                //string strmemberID = frm["hdmemberID"];
+             
+                MemberBO member = new MemberBO();
+                member.MemberID = memberID;
+                member.Email = email;
+                member.FullName = fullName;
+                member.Mobile = mobile;
+                member.Avatar = avatar;
 
-                string filePath = Server.MapPath("~/imageAvatar/" + years + "/" + mon + "/" + day + "/");
-                if (!Directory.Exists(filePath))
+                Random r = new Random();
+                string s = r.Next(100000).ToString() + DateTime.Now.ToString() + "" + DateTime.Now.Ticks.ToString();
+
+                if (fileup != null)
                 {
-                    Directory.CreateDirectory(filePath);
+                    string years = string.Format("{0:yyyy}", System.DateTime.Now);
+                    string mon = string.Format("{0:MM}", System.DateTime.Now);
+                    string day = string.Format("{0:dd}", System.DateTime.Now);
+
+                    string filePath = Server.MapPath("~/imageAvatar/" + years + "/" + mon + "/" + day + "/");
+                    if (!Directory.Exists(filePath))
+                    {
+                        Directory.CreateDirectory(filePath);
+                    }
+
+                    string img = s + fileup.FileName;
+                    img = Utility.EncodeString(img) + ".jpg";
+                    string images = filePath + img;
+                    fileup.SaveAs(images);
+                    avatar = "~/imageAvatar/" + years + "/" + mon + "/" + day + "/" + img;
+                    //string filePath = Server.MapPath("~/Areas/Admin/ImagePost/" + fileup.FileName);
+                    //fileup.SaveAs(filePath);
+                    //imageUrl = "/Areas/Admin/ImagePost/" + fileup.FileName;
+
+
                 }
+                //member.MemberID = memberID;
+                member.Email = email;
+                member.FullName = fullName;
+                member.Mobile = mobile;
+                member.Avatar = avatar;
 
-                string img = s + fileup.FileName;
-                img =Utility.EncodeString(img) + ".jpg";
-                string images = filePath + img;
-                fileup.SaveAs(images);
-                avatar = "~/imageAvatar/" + years + "/" + mon + "/" + day + "/" + img;
-                //string filePath = Server.MapPath("~/Areas/Admin/ImagePost/" + fileup.FileName);
-                //fileup.SaveAs(filePath);
-                //imageUrl = "/Areas/Admin/ImagePost/" + fileup.FileName;
-
-
+                bool memberUpdate = memberServices.UpdateMember(member, memberID);
+                if (memberUpdate)
+                {
+                    result = "UpdateSuccess";
+                }
             }
-
-            bool  memberUpdate =memberServices.UpdateMember(member, memberID);
-            if(memberUpdate)
-            {
-                result = "UpdateSuccess";
-            }
-            
             return result;
         }
-
     }
 }

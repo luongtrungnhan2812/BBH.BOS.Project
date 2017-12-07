@@ -20,7 +20,8 @@ namespace BBH.BOS.Web
             routes.MapRoute("PackageCoin", "packagecoin", new { controller = "Package_Coin", action = "Index" });
             routes.MapRoute("Coin", "coin", new { controller = "Coin", action = "Index" });
 
-            routes.MapRoute("EditAccount", "editaccount", new { controller = "Login", action = "EditAccount" });
+            routes.MapRoute("EditAccount", "editaccount", new { controller = "Member", action = "UpdatePrototypeMember" });
+
             routes.MapRoute("ChangePassword", "changepassword", new { controller = "Login", action = "ChangePassword" });
             routes.MapRoute("Admin", "admin", new { controller = "Admin", action = "Index" });
             routes.MapRoute("Home", "Home", new { controller = "Home", action = "Index" });

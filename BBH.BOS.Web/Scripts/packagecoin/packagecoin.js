@@ -1,21 +1,21 @@
 ﻿function ShowPopupInsert() {
     $('#hdPackageID').val(0);
     $('#hdCoinID').val(0);
-  
 
-  
     $('#cbPackage option[value=0]').attr('selected', true);
-    $('#cbPackage').chosen('destroy');
-    //$('#cbPackage').trigger('chosen:updated');
+    //$('#cbPackage').chosen('destroy');
+   
     $('#cbCoin option[value=0]').attr('selected', true);
-    //$('#cbCoin').trigger('chosen:updated');
 
-    $('#cbCoin').chosen('destroy');
+    //$('#cbCoin').chosen('destroy');
 
     $('#txtPackageValue').val('');
 
     $('#cbPackage').attr("disabled", false);
     $('#cbCoin').attr("disabled", false);
+    $('#cbPackage').trigger('chosen:updated');
+
+    $('#cbCoin').trigger('chosen:updated');
     //setTimeout(function () {
     //    $('#cbPackage option[value=0]').attr('selected', true);
     //    $('#cbPackage').trigger('chosen:updated');
@@ -101,26 +101,28 @@ function ResetForm(id, value) {
 //        return false;
 //    }
 //}
-//$(document).ready(function () {
+$(document).ready(function () {
  
-//    var packageID = $('#hdPackageID').val();
-//    var coinID = $('#hdCoinID').val();
-//    var packageValue = $('#txtPackageValue').val();
+    var packageID = $('#hdPackageID').val();
+    var coinID = $('#hdCoinID').val();
+    var packageValue = $('#txtPackageValue').val();
+    $('#cbPackage').trigger('chosen:updated');
 
-//    //var packageID = hdPackageID;
-//    //var coinID = hdCoinID;
+    $('#cbCoin').trigger('chosen:updated');
+    //var packageID = hdPackageID;
+    //var coinID = hdCoinID;
 
-//    if (packageID > 0 && coinID > 0) {
-//        //$('#cbPackage').attr("disabled", true);
-//        //$('#cbCoin').attr("disabled", true);
-//        ShowpopupEditpackageCoin(packageID, coinID, packageValue);
-//    }
-//    else /*if (packageID == 0 && coinID == 0*/{
-//        //$('#cbPackage').attr("disabled", false);
-//        //$('#cbCoin').attr("disabled", false);
-//        ShowPopupInsert();
-//    }
-//});
+    if (packageID > 0 && coinID > 0) {
+        //$('#cbPackage').attr("disabled", true);
+        //$('#cbCoin').attr("disabled", true);
+        ShowpopupEditpackageCoin(packageID, coinID, packageValue);
+    }
+    else /*if (packageID == 0 && coinID == 0*/{
+        //$('#cbPackage').attr("disabled", false);
+        //$('#cbCoin').attr("disabled", false);
+        ShowPopupInsert();
+    }
+});
 function close()
 {
     $('#hdPackageID').val('');

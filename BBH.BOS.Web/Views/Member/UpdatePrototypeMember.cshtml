@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "EditAccount";
+    ViewBag.Title = "UpdatePrototypeMember";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
@@ -16,17 +16,19 @@
                         <h4 class="h4-responsive mt-1"><a href="/editaccount">Edit Account</a></h4>
                     </div>
 
-                    <div class="col-md-6 text-md-right">
+                    @*<div class="col-md-6 text-md-right">
                         <a href="#" class="btn btn-secondary waves-effect waves-light">Pay now</a>
                         <a href="#" class="btn btn-primary waves-effect waves-light"><i class="fa fa-print left"></i> Print</a>
-                    </div>
+                    </div>*@
                     <!-- /.Navigation -->
 
                 </div>
             </div>
             <!-- First row -->
+@*@using (Html.BeginForm("UpdateMember", "Member", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{*@
             <div class="row">
-               
+
                 <!-- First column -->
                 <div class="col-lg-4">
 
@@ -71,72 +73,78 @@
                                 <form>
                                     <!--First row-->
                                     @*<div class="row">
-                                        <!--First column-->
-                                        <div class="col-md-6">
-                                            <div class="md-form">
-                                                <input type="text" id="form1" class="form-control validate" value="Company, inc" disabled>
-                                                <label for="form1" data-error="wrong" data-success="right">Company</label>
+                                            <!--First column-->
+                                            <div class="col-md-6">
+                                                <div class="md-form">
+                                                    <input type="text" id="form1" class="form-control validate" value="Company, inc" disabled>
+                                                    <label for="form1" data-error="wrong" data-success="right">Company</label>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <!--Second column-->
-                                        <div class="col-md-6">
-                                            <div class="md-form">
-                                                <input type="text" id="form2" class="form-control validate">
-                                                <label for="form2" data-error="wrong" data-success="right">Username</label>
+                                            <!--Second column-->
+                                            <div class="col-md-6">
+                                                <div class="md-form">
+                                                    <input type="text" id="form2" class="form-control validate">
+                                                    <label for="form2" data-error="wrong" data-success="right">Username</label>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>*@
+                                        </div>*@
                                     <!--/.First row-->
                                     <!--First row-->
                                     <div class="row">
                                         <!--First column-->
                                         <div class="col-md-12">
-
                                             <div class="col-md-6">
+                                                <div class="md-form">
+                                                    <input type="text" id="txtE-mail" name="txtE-mail" value="@Session["username"]" class="form-control validate">
+                                                    <label for="form76">E-mail</label>
+                                                </div>
+                                            </div>
+                                            @*<div class="col-md-6">
                                                 <div class="md-form">
                                                     <input type="text" id="txtEmail" name="txtEmail" value="@Session["username"]" class="form-control validate" placeholder="email">
                                                 </div>
-                                                @*<label for="form81" data-error="wrong" data-success="right">Email Address</label>*@
+                                                @*<label for="form81" data-error="wrong" data-success="right">Email Address</label>
 
-                                            </div>
+                                            </div>*@
                                             <!--Second column-->
                                             <div class="col-md-6">
                                                 <div class="md-form">
                                                     <input type="text" id="txtFullName" name="txtFullName" value="@Session["FullName"]" class="form-control validate">
-                                                    @*<label for="form82" data-error="wrong" data-success="right">Full Name</label>*@
+                                                    <label for="form82" data-error="wrong" data-success="right">Full Name</label>
                                                 </div>
                                             </div>
-                                            </div>
                                         </div>
+                                    </div>
                                     <!--/.First row-->
                                     <!--Second row-->
                                     <div class="row">
                                         <!--First column-->
-                                        <div class="col-md-6">
-                                            <div class="md-form">
-                                                <input type="text" id="txtMobile" name="txtMobile" value="@Session["username"]" class="form-control validate">
-                                                @*<label for="form76">Phone</label>*@
+                                        <div class="col-md-12">
+                                            <div class="col-md-6">
+                                                <div class="md-form">
+                                                    <input type="text" id="txtMobile" name="txtMobile" value="@Session["Mobile"]" class="form-control validate">
+                                                    <label for="form76">Phone</label>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <!--Second column-->
-                                        @*<div class="col-md-6">
-                                            <div class="md-form">
-                                                <input type="text" id="form77" class="form-control validate">
-                                                <label for="form77" data-error="wrong" data-success="right">Website Address</label>
+                                       </div>
+                                                <!--Second column-->
+                                                @*<div class="col-md-6">
+                <div class="md-form">
+                    <input type="text" id="form77" class="form-control validate">
+                    <label for="form77" data-error="wrong" data-success="right">Website Address</label>
+                </div>
+            </div>*@
                                             </div>
-                                        </div>*@
-                                    </div>
                                     <!--/.Second row-->
                                     <!--Third row-->
-                                    
                                     <!--/.Third row-->
                                     <!-- Fourth row -->
-                                    @*<div class="row">
-                                        <div class="col-md-12 text-center">
-                                            <input type="button" value="Update Account" onclick="return UpdateMember()" class="btn btn-primary">
+                                    <div class="row">
+                                            <div class="col-md-12 text-center">
+                                                <input type="submit" value="Update Account" onclick="return UpdateMember()" class="btn btn-primary">
+                                            </div>
                                         </div>
-                                    </div>*@
-                                <input type="button" value="update" onclick="return UpdateMember()" />
+                                    <input type="button" value="update" onclick="return UpdateMember()" />
                                     <!-- /.Fourth row -->
                                 </form>
                                 <!-- Edit Form -->
@@ -148,11 +156,13 @@
                 </div>
                 <!-- /.Second column -->
             </div>
+@*}*@
             <!-- /.First row -->
         </section>
         <!-- /.Section: Edit Account -->
     </div>
-    <input type="hidden" id="hdmemberID" name="hdmemberID" value="" />
+    <input type="hidden" id="hdmemberID" name="hdmemberID" value="@Session["memberid"]" />
 </main>
+
 
 <script src="/Scripts/member/member.js"></script>

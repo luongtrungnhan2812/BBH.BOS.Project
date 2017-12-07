@@ -238,6 +238,8 @@ function CloseModal() {
 
 $(document).ready(function () {
     Onload();
+    $('#txtE-mail').attr("readonly", true);
+
 });
 
 function Onload()
@@ -427,32 +429,20 @@ function RegisterMember() {
 
 function UpdateMember()
 {
+    var checkReg = true;
     var memberID = $('#hdmemberID').val();
-    var email = $('#txtEmail').val();
+    var email = $('#txtE-mail').val();
     var fullName = $('#txtFullName').val();
     var mobile = $('#txtMobile').val();
     var avatar = $('#fileup').val();
+    
+    $('#txtE-mail').attr("readonly", true);
 
-    var checkReg = true;
-   
-    //if (email == '') {
-
-    //    $('#lbEmail').text('Please input email');
-    //    $('#lbEmail').css('display', '');
-    //    checkReg = false;
-    //}
-    //else {
-    //    if (!isValidEmailAddress(email)) {
-    //        $('#lbEmail').text('Invalid email address.');
-    //        $('#lbEmail').css('display', '');
-
-    //        checkReg = false;
-    //    }
-    //}
-   
+    
+      
        if (fullName == '') {
 
-        $('#lbFullname').text('Please input fullname');
+        $('#lbFullname').text('Input fullname');
         $('#lbFullname').css('display', '');
         checkReg = false;
     }
@@ -477,7 +467,7 @@ function UpdateMember()
         $('#imgLoading').css("display", "");
         $.ajax({
             type: "post",
-            url: "/Member/UpdatePrototypeMember",
+            url: "/Member/UpdateMember",
             async: true,
             data: { memberID: memberID, email: email, fullName: fullName, mobile: mobile, avatar: avatar },
             beforeSend: function () {
