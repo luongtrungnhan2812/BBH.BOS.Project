@@ -154,6 +154,7 @@ namespace BBH.BOS.Web.Controllers
 
             return result;
         }
+
         [HttpPost]
         public void SetTimeoutSession()
         {

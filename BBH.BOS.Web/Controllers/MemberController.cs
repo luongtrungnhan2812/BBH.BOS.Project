@@ -59,12 +59,12 @@ namespace BBH.BOS.Web.Controllers
        public string SendMailResetPassword(string email)
         {
             string result = "";
-            if (Session["MemberInfomation"] == null)
-            {
-                Response.Redirect("/login");
-            }
-            else
-            {
+            //if (Session["MemberInfomation"] == null)
+            //{
+            //    Response.Redirect("/login");
+            //}
+            //else
+            //{
                 if (email == "")
                 {
                     result = "emtry";
@@ -108,7 +108,7 @@ namespace BBH.BOS.Web.Controllers
                     }
 
                 }
-            }
+            //}
             return result;
         }
 
