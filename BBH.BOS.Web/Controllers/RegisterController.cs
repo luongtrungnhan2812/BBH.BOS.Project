@@ -66,95 +66,212 @@ namespace BBH.BOS.Web.Controllers
             return View();
         }
 
+        //       [HttpPost]
+        //       public string RegisterMember()
+        ////string address, string password, string avatar, int isDelete,DateTime birthday, int isActive, int gender, DateTime updateDate, DateTime deleteDate, string updateUser, string linkActive, DateTime expireTimeLink, DateTime createDate,string deleteUser)
+        //       {
+        //           string result = "";
+        //           MemberBO member = new MemberBO();
+
+        //           string email = Request["txtEmail"];
+        //           string password = Request["txtPassword"];
+        //           //string mobile = Request["txtMobile"];
+        //           string fullName = Request["txtFullName"];
+
+        //           TempData["EmailRegister"] = email;
+        //           TempData["PasswordRegister"] = password;
+        //           TempData["FullNameRegister"] = fullName;
+        //           //TempData["MobileRegister"] = mobile;
+
+
+        //           string strCaptcha = Request["g-recaptcha-response"].ToString();
+        //          // string secretKey = secKey;/*"6LfhJyUUAAAAAPKM6Hl87lD0mVKa-0zPKNR53W_j";*/
+        //           var client = new WebClient();
+        //           var response = strCaptcha;
+        //           var result1 = client.DownloadString(string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", secretKey, response));
+        //           var obj = JObject.Parse(result1);
+        //           var status = (bool)obj.SelectToken("success");
+        //           if (status == false)
+        //           {
+        //               result = "errorCaptcha";
+        //           }
+        //           else
+        //           {
+
+        //               member.FullName = fullName;
+        //               member.Email = email;
+        //               member.Mobile = "";
+        //               member.Password = Utility.MaHoaMD5(password);
+        //               member.IsActive = 0;
+        //               member.IsDelete = 0;
+        //               member.CreateDate = DateTime.Now;
+        //               member.Gender = 1;
+        //               member.Avatar = "";
+
+        //               bool checkEmail = repository.CheckEmailExists(email);
+        //               if (checkEmail)
+        //               {
+        //                   result="EmailExist";
+        //               }
+        //               else
+        //               {
+
+        //                   int returnAdminID = repository.InsertMember(member);
+        //                   if (returnAdminID > 0)
+        //                   {
+        //                       try
+        //                       {
+        //                           bool rsSendMail = sentMail.SendMailByVerifyMember(email);
+
+        //                           member = repository.GetMemberDetailByEmail(email);
+        //                           Member_WalletBO memberWallet = new Member_WalletBO();
+        //                           if (member != null)
+        //                           {
+        //                               memberWallet.IndexWallet = member.MemberID;
+        //                               memberWallet.IsActive = 1;
+        //                               memberWallet.IsDelete = 0;
+        //                               memberWallet.MemberID = member.MemberID;
+        //                               memberWallet.NumberCoin = 0;
+        //                           }
+        //                           bool rs_ = repository.InsertMemberWallet(memberWallet);
+        //                           if (rs_)
+        //                           {
+        //                               result = "registerSuccess";
+        //                           }
+        //                       }
+        //                       catch { }
+        //                   }
+        //                   else
+        //                   {
+        //                       result = "RegisterFaile";
+        //                   }
+
+        //               }
+
+        //           }
+        //           Session["Result"] = result;
+        //           Response.Redirect("/registermember");
+
+        //           return result;
+        //       }
         [HttpPost]
-        public string RegisterMember()
- //string address, string password, string avatar, int isDelete,DateTime birthday, int isActive, int gender, DateTime updateDate, DateTime deleteDate, string updateUser, string linkActive, DateTime expireTimeLink, DateTime createDate,string deleteUser)
-        {
-            string result = "";
-            MemberBO member = new MemberBO();
-
-            string email = Request["txtEmail"];
-            string password = Request["txtPassword"];
-            //string mobile = Request["txtMobile"];
-            string fullName = Request["txtFullName"];
-
-            TempData["EmailRegister"] = email;
-            TempData["PasswordRegister"] = password;
-            TempData["FullNameRegister"] = fullName;
-            //TempData["MobileRegister"] = mobile;
-
-
-            string strCaptcha = Request["g-recaptcha-response"].ToString();
-           // string secretKey = secKey;/*"6LfhJyUUAAAAAPKM6Hl87lD0mVKa-0zPKNR53W_j";*/
-            var client = new WebClient();
-            var response = strCaptcha;
-            var result1 = client.DownloadString(string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", secretKey, response));
-            var obj = JObject.Parse(result1);
-            var status = (bool)obj.SelectToken("success");
-            if (status == false)
+        public JsonResult RegisterMember(string strEmail, string strPassword,string strFullName,string strCaptcha)
+        { 
+            try
             {
-                result = "errorCaptcha";
-            }
-            else
-            {
-
-                member.FullName = fullName;
-                member.Email = email;
-                member.Mobile = "";
-                member.Password = Utility.MaHoaMD5(password);
-                member.IsActive = 0;
-                member.IsDelete = 0;
-                member.CreateDate = DateTime.Now;
-                member.Gender = 1;
-                member.Avatar = "";
-
-                bool checkEmail = repository.CheckEmailExists(email);
-                if (checkEmail)
+                // Email null 
+                if (strEmail == null || strEmail.Trim().Length == 0)
                 {
-                    result="EmailExist";
+                    return Json(new { intTypeError = 1, result = "", email = strEmail, password = strPassword, fullname = strFullName }, JsonRequestBehavior.AllowGet);
+                }
+                //Email maxlength > 50
+                else if (strEmail.Trim().Length > 50)
+                {                    
+                    return Json(new { intTypeError = 2, result = "", email = strEmail, password = strPassword, fullname = strFullName }, JsonRequestBehavior.AllowGet);
+                }
+                //password null || error
+                if(strPassword==null || strPassword.Trim().Length==0)
+                {
+                    return Json(new { InputType = 3, result = "", email = strEmail, password = strPassword, fullname = strFullName }, JsonRequestBehavior.AllowGet);
+                }
+                //password maxlenght >=8
+                else if(strPassword.Trim().Length<8)
+                {
+                    return Json(new { InputType = 4, result = "", email = strEmail, password = strPassword, fullname = strFullName }, JsonRequestBehavior.AllowGet);
+                }
+                //fullname error || null
+                if (strFullName ==null || strFullName.Trim().Length==0)
+                {
+                    return Json(new { intTypeError = 5, result = "", email = strEmail, password = strPassword, fullname = strFullName }, JsonRequestBehavior.AllowGet);
+                }
+                //Captcha error || null
+                if (strCaptcha == null || strCaptcha.Trim().Length == 0)
+                {
+                    return Json(new { intTypeError = 6, result = "", email = strEmail, password = strPassword, fullname = strFullName }, JsonRequestBehavior.AllowGet);
+                }
+
+                string strResult = "";
+                MemberBO member = new MemberBO();
+
+                TempData["EmailRegister"] = strEmail;
+                TempData["PasswordRegister"] = strPassword;
+                TempData["FullNameRegister"] = strFullName;
+                //TempData["MobileRegister"] = mobile;
+
+
+                //string strCaptcha = Request["g-recaptcha-response"].ToString();
+                // string secretKey = secKey;/*"6LfhJyUUAAAAAPKM6Hl87lD0mVKa-0zPKNR53W_j";*/
+                var client = new WebClient();
+                var response = strCaptcha;
+                var result1 = client.DownloadString(string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", secretKey, response));
+                var obj = JObject.Parse(result1);
+                var status = (bool)obj.SelectToken("success");
+                if (status == false)
+                {
+                    strResult = "errorCaptcha";
                 }
                 else
                 {
 
-                    int returnAdminID = repository.InsertMember(member);
-                    if (returnAdminID > 0)
+                    member.FullName = strFullName;
+                    member.Email = strEmail;
+                    member.Mobile = "";
+                    member.Password = Utility.MaHoaMD5(strPassword);
+                    member.IsActive = 0;
+                    member.IsDelete = 0;
+                    member.CreateDate = DateTime.Now;
+                    member.Gender = 1;
+                    member.Avatar = "";
+
+                    bool checkEmail = repository.CheckEmailExists(strEmail);
+                    if (checkEmail)
                     {
-                        try
-                        {
-                            bool rsSendMail = sentMail.SendMailByVerifyMember(email);
-                           
-                            member = repository.GetMemberDetailByEmail(email);
-                            Member_WalletBO memberWallet = new Member_WalletBO();
-                            if (member != null)
-                            {
-                                memberWallet.IndexWallet = member.MemberID;
-                                memberWallet.IsActive = 1;
-                                memberWallet.IsDelete = 0;
-                                memberWallet.MemberID = member.MemberID;
-                                memberWallet.NumberCoin = 0;
-                            }
-                            bool rs_ = repository.InsertMemberWallet(memberWallet);
-                            if (rs_)
-                            {
-                                result = "registerSuccess";
-                            }
-                        }
-                        catch { }
+                        strResult = "EmailExist";
                     }
                     else
                     {
-                        result = "RegisterFaile";
+
+                        int returnAdminID = repository.InsertMember(member);
+                        if (returnAdminID > 0)
+                        {
+                            try
+                            {
+                                bool rsSendMail = sentMail.SendMailByVerifyMember(strEmail);
+
+                                member = repository.GetMemberDetailByEmail(strEmail);
+                                Member_WalletBO memberWallet = new Member_WalletBO();
+                                if (member != null)
+                                {
+                                    memberWallet.IndexWallet = member.MemberID;
+                                    memberWallet.IsActive = 1;
+                                    memberWallet.IsDelete = 0;
+                                    memberWallet.MemberID = member.MemberID;
+                                    memberWallet.NumberCoin = 0;
+                                }
+                                bool rs_ = repository.InsertMemberWallet(memberWallet);
+                                if (rs_)
+                                {
+                                    strResult = "registerSuccess";
+                                }
+                            }
+                            catch { }
+                        }
+                        else
+                        {
+                            strResult = "RegisterFaile";
+                        }
+
                     }
 
                 }
-
+                return Json(new { intTypeError = 0, result = strResult, email = strEmail, password = strPassword, fullname = strFullName }, JsonRequestBehavior.AllowGet);
             }
-            Session["Result"] = result;
-            Response.Redirect("/registermember");
-
-            return result;
+            catch(Exception objEx)
+            {
+                return Json(new { intTypeError = 0, result = "RegisterFaile", email = strEmail, password = strPassword, fullname = strFullName,messageError=objEx.Message }, JsonRequestBehavior.AllowGet);
+            }
+           
         }
-
         [HttpPost]
         public void SetTimeoutSession()
         {

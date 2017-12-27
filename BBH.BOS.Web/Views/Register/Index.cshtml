@@ -19,6 +19,8 @@
     <link href="/Content/css/style.css" rel="stylesheet">
     <link href="/Content/alertify.css" rel="stylesheet">
     <script src='https://www.google.com/recaptcha/api.js'></script>
+    <link data-require="sweet-alert" data-semver="0.4.2" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/0.4.2/sweet-alert.min.css">
+    <link href="/Content/css/style_dev.css" rel="stylesheet" />
 </head>
 
 <body class="fixed-sn white-skin">
@@ -29,8 +31,8 @@
                 <!--Form with header-->
                 @*@if ((string)Session["Language"] == "EN")
                     {*@
-            @using(Html.BeginForm("RegisterMember", "Register", FormMethod.Post))
-            {
+            @*@using(Html.BeginForm("RegisterMember", "Register", FormMethod.Post))
+            {*@
                 <div class="card" style="top:-75px">
                     <div class="card-block">
                         <!--Header-->
@@ -54,23 +56,11 @@
                             <label id="lbFullname" style="color:red; display:none" class=""></label>
                         </div>
 
-                        @*<div class="md-form">
-                <i class="fa fa-lock prefix"></i>
-                <input type="password" id="txtRePassword" name="txtRePassword" onfocus="ResetForm('lbRePass', this.value)" placeholder="comfirm password" class="form-control validate">
-                <label id="lbRePass" style="color:red; display:none" class=""></label>
-            </div>*@
-
-
-                        @*<div class="md-form">
-                <i class="fa fa-mobile prefix"></i>
-                <input type="text" id="txtMobile" name="txtMobile" onfocus="ResetForm('lbMobile', this.value)" placeholder="mobile" class="form-control validate" onkeypress="return functionx(event)">
-                <label id="lbMobile" style="color:red; display:none" class=""></label>
-
-            </div>*@
+                     
                         <div class="row">
 
                             <div class="col-md-12" style="margin-left: 40px;">
-                                <div class="g-recaptcha" data-sitekey="6LfhJyUUAAAAANmMFHQ7ARUoDEwgs3Zy-W6bwCo1"></div><br />
+                                <div class="g-recaptcha"  data-sitekey="6LfhJyUUAAAAANmMFHQ7ARUoDEwgs3Zy-W6bwCo1"></div><br />
 
                             </div>
                             </div>
@@ -93,7 +83,7 @@
                             </div>
 
                         </div>
-                        }
+                        @*}*@
                         @*}
             else
             {*@
@@ -123,11 +113,13 @@
                     </div>
         </div>
     </div>
+    <div id="divLoading" class="loadingPage" style="display: none;">
+        <img src="/Images/loading.gif" id="imgLoading">
+    </div>
     <input type="hidden" id="hdResult" value="@Session["Result"]" />
     <input type="hidden" id="hdEmail" value="@TempData["EmailRegister"]" />
     <input type="hidden" id="hdPassword" value="@TempData["PasswordRegister"]" />
     <input type="hidden" id="hdFullName" value="@TempData["FullNameRegister"]" />
-    <input type="hidden" id="hdMobile" value="@TempData["MobileRegister"]" />
 
     @*<input type="hidden" id="hdRedirect" value="@ViewData["UrlRedirect"]" />
         <input type="hidden" id="hdLanguage" value="@Session["Language"]" />*@
@@ -144,5 +136,7 @@
     
     <script src="/Scripts/member/member.js"></script>
     <script type="text/javascript" src="/Scripts/alertify.js"></script>
+    <script src="https://unpkg.com/sweetalert2@7.0.9/dist/sweetalert2.all.js"></script>
+    <script src="/Scripts/loading.js"></script>
 </body>
 </html>

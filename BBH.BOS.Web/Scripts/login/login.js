@@ -246,7 +246,7 @@ $(document).ready(function () {
     //{
     //    alertify.error('Please confirm captcha !');
     //}
-    OnLoad();
+    //OnLoad();
     
     
 });
@@ -282,66 +282,256 @@ function OnLoad() {
     }
 }
 function LoginMember() {
-    //var language = $('#hdLanguage').val();
-    //var urlRedirect = $('#hdRedirect').val();
-    var email = $('#txtEmail').val();
-    var password = $('#txtPassword').val();
+    
+    var email = "";
+    var password = "";
+    var strCaptcha = "";
+
     var checkReg = true;
-    var checkPassword = CheckPassword(password);
-    if (email == '') {
-        checkReg = false;
-        $('#lbEmail').text('Input Email');
+    if (typeof $('#txtEmail') != 'undefined' && $('#txtEmail').length > 0)
+    {
+        email = $('#txtEmail').val();
+    }
+    if (email == '') {        
+        $('#lbEmail').text('Email required for login.');
         $('#lbEmail').css('display', '');
+        checkReg = false;
     }
-    else {
-        if (!isValidEmailAddress(email)) {
+    else if (!isValidEmailAddress(email)) {    
+            
+            $('#lbEmail').text('Invalid email format');
+            $('#lbEmail').css('display', '');     
             checkReg = false;
-            $('#lbEmail').text('Email is not correct format');
-            $('#lbEmail').css('display', '');
-        }
     }
-   
+    else if (email.length > 50)
+    {
+        $('#lbEmail').text('The maximum length is 50 characters.');
+        $('#lbEmail').css('display', '');
+        checkReg = false;
+    }
+    if (typeof $('#txtPassword') != 'undefined' && $('#txtPassword').length > 0)
+    {
+        password = $('#txtPassword').val();
+    }
     if (password == '') {
         checkReg = false;
-        $('#lbPass').text('Input Password');
+        $('#lbPass').text('Password required for login.');
         $('#lbPass').css('display', '');
     }
+    else if (password.length < 8) {
+        $('#lbPass').text('The mimimum length is 8 characters.');
+        $('#lbPass').css('display', '');
+        checkReg = false;
+    }
+    if (typeof $('#g-recaptcha-response') != 'undefined' && $('#g-recaptcha-response').length > 0) {
+        strCaptcha = $('#g-recaptcha-response').val();
+    }
+
+    if (strCaptcha == null || strCaptcha.trim().length == 0) {
+        if (typeof $('#lbrecaptcha') != 'undefined' && $('#lbrecaptcha').length > 0) {
+            $('#lbrecaptcha').text('The captcha field is required!');
+            $('#lbrecaptcha').css('display', '');
+        }
+        checkReg = false;
+    }
+
     if (!checkReg) {
         return false;
     }
     else {
-        return true;
-        //$('#imgLoading').css("display", "");
-        //$.ajax({
-        //    type: "post",
-        //    url: "/Login/MemberLogin",
-        //    async: true,
-        //    data: { email: email, password: password },
-        //    beforeSend: function () {
-        //        $('#imgLoading').css("display", "");
-        //    },
-        //    success: function (d) {
-        //        $('#imgLoading').css("display", "none");
-        //        if (d == 'loginfaile') {
-        //            //if (language == 'EN') {
-        //            alertify.error("Email or password is wrongly");
-        //            //  noty({ text: "Please input keyword search", layout: "bottomRight", type: "error" });
-        //            //}
-        //            //else
-        //            //{
-        //            //    alertify.error("Email hoặc mật khẩu không đúng");
-        //            //}
-        //        }
-        //        else if (d == 'loginSuccess') {
-        //            window.location.href = '/play-game';
-        //        }
-        //    },
-        //    error: function () {
-
-        //    }
-        //});
+        var param = {};
+        param.strEmail = email;
+        param.strPassword = password;
+        param.strCaptcha = strCaptcha;
+        $.ajax({
+            type: "post",
+            url: "/Login/LoginMember",
+            async: true,
+            data: param,
+            beforeSend: function () {
+                showLoading();
+            },
+            success: function (d) {
+                hideLoading();
+                if (typeof d.intTypeError != 'undefined' && typeof d.result != 'undefined' && typeof d.email != 'undefined' && typeof d.password != 'undefined')
+                {
+                    LoginMemberSuccess(d.intTypeError, d.result, d.email, d.password);
+                }
+                else {
+                    swal("Email or password is wrongly");              
+                }              
+            },
+            error: function () {
+                swal('Error Login.Please contact with administrator!');
+            }
+        });
     }
 }
+
+function LoginMemberSuccess(intTypeError, strResult, strEmail, strPassword)
+{
+    if (intTypeError != 0)
+    {
+        if (intTypeError == 1)
+        {
+            if (typeof $('#lbEmail') != 'undefined' && $('#lbEmail').length > 0)
+            {
+                $('#lbEmail').text('Email required for login.');
+                $('#lbEmail').css('display', '');
+            }
+        }
+       
+        else if (intTypeError == 2)
+        {
+            if (typeof $('#lbPass') != 'undefined' && $('#lbPass').length > 0)
+            {
+                $('#lbPass').text('Password required for login.');
+                $('#lbPass').css('display', '');
+            }
+        }
+
+        else if (intTypeError == 3)
+        {
+            if (typeof $('#lbrecaptcha') != 'undefined' && $('lbrecaptcha').length > 0) {
+                $('#lbrecaptcha').text('The captcha field is required!.');
+                $('#lbrecaptcha').css('display', '');
+            }
+        }
+        else if (intTypeError == 4) {
+            if (typeof $('#lbEmail') != 'undefined' && $('#lbEmail').length > 0) {
+                $('#lbEmail').text('The maximum length is 50 characters.');
+                $('#lbEmail').css('display', '');
+            }
+        }
+        else if (intTypeError == 5) {
+            if (typeof $('#lbPass') != 'undefined' && $('#lbEmail').length > 0) {
+                $('#lbPass').text('The mimimum length is 8 characters.');
+                $('#lbPass').css('display', '');
+            }
+        }
+    }
+    else {
+        if (strResult == "loginSuccess") {
+            ResetDataElement('','', '');           
+            window.location.href = '/Home';
+        }
+        else if (strResult == "EmailNotExits")
+        {
+            ResetDataElement($('#hdUsername').val(), '', '');
+            swal('This ' + strEmail + ' unregistered'); 
+        }
+        else if (strResult == 'EmailNotActive') {
+            ResetDataElement($('#hdUsername').val(), '', '');
+            //alertify.error("E-mail Not Actived");
+            swal('This ' + strEmail + ' not actived'); 
+        }
+        else if (strResult == 'loginfaile') {
+            ResetDataElement($('#hdUsername').val(),'', '');
+            alertify.error("Email or Password incorrect!");
+        }
+        else if (strResult == 'captchafaile') {
+            ResetDataElement($('#hdUsername').val(),'', 'The captcha field is required!');          
+        }
+    }
+   
+}
+function ResetDataElement(strEmail, strPassword, strConfirmCaptcha) {
+    //reset email
+    if (typeof $('#txtEmail') != 'undefined' && $('#txtEmail').length > 0) {
+        $('#txtEmail').val(strEmail);
+    }
+
+    if (typeof $('#txtPassword') != 'undefined' && $('#txtPassword').length > 0) {
+        $('#txtPassword').val(strPassword);
+    }
+
+    if (typeof $('#g-recaptcha-response') != 'undefined' && $('#g-recaptcha-response').length > 0) {
+        $('#g-recaptcha-response').val(strConfirmCaptcha);
+    }
+    //reset captcha
+    grecaptcha.reset();
+
+    if (typeof $('#lbEmail') != 'undefined' && $('#lbEmail').length > 0) {
+        $('#lbEmail').text('');
+        $('#lbEmail').hide();
+    }
+
+    if (typeof $('#lbPass') != 'undefined' && $('#lbPass').length > 0) {
+        $('#lbPass').text('');
+        $('#lbPass').hide();
+    }
+
+    if (typeof $('#lbrecaptcha') != 'undefined' && $('#lbrecaptcha').length > 0) {
+        $('#lbrecaptcha').text('');
+        $('#lbrecaptcha').hide();
+        //$('#lbrecaptcha').text(strConfirmCaptcha);
+        //if (strConfirmCaptcha.length == 0) {
+        //    $('#lbrecaptcha').hide();
+        //}
+    }
+}
+
+//function LoginMember() {
+//    //var language = $('#hdLanguage').val();
+//    //var urlRedirect = $('#hdRedirect').val();
+//    var email = $('#txtEmail').val();
+//    var password = $('#txtPassword').val();
+//    var checkReg = true;
+//    var checkPassword = CheckPassword(password);
+//    if (email == '') {
+//        checkReg = false;
+//        $('#lbEmail').text('Input Email');
+//        $('#lbEmail').css('display', '');
+//    }
+//    else {
+//        if (!isValidEmailAddress(email)) {
+//            checkReg = false;
+//            $('#lbEmail').text('Email is not correct format');
+//            $('#lbEmail').css('display', '');
+//        }
+//    }
+   
+//    if (password == '') {
+//        checkReg = false;
+//        $('#lbPass').text('Input Password');
+//        $('#lbPass').css('display', '');
+//    }
+//    if (!checkReg) {
+//        return false;
+//    }
+//    else {
+//        return true;
+//        //$('#imgLoading').css("display", "");
+//        //$.ajax({
+//        //    type: "post",
+//        //    url: "/Login/MemberLogin",
+//        //    async: true,
+//        //    data: { email: email, password: password },
+//        //    beforeSend: function () {
+//        //        $('#imgLoading').css("display", "");
+//        //    },
+//        //    success: function (d) {
+//        //        $('#imgLoading').css("display", "none");
+//        //        if (d == 'loginfaile') {
+//        //            //if (language == 'EN') {
+//        //            alertify.error("Email or password is wrongly");
+//        //            //  noty({ text: "Please input keyword search", layout: "bottomRight", type: "error" });
+//        //            //}
+//        //            //else
+//        //            //{
+//        //            //    alertify.error("Email hoặc mật khẩu không đúng");
+//        //            //}
+//        //        }
+//        //        else if (d == 'loginSuccess') {
+//        //            window.location.href = '/play-game';
+//        //        }
+//        //    },
+//        //    error: function () {
+
+//        //    }
+//        //});
+//    }
+//}
 function LogoutMember()
 {
     $.ajax({
@@ -360,6 +550,7 @@ function LogoutMember()
             }
         });
 }
+
 //function EnterLogin(event, value) {
 //    var urlRedirect = $('#hdRedirect').val();
 //    if (event.which == 13 || event.keyCode == 13) {

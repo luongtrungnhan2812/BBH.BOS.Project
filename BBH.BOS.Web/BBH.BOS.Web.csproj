@@ -260,6 +260,7 @@
     <Content Include="Content\css\mdb\pro\sections\_templates.css" />
     <Content Include="Content\css\noty_theme_default.css" />
     <Content Include="Content\css\style.css" />
+    <Content Include="Content\css\style_dev.css" />
     <Content Include="Content\img\flags\ad.png" />
     <Content Include="Content\img\flags\ae.png" />
     <Content Include="Content\img\flags\af.png" />
@@ -767,6 +768,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\loading.js" />
     <Content Include="Scripts\login\login.js" />
     <Content Include="Scripts\member\member.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
