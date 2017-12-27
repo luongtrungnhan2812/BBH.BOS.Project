@@ -236,7 +236,7 @@ namespace BBH.BOS.Web.Controllers
                         {
                             try
                             {
-                                bool rsSendMail = sentMail.SendMailByVerifyMember(strEmail);
+                                bool rsSendMail = BBH.BOS.Web.Models.SentMailServicesModels.WSSentMail.SendMailByVerifyMember(strEmail);
 
                                 member = repository.GetMemberDetailByEmail(strEmail);
                                 Member_WalletBO memberWallet = new Member_WalletBO();
