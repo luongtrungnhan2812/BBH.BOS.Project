@@ -59,9 +59,9 @@ namespace BBH.BOS.Web.Controllers
             //        string Emaail = lstMember.ElementAt(0).Email;
             //    }
             //    ViewData["ListAdmin"] = lstMember;
-                //IEnumerable<GroupAdminBO> lstGroupAdmin = repository.ListGroupAdmin();
-                //ViewData["ListGroupAdmin"] = lstGroupAdmin;
-            
+            //IEnumerable<GroupAdminBO> lstGroupAdmin = repository.ListGroupAdmin();
+            //ViewData["ListGroupAdmin"] = lstGroupAdmin;
+
 
             return View();
         }
@@ -155,8 +155,8 @@ namespace BBH.BOS.Web.Controllers
         //           return result;
         //       }
         [HttpPost]
-        public JsonResult RegisterMember(string strEmail, string strPassword,string strFullName,string strCaptcha)
-        { 
+        public JsonResult RegisterMember(string strEmail, string strPassword, string strFullName, string strCaptcha)
+        {
             try
             {
                 // Email null 
@@ -166,21 +166,21 @@ namespace BBH.BOS.Web.Controllers
                 }
                 //Email maxlength > 50
                 else if (strEmail.Trim().Length > 50)
-                {                    
+                {
                     return Json(new { intTypeError = 2, result = "", email = strEmail, password = strPassword, fullname = strFullName }, JsonRequestBehavior.AllowGet);
                 }
                 //password null || error
-                if(strPassword==null || strPassword.Trim().Length==0)
+                if (strPassword == null || strPassword.Trim().Length == 0)
                 {
                     return Json(new { InputType = 3, result = "", email = strEmail, password = strPassword, fullname = strFullName }, JsonRequestBehavior.AllowGet);
                 }
                 //password maxlenght >=8
-                else if(strPassword.Trim().Length<8)
+                else if (strPassword.Trim().Length < 8)
                 {
                     return Json(new { InputType = 4, result = "", email = strEmail, password = strPassword, fullname = strFullName }, JsonRequestBehavior.AllowGet);
                 }
                 //fullname error || null
-                if (strFullName ==null || strFullName.Trim().Length==0)
+                if (strFullName == null || strFullName.Trim().Length == 0)
                 {
                     return Json(new { intTypeError = 5, result = "", email = strEmail, password = strPassword, fullname = strFullName }, JsonRequestBehavior.AllowGet);
                 }
@@ -266,22 +266,22 @@ namespace BBH.BOS.Web.Controllers
                 }
                 return Json(new { intTypeError = 0, result = strResult, email = strEmail, password = strPassword, fullname = strFullName }, JsonRequestBehavior.AllowGet);
             }
-            catch(Exception objEx)
+            catch (Exception objEx)
             {
-                return Json(new { intTypeError = 0, result = "RegisterFaile", email = strEmail, password = strPassword, fullname = strFullName,messageError=objEx.Message }, JsonRequestBehavior.AllowGet);
+                return Json(new { intTypeError = 0, result = "RegisterFaile", email = strEmail, password = strPassword, fullname = strFullName, messageError = objEx.Message }, JsonRequestBehavior.AllowGet);
             }
-           
+
         }
         [HttpPost]
         public void SetTimeoutSession()
         {
             Session["Result"] = null;
         }
-        
+
         public ActionResult VerifyEmailMember(string email)
         {
             bool rs = false;
-            rs = repository.UpdateIsActiveByEmail(email,1);
+            rs = repository.UpdateIsActiveByEmail(email, 1);
             if (rs)
             {
                 //MemberInformationBO mem = repository.GetMemberDetailByEmail(email);
@@ -295,7 +295,7 @@ namespace BBH.BOS.Web.Controllers
                     Session["memberid"] = mem.MemberID;
                     //Session["MemberInfomation"] = mem;
                     Response.Redirect("/");
-                    
+
                 }
             }
             else

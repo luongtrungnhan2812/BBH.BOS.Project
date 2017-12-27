@@ -49,8 +49,9 @@
     <Reference Include="BBC.Core.Common">
       <HintPath>..\Share dll\BBC.Core.Common.dll</HintPath>
     </Reference>
-    <Reference Include="BBC.Core.Database">
-      <HintPath>..\Share dll\BBC.Core.Database.dll</HintPath>
+    <Reference Include="BBC.Core.Database, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\BBC\BBH.ICashComingSoon.Projects\share dll\BBC.Core.Database.dll</HintPath>
     </Reference>
     <Reference Include="BBC.Core.WebService, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -216,6 +217,7 @@
     <Compile Include="Controllers\Package_CoinController.cs" />
     <Compile Include="Controllers\PagingController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers\VerifyController.cs" />
     <Compile Include="Controllers\WalletController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -224,13 +226,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\SentMailServices\SendMailSvc.disco" />
     <None Include="Connected Services\SentMailServices\configuration91.svcinfo" />
     <None Include="Connected Services\SentMailServices\configuration.svcinfo" />
     <None Include="Connected Services\SentMailServices\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Connected Services\SentMailServices\SendMailSvc1.disco" />
     <Content Include="Content\alertify.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -751,14 +753,14 @@
     <Content Include="Content\sass\mdb\pro\_tabs.scss" />
     <Content Include="Content\sass\mdb\pro\_toasts.scss" />
     <Content Include="App_Data\IoC.config" />
-    <None Include="Connected Services\SentMailServices\SendMailSvc.wsdl" />
-    <None Include="Connected Services\SentMailServices\SendMailSvc.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\SentMailServices\SendMailSvc1.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <Content Include="Content\css\chosen\.bower.json" />
+    <None Include="Connected Services\SentMailServices\SendMailSvc1.wsdl" />
+    <None Include="Connected Services\SentMailServices\SendMailSvc2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\SentMailServices\SendMailSvc21.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -829,6 +831,7 @@
   <ItemGroup>
     <Folder Include="imageAvatar\" />
     <Folder Include="Views\Default\" />
+    <Folder Include="Views\Verify\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

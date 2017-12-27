@@ -19,13 +19,13 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://sendmailservice.wan2save.vn/SendMailSvc.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://sendmailservice.test.wan2save.vn/SendMailSvc.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="SendMailSvc.disco" MetadataType="Disco" ID="ebc506d0-8fad-4986-93d5-97acf9bceb01" SourceId="1" SourceUrl="http://sendmailservice.wan2save.vn/SendMailSvc.svc?disco" />
-    <MetadataFile FileName="SendMailSvc.wsdl" MetadataType="Wsdl" ID="4eb6832c-8c53-4922-aaa1-1db9bf2018a0" SourceId="1" SourceUrl="http://sendmailservice.wan2save.vn/SendMailSvc.svc?wsdl" />
-    <MetadataFile FileName="SendMailSvc.xsd" MetadataType="Schema" ID="a7cea9cb-2485-42a3-b590-3cfa49438273" SourceId="1" SourceUrl="http://sendmailservice.wan2save.vn/SendMailSvc.svc?xsd=xsd0" />
-    <MetadataFile FileName="SendMailSvc1.xsd" MetadataType="Schema" ID="e2240778-1f8f-44e6-b3e2-821579b74a51" SourceId="1" SourceUrl="http://sendmailservice.wan2save.vn/SendMailSvc.svc?xsd=xsd1" />
+    <MetadataFile FileName="SendMailSvc1.wsdl" MetadataType="Wsdl" ID="159dd8dd-a5ab-4c42-83b6-e0bf345a3baf" SourceId="1" SourceUrl="http://sendmailservice.test.wan2save.vn/SendMailSvc.svc?wsdl" />
+    <MetadataFile FileName="SendMailSvc2.xsd" MetadataType="Schema" ID="1109854e-59e2-4a75-bf5b-f5186af0019a" SourceId="1" SourceUrl="http://sendmailservice.test.wan2save.vn/SendMailSvc.svc?xsd=xsd0" />
+    <MetadataFile FileName="SendMailSvc1.disco" MetadataType="Disco" ID="caed9467-22a0-4716-aecf-7b51f77c66c7" SourceId="1" SourceUrl="http://sendmailservice.test.wan2save.vn/SendMailSvc.svc?disco" />
+    <MetadataFile FileName="SendMailSvc21.xsd" MetadataType="Schema" ID="e8cbc36a-d146-432a-baa2-5db34442f4c7" SourceId="1" SourceUrl="http://sendmailservice.test.wan2save.vn/SendMailSvc.svc?xsd=xsd1" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

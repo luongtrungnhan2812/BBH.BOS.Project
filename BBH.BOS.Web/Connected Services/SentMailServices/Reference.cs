@@ -32,6 +32,24 @@ namespace BBH.BOS.Web.SentMailServices {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISendMailSvc/SendMailResetPassword", ReplyAction="http://tempuri.org/ISendMailSvc/SendMailResetPasswordResponse")]
         System.Threading.Tasks.Task<bool> SendMailResetPasswordAsync(string emailRecieve, string newPassword);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISendMailSvc/SendMailByVerifyBitAddress", ReplyAction="http://tempuri.org/ISendMailSvc/SendMailByVerifyBitAddressResponse")]
+        bool SendMailByVerifyBitAddress(string emailVerify, string bitcoinAddress);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISendMailSvc/SendMailByVerifyBitAddress", ReplyAction="http://tempuri.org/ISendMailSvc/SendMailByVerifyBitAddressResponse")]
+        System.Threading.Tasks.Task<bool> SendMailByVerifyBitAddressAsync(string emailVerify, string bitcoinAddress);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISendMailSvc/SendMailOrderSuccessInfocash", ReplyAction="http://tempuri.org/ISendMailSvc/SendMailOrderSuccessInfocashResponse")]
+        bool SendMailOrderSuccessInfocash(string emailVerify, string bitcoinAddress, string eventCoin, string bitcoinDeposit, string createDate);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISendMailSvc/SendMailOrderSuccessInfocash", ReplyAction="http://tempuri.org/ISendMailSvc/SendMailOrderSuccessInfocashResponse")]
+        System.Threading.Tasks.Task<bool> SendMailOrderSuccessInfocashAsync(string emailVerify, string bitcoinAddress, string eventCoin, string bitcoinDeposit, string createDate);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISendMailSvc/SendMailByVerifyOrderInfocash", ReplyAction="http://tempuri.org/ISendMailSvc/SendMailByVerifyOrderInfocashResponse")]
+        bool SendMailByVerifyOrderInfocash(string emailVerify, string bitcoinAddress, string timeOut, string walletIndex);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISendMailSvc/SendMailByVerifyOrderInfocash", ReplyAction="http://tempuri.org/ISendMailSvc/SendMailByVerifyOrderInfocashResponse")]
+        System.Threading.Tasks.Task<bool> SendMailByVerifyOrderInfocashAsync(string emailVerify, string bitcoinAddress, string timeOut, string walletIndex);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -83,6 +101,30 @@ namespace BBH.BOS.Web.SentMailServices {
         
         public System.Threading.Tasks.Task<bool> SendMailResetPasswordAsync(string emailRecieve, string newPassword) {
             return base.Channel.SendMailResetPasswordAsync(emailRecieve, newPassword);
+        }
+        
+        public bool SendMailByVerifyBitAddress(string emailVerify, string bitcoinAddress) {
+            return base.Channel.SendMailByVerifyBitAddress(emailVerify, bitcoinAddress);
+        }
+        
+        public System.Threading.Tasks.Task<bool> SendMailByVerifyBitAddressAsync(string emailVerify, string bitcoinAddress) {
+            return base.Channel.SendMailByVerifyBitAddressAsync(emailVerify, bitcoinAddress);
+        }
+        
+        public bool SendMailOrderSuccessInfocash(string emailVerify, string bitcoinAddress, string eventCoin, string bitcoinDeposit, string createDate) {
+            return base.Channel.SendMailOrderSuccessInfocash(emailVerify, bitcoinAddress, eventCoin, bitcoinDeposit, createDate);
+        }
+        
+        public System.Threading.Tasks.Task<bool> SendMailOrderSuccessInfocashAsync(string emailVerify, string bitcoinAddress, string eventCoin, string bitcoinDeposit, string createDate) {
+            return base.Channel.SendMailOrderSuccessInfocashAsync(emailVerify, bitcoinAddress, eventCoin, bitcoinDeposit, createDate);
+        }
+        
+        public bool SendMailByVerifyOrderInfocash(string emailVerify, string bitcoinAddress, string timeOut, string walletIndex) {
+            return base.Channel.SendMailByVerifyOrderInfocash(emailVerify, bitcoinAddress, timeOut, walletIndex);
+        }
+        
+        public System.Threading.Tasks.Task<bool> SendMailByVerifyOrderInfocashAsync(string emailVerify, string bitcoinAddress, string timeOut, string walletIndex) {
+            return base.Channel.SendMailByVerifyOrderInfocashAsync(emailVerify, bitcoinAddress, timeOut, walletIndex);
         }
     }
 }
