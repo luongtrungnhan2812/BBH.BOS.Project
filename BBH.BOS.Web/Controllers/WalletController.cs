@@ -30,6 +30,7 @@ namespace BBH.BOS.Web.Controllers
             else
             {
                 ViewBag.NumberCoin = "0";
+                Response.Redirect("/login");
             }
             ViewBag.strHtmlTransactionCoin = GenHtml_TractionCoin();
             return View();
@@ -97,7 +98,7 @@ namespace BBH.BOS.Web.Controllers
             else
             {
                 ViewBag.NumberCoin = "0";
-
+                Response.Redirect("/login");
             }
             ViewBag.strHtmlTransactionPackage = GenHtml_TractionPackage();
             return View();
