@@ -352,14 +352,15 @@ function LoginMember() {
                 showLoading();
             },
             success: function (d) {
-                hideLoading();
+                
                 if (typeof d.intTypeError != 'undefined' && typeof d.result != 'undefined' && typeof d.email != 'undefined' && typeof d.password != 'undefined')
                 {
                     LoginMemberSuccess(d.intTypeError, d.result, d.email, d.password);
                 }
                 else {
                     swal("Email or password is wrongly");              
-                }              
+                }     
+                hideLoading();
             },
             error: function () {
                 swal('Error Login.Please contact with administrator!');

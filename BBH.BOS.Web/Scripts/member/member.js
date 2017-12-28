@@ -770,7 +770,7 @@ function ChangePassWord() {
                 if (d == 'UpdatePassSuccess') {
                     $('#txtNewPass').val('');
                     $('#txtRePass').val('');
-                    swan('Update password success')
+                    swal('Update password success')
 
                     setTimeout(function () { window.location.reload(); }, 3000);
                 }
@@ -826,7 +826,7 @@ function ForgotPassword()
                 hideLoading();
                 if (d == 'ResetPassSuccess') {
                    
-                    swan('<span>Reset Password success,go to mail get account!!</span>');
+                    swal('<span>Reset Password success,go to mail get account!!</span>');
                     $('#txtReEmail').val('');
                     setTimeout(function () { window.location.reload("/login"); }, 5000);
 

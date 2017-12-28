@@ -27,6 +27,9 @@
     <link href="/Content/css/noty_theme_default.css" rel="stylesheet" />
     <link href="/Content/css/chosen/chosen.css" rel="stylesheet" />
     <script src="/Content/js/jquery-3.1.1.min.js"></script>
+
+    <link href="/Content/css/style_dev.css" rel="stylesheet" />
+    <link data-require="sweet-alert" data-semver="0.4.2" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/0.4.2/sweet-alert.min.css">
 </head>
 <body class="fixed-sn white-skin">
     <header>
@@ -314,7 +317,7 @@
 
 
                                 <div class="row">
-                                    <img src="/Images/loading.gif" id="imgLoading" style="position: absolute; display:none">
+                                    @*<img src="/Images/loading.gif" id="imgLoading" style="position: absolute; display:none">*@
                                     <div class="col-md-12 text-center">
                                         <input type="button" style="padding:5px 30px; cursor:pointer; height:35px" onclick="ChangePassWord()" value="Confirm" class="btn-primary">
                                     </div>
@@ -327,7 +330,7 @@
                         </div>
                         <!--Footer-->
                         <div class="modal-footer">
-                            <img id="imgLoadingBooking" src="/Images/loading.gif" style="display:none">
+                            @*<img id="imgLoadingBooking" src="/Images/loading.gif" style="display:none">*@
                             <a id="2lvlModal-cancel" class="btn btn-default waves-effect waves-light" onclick="CloseModal()" data-dismiss="modal" contenteditable="true">Close</a>
                             @*<a id="2lvlModal-learnMore" class="btn btn-danger" onclick="ConfirmBooking()" contenteditable="true">Confirm</a>*@
 
@@ -340,6 +343,9 @@
 
             </div>
 
+    <div id="divLoading" class="loadingPage" style="display: none;">
+        <img src="/Images/loading.gif" id="imgLoading">
+    </div>
             @*===========================================================*@
             <!-- SCRIPTS -->
             <!-- JQuery -->
@@ -359,6 +365,9 @@
             <script src="/Content/js/jquery.noty.js"></script>
             <script src="/Content/css/chosen/chosen.jquery.min.js"></script>
             <script src="~/Scripts/package/transactionPackage.js"></script>
+             <script src="https://unpkg.com/sweetalert2@7.0.9/dist/sweetalert2.all.js"></script>
+
+            <script src="/Scripts/loading.js"></script>
             <script>
                 $(function () {
                     $('.min-chart#chart-sales').easyPieChart({
