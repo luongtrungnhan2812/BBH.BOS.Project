@@ -26,9 +26,6 @@ namespace BBH.BOS.Web.Controllers
         // GET: Login
         public ActionResult Index()
         {
-            ViewBag.Username = "-1";
-            ViewBag.Password = "-1";
-            ViewBag.Result = "-1";
             return View();
         }
         public ActionResult EditAccount()
